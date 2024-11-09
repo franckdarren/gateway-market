@@ -6,6 +6,7 @@ use App\Models\Offre;
 use Illuminate\Http\Request;
 use App\Models\CompteStartup;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class OffreController extends Controller
 {
@@ -40,14 +41,26 @@ class OffreController extends Controller
             'nbre_mois_remboursement' => 'required|integer',
             'nbre_mois_grace' => 'required|integer',
             'taux_interet' => 'required|integer',
-            'url_business_plan' => 'nullable|url',
-            'url_etude_risque' => 'nullable|url',
+            'url_business_plan' => 'nullable|file|mimes:pdf|max:10240',  // Validation du fichier PDF
+            'url_etude_risque' => 'nullable|file|mimes:pdf|max:10240', // Validation du fichier PDF
             'van' => 'required|integer',
             'ir' => 'required|numeric',
             'tri' => 'required|numeric',
             'krl' => 'required|numeric',
             'compte_startup_id' => 'required|exists:compte_startups,id',
         ]);
+
+        // Gérer l'upload des fichiers PDF
+        $businessPlanPath = null;
+        $etudeRisquePath = null;
+
+        if ($request->hasFile('url_business_plan')) {
+            $businessPlanPath = $request->file('url_business_plan')->store('business_plans', 'public');
+        }
+
+        if ($request->hasFile('url_etude_risque')) {
+            $etudeRisquePath = $request->file('url_etude_risque')->store('etudes_risques', 'public');
+        }
 
         // Créer une nouvelle offre
         $offre = Offre::create([
@@ -57,8 +70,8 @@ class OffreController extends Controller
             'nbre_mois_remboursement' => $request->nbre_mois_remboursement,
             'nbre_mois_grace' => $request->nbre_mois_grace,
             'taux_interet' => $request->taux_interet,
-            'url_business_plan' => $request->url_business_plan,
-            'url_etude_risque' => $request->url_etude_risque,
+            'url_business_plan' => $businessPlanPath,
+            'url_etude_risque' => $etudeRisquePath,
             'van' => $request->van,
             'ir' => $request->ir,
             'tri' => $request->tri,
@@ -103,8 +116,8 @@ class OffreController extends Controller
             'nbre_mois_remboursement' => 'required|integer',
             'nbre_mois_grace' => 'required|integer',
             'taux_interet' => 'required|integer',
-            'url_business_plan' => 'nullable|url',
-            'url_etude_risque' => 'nullable|url',
+            'url_business_plan' => 'nullable|file|mimes:pdf|max:10240', // Validation du fichier PDF
+            'url_etude_risque' => 'nullable|file|mimes:pdf|max:10240', // Validation du fichier PDF
             'van' => 'required|integer',
             'ir' => 'required|numeric',
             'tri' => 'required|numeric',
@@ -115,7 +128,24 @@ class OffreController extends Controller
         // Récupérer l'offre par son ID
         $offre = Offre::findOrFail($id);
 
-        // Mettre à jour les données de l'offre
+        // Gérer l'upload des fichiers PDF
+        if ($request->hasFile('url_business_plan')) {
+            // Supprimer le fichier précédent si nécessaire
+            if ($offre->url_business_plan) {
+                Storage::disk('public')->delete($offre->url_business_plan);
+            }
+            $offre->url_business_plan = $request->file('url_business_plan')->store('business_plans', 'public');
+        }
+
+        if ($request->hasFile('url_etude_risque')) {
+            // Supprimer le fichier précédent si nécessaire
+            if ($offre->url_etude_risque) {
+                Storage::disk('public')->delete($offre->url_etude_risque);
+            }
+            $offre->url_etude_risque = $request->file('url_etude_risque')->store('etudes_risques', 'public');
+        }
+
+        // Mettre à jour les autres informations de l'offre
         $offre->update([
             'nom_projet' => $request->nom_projet,
             'description_projet' => $request->description_projet,
@@ -123,8 +153,6 @@ class OffreController extends Controller
             'nbre_mois_remboursement' => $request->nbre_mois_remboursement,
             'nbre_mois_grace' => $request->nbre_mois_grace,
             'taux_interet' => $request->taux_interet,
-            'url_business_plan' => $request->url_business_plan,
-            'url_etude_risque' => $request->url_etude_risque,
             'van' => $request->van,
             'ir' => $request->ir,
             'tri' => $request->tri,
@@ -133,7 +161,7 @@ class OffreController extends Controller
         ]);
 
         // Rediriger avec un message de succès
-        return redirect()->route('offre.index')->with('success', 'Offre mise à jour avec succès.');
+        return redirect()->route('offres.index')->with('success', 'Offre mise à jour avec succès.');
     }
 
     // Supprimer une offre spécifique
