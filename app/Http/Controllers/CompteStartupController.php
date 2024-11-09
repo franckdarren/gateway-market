@@ -14,7 +14,7 @@ class CompteStartupController extends Controller
     {
         // Affiche la liste des comptes startup
         $comptes = CompteStartup::all();
-        return view('comptes.index', compact('comptes'));
+        return view('compte-startup.index', compact('comptes'));
     }
 
     /**
@@ -23,7 +23,7 @@ class CompteStartupController extends Controller
     public function create()
     {
         // Affiche le formulaire de création
-        return view('comptes.create');
+        return view('compte-startup.create');
     }
 
     /**
@@ -43,7 +43,7 @@ class CompteStartupController extends Controller
 
         CompteStartup::create($validatedData);
 
-        return redirect()->route('comptes.index')->with('success', 'Compte startup créé avec succès.');
+        return redirect()->route('compte-startup.index')->with('success', 'Compte startup créé avec succès.');
     }
 
     /**
@@ -55,7 +55,7 @@ class CompteStartupController extends Controller
         $compte = CompteStartup::findOrFail($id);
 
         // Afficher le compte startup
-        return view('comptes.show', compact('compte'));
+        return view('compte-startup.show', compact('compte'));
     }
 
     /**
@@ -67,7 +67,7 @@ class CompteStartupController extends Controller
         $compte = CompteStartup::findOrFail($id);
 
         // Afficher le formulaire d'édition avec les données du compte
-        return view('comptes.edit', compact('compte'));
+        return view('compte-startup.edit', compact('compte'));
     }
 
     /**
@@ -94,7 +94,7 @@ class CompteStartupController extends Controller
         $compte->save();
 
         // Rediriger avec un message de succès
-        return redirect()->route('comptes.index')->with('success', 'Compte startup mis à jour avec succès.');
+        return redirect()->route('compte-startup.index')->with('success', 'Compte startup mis à jour avec succès.');
     }
 
 
@@ -109,6 +109,6 @@ class CompteStartupController extends Controller
         // Supprimer le compte
         $compte->delete();
 
-        return redirect()->route('comptes.index')->with('success', 'Compte startup supprimé avec succès.');
+        return redirect()->route('compte-startup.index')->with('success', 'Compte startup supprimé avec succès.');
     }
 }
