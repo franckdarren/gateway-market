@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\OffreController;
 use App\Http\Controllers\CompteStartupController;
 use App\Http\Controllers\CompteInvestisseurController;
 
@@ -20,3 +21,4 @@ Route::middleware([
 
 Route::resource('compte_startup', CompteStartupController::class);
 Route::resource('compte_investisseur', CompteInvestisseurController::class);
+Route::resource('offre', OffreController::class);
