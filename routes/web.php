@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CompteStartupController;
+use App\Http\Controllers\CompteInvestisseurController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -17,4 +18,5 @@ Route::middleware([
     })->name('dashboard');
 });
 
-Route::resource('comptes', CompteStartupController::class);
+Route::resource('compte_startup', CompteStartupController::class);
+Route::resource('compte_investisseur', CompteInvestisseurController::class);
