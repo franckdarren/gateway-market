@@ -26,9 +26,9 @@
                 <select id="role" name="role"
                     class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50"
                     required>
-                    <option value="startup" {{ old('role') == 'startup' ? 'selected' : '' }}>{{ __('Startup') }}
+                    <option value="Startup" {{ old('role') == 'Startup' ? 'selected' : '' }}>{{ __('Startup') }}
                     </option>
-                    <option value="investisseur" {{ old('role') == 'investisseur' ? 'selected' : '' }}>
+                    <option value="Investisseur" {{ old('role') == 'Investisseur' ? 'selected' : '' }}>
                         {{ __('Investisseur') }}</option>
                 </select>
             </div>
