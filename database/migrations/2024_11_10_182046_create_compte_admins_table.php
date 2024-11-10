@@ -11,18 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('compte_startups', function (Blueprint $table) {
+        Schema::create('compte_admins', function (Blueprint $table) {
             $table->id();
-            $table->string('nom');
-            $table->date('date_creation');
-            $table->string('activite_principale');
-            $table->string('email');
-            $table->string('phone');
             $table->integer('solde');
-
-
-            $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade');
-
             $table->timestamps();
         });
     }
@@ -32,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('compte_startups');
+        Schema::dropIfExists('compte_admins');
     }
 };

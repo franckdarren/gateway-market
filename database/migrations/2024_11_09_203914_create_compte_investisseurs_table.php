@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('phone');
             $table->string('email');
             $table->string('profession');
+            $table->integer('solde');
+
 
             $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade');
 

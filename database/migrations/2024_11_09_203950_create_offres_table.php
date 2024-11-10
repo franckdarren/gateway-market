@@ -19,12 +19,15 @@ return new class extends Migration
             $table->integer('nbre_mois_remboursement');
             $table->integer('nbre_mois_grace');
             $table->integer('taux_interet');
+            $table->integer('montant_dette');
             $table->string('url_business_plan')->nullable();
             $table->string('url_etude_risque')->nullable();
             $table->integer('van');
             $table->float('ir');
             $table->float('tri');
             $table->float('krl');
+            $table->string('statut');
+
 
             $table->foreignId('compte_startup_id')->constrained()->onDelete('cascade'); // clé étrangère obligatoire
             $table->foreignId('compte_investisseur_id')->nullable()->constrained()->onDelete('set null'); // clé étrangère optionnelle
