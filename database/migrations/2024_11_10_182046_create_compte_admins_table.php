@@ -14,6 +14,9 @@ return new class extends Migration
         Schema::create('compte_admins', function (Blueprint $table) {
             $table->id();
             $table->integer('solde');
+
+            $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade');
+
             $table->timestamps();
         });
     }
