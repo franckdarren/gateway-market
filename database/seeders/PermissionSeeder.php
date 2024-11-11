@@ -30,5 +30,11 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'edit investisseur']);
         Permission::create(['name' => 'delete investisseur']);
         Permission::create(['name' => 'view investisseur']);
+
+        // Gestion des transactions
+        Permission::create(['name' => 'create transaction']);
+        Permission::create(['name' => 'edit transaction']);
+        Permission::create(['name' => 'delete transaction']);
+        Permission::create(['name' => 'view transaction']);
     }
 }

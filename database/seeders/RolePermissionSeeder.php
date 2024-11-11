@@ -37,17 +37,61 @@ class RolePermissionSeeder extends Seeder
         $deleteInvestisseur = Permission::where('name', 'delete investisseur')->first();
         $viewInvestisseur = Permission::where('name', 'view investisseur')->first();
 
+        $createTransaction = Permission::where('name', 'create transaction')->first();
+        $editTransaction = Permission::where('name', 'edit transaction')->first();
+        $deleteTransaction = Permission::where('name', 'delete transaction')->first();
+        $viewTransaction = Permission::where('name', 'view transaction')->first();
+
 
         // Assigner des permissions aux rôles
-        $administrateur->givePermissionTo([]);
+        $administrateur->givePermissionTo([
+            $createStartup,
+            $editStartup,
+            $deleteStartup,
+            $viewStartup,
 
-        $startup->givePermissionTo([
             $createOffres,
             $editOffres,
             $deleteOffres,
             $viewOffres,
+
+            $createInvestisseur,
+            $editInvestisseur,
+            $deleteInvestisseur,
+            $viewInvestisseur,
+
+            $createTransaction,
+            $editTransaction,
+            $deleteTransaction,
+            $viewTransaction,
         ]);
 
-        $investisseur->givePermissionTo([]);
+        $startup->givePermissionTo([
+            $createStartup,
+            $editStartup,
+            $deleteStartup,
+            $viewStartup,
+
+            $createOffres,
+            $editOffres,
+            $deleteOffres,
+            $viewOffres,
+
+            $createTransaction,
+            $viewTransaction,
+            $editTransaction,
+
+        ]);
+
+        $investisseur->givePermissionTo([
+            $createInvestisseur,
+            $editInvestisseur,
+            $deleteInvestisseur,
+            $viewInvestisseur,
+
+            $createTransaction,
+            $viewTransaction,
+            $editTransaction,
+        ]);
     }
 }
