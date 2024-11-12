@@ -4,7 +4,9 @@ namespace Database\Seeders;
 
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\CompteStartup;
 use Illuminate\Database\Seeder;
+use App\Models\CompteInvestisseur;
 
 class DatabaseSeeder extends Seeder
 {
@@ -27,9 +29,14 @@ class DatabaseSeeder extends Seeder
             InvestisseurUserSeeder::class,
 
             CompteAdminSeeder::class,
-            
+
             PermissionSeeder::class,
             RolePermissionSeeder::class,
+
+            CompteStartupSeeder::class,
+            CompteInvestisseurSeeder::class,
+            OffreSeeder::class,
+
         ]);
     }
 }

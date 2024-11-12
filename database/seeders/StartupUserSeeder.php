@@ -15,7 +15,7 @@ class StartupUserSeeder extends Seeder
     public function run(): void
     {
         // Créer l'utilisateur startup
-        $administrateur = User::create([
+        $startup = User::create([
             'name' => 'Startup',
             'email' => 'startup@startup.com',
             'password' => bcrypt('password'), // Changez le mot de passe si nécessaire
@@ -26,12 +26,10 @@ class StartupUserSeeder extends Seeder
 
         // Vérifier que le rôle existe avant de l'assigner
         if ($role) {
-            $administrateur->assignRole($role);
+            $startup->assignRole($role);
         } else {
             // Si le rôle n'existe pas, lever une exception ou ajouter un message d'erreur
             $this->command->error('Le rôle Startup n\'existe pas dans la base de données.');
         }
-
-
     }
 }

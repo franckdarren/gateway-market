@@ -27,7 +27,7 @@ class CompteAdminSeeder extends Seeder
             // Si l'utilisateur admin n'existe pas, vous pouvez en créer un pour test (si nécessaire)
             $adminUser = User::create([
                 'name' => 'Admin',
-                'email' => 'admin@example.com',
+                'email' => 'admin@admin.com',
                 'password' => bcrypt('password'),  // Remplacez par un mot de passe approprié
             ]);
 

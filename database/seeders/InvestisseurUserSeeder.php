@@ -15,7 +15,7 @@ class InvestisseurUserSeeder extends Seeder
     public function run(): void
     {
         // Créer l'utilisateur investisseur
-        $administrateur = User::create([
+        $investisseur = User::create([
             'name' => 'Investisseur',
             'email' => 'investisseur@investisseur.com',
             'password' => bcrypt('password'), // Changez le mot de passe si nécessaire
@@ -26,7 +26,7 @@ class InvestisseurUserSeeder extends Seeder
 
         // Vérifier que le rôle existe avant de l'assigner
         if ($role) {
-            $administrateur->assignRole($role);
+            $investisseur->assignRole($role);
         } else {
             // Si le rôle n'existe pas, lever une exception ou ajouter un message d'erreur
             $this->command->error('Le rôle Investisseur n\'existe pas dans la base de données.');
