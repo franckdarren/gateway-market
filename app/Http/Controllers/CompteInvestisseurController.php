@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\CompteInvestisseur;
 
@@ -17,29 +18,38 @@ class CompteInvestisseurController extends Controller
     // Afficher le formulaire pour créer un nouveau compte investisseur
     public function create()
     {
-        return view('compte-investisseur.create');
+        // Récupère les utilisateurs ayant le rôle 'Investisseur'
+        $investisseurUser = User::role('Investisseur')->first();
+
+        // Vérifie s'il existe un investisseur
+        if ($investisseurUser && !$investisseurUser->compteInvestisseur) {
+            return view('compte-investisseur.create', compact('investisseurUser'));
+        } else {
+            return redirect()->route('compte-investisseur.index')->with('error', "L'utilisateur a déjà un compte investisseur.");
+        }
     }
 
     // Enregistrer un nouveau compte investisseur
     public function store(Request $request)
     {
-        // Valider les données du formulaire
         $request->validate([
             'nom' => 'required|string|max:255',
             'prenom' => 'required|string|max:255',
             'pays' => 'required|string|max:255',
-            'ville' => 'nullable|string|max:255',
-            'code_postal' => 'nullable|string|max:10',
             'phone' => 'required|string|max:20',
             'email' => 'required|email|max:255',
             'profession' => 'required|string|max:255',
-            'user_id' => 'nullable|exists:users,id',
         ]);
 
-        // Créer un nouveau compte investisseur
-        $compte = CompteInvestisseur::create($request->all());
+        // Récupérer l'utilisateur investisseur
+        $investisseurUser = User::role('investisseur')->first();
 
-        // Rediriger avec un message de succès
+        // Créer le compte investisseur
+        $compteInvestisseur = new CompteInvestisseur($request->all());
+        $compteInvestisseur->user_id = $investisseurUser->id;
+
+        $compteInvestisseur->save();
+
         return redirect()->route('compte-investisseur.index')->with('success', 'Compte investisseur créé avec succès.');
     }
 
@@ -49,56 +59,39 @@ class CompteInvestisseurController extends Controller
         // Récupérer le compte investisseur par son ID
         $compte = CompteInvestisseur::findOrFail($id);
 
+        // Vérifier que le compte appartient à l'utilisateur connecté et a le rôle 'Investisseur'
+        if ($compte->user_id !== auth()->id() || !auth()->user()->hasRole('Investisseur')) {
+            abort(403, 'Accès non autorisé.');
+        }
+
         // Afficher les détails du compte
         return view('compte-investisseur.show', compact('compte'));
     }
 
-    // Afficher le formulaire d'édition pour un compte investisseur spécifique
-    public function edit(string $id)
-    {
-        // Récupérer le compte investisseur par son ID
-        $compte = CompteInvestisseur::findOrFail($id);
 
-        // Afficher le formulaire d'édition avec les données du compte
-        return view('compte-investisseur.edit', compact('compte'));
+    // Afficher le formulaire d'édition pour un compte investisseur spécifique
+    public function edit($id)
+    {
+        $compteInvestisseur = CompteInvestisseur::findOrFail($id);
+        return view('compte-investisseur.edit', compact('compteInvestisseur'));
     }
 
     // Mettre à jour un compte investisseur spécifique
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        // Valider les données à mettre à jour
-        $request->validate([
-            'nom' => 'required|string|max:255',
-            'prenom' => 'required|string|max:255',
-            'pays' => 'required|string|max:255',
-            'ville' => 'nullable|string|max:255',
-            'code_postal' => 'nullable|string|max:10',
-            'phone' => 'required|string|max:20',
-            'email' => 'required|email|max:255',
-            'profession' => 'required|string|max:255',
-            'user_id' => 'nullable|exists:users,id',
-        ]);
+        $compteInvestisseur = CompteInvestisseur::findOrFail($id);
 
-        // Récupérer le compte investisseur par son ID
-        $compte = CompteInvestisseur::findOrFail($id);
+        $compteInvestisseur->update($request->all());
 
-        // Mettre à jour les données du compte
-        $compte->update($request->all());
-
-        // Rediriger avec un message de succès
         return redirect()->route('compte-investisseur.index')->with('success', 'Compte investisseur mis à jour avec succès.');
     }
 
     // Supprimer un compte investisseur spécifique
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        // Récupérer le compte investisseur par son ID
-        $compte = CompteInvestisseur::findOrFail($id);
+        $compteInvestisseur = CompteInvestisseur::findOrFail($id);
+        $compteInvestisseur->delete();
 
-        // Supprimer le compte investisseur
-        $compte->delete();
-
-        // Rediriger avec un message de succès
         return redirect()->route('compte-investisseur.index')->with('success', 'Compte investisseur supprimé avec succès.');
     }
 }

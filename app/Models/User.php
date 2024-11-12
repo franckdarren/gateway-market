@@ -73,8 +73,8 @@ class User extends Authenticatable
         return $this->hasOne(CompteStartup::class);
     }
 
-    public function comptesInvestisseurs()
+    public function compteInvestisseur()
     {
-        return $this->hasMany(CompteInvestisseur::class);
+        return $this->hasOne(CompteInvestisseur::class);
     }
 }

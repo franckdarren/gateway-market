@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('phone');
             $table->integer('solde');
 
-
             $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade')->unique();
 
             $table->timestamps();
