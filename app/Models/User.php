@@ -68,9 +68,9 @@ class User extends Authenticatable
         ];
     }
 
-    public function comptesStartups()
+    public function compteStartup()
     {
-        return $this->hasMany(CompteStartup::class);
+        return $this->hasOne(CompteStartup::class);
     }
 
     public function comptesInvestisseurs()

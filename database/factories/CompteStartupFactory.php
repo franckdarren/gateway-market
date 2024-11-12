@@ -21,6 +21,11 @@ class CompteStartupFactory extends Factory
 
     public function definition(): array
     {
+        // On s'assure d'avoir un utilisateur avec le rôle 'Startup', sinon on met null
+        $userId = User::whereHas('roles', function ($query) {
+            $query->where('name', 'Startup');
+        })->inRandomOrder()->first()->id ?? null;
+
         return [
             'nom' => $this->faker->company,
             'date_creation' => $this->faker->date(),
@@ -28,7 +33,7 @@ class CompteStartupFactory extends Factory
             'email' => $this->faker->unique()->companyEmail,
             'phone' => $this->faker->phoneNumber,
             'solde' => $this->faker->numberBetween(100000, 10000000),
-            'user_id' => User::role('Startup')->inRandomOrder()->first()->id ?? null,
+            'user_id' => $userId, // on utilise la variable $userId définie précédemment
         ];
     }
 }
