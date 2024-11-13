@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
@@ -19,6 +20,7 @@ class AdminUserSeeder extends Seeder
             'name' => 'Administrateur',
             'email' => 'admin@admin.com',
             'password' => bcrypt('password'), // Changez le mot de passe si nécessaire
+            'email_verified_at' => Carbon::now(),
         ]);
 
         // Récupérer le rôle "Administrateur" depuis la base de données
