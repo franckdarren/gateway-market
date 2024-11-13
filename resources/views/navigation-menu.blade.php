@@ -13,9 +13,69 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                        @if (auth()->user()->hasRole('Administrateur'))
+                            {{ __('Dashboard') }}
+                        @else
+                            {{ __('Accueil') }}
+                        @endif
                     </x-nav-link>
                 </div>
+
+                @role('Administrateur')
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link href="{{ route('investisseur') }}" :active="request()->routeIs('investisseur')">
+                            {{ __('Investisseur') }}
+                        </x-nav-link>
+                    </div>
+                @endrole
+
+                @role('Administrateur')
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link href="{{ route('startup') }}" :active="request()->routeIs('startup')">
+                            {{ __('Startup') }}
+                        </x-nav-link>
+                    </div>
+                @endrole
+
+                @role('Administrateur')
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link href="{{ route('transaction') }}" :active="request()->routeIs('transaction')">
+                            {{ __('Transaction') }}
+                        </x-nav-link>
+                    </div>
+                @endrole
+
+                @role('Investisseur')
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link href="{{ route('remboursement') }}" :active="request()->routeIs('remboursement')">
+                            {{ __('Remboursement') }}
+                        </x-nav-link>
+                    </div>
+                @endrole
+
+                @role('Investisseur')
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link href="{{ route('historique') }}" :active="request()->routeIs('historique')">
+                            {{ __('Historique') }}
+                        </x-nav-link>
+                    </div>
+                @endrole
+
+                @role('Startup')
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link href="{{ route('dette') }}" :active="request()->routeIs('dette')">
+                            {{ __('Dettes') }}
+                        </x-nav-link>
+                    </div>
+                @endrole
+
+                @role('Startup')
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link href="{{ route('historique') }}" :active="request()->routeIs('historique')">
+                            {{ __('Historique') }}
+                        </x-nav-link>
+                    </div>
+                @endrole
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ms-6">
