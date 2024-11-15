@@ -33,7 +33,7 @@ class OffreController extends Controller
     // Enregistrer une nouvelle offre
     public function store(Request $request)
     {
-        // dd($request->url_etude_risque);
+        //
 
         // Valider les données du formulaire
         $request->validate([
@@ -62,7 +62,7 @@ class OffreController extends Controller
         }
 
         $compteStartup = CompteStartup::where('user_id', auth()->id())->first();
-        $montantDette = $request->montant + $request->montant * $request->taux_interet;
+        $montantDette = $request->montant + $request->montant * $request->taux_interet / 100;
 
         // dd($montantDette);
 
@@ -113,61 +113,77 @@ class OffreController extends Controller
     // Mettre à jour une offre spécifique
     public function update(Request $request, string $id)
     {
+        // Récupérer l'offre par son ID
+        $offre = Offre::findOrFail($id);
+
         // Valider les données du formulaire
         $request->validate([
             'nom_projet' => 'required|string|max:255',
             'description_projet' => 'required|string',
-            'montant' => 'required|integer',
+            'montant' => 'required|numeric',
             'nbre_mois_remboursement' => 'required|integer',
             'nbre_mois_grace' => 'required|integer',
             'taux_interet' => 'required|integer',
-            'url_business_plan' => 'nullable|file|mimes:pdf|max:10240', // Validation du fichier PDF
-            'url_etude_risque' => 'nullable|file|mimes:pdf|max:10240', // Validation du fichier PDF
-            'van' => 'required|integer',
+            'url_business_plan' => 'nullable|file|mimes:pdf|max:10240',
+            'url_etude_risque' => 'nullable|file|mimes:pdf|max:10240',
+            'van' => 'required|numeric',
             'ir' => 'required|numeric',
             'tri' => 'required|numeric',
             'krl' => 'required|numeric',
-            'compte_startup_id' => 'required|exists:compte_startups,id',
         ]);
 
-        // Récupérer l'offre par son ID
-        $offre = Offre::findOrFail($id);
+        // Vérifier si l'utilisateur a un compte startup
+        $compteStartup = CompteStartup::where('user_id', auth()->id())->first();
+        if (!$compteStartup) {
+            return redirect()->back()->withErrors(['error' => 'Aucun compte startup associé à cet utilisateur.']);
+        }
 
-        // Gérer l'upload des fichiers PDF
+        // Calcul du montant de la dette
+        $tauxInteret = $request->taux_interet / 100; // Convertir le pourcentage en fraction
+        $montantDette = $request->montant + ($request->montant * $tauxInteret);
+
+        // Gérer l'upload des fichiers PDF (Business Plan)
         if ($request->hasFile('url_business_plan')) {
             // Supprimer le fichier précédent si nécessaire
             if ($offre->url_business_plan) {
                 Storage::disk('public')->delete($offre->url_business_plan);
             }
+            // Enregistrer le nouveau fichier
             $offre->url_business_plan = $request->file('url_business_plan')->store('business_plans', 'public');
         }
 
+        // Gérer l'upload des fichiers PDF (Étude de Risque)
         if ($request->hasFile('url_etude_risque')) {
-            // Supprimer le fichier précédent si nécessaire
+            // Supprimer l'ancien fichier si nécessaire
             if ($offre->url_etude_risque) {
                 Storage::disk('public')->delete($offre->url_etude_risque);
             }
+            // Enregistrer le nouveau fichier
             $offre->url_etude_risque = $request->file('url_etude_risque')->store('etudes_risques', 'public');
         }
 
         // Mettre à jour les autres informations de l'offre
-        $offre->update([
-            'nom_projet' => $request->nom_projet,
-            'description_projet' => $request->description_projet,
-            'montant' => $request->montant,
-            'nbre_mois_remboursement' => $request->nbre_mois_remboursement,
-            'nbre_mois_grace' => $request->nbre_mois_grace,
-            'taux_interet' => $request->taux_interet,
-            'van' => $request->van,
-            'ir' => $request->ir,
-            'tri' => $request->tri,
-            'krl' => $request->krl,
-            'compte_startup_id' => $request->compte_startup_id,
-        ]);
+        $offre->nom_projet = $request->nom_projet;
+        $offre->description_projet = $request->description_projet;
+        $offre->montant = $request->montant;
+        $offre->nbre_mois_remboursement = $request->nbre_mois_remboursement;
+        $offre->nbre_mois_grace = $request->nbre_mois_grace;
+        $offre->taux_interet = $request->taux_interet;
+        $offre->montant_dette = $montantDette;
+        $offre->van = $request->van;
+        $offre->ir = $request->ir;
+        $offre->tri = $request->tri;
+        $offre->krl = $request->krl;
+        $offre->compte_startup_id = $compteStartup->id;
+
+        // Enregistrer toutes les modifications dans la base de données
+        $offre->save();
 
         // Rediriger avec un message de succès
-        return redirect()->route('offres.index')->with('success', 'Offre mise à jour avec succès.');
+        return redirect()->route('dashboard')->with('success', 'Offre mise à jour avec succès.');
     }
+
+
 
     // Supprimer une offre spécifique
     public function destroy(string $id)

@@ -38,7 +38,7 @@ class OffreFactory extends Factory
             'ir' => $this->faker->randomFloat(2, 25, 100),
             'tri' => $this->faker->randomFloat(2, 25, 100),
             'krl' => $this->faker->randomFloat(2, 0, 1),
-            'statut' => 'inactif',
+            'statut' => 'En attente ',
 
             // Lier l'offre à un compte startup existant
             'compte_startup_id' => CompteStartup::inRandomOrder()->first()->id,
