@@ -37,18 +37,29 @@ class CompteStartupController extends Controller
             return redirect()->route('comptes.index')->with('error', 'Vous avez déjà un compte startup.');
         }
 
-        // Crée un nouveau compte startup pour l'utilisateur
-        $compte = new CompteStartup();
-        $compte->nom = $request->nom;
-        $compte->date_creation = $request->date_creation;
-        $compte->activite_principale = $request->activite_principale;
-        $compte->email = $request->email;
-        $compte->phone = $request->phone;
-        $compte->user_id = Auth::id();
-        $compte->save();
+        // Valider les données d'entrée
+        $validatedData = $request->validate([
+            'nom' => 'required|string|max:255',
+            'date_creation' => 'required|date',
+            'activite_principale' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:compte_startups,email',
+            'phone' => 'required|string|max:20|unique:compte_startups,phone',
+        ]);
 
-        return redirect()->route('comptes.index')->with('success', 'Compte startup créé avec succès.');
+        // Créer un nouveau compte startup pour l'utilisateur
+        $compte = CompteStartup::create([
+            'nom' => $validatedData['nom'],
+            'date_creation' => $validatedData['date_creation'],
+            'activite_principale' => $validatedData['activite_principale'],
+            'email' => $validatedData['email'],
+            'phone' => $validatedData['phone'],
+            'user_id' => Auth::id(),
+            'solde' => 0, // Initialise le solde par défaut
+        ]);
+
+        return redirect()->route('dashboard')->with('success', 'Compte startup créé avec succès.');
     }
+
 
 
 

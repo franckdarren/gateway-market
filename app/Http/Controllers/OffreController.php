@@ -33,23 +33,22 @@ class OffreController extends Controller
     // Enregistrer une nouvelle offre
     public function store(Request $request)
     {
+        // dd($request->url_etude_risque);
+
         // Valider les données du formulaire
         $request->validate([
             'nom_projet' => 'required|string|max:255',
             'description_projet' => 'required|string',
             'montant' => 'required|integer',
-            'nbre_mois_remboursement' => 'required|integer',
             'nbre_mois_grace' => 'required|integer',
             'taux_interet' => 'required|integer',
-            'url_business_plan' => 'nullable|file|mimes:pdf|max:10240',  // Validation du fichier PDF
-            'url_etude_risque' => 'nullable|file|mimes:pdf|max:10240', // Validation du fichier PDF
+            'url_business_plan' => 'nullable|file|mimes:pdf|max:10240',
+            'url_etude_risque' => 'nullable|file|mimes:pdf|max:10240',
             'van' => 'required|integer',
             'ir' => 'required|numeric',
             'tri' => 'required|numeric',
             'krl' => 'required|numeric',
-            'compte_startup_id' => 'required|exists:compte_startups,id',
         ]);
-
         // Gérer l'upload des fichiers PDF
         $businessPlanPath = null;
         $etudeRisquePath = null;
@@ -62,6 +61,11 @@ class OffreController extends Controller
             $etudeRisquePath = $request->file('url_etude_risque')->store('etudes_risques', 'public');
         }
 
+        $compteStartup = CompteStartup::where('user_id', auth()->id())->first();
+        $montantDette = $request->montant + $request->montant * $request->taux_interet;
+
+        // dd($montantDette);
+
         // Créer une nouvelle offre
         $offre = Offre::create([
             'nom_projet' => $request->nom_projet,
@@ -70,17 +74,18 @@ class OffreController extends Controller
             'nbre_mois_remboursement' => $request->nbre_mois_remboursement,
             'nbre_mois_grace' => $request->nbre_mois_grace,
             'taux_interet' => $request->taux_interet,
+            'montant_dette' => $montantDette,
             'url_business_plan' => $businessPlanPath,
             'url_etude_risque' => $etudeRisquePath,
             'van' => $request->van,
             'ir' => $request->ir,
             'tri' => $request->tri,
             'krl' => $request->krl,
-            'compte_startup_id' => $request->compte_startup_id,
+            'compte_startup_id' => $compteStartup->id,
         ]);
 
         // Rediriger avec un message de succès
-        return redirect()->route('offre.index')->with('success', 'Offre créée avec succès.');
+        return redirect()->route('dashboard')->with('success', 'Offre créée avec succès.');
     }
 
     // Afficher les détails d'une offre spécifique
