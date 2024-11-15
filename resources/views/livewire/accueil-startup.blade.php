@@ -18,7 +18,7 @@
                             <th class="border border-gray-300 px-4 py-2 text-left text-gray-600">Désignation</th>
                             <th class="border border-gray-300 px-4 py-2 text-left text-gray-600">Intérêt</th>
                             <th class="border border-gray-300 px-4 py-2 text-left text-gray-600">Montant</th>
-                            <th class="border border-gray-300 px-2 py-2 text-center text-gray-600 w-[200px]">Action</th>
+                            <th class="border border-gray-300 px-2 py-2 text-center text-gray-600 w-[250px]">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -27,35 +27,35 @@
                                 <td class="border border-gray-300 px-4 py-2">{{ $offre->nom_projet }}</td>
                                 <td class="border border-gray-300 px-4 py-2">{{ $offre->taux_interet }} %</td>
                                 <td class="border border-gray-300 px-4 py-2">{{ $offre->montant }} FCFA</td>
-                                <td class="border border-gray-300 px-2 py-2 text-center w-[200px]">
-                                    <button
-                                        class="inline-flex items-center px-2 py-1 text-sm text-blue-600 hover:text-blue-800">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                            stroke-width="1.5" stroke="currentColor" class="h-5 w-5">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M15.75 9V5.25a2.25 2.25 0 00-2.25-2.25h-3a2.25 2.25 0 00-2.25 2.25V9m-3.75 0h15m-15 0v9.75A2.25 2.25 0 005.25 21h13.5a2.25 2.25 0 002.25-2.25V9m-15 0v-.75A1.5 1.5 0 016.75 6.75h10.5A1.5 1.5 0 0118.75 9V9m-9 3h3m-3 3h3" />
-                                        </svg>
-                                    </button>
-                                    <button
-                                        class="inline-flex items-center px-2 py-1 text-sm text-green-600 hover:text-green-800">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                            stroke-width="1.5" stroke="currentColor" class="h-5 w-5">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M16.862 4.487c.253-.253.596-.39.941-.39.345 0 .688.137.941.39l1.829 1.829c.253.253.39.596.39.941 0 .345-.137.688-.39.941l-1.829 1.829-3.712-3.712 1.83-1.83zm-.97.97L4.5 16.85V19.5h2.65l11.391-11.391-3.712-3.712z" />
-                                        </svg>
-                                    </button>
-                                    <button
-                                        class="inline-flex items-center px-2 py-1 text-sm text-red-600 hover:text-red-800">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                            stroke-width="1.5" stroke="currentColor" class="h-5 w-5">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M6 18L18 6M6 6l12 12" />
-                                        </svg>
-                                    </button>
+                                <td class="border border-gray-300 px-2 py-2 text-center w-[250px]">
+                                    <!-- Bouton Voir -->
+                                    <a href="{{ route('offre.show', $offre->id) }}"
+                                        class="inline-flex items-center px-2 py-1 text-sm font-semibold text-blue-600 hover:text-blue-800 border border-blue-600 rounded-md hover:bg-blue-100">
+                                        Voir
+                                    </a>
+
+                                    <!-- Bouton Éditer -->
+                                    <a href="{{ route('offre.edit', $offre->id) }}"
+                                        class="inline-flex items-center px-2 py-1 text-sm font-semibold text-green-600 hover:text-green-800 border border-green-600 rounded-md hover:bg-green-100 ml-2">
+                                        Éditer
+                                    </a>
+
+                                    <!-- Bouton Supprimer -->
+                                    <form action="{{ route('offre.destroy', $offre->id) }}" method="POST"
+                                        class="inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit"
+                                            onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette offre ?')"
+                                            class="inline-flex items-center px-2 py-1 text-sm font-semibold text-red-600 hover:text-red-800 border border-red-600 rounded-md hover:bg-red-100 ml-2">
+                                            Supprimer
+                                        </button>
+                                    </form>
                                 </td>
+
+
                             </tr>
                         @empty
-                            
                         @endforelse
                     </tbody>
                 </table>
