@@ -177,6 +177,9 @@
                     </div>
                 </div>
             </div>
+            <h1 class="text-xl font-bold text-gray-800 my-6 text-center">Simulateur de prévision de remboursement
+            </h1>
+            @livewire('prevision')
         </div>
     </div>
 </x-app-layout>
