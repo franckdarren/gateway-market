@@ -195,6 +195,6 @@ class OffreController extends Controller
         $offre->delete();
 
         // Rediriger avec un message de succès
-        return redirect()->route('offre.index')->with('success', 'Offre supprimée avec succès.');
+        return redirect()->route('dashboard')->with('success', 'Offre supprimée avec succès.');
     }
 }
