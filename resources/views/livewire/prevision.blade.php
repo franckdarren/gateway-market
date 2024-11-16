@@ -5,34 +5,42 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div class="flex flex-col">
-                <label for="montantEmprunte" class="block text-sm font-medium text-gray-700 mb-2">Montant emprunté :</label>
+                <label for="montantEmprunte" class="block text-sm font-medium text-gray-700 mb-2">Montant emprunté
+                    :</label>
                 <input type="number" id="montantEmprunte" wire:model="montantEmprunte" required
-                    class="px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none text-sm">
+                    class="px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none text-sm"
+                    disabled>
             </div>
 
             <div class="flex flex-col">
                 <label for="duree" class="block text-sm font-medium text-gray-700 mb-2">Durée (en mois) :</label>
                 <input type="number" id="duree" wire:model="duree" required
-                    class="px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none text-sm">
+                    class="px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none text-sm"
+                    disabled>
             </div>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div class="flex flex-col">
-                <label for="tauxInteret" class="block text-sm font-medium text-gray-700 mb-2">Taux d'intérêt (%) :</label>
+                <label for="tauxInteret" class="block text-sm font-medium text-gray-700 mb-2">Taux d'intérêt (%)
+                    :</label>
                 <input type="number" id="tauxInteret" wire:model="tauxInteret" required
-                    class="px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none text-sm">
+                    class="px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none text-sm"
+                    disabled>
             </div>
 
             <div class="flex flex-col">
-                <label for="delaiGrace" class="block text-sm font-medium text-gray-700 mb-2">Délai de grâce (en mois) :</label>
+                <label for="delaiGrace" class="block text-sm font-medium text-gray-700 mb-2">Délai de grâce (en mois)
+                    :</label>
                 <input type="number" id="delaiGrace" wire:model="delaiGrace" required
-                    class="px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none text-sm">
+                    class="px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none text-sm"
+                    disabled>
             </div>
         </div>
 
         <div class="flex justify-center">
-            <button type="submit" class="w-full md:w-auto px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+            <button type="submit"
+                class="w-full md:w-auto px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
                 Calculer
             </button>
         </div>
@@ -53,8 +61,10 @@
                     <tbody class="divide-y divide-gray-200">
                         @foreach ($remboursements as $remboursement)
                             <tr>
-                                <td class="px-6 py-4 text-sm font-medium text-gray-700">{{ $remboursement['mois'] }}</td>
-                                <td class="px-6 py-4 text-sm text-gray-900">{{ number_format($remboursement['montant'], 2) }} FCFA</td>
+                                <td class="px-6 py-4 text-sm font-medium text-gray-700">{{ $remboursement['mois'] }}
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-900">
+                                    {{ number_format($remboursement['montant'], 2) }} FCFA</td>
                             </tr>
                         @endforeach
                     </tbody>

@@ -18,7 +18,7 @@ class OffreFactory extends Factory
     public function definition()
     {
         // Générer les valeurs de montant et taux_interet
-        $montant = $this->faker->numberBetween(2000000, 50000000);
+        $montant = $this->faker->numberBetween(2000000, 7000000);
         $taux_interet = $this->faker->randomElement([3, 6, 9, 12, 15, 18, 21]);
 
         // Calculer montant_dette en fonction de la formule donnée
