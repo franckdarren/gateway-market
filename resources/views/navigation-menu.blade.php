@@ -143,16 +143,45 @@
                                 <button
                                     class="flex text-sm border-2 border-transparent rounded-full transition items-center gap-1">
                                     @php
-                                        $solde = auth()->user()->compteInvestisseur
-                                            ? auth()->user()->compteInvestisseur->solde
-                                            : 0;
+                                        // Initialisation des soldes
+                                        $soldeInvestisseur = 0;
+                                        $soldeStartup = 0;
+                                        $soldeAdmin = 0;
+
+                                        // Vérification du rôle de l'utilisateur connecté
+if (auth()->user()->hasRole('Investisseur')) {
+    // Si l'utilisateur est un Investisseur, récupère son solde
+                                            $soldeInvestisseur = auth()->user()->compteInvestisseur
+                                                ? auth()->user()->compteInvestisseur->solde
+                                                : 0;
+                                        } elseif (auth()->user()->hasRole('Startup')) {
+                                            // Si l'utilisateur est une Startup, récupère son solde
+    $soldeStartup = auth()->user()->compteStartup
+        ? auth()->user()->compteStartup->solde
+        : 0;
+} elseif (auth()->user()->hasRole('Admin')) {
+    // Si l'utilisateur est un Admin, récupère le solde du compte admin
+                                            $soldeAdmin = optional(\App\Models\CompteAdmin::first())->solde ?? 0;
+                                        }
                                     @endphp
 
+                                    <!-- Affichage conditionnel des soldes -->
                                     <div class="flex items-center space-x-2 pr-[100px]">
-
-                                        <p class="text-lg font-semibold text-gray-800">Solde : <span
-                                                class="text-xl text-green-600">{{ $solde }} FCFA</span></p>
+                                        @if (auth()->user()->hasRole('Investisseur'))
+                                            <p class="text-lg font-semibold text-gray-800">Solde : <span
+                                                    class="text-xl text-green-600">{{ $soldeInvestisseur }}
+                                                    FCFA</span></p>
+                                        @elseif (auth()->user()->hasRole('Startup'))
+                                            <p class="text-lg font-semibold text-gray-800">Solde : <span
+                                                    class="text-xl text-green-600">{{ $soldeStartup }} FCFA</span>
+                                            </p>
+                                        @elseif (auth()->user()->hasRole('Admin'))
+                                            <p class="text-lg font-semibold text-gray-800">Solde : <span
+                                                    class="text-xl text-green-600">{{ $soldeAdmin }} FCFA</span>
+                                            </p>
+                                        @endif
                                     </div>
+
 
                                     <img class="h-8 w-8 rounded-full object-cover"
                                         src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />

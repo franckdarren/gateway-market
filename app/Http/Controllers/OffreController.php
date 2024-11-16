@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Offre;
+use App\Models\CompteAdmin;
 use Illuminate\Http\Request;
 use App\Models\CompteStartup;
 use App\Models\CompteInvestisseur;
@@ -209,15 +210,39 @@ class OffreController extends Controller
             return redirect()->route('compte_investisseur.create')->with('error', 'Veuillez créer un compte investisseur.');
         }
 
-        // Vérifier si le solde de l'investisseur est suffisant pour l'investissement
-        if ($investisseur->solde < $offre->montant) {
-            // Si le solde est insuffisant, retourner une erreur ou un message
+        // Vérifier si le solde de l'investisseur est suffisant pour l'investissement + frais
+        $montantInvestissement = $offre->montant;
+        $frais = $montantInvestissement * 0.02;  // Calculer les 2% de l'offre
+        $montantTotal = $montantInvestissement + $frais;
+
+        if ($investisseur->solde < $montantTotal) {
+            // Si le solde est insuffisant pour l'investissement + frais, retourner une erreur ou un message
             return redirect()->back()->with('error', 'Solde insuffisant pour cet investissement.');
         }
 
-        // Débiter le montant du solde de l'investisseur
-        $investisseur->solde -= $offre->montant;
-        $investisseur->save();
+        // Débiter le montant de l'offre + 2% du montant de l'offre du solde de l'investisseur
+        $investisseur->solde -= $montantTotal;
+        $investisseur->save();  // Sauvegarder les changements sur l'investisseur
+
+        // Ajouter le montant de l'offre dans le solde du compte startup qui a créé l'offre
+        $compteStartup = CompteStartup::find($offre->compte_startup_id);
+        if ($compteStartup) {
+            $compteStartup->solde += $montantInvestissement;
+            $compteStartup->save();  // Sauvegarder les changements sur le compte startup
+        } else {
+            // Si le compte startup n'existe pas, retourner une erreur
+            return redirect()->back()->with('error', 'Compte startup introuvable.');
+        }
+
+        // Ajouter les 2% dans le solde du compte admin
+        $compteAdmin = CompteAdmin::first(); // Supposons que vous avez une entité `CompteAdmin`
+        if ($compteAdmin) {
+            $compteAdmin->solde += $frais;
+            $compteAdmin->save();  // Sauvegarder les changements sur le compte admin
+        } else {
+            // Si le compte admin n'existe pas, retourner une erreur
+            return redirect()->back()->with('error', 'Compte administrateur introuvable.');
+        }
 
         // Mettre à jour l'offre avec le compte investisseur et changer son statut
         $offre->compte_investisseur_id = $investisseur->id;

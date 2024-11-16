@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('offres', function (Blueprint $table) {
             $table->id();
             $table->string('nom_projet');
-            $table->string('description_projet');
+            $table->text('description_projet');
             $table->integer('montant');
             $table->integer('nbre_mois_remboursement');
             $table->integer('nbre_mois_grace');
