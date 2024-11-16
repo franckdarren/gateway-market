@@ -78,4 +78,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasOne(CompteInvestisseur::class);
     }
+
+    public function compteAdmin()
+    {
+        return $this->hasOne(CompteAdmin::class);
+    }
 }

@@ -159,9 +159,11 @@ if (auth()->user()->hasRole('Investisseur')) {
     $soldeStartup = auth()->user()->compteStartup
         ? auth()->user()->compteStartup->solde
         : 0;
-} elseif (auth()->user()->hasRole('Admin')) {
+} elseif (auth()->user()->hasRole('Administrateur')) {
     // Si l'utilisateur est un Admin, récupère le solde du compte admin
-                                            $soldeAdmin = optional(\App\Models\CompteAdmin::first())->solde ?? 0;
+                                            $soldeAdmin = auth()->user()->compteAdmin
+                                                ? auth()->user()->compteAdmin->solde
+                                                : 0;
                                         }
                                     @endphp
 
@@ -169,15 +171,17 @@ if (auth()->user()->hasRole('Investisseur')) {
                                     <div class="flex items-center space-x-2 pr-[100px]">
                                         @if (auth()->user()->hasRole('Investisseur'))
                                             <p class="text-lg font-semibold text-gray-800">Solde : <span
-                                                    class="text-xl text-green-600">{{ $soldeInvestisseur }}
+                                                    class="text-xl text-green-600">{{ number_format($soldeInvestisseur, 0, '.', ' ') }}
                                                     FCFA</span></p>
                                         @elseif (auth()->user()->hasRole('Startup'))
                                             <p class="text-lg font-semibold text-gray-800">Solde : <span
-                                                    class="text-xl text-green-600">{{ $soldeStartup }} FCFA</span>
+                                                    class="text-xl text-green-600">{{ number_format($soldeStartup, 0, '.', ' ') }}
+                                                    FCFA</span>
                                             </p>
-                                        @elseif (auth()->user()->hasRole('Admin'))
+                                        @elseif (auth()->user()->hasRole('Administrateur'))
                                             <p class="text-lg font-semibold text-gray-800">Solde : <span
-                                                    class="text-xl text-green-600">{{ $soldeAdmin }} FCFA</span>
+                                                    class="text-xl text-green-600">{{ number_format($soldeAdmin, 0, '.', ' ') }}
+                                                    FCFA</span>
                                             </p>
                                         @endif
                                     </div>

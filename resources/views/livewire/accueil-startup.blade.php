@@ -26,7 +26,8 @@
                             <tr class="hover:bg-gray-100">
                                 <td class="border border-gray-300 px-4 py-2">{{ $offre->nom_projet }}</td>
                                 <td class="border border-gray-300 px-4 py-2">{{ $offre->taux_interet }} %</td>
-                                <td class="border border-gray-300 px-4 py-2">{{ $offre->montant }} FCFA</td>
+                                <td class="border border-gray-300 px-4 py-2">
+                                    {{ number_format($offre->montant, 0, '.', ' ') }} FCFA</td>
                                 <td class="border border-gray-300 px-2 py-2 text-center w-[250px]">
                                     <!-- Bouton Voir -->
                                     <a href="{{ route('offre.show', $offre->id) }}"

@@ -21,7 +21,9 @@
                                 <td class="border border-gray-300 px-4 py-2">{{ $offre->taux_interet }} %</td>
                                 <td class="border border-gray-300 px-4 py-2">{{ $offre->nbre_mois_remboursement }}</td>
                                 <td class="border border-gray-300 px-4 py-2">{{ $offre->nbre_mois_grace }}</td>
-                                <td class="border border-gray-300 px-4 py-2">{{ $offre->montant }} FCFA</td>
+                                <td class="border border-gray-300 px-4 py-2">
+                                    {{ number_format($offre->montant, 0, '.', ' ') }} FCFA</td>
+
                                 <td class="border border-gray-300 px-2 py-2 text-center w-[250px]">
                                     <a href="{{ route('offre.show', $offre->id) }}"
                                         class="inline-flex items-center px-2 py-1 text-sm font-semibold text-blue-600 hover:text-blue-800 border border-blue-600 rounded-md hover:bg-blue-100">
