@@ -42,8 +42,10 @@ Route::middleware([
     Route::get('/historiques', function () {
         return view('historique');
     })->name('historique');
-});
 
-Route::resource('compte_startup', CompteStartupController::class);
-Route::resource('compte_investisseur', CompteInvestisseurController::class);
-Route::resource('offre', OffreController::class);
+    Route::get('/investir/{offre}', [OffreController::class, 'investir'])->name('offre.investir');
+
+    Route::resource('compte_startup', CompteStartupController::class);
+    Route::resource('compte_investisseur', CompteInvestisseurController::class);
+    Route::resource('offre', OffreController::class);
+});

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Offre;
 use Illuminate\Http\Request;
 use App\Models\CompteStartup;
+use App\Models\CompteInvestisseur;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -196,5 +197,34 @@ class OffreController extends Controller
 
         // Rediriger avec un message de succès
         return redirect()->route('dashboard')->with('success', 'Offre supprimée avec succès.');
+    }
+
+    public function investir(Offre $offre)
+    {
+        // Récupérer l'investisseur (utilisateur connecté)
+        $investisseur = CompteInvestisseur::where('user_id', Auth::id())->first();
+
+        if (!$investisseur) {
+            // Si l'investisseur n'existe pas, retourner une erreur ou rediriger
+            return redirect()->route('compte_investisseur.create')->with('error', 'Veuillez créer un compte investisseur.');
+        }
+
+        // Vérifier si le solde de l'investisseur est suffisant pour l'investissement
+        if ($investisseur->solde < $offre->montant) {
+            // Si le solde est insuffisant, retourner une erreur ou un message
+            return redirect()->back()->with('error', 'Solde insuffisant pour cet investissement.');
+        }
+
+        // Débiter le montant du solde de l'investisseur
+        $investisseur->solde -= $offre->montant;
+        $investisseur->save();
+
+        // Mettre à jour l'offre avec le compte investisseur et changer son statut
+        $offre->compte_investisseur_id = $investisseur->id;
+        $offre->statut = 'En cours'; // Vous pouvez définir un autre statut selon vos besoins
+        $offre->save();
+
+        // Retourner à la page de l'offre avec un message de succès
+        return redirect()->route('offre.show', $offre->id)->with('success', 'Investissement réussi !');
     }
 }

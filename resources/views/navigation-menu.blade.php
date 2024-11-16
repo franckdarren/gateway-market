@@ -136,11 +136,24 @@
 
                 <!-- Settings Dropdown -->
                 <div class="ms-3 relative">
+
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
                             @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
                                 <button
                                     class="flex text-sm border-2 border-transparent rounded-full transition items-center gap-1">
+                                    @php
+                                        $solde = auth()->user()->compteInvestisseur
+                                            ? auth()->user()->compteInvestisseur->solde
+                                            : 0;
+                                    @endphp
+
+                                    <div class="flex items-center space-x-2 pr-[100px]">
+
+                                        <p class="text-lg font-semibold text-gray-800">Solde : <span
+                                                class="text-xl text-green-600">{{ $solde }} FCFA</span></p>
+                                    </div>
+
                                     <img class="h-8 w-8 rounded-full object-cover"
                                         src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
                                     <span class="text-gray-600">{{ Auth::user()->name }}</span>

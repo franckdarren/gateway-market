@@ -106,20 +106,24 @@
                         @endrole
 
                         @role('Investisseur')
-                            <h1 class="text-xl font-bold text-gray-800 my-6 text-center">Simulateur de prévision de
-                                remboursement
-                            </h1>
-                            @livewire('prevision', [
-                                'montantEmprunte' => $offre->montant,
-                                'duree' => $offre->nbre_mois_remboursement,
-                                'tauxInteret' => $offre->taux_interet,
-                                'delaiGrace' => $offre->nbre_mois_grace,
-                            ])
+                            <div class="mb-10">
+                                <h1 class="text-xl font-bold text-gray-800 my-6 text-center">Simulateur de prévision de
+                                    remboursement
+                                </h1>
+                                @livewire('prevision', [
+                                    'montantEmprunte' => $offre->montant,
+                                    'duree' => $offre->nbre_mois_remboursement,
+                                    'tauxInteret' => $offre->taux_interet,
+                                    'delaiGrace' => $offre->nbre_mois_grace,
+                                ])
+                            </div>
                         @endrole
 
                         @role('Investisseur')
-                            <a href="{{ route('offre.edit', $offre->id) }}"
-                                class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600">Investir</a>
+                            <a href="{{ route('offre.investir', $offre->id) }}"
+                                class="px-4 py-4 bg-green-500 text-white rounded-md hover:bg-green-600">
+                                Investir
+                            </a>
                         @endrole
 
                     </div>
