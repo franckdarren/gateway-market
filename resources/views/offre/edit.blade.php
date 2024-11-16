@@ -179,7 +179,12 @@
             </div>
             <h1 class="text-xl font-bold text-gray-800 my-6 text-center">Simulateur de prévision de remboursement
             </h1>
-            @livewire('prevision')
+            @livewire('prevision', [
+                'montantEmprunte' => $offre->montant,
+                'duree' => $offre->nbre_mois_remboursement,
+                'tauxInteret' => $offre->taux_interet,
+                'delaiGrace' => $offre->nbre_mois_grace,
+            ])
         </div>
     </div>
 </x-app-layout>
