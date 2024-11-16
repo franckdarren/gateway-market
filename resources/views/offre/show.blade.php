@@ -134,10 +134,18 @@
                         @endrole
 
                         @role('Investisseur')
-                            <a href="{{ route('offre.investir', $offre->id) }}"
-                                class="px-4 py-4 bg-green-500 text-white rounded-md hover:bg-green-600">
-                                Investir
-                            </a>
+
+                            @php
+                                // Supposons que vous avez accès à l'id du compteInvestisseur connecté
+                                $compteInvestisseurId = auth()->user()->compteInvestisseur->id ?? null;
+                            @endphp
+
+                            @if ($offre->compte_investisseur_id !== $compteInvestisseurId)
+                                <a href="{{ route('offre.investir', $offre->id) }}"
+                                    class="px-4 py-4 bg-green-500 text-white rounded-md hover:bg-green-600">
+                                    Investir
+                                </a>
+                            @endif
                         @endrole
 
                     </div>
