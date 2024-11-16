@@ -30,18 +30,28 @@ class Prevision extends Component
         // Initialisation du tableau des remboursements
         $remboursements = [];
 
+        // Mois de départ pour les remboursements (un mois après le mois actuel)
+        $currentMonth = now()->addMonth()->month; // Décalage d'un mois
+        $currentYear = now()->addMonth()->year;
+
         // Calcul des mensualités en tenant compte du délai de grâce
         for ($i = 1; $i <= $this->duree + $this->delaiGrace; $i++) {
+            $monthIndex = ($currentMonth + $i - 1) % 12 ?: 12; // Récupère le mois entre 1 et 12
+            $yearOffset = intdiv($currentMonth + $i - 1, 12); // Ajuste l'année si on dépasse décembre
+
+            $monthName = now()->setMonth($monthIndex)->translatedFormat('F'); // Récupère le nom du mois
+            $year = $currentYear + $yearOffset; // Calcule l'année correspondante
+
             if ($i <= $this->delaiGrace) {
                 // Pendant le délai de grâce, on ne paye rien
                 $remboursements[] = [
-                    'mois' => $i,
+                    'mois' => $monthName . ' ' . $year,
                     'montant' => 0, // Pas de remboursement pendant le délai de grâce
                 ];
             } else {
                 // Après le délai de grâce, on commence à rembourser
                 $remboursements[] = [
-                    'mois' => $i,
+                    'mois' => $monthName . ' ' . $year,
                     'montant' => round($mensualite, 2), // Arrondi pour plus de clarté
                 ];
             }
@@ -50,6 +60,8 @@ class Prevision extends Component
         // Stockage des remboursements calculés dans la propriété publique
         $this->remboursements = $remboursements;
     }
+
+
 
     public function render()
     {
