@@ -34,6 +34,10 @@ Route::middleware([
         return view('remboursement');
     })->name('remboursement');
 
+    Route::get('/projets', function () {
+        return view('projets');
+    })->name('projets');
+
     //Routes Startups
     Route::get('/dettes', function () {
         return view('dette');
@@ -44,6 +48,8 @@ Route::middleware([
     })->name('historique');
 
     Route::get('/investir/{offre}', [OffreController::class, 'investir'])->name('offre.investir');
+    Route::get('/annuler/{offre}', [OffreController::class, 'annuler'])->name('offre.annuler');
+
 
     Route::resource('compte_startup', CompteStartupController::class);
     Route::resource('compte_investisseur', CompteInvestisseurController::class);

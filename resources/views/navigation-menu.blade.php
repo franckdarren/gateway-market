@@ -47,6 +47,14 @@
 
                 @role('Investisseur')
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link href="{{ route('projets') }}" :active="request()->routeIs('projets')">
+                            {{ __('Mes projets') }}
+                        </x-nav-link>
+                    </div>
+                @endrole
+
+                @role('Investisseur')
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                         <x-nav-link href="{{ route('remboursement') }}" :active="request()->routeIs('remboursement')">
                             {{ __('Remboursement') }}
                         </x-nav-link>

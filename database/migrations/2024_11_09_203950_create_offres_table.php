@@ -26,7 +26,7 @@ return new class extends Migration
             $table->float('ir');
             $table->float('tri');
             $table->float('krl');
-            $table->string('statut')->default('En attente');
+            $table->string('statut')->default('Disponible');
 
 
             $table->foreignId('compte_startup_id')->constrained()->onDelete('cascade'); // clé étrangère obligatoire

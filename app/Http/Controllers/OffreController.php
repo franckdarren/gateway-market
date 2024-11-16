@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Offre;
 use App\Models\CompteAdmin;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use App\Models\CompteStartup;
 use App\Models\CompteInvestisseur;
@@ -200,6 +201,29 @@ class OffreController extends Controller
         return redirect()->route('dashboard')->with('success', 'Offre supprimée avec succès.');
     }
 
+    public function annuler(string $id)
+    {
+        // Récupérer l'offre par son ID
+        $offre = Offre::findOrFail($id);
+
+        // Vérifier si l'offre a le statut "En attente"
+        if ($offre->statut === 'En attente') {
+            // Réinitialiser l'offre
+            $offre->statut = 'Disponible';
+            $offre->compte_investisseur_id = null;
+
+            // Enregistrer les modifications dans la base de données
+            $offre->save();
+
+            // Rediriger avec un message de succès
+            return redirect()->route('projets')->with('success', 'L\'offre a été annulée avec succès.');
+        }
+
+        // Si le statut de l'offre n'est pas "En attente"
+        return redirect()->route('projets')->with('error', 'Seules les offres en attente peuvent être annulées.');
+    }
+
+
     public function investir(Offre $offre)
     {
         // Récupérer l'investisseur (utilisateur connecté)
@@ -220,36 +244,21 @@ class OffreController extends Controller
             return redirect()->back()->with('error', 'Solde insuffisant pour cet investissement.');
         }
 
-        // Débiter le montant de l'offre + 2% du montant de l'offre du solde de l'investisseur
-        $investisseur->solde -= $montantTotal;
-        $investisseur->save();  // Sauvegarder les changements sur l'investisseur
-
-        // Ajouter le montant de l'offre dans le solde du compte startup qui a créé l'offre
-        $compteStartup = CompteStartup::find($offre->compte_startup_id);
-        if ($compteStartup) {
-            $compteStartup->solde += $montantInvestissement;
-            $compteStartup->save();  // Sauvegarder les changements sur le compte startup
-        } else {
-            // Si le compte startup n'existe pas, retourner une erreur
-            return redirect()->back()->with('error', 'Compte startup introuvable.');
-        }
-
-        // Ajouter les 2% dans le solde du compte admin
-        $compteAdmin = CompteAdmin::first(); // Supposons que vous avez une entité `CompteAdmin`
-        if ($compteAdmin) {
-            $compteAdmin->solde += $frais;
-            $compteAdmin->save();  // Sauvegarder les changements sur le compte admin
-        } else {
-            // Si le compte admin n'existe pas, retourner une erreur
-            return redirect()->back()->with('error', 'Compte administrateur introuvable.');
-        }
+        Transaction::create([
+            'montant' => $montantTotal,
+            'type' => 'investissement',
+            'description' => 'Investissement dans l\'offre ' . $offre->nom_projet,
+            'compte_type' => 'CompteInvestisseur',
+            'compte_id' => $investisseur->id,
+            'offre_id' => $offre->id,
+        ]);
 
         // Mettre à jour l'offre avec le compte investisseur et changer son statut
         $offre->compte_investisseur_id = $investisseur->id;
-        $offre->statut = 'En cours'; // Vous pouvez définir un autre statut selon vos besoins
+        $offre->statut = 'En attente'; // Vous pouvez définir un autre statut selon vos besoins
         $offre->save();
 
         // Retourner à la page de l'offre avec un message de succès
-        return redirect()->route('offre.show', $offre->id)->with('success', 'Investissement réussi !');
+        return redirect()->route('offre.show', $offre->id)->with('success', 'Investissement en cours de traitement !');
     }
 }
