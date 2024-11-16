@@ -17,7 +17,7 @@
                     <div class="bg-white shadow-md rounded-lg p-6">
                         <h2 class="text-2xl font-bold mb-4">Détails de l'offre</h2>
 
-                        <table class="table-auto w-full border border-gray-300">
+                        <table class="table-auto w-full border border-gray-300 mb-5">
                             <tbody>
                                 <tr class="border-b">
                                     <th class="text-left px-4 py-2 w-1/3 bg-gray-100">Nom du projet :</th>
@@ -89,19 +89,39 @@
                             </tbody>
                         </table>
 
-                        <div class="mt-6 flex">
+                        @role('Startup')
+                            <div class="mt-6 flex">
+                                <a href="{{ route('offre.edit', $offre->id) }}"
+                                    class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600">Éditer</a>
+                                <form action="{{ route('offre.destroy', $offre->id) }}" method="POST" class="ml-4">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit"
+                                        onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette offre ?')"
+                                        class="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600">
+                                        Supprimer
+                                    </button>
+                                </form>
+                            </div>
+                        @endrole
+
+                        @role('Investisseur')
+                            <h1 class="text-xl font-bold text-gray-800 my-6 text-center">Simulateur de prévision de
+                                remboursement
+                            </h1>
+                            @livewire('prevision', [
+                                'montantEmprunte' => $offre->montant,
+                                'duree' => $offre->nbre_mois_remboursement,
+                                'tauxInteret' => $offre->taux_interet,
+                                'delaiGrace' => $offre->nbre_mois_grace,
+                            ])
+                        @endrole
+
+                        @role('Investisseur')
                             <a href="{{ route('offre.edit', $offre->id) }}"
-                                class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600">Éditer</a>
-                            <form action="{{ route('offre.destroy', $offre->id) }}" method="POST" class="ml-4">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit"
-                                    onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette offre ?')"
-                                    class="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600">
-                                    Supprimer
-                                </button>
-                            </form>
-                        </div>
+                                class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600">Investir</a>
+                        @endrole
+
                     </div>
                 </div>
             </div>

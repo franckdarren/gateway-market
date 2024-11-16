@@ -24,7 +24,7 @@
                 @elseif (auth()->user()->hasRole('Startup'))
                     @livewire('accueil-startup')
                 @else
-                    @livewire('accueil-investisseur')
+                    @livewire('investisseur')
                 @endif
             </div>
         </div>

@@ -1,3 +1,0 @@
-<div>
-    Acceuil Investisseur
-</div>
