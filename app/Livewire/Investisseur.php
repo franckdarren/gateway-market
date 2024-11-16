@@ -10,8 +10,22 @@ class Investisseur extends Component
 {
     use WithPagination; // Importer le trait pour la pagination
 
+    public $compteInvestisseurId = null;
+    public $hasCompteInvestisseur = false;
     // Personnalisation du nombre d'éléments par page
     protected $paginationTheme = 'tailwind';
+
+    public function mount()
+    {
+        // Vérifie si l'utilisateur a un compte startup
+        $user = auth()->user();
+        if ($user && $user->compteInvestisseur) {
+            $this->compteInvestisseurId = $user->compteInvestisseur->id;
+            $this->hasCompteInvestisseur = true;
+        } else {
+            $this->hasCompteInvestisseur = false;
+        }
+    }
 
     public function render()
     {

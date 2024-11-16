@@ -18,39 +18,43 @@ class CompteInvestisseurController extends Controller
     // Afficher le formulaire pour créer un nouveau compte investisseur
     public function create()
     {
-        // Récupère les utilisateurs ayant le rôle 'Investisseur'
-        $investisseurUser = User::role('Investisseur')->first();
-
-        // Vérifie s'il existe un investisseur
-        if ($investisseurUser && !$investisseurUser->compteInvestisseur) {
-            return view('compte-investisseur.create', compact('investisseurUser'));
-        } else {
-            return redirect()->route('compte-investisseur.index')->with('error', "L'utilisateur a déjà un compte investisseur.");
-        }
+        // Affiche le formulaire de création
+        return view('compte-investisseur.create');
     }
 
     // Enregistrer un nouveau compte investisseur
     public function store(Request $request)
     {
+        // Validation des champs
         $request->validate([
             'nom' => 'required|string|max:255',
             'prenom' => 'required|string|max:255',
             'pays' => 'required|string|max:255',
-            'phone' => 'required|string|max:20',
-            'email' => 'required|email|max:255',
+            'etat_province' => 'nullable|string|max:255',
+            'ville' => 'nullable|string|max:255',
+            'code_postal' => 'nullable|string|max:255',
+            'phone' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:compte_investisseurs',
             'profession' => 'required|string|max:255',
         ]);
 
-        // Récupérer l'utilisateur investisseur
-        $investisseurUser = User::role('investisseur')->first();
+        // Création du compte investisseur
+        $compteInvestisseur = CompteInvestisseur::create([
+            'nom' => $request->nom,
+            'prenom' => $request->prenom,
+            'pays' => $request->pays,
+            'etat_province' => $request->etat_province,
+            'ville' => $request->ville,
+            'code_postal' => $request->code_postal,
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'profession' => $request->profession,
+            'solde' => 0,
+            'user_id' => auth()->id(),  // Récupère l'id de l'utilisateur connecté
+        ]);
 
-        // Créer le compte investisseur
-        $compteInvestisseur = new CompteInvestisseur($request->all());
-        $compteInvestisseur->user_id = $investisseurUser->id;
-
-        $compteInvestisseur->save();
-
-        return redirect()->route('compte-investisseur.index')->with('success', 'Compte investisseur créé avec succès.');
+        // Retourner une réponse, redirection, ou vue selon besoin
+        return redirect()->route('compte_investisseur.index')->with('success', 'Compte créé avec succès!');
     }
 
     // Afficher les détails d'un compte investisseur spécifique
