@@ -259,6 +259,6 @@ class OffreController extends Controller
         $offre->save();
 
         // Retourner à la page de l'offre avec un message de succès
-        return redirect()->route('offre.show', $offre->id)->with('success', 'Investissement en cours de traitement !');
+        return redirect()->route('offre.show', $offre->id)->with('success', 'Investissement en cours de traitement ! Un email vous sera envoyé pour confirmer la transaction.');
     }
 }
