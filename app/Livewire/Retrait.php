@@ -37,32 +37,31 @@ class Retrait extends Component
             // Si l'utilisateur a un CompteAdmin
             $compte_id = $user->compteAdmin->id;
             $compteType = 'Compte Admin';
+            $compte = CompteAdmin::find($compte_id);
         } elseif ($userRole === 'Investisseur') {
             // Si l'utilisateur a un CompteInvestisseur
             $compte_id = $user->compteInvestisseur->id;
             $compteType = 'Compte Investisseur';
+            $compte = CompteInvestisseur::find($compte_id);
         } elseif ($userRole === 'Startup') {
             // Si l'utilisateur a un CompteStartup
             $compte_id = $user->compteStartup->id;
             $compteType = 'Compte Startup';
+            $compte = CompteStartup::find($compte_id);
         } else {
             // Si l'utilisateur n'a aucun compte valide
             session()->flash('error', 'Aucun compte valide trouvé pour l\'utilisateur.');
             return;
         }
 
-        $this->validate();
+        // Vérification du solde
+        if ($this->montant > $compte->solde) {
+            $this->reset();
+            session()->flash('error', 'Montant insuffisant dans le solde du compte.');
+            return;
+        }
 
-        // dd([
-        //     'montant' => $this->montant,
-        //     'type' => $this->type,
-        //     'description' => $this->description,
-        //     'compte_type' => $compteType,
-        //     'mode_retrait' => $this->mode_retrait,
-        //     'nom_compte' => $this->nom_compte,
-        //     'numero_compte' => $this->numero_compte,
-        //     'compte_id' => $compte_id,
-        // ]);
+        $this->validate();
 
         // Créer la transaction
         $transaction = Transaction::create([

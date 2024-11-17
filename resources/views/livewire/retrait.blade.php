@@ -8,6 +8,12 @@
             <span>{{ session('message') }}</span>
         </div>
     @endif
+    <!-- Message d'erreur -->
+    @if (session()->has('error'))
+        <div class="mb-4 p-4 text-sm text-red-700 bg-red-100 border border-red-300 rounded-lg">
+            {{ session('error') }}
+        </div>
+    @endif
     <h2 class="text-2xl font-semibold text-center mb-6">Retrait d'argent</h2>
     <form wire:submit.prevent="submit" class="space-y-6">
         <!-- Montant -->
