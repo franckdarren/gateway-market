@@ -74,6 +74,17 @@ class InvestissementCommand extends Command
                 $transaction->statut = 'Annulée';
                 $transaction->save();
 
+                // Récupérer l'offre et le compte startup
+                $offre = Offre::find($transaction->offre_id);
+                if (!$offre) {
+                    $this->error("Offre introuvable pour la transaction ID {$transaction->id}");
+                    continue;
+                }
+
+                $offre->statut = 'Disponible';
+                $offre->compte_investisseur_id = null;
+                $offre->save();
+
                 continue;
             }
 
