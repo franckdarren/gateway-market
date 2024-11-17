@@ -9,6 +9,8 @@ use App\Models\CompteStartup;
 use Illuminate\Console\Command;
 use App\Models\CompteInvestisseur;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\NotificationInvestisseur;
 
 class InvestissementCommand extends Command
 {
@@ -95,6 +97,9 @@ class InvestissementCommand extends Command
             // Marquer la transaction comme traitée
             $transaction->statut = 'Traitée';
             $transaction->save();
+
+            // Envoyer l'email à l'investisseur
+            Mail::to($compteInvestisseur->email)->send(new NotificationInvestisseur($transaction, $compteInvestisseur));
 
             $this->info("Transaction ID {$transaction->id} traitée avec succès.");
         }
