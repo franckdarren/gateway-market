@@ -11,6 +11,7 @@ use App\Models\CompteInvestisseur;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\NotificationInvestisseur;
+use App\Mail\AnnulationInvestissement; // Ajouter le mail d'annulation
 
 class InvestissementCommand extends Command
 {
@@ -57,6 +58,21 @@ class InvestissementCommand extends Command
             $compteInvestisseur = CompteInvestisseur::find($transaction->compte_id);
             if (!$compteInvestisseur) {
                 $this->error("Compte investisseur introuvable pour la transaction ID {$transaction->id}");
+                continue;
+            }
+
+            // Vérification du solde avant de poursuivre
+            if ($compteInvestisseur->solde < $montant) {
+                // Si le solde est insuffisant, envoyer un email d'annulation et arrêter l'opération
+                $this->error("Solde insuffisant pour la transaction ID {$transaction->id}");
+
+                // Envoi de l'email d'annulation
+                Mail::to($compteInvestisseur->email)->send(new AnnulationInvestissement($transaction, $compteInvestisseur));
+
+                // Marquer la transaction comme annulée
+                $transaction->statut = 'Annulée';
+                $transaction->save();
+
                 continue;
             }
 
