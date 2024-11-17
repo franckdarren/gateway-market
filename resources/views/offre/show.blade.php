@@ -136,7 +136,6 @@
                         @role('Investisseur')
 
                             @php
-                                // Supposons que vous avez accès à l'id du compteInvestisseur connecté
                                 $compteInvestisseurId = auth()->user()->compteInvestisseur->id ?? null;
                             @endphp
 

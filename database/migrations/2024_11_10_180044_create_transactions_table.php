@@ -17,7 +17,7 @@ return new class extends Migration
             $table->enum('type', ['depot', 'retrait', 'investissement']);
             $table->string('description')->nullable();
             $table->string('compte_type');
-
+            $table->string('statut')->default('En attente de traitement');
             $table->unsignedBigInteger('compte_id');
             $table->foreignId('offre_id')->nullable()->constrained()->onDelete('set null'); // clé étrangère optionnelle
 

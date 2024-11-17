@@ -17,10 +17,9 @@
             <tr>
                 <th class="border border-gray-300 px-4 py-2 text-left text-gray-600">Désignation</th>
                 <th class="border border-gray-300 px-4 py-2 text-left text-gray-600">Intérêt</th>
-                <th class="border border-gray-300 px-4 py-2 text-left text-gray-600">Mois de remboursement
-                </th>
-                <th class="border border-gray-300 px-4 py-2 text-left text-gray-600">Mois de grace</th>
                 <th class="border border-gray-300 px-4 py-2 text-left text-gray-600">Montant</th>
+                <th class="border border-gray-300 px-4 py-2 text-left text-gray-600">Statut</th>
+
                 <th class="border border-gray-300 px-2 py-2 text-center text-gray-600 w-[250px]">Action</th>
             </tr>
         </thead>
@@ -29,10 +28,9 @@
                 <tr class="hover:bg-gray-100">
                     <td class="border border-gray-300 px-4 py-2">{{ $offre->nom_projet }}</td>
                     <td class="border border-gray-300 px-4 py-2">{{ $offre->taux_interet }} %</td>
-                    <td class="border border-gray-300 px-4 py-2">{{ $offre->nbre_mois_remboursement }}</td>
-                    <td class="border border-gray-300 px-4 py-2">{{ $offre->nbre_mois_grace }}</td>
                     <td class="border border-gray-300 px-4 py-2">
                         {{ number_format($offre->montant, 0, '.', ' ') }} FCFA</td>
+                    <td class="border border-gray-300 px-4 py-2">{{ $offre->statut }}</td>
 
                     <td class="border border-gray-300 px-2 py-2 text-center w-[250px]">
                         <a href="{{ route('offre.show', $offre->id) }}"
