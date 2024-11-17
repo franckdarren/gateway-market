@@ -14,10 +14,12 @@ class Transaction extends Model
         'type',
         'description',
         'compte_type',
-
+        'mode_retrait',
+        'nom_compte',
+        'numero_compte',
         'compte_id',
+        'statut',
         'offre_id',
-
     ];
 
     public function compte()

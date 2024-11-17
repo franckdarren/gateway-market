@@ -69,6 +69,14 @@
                     </div>
                 @endrole
 
+                @role('Investisseur')
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link href="{{ route('retrait') }}" :active="request()->routeIs('retrait')">
+                            {{ __('Retrait') }}
+                        </x-nav-link>
+                    </div>
+                @endrole
+
                 @role('Startup')
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                         <x-nav-link href="{{ route('dette') }}" :active="request()->routeIs('dette')">
@@ -81,6 +89,13 @@
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                         <x-nav-link href="{{ route('historique') }}" :active="request()->routeIs('historique')">
                             {{ __('Historique') }}
+                        </x-nav-link>
+                    </div>
+                @endrole
+                @role('Startup')
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link href="{{ route('retrait') }}" :active="request()->routeIs('retrait')">
+                            {{ __('Retrait') }}
                         </x-nav-link>
                     </div>
                 @endrole

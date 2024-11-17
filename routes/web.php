@@ -47,6 +47,10 @@ Route::middleware([
         return view('historique');
     })->name('historique');
 
+    Route::get('/retrait', function () {
+        return view('retrait');
+    })->name('retrait');
+
     Route::get('/investir/{offre}', [OffreController::class, 'investir'])->name('offre.investir');
     Route::get('/annuler/{offre}', [OffreController::class, 'annuler'])->name('offre.annuler');
 
