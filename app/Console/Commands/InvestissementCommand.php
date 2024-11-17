@@ -7,6 +7,7 @@ use App\Models\CompteAdmin;
 use App\Models\Transaction;
 use App\Models\CompteStartup;
 use Illuminate\Console\Command;
+use App\Mail\NotificationStartup;
 use App\Models\CompteInvestisseur;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
@@ -116,6 +117,9 @@ class InvestissementCommand extends Command
 
             // Envoyer l'email à l'investisseur
             Mail::to($compteInvestisseur->email)->send(new NotificationInvestisseur($transaction, $compteInvestisseur));
+
+            // Envoyer l'email à la startup
+            Mail::to($compteStartup->email)->send(new NotificationStartup($transaction, $compteInvestisseur, $compteStartup));
 
             $this->info("Transaction ID {$transaction->id} traitée avec succès.");
         }

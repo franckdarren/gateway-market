@@ -105,12 +105,6 @@
             </p>
 
         </div>
-
-        <!-- Footer -->
-        <div class="footer">
-            <p>Pour toute question, n'hésitez pas à nous contacter à </p>
-            <p>Merci pour votre confiance.</p>
-        </div>
     </div>
 </body>
 
