@@ -109,13 +109,6 @@
                 FCFA</span></p>
 
         <p>Nous vous remercions pour votre confiance et restons à votre disposition pour toute question.</p>
-
-        <a href="#" class="btn">Voir mes transactions</a>
-
-        <div class="footer">
-            <p>Merci de faire affaire avec nous !</p>
-            <p><a href="#">Contactez-nous</a> | <a href="#">Gestion de votre compte</a></p>
-        </div>
     </div>
 </body>
 
