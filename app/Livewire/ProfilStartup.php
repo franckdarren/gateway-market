@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use Carbon\Carbon;
 use Livewire\Component;
 
 class ProfilStartup extends Component
@@ -24,7 +25,7 @@ class ProfilStartup extends Component
         $this->activite_principale = $startup->activite_principale;
         $this->email = $startup->email;
         $this->phone = $startup->phone;
-        $this->date_creation = $startup->date_creation;
+        $this->date_creation = Carbon::parse($startup->date_creation)->format('d-M-Y');
     }
 
     public function updateCompteInformation()
