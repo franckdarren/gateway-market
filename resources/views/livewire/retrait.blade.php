@@ -1,13 +1,27 @@
 <div class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-lg">
     @if (session()->has('message'))
-        <div class="flex items-center bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg shadow-md mb-4"
+        <div x-data="{ show: true }" x-show="show"
+            class="flex items-center bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg shadow-md mb-4"
             role="alert">
+            <!-- Icône de succès -->
             <svg class="w-5 h-5 mr-2 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                 <path d="M10 0a10 10 0 100 20A10 10 0 0010 0zm1 15H9v-2h2v2zm0-4H9V5h2v6z" />
             </svg>
-            <span>{{ session('message') }}</span>
+
+            <!-- Message -->
+            <span class="flex-1">{{ session('message') }}</span>
+
+            <!-- Bouton de fermeture -->
+            <button @click="show = false" class="ml-4 text-green-700 hover:text-green-900 focus:outline-none">
+                <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd"
+                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 011.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                        clip-rule="evenodd" />
+                </svg>
+            </button>
         </div>
     @endif
+
     <!-- Message d'erreur -->
     @if (session()->has('error'))
         <div class="mb-4 p-4 text-sm text-red-700 bg-red-100 border border-red-300 rounded-lg">
