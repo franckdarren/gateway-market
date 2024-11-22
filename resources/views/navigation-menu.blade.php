@@ -39,6 +39,14 @@
 
                 @role('Administrateur')
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link href="{{ route('demandes') }}" :active="request()->routeIs('demandes')">
+                            {{ __('Demande de retrait') }}
+                        </x-nav-link>
+                    </div>
+                @endrole
+
+                @role('Administrateur')
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                         <x-nav-link href="{{ route('transaction') }}" :active="request()->routeIs('transaction')">
                             {{ __('Transaction') }}
                         </x-nav-link>

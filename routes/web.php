@@ -28,6 +28,9 @@ Route::middleware([
     Route::get('/transactions', function () {
         return view('transaction');
     })->name('transaction');
+    Route::get('/demandes', function () {
+        return view('demandes');
+    })->name('demandes');
 
     //Routes Investisseurs
     Route::get('/remboursements', function () {

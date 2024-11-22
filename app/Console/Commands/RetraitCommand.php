@@ -36,7 +36,7 @@ class RetraitCommand extends Command
 
         // Récupérer toutes les transactions "investissement" non traitées
         $retraits = Transaction::where('type', 'retrait')
-            ->where('statut', 'En attente de traitement')
+            ->where('statut', 'En cours de traitement')
             ->get();
 
         if ($retraits->isEmpty()) {

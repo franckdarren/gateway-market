@@ -12,5 +12,5 @@ Artisan::command('inspire', function () {
 })->purpose('Display an inspiring quote')->hourly();
 
 Schedule::command(InvestissementCommand::class, [])->everyFiveMinutes();
-Schedule::command(RetraitCommand::class, [])->everyTwoMinutes();
-Schedule::command(DepotCommand::class, [])->everyMinutes();
+Schedule::command(RetraitCommand::class, [])->everyMinute();
+Schedule::command(DepotCommand::class, [])->everyMinute();
