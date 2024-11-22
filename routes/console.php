@@ -1,5 +1,6 @@
 <?php
 
+use App\Console\Commands\DepotCommand;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
 use App\Console\Commands\InvestissementCommand;
@@ -11,4 +12,5 @@ Artisan::command('inspire', function () {
 })->purpose('Display an inspiring quote')->hourly();
 
 Schedule::command(InvestissementCommand::class, [])->everyFiveMinutes();
-Schedule::command(RetraitCommand::class, [])->everyFiveMinutes();
+Schedule::command(RetraitCommand::class, [])->everyTwoMinutes();
+Schedule::command(DepotCommand::class, [])->everyMinutes();
