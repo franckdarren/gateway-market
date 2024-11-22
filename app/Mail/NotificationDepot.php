@@ -26,7 +26,7 @@ class NotificationDepot extends Mailable
 
     public function build()
     {
-        return $this->subject("Vadidation de votre retrait d'argent")
+        return $this->subject("Confirmation de votre dépot d'argent")
             ->view('emails.notification_depot')
             ->with([
                 'montant' => $this->transaction->montant,
