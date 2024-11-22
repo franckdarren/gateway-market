@@ -40,8 +40,8 @@ class Historique extends Component implements HasForms, HasTable
                 $userRole = $user->getRoleNames()->first();
 
                 if ($userRole === 'Administrateur') {
-                    // L'administrateur voit toutes les transactions
-                    return Transaction::query();
+                    // L'administrateur voit toutes les transactions, triées par date décroissante
+                    return Transaction::query()->orderByDesc('created_at');
                 }
 
                 // Déterminer le compte associé en fonction du rôle
@@ -58,9 +58,10 @@ class Historique extends Component implements HasForms, HasTable
                     return Transaction::query()->whereRaw('0 = 1'); // Requête vide
                 }
 
-                // Filtrer les transactions par `compte_id` pour les autres utilisateurs
-                return Transaction::where('compte_id', $compte->id);
+                // Filtrer les transactions par `compte_id` et trier par date décroissante
+                return Transaction::where('compte_id', $compte->id)->orderByDesc('created_at');
             })
+
 
 
 
@@ -108,6 +109,11 @@ class Historique extends Component implements HasForms, HasTable
                     ->searchable()
                     ->badge()
                     ->color(fn($state) => $state == 'Traitée' ? 'success' : 'gray')
+                    ->sortable(),
+
+                TextColumn::make('created_at')
+                    ->searchable()
+                    ->label('Date')
                     ->sortable(),
 
             ])
