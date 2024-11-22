@@ -84,7 +84,7 @@ class ListStartup extends Component implements HasForms, HasTable
                         Transaction::create([
                             'montant' => $data['montant'],
                             'type' => 'depot',
-                            'description' => "Dépôt d'argent",
+                            'description' => "Dépôt d'argent au compte " . $record->nom,
                             'compte_type' => "Compte Startup", // Valeur fixe
                             'compte_id' => $record->id,
                             'statut' => 'En attente de traitement',

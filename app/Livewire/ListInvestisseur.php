@@ -96,7 +96,7 @@ class ListInvestisseur extends Component implements HasForms, HasTable
                         Transaction::create([
                             'montant' => $data['montant'],
                             'type' => 'depot',
-                            'description' => "Dépôt d'argent",
+                            'description' => "Dépôt d'argent au compte " . $record->nom . ' ' . $record->prenom,
                             'compte_type' => "Compte Investisseur", // Valeur fixe
                             'compte_id' => $record->id,
                             'statut' => 'En attente de traitement',
