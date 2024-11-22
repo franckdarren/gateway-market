@@ -14,14 +14,19 @@
             </div>
         @endif
 
-        <div class="mt-4 flex items-center justify-between">
+        <div class="mt-4 flex items-center justify-between gap-2">
             <form method="POST" action="{{ route('verification.send') }}">
                 @csrf
 
                 <div>
-                    <x-button type="submit" class="bg-blue-800 hover:bg-blue-900">
+                    {{-- <x-button type="submit" class="bg-blue-800 hover:bg-blue-900">
                         {{ __('Resend Verification Email') }}
-                    </x-button>
+                    </x-button> --}}
+                    <button type="submit"
+                        class="px-6 py-2 bg-blue-600 text-white font-semibold text-sm rounded-lg shadow-md
+           hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all">
+                        Renvoyer l'e-mail de vérification
+                    </button>
                 </div>
             </form>
 
