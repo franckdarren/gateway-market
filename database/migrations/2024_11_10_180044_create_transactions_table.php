@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('mode_retrait')->nullable();
             $table->string('numero_compte')->nullable();
             $table->string('nom_compte')->nullable();
+            $table->integer('frais')->nullable();
+
             $table->string('statut')->default('En attente de traitement');
 
             $table->foreignId('offre_id')->nullable()->constrained()->onDelete('set null'); // clé étrangère optionnelle

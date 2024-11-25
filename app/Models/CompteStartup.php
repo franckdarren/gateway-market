@@ -29,4 +29,9 @@ class CompteStartup extends Model
     {
         return $this->morphMany(Transaction::class, 'compte');
     }
+
+    public function offres()
+    {
+        return $this->hasMany(Offre::class);
+    }
 }

@@ -20,10 +20,17 @@ class Transaction extends Model
         'compte_id',
         'statut',
         'offre_id',
+
+        'frais',
     ];
 
     public function compte()
     {
         return $this->morphTo();
+    }
+
+    public function offre()
+    {
+        return $this->belongsTo(Offre::class);
     }
 }

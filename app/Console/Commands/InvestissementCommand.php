@@ -6,6 +6,7 @@ use App\Models\Offre;
 use App\Models\CompteAdmin;
 use App\Models\Transaction;
 use App\Models\CompteStartup;
+use App\Models\Remboursement;
 use Illuminate\Console\Command;
 use App\Mail\NotificationStartup;
 use App\Models\CompteInvestisseur;
@@ -30,6 +31,16 @@ class InvestissementCommand extends Command
      */
     protected $description = 'Command description';
 
+    public $montantDepart;
+    public $taux_interet;
+    public $duree_remboursement;
+    public $delaiGrace;
+    public $montantEmprunte;
+    public $duree;
+    public $tauxInteret;
+    public $remboursements = [];
+
+
     /**
      * Execute the console command.
      */
@@ -52,8 +63,9 @@ class InvestissementCommand extends Command
 
             // Calcul des montants
             $montant = $transaction->montant;
-            $montantAdmin = $montant * 0.02; // 2%
-            $montantStartup = $montant * 0.98; // 98%
+            $montantAdmin = $transaction->frais; // 2%
+            $montantStartup = $transaction->montant - $transaction->frais; // 98%
+            // $montantDepart = $montantStartup;
 
             // Récupérer le compte investisseur
             $compteInvestisseur = CompteInvestisseur::find($transaction->compte_id);
@@ -131,6 +143,64 @@ class InvestissementCommand extends Command
 
             // Envoyer l'email à la startup
             Mail::to($compteStartup->email)->send(new NotificationStartup($transaction, $compteInvestisseur, $compteStartup));
+
+            // Création des lignes dans la tables remboursements
+
+            // Variables nécessaires pour les calculs
+            $capitalRestant = $montantStartup; // Montant total de l'investissement
+            $tauxInteret = $offre->taux_interet; // Taux d'intérêt en pourcentage
+            $duree = $offre->nbre_mois_remboursement; // Nombre de mois de remboursement
+            $delaiGrace = $offre->nbre_mois_grace; // Délai de grâce en mois
+            $capitalTotalRestant = $capitalRestant; // Pour fixer le capital total restant après la période de grâce
+            $cumulRemboursement = 0;
+
+            $currentMonth = now()->addMonth()->month;
+            $currentYear = now()->addMonth()->year;
+
+            // Parcours pour chaque mois (grâce + remboursement)
+            for ($i = 1; $i <= $duree + $delaiGrace; $i++) {
+                $monthIndex = ($currentMonth + $i - 1) % 12 ?: 12;
+                $yearOffset = intdiv($currentMonth + $i - 1, 12);
+                $mois = now()->setMonth($monthIndex)->translatedFormat('F') . " " . ($currentYear + $yearOffset);
+
+                $remboursementCapital = 0;
+                $remboursementInteret = 0;
+                $interetDu = 0;
+
+                // Calcul des intérêts pendant la période de grâce
+                if ($i <= $delaiGrace) {
+                    $interetDu = floor($capitalRestant * ($tauxInteret / 100));
+                    $capitalRestant += $interetDu; // Ajouter les intérêts au capital restant
+                }
+
+                // Calcul des remboursements après la période de grâce
+                if ($i > $delaiGrace) {
+                    if ($i == $delaiGrace + 1) {
+                        $capitalTotalRestant = $capitalRestant; // Fixer le capital total à rembourser
+                    }
+
+                    $remboursementCapital = floor($capitalTotalRestant / $duree);
+                    $remboursementInteret = floor($capitalRestant * ($tauxInteret / 100));
+                    $capitalRestant -= $remboursementCapital; // Mise à jour du capital restant
+                }
+
+                $remboursementTotal = $remboursementCapital + $remboursementInteret;
+                $cumulRemboursement += $remboursementTotal;
+
+                // Créer l'entrée dans la table remboursements
+                Remboursement::create([
+                    'offre_id' => $offre->id,
+                    'compte_startup_id' => $offre->compte_startup_id,
+                    'compte_investisseur_id' => $offre->compte_investisseur_id,
+                    'mois' => $mois,
+                    'capital_restant' => max(0, $capitalRestant),
+                    'interet_du' => $interetDu,
+                    'remboursement_capital' => $remboursementCapital,
+                    'remboursement_interet' => $remboursementInteret,
+                    'remboursement_total' => $remboursementTotal,
+                    'cumul_remboursement' => $cumulRemboursement,
+                ]);
+            }
 
             $this->info("Transaction ID {$transaction->id} traitée avec succès.");
         }

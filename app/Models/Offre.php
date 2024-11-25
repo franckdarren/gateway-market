@@ -29,6 +29,12 @@ class Offre extends Model
 
     ];
 
+    public function genererRemboursements()
+    {
+        
+    }
+
+
     public function compteStartup()
     {
         return $this->belongsTo(CompteStartup::class);
