@@ -21,9 +21,6 @@ class OffreFactory extends Factory
         $montant = $this->faker->numberBetween(2000000, 7000000);
         $taux_interet = $this->faker->randomElement([3, 6, 9, 12, 15, 18, 21]);
 
-        // Calculer montant_dette en fonction de la formule donnée
-        $montant_dette = $montant + ($taux_interet / 100 * $montant);
-
         return [
             'nom_projet' => $this->faker->company,
             'description_projet' => $this->faker->paragraph,
@@ -31,7 +28,6 @@ class OffreFactory extends Factory
             'nbre_mois_remboursement' => $this->faker->numberBetween(6, 24),
             'nbre_mois_grace' => $this->faker->numberBetween(2, 12),
             'taux_interet' => $taux_interet,
-            'montant_dette' => $montant_dette,  // Utiliser le montant calculé
             'url_business_plan' => 'pdf/business_plan_1.pdf',  // URL vers le fichier PDF business plan
             'url_etude_risque' => 'pdf/etude_risque_1.pdf',  // URL vers le fichier PDF étude de risque
             'van' => $this->faker->numberBetween(50000, 500000),

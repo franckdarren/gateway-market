@@ -45,11 +45,7 @@
                                     <th class="text-left px-4 py-2 bg-gray-100">Montant :</th>
                                     <td class="px-4 py-2">{{ number_format($offre->montant, 0, ',', ' ') }} FCFA</td>
                                 </tr>
-                                <tr class="border-b">
-                                    <th class="text-left px-4 py-2 bg-gray-100">Montant à rembourser:</th>
-                                    <td class="px-4 py-2">{{ number_format($offre->montant_dette, 0, ',', ' ') }} FCFA
-                                    </td>
-                                </tr>
+
                                 <tr class="border-b">
                                     <th class="text-left px-4 py-2 bg-gray-100">Nombre de mois de grâce :</th>
                                     <td class="px-4 py-2">{{ $offre->nbre_mois_grace }}</td>

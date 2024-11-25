@@ -19,7 +19,6 @@ return new class extends Migration
             $table->integer('nbre_mois_remboursement');
             $table->integer('nbre_mois_grace');
             $table->integer('taux_interet');
-            $table->integer('montant_dette');
             $table->string('url_business_plan')->nullable();
             $table->string('url_etude_risque')->nullable();
             $table->integer('van');
