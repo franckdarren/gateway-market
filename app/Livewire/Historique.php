@@ -49,8 +49,10 @@ class Historique extends Component implements HasForms, HasTable
 
                 if ($userRole === 'Investisseur') {
                     $compte = $user->compteInvestisseur; // Relation directe
+                    $typeCompte = 'Compte Investisseur';
                 } elseif ($userRole === 'Startup') {
                     $compte = $user->compteStartup; // Relation directe
+                    $typeCompte = 'Compte Startup';
                 }
 
                 if (!$compte) {
@@ -59,7 +61,9 @@ class Historique extends Component implements HasForms, HasTable
                 }
 
                 // Filtrer les transactions par `compte_id` et trier par date décroissante
-                return Transaction::where('compte_id', $compte->id)->orderByDesc('created_at');
+                return Transaction::where('compte_id', $compte->id)
+                    ->where('compte_type', $typeCompte)
+                    ->orderByDesc('created_at');
             })
 
 
@@ -73,7 +77,7 @@ class Historique extends Component implements HasForms, HasTable
                 TextColumn::make('montant')
                     ->searchable()
                     ->formatStateUsing(function ($state, $record) {
-                        $prefix = ($record->type === 'depot' || $record->type === 'investissement') ? '+' : '-';
+                        $prefix = ($record->type === 'depot' || $record->type === 'investissement' || $record->type === 'remboursement crédit') ? '+' : '-';
                         return $prefix . ' ' . number_format($state, 0, '', ' ') . ' FCFA';
                     })
                     ->sortable(),
@@ -86,6 +90,9 @@ class Historique extends Component implements HasForms, HasTable
                         'investissement' => 'gray',
                         'retrait' => 'warning',
                         'depot' => 'success',
+                        'remboursement débit' => 'warning',
+                        'remboursement crédit' => 'success',
+                        'remboursement ERREUR' => 'danger',
                     })
                     ->sortable(),
 

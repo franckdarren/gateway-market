@@ -29,7 +29,6 @@ MAIL_FROM_ADDRESS=no-reply@gateway-market.com
 MAIL_FROM_NAME="${APP_NAME}"
 
 
-
 Startup existante
 identifiant : startup@startup.com
 password : password
@@ -41,4 +40,12 @@ password : password
 Admin existante
 identifiant : admin@admin.com
 password : password
+
+
+Pour lancer la commande qui traite les investissements
+`php artisan investissement:command`
+
+Pour lancer la commande qui traite les remboursements
+`php artisan remboursement:command`
+
 
