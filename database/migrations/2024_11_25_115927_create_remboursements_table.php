@@ -23,6 +23,8 @@ return new class extends Migration
             $table->integer('remboursement_interet'); // Remboursement de l'intérêt
             $table->integer('remboursement_total'); // Total remboursé (capital + intérêt)
             $table->integer('cumul_remboursement'); // Cumul des remboursements
+            $table->string('statut')->default('En attente de paiement');
+
             $table->timestamps(); // Colonnes created_at et updated_at
 
             // Déclaration des clés étrangères avec cascade

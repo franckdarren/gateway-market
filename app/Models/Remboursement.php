@@ -17,6 +17,22 @@ class Remboursement extends Model
         'remboursement_interet',
         'remboursement_total',
         'cumul_remboursement',
-        
+        'statut',
+
     ];
+
+    public function offre()
+    {
+        return $this->belongsTo(Offre::class);
+    }
+
+    public function compteStartup()
+    {
+        return $this->belongsTo(CompteStartup::class, 'compte_startup_id');
+    }
+
+    public function compteInvestisseur()
+    {
+        return $this->belongsTo(CompteInvestisseur::class, 'compte_investisseur_id');
+    }
 }
