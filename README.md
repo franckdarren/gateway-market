@@ -33,11 +33,11 @@ Startup existante
 identifiant : startup@startup.com
 password : password
 
-Investiseur existante
-identifiant : investiseur@investiseur.com
+Investiseur existant
+identifiant : investisseur@investisseur.com
 password : password
 
-Admin existante
+Admin existant
 identifiant : admin@admin.com
 password : password
 
