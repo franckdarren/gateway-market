@@ -195,7 +195,7 @@ class InvestissementCommand extends Command
                 $cumulRemboursement += $remboursementTotal;
 
                 // Créer l'entrée dans la table remboursements
-                Remboursement::create([
+                Remboursements::create([
                     'offre_id' => $offre->id,
                     'compte_startup_id' => $offre->compte_startup_id,
                     'compte_investisseur_id' => $offre->compte_investisseur_id,
