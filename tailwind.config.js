@@ -27,3 +27,4 @@ export default {
 
     plugins: [forms, typography],
 };
+const preset = require('./vendor/filament/support/tailwind.config.preset');
