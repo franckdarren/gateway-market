@@ -205,10 +205,10 @@ if (auth()->user()->hasRole('Investisseur')) {
                                                     class="text-xl text-green-600">{{ number_format($soldeInvestisseur, 0, '.', ' ') }}
                                                     FCFA</span></p>
                                         @elseif (auth()->user()->hasRole('Startup'))
-                                            <p class="lg:text-lg font-semibold text-gray-800">Solde :  <span
+                                            <p class="lg:text-lg font-semibold text-gray-800">Solde : <span
                                                     class="lg:text-xl text-green-600">{{ number_format($soldeStartup, 0, '.', ' ') }}
                                                     FCFA</span>
-                                            </p> 
+                                            </p>
                                         @elseif (auth()->user()->hasRole('Administrateur'))
                                             <p class="text-lg font-semibold text-gray-800">Solde : <span
                                                     class="text-xl text-green-600">{{ number_format($soldeAdmin, 0, '.', ' ') }}
@@ -289,9 +289,100 @@ if (auth()->user()->hasRole('Investisseur')) {
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
+                @if (auth()->user()->hasRole('Administrateur'))
+                    {{ __('Dashboard') }}
+                @else
+                    {{ __('Accueil') }}
+                @endif
             </x-responsive-nav-link>
         </div>
+        @role('Administrateur')
+            <div class="pt-2 pb-3 space-y-1">
+                <x-responsive-nav-link href="{{ route('investisseur') }}" :active="request()->routeIs('investisseur')">
+                    {{ __('Investisseur') }}
+                </x-responsive-nav-link>
+            </div>
+        @endrole
+
+        @role('Administrateur')
+            <div class="pt-2 pb-3 space-y-1">
+                <x-responsive-nav-link href="{{ route('startup') }}" :active="request()->routeIs('startup')">
+                    {{ __('Startup') }}
+                </x-responsive-nav-link>
+            </div>
+        @endrole
+
+        @role('Administrateur')
+            <div class="pt-2 pb-3 space-y-1">
+                <x-responsive-nav-link href="{{ route('demandes') }}" :active="request()->routeIs('demandes')">
+                    {{ __('Demande de retrait') }}
+                </x-responsive-nav-link>
+            </div>
+        @endrole
+
+        @role('Administrateur')
+            <div class="pt-2 pb-3 space-y-1">
+                <x-responsive-nav-link href="{{ route('transaction') }}" :active="request()->routeIs('transaction')">
+                    {{ __('Transaction') }}
+                </x-responsive-nav-link>
+            </div>
+        @endrole
+
+        @role('Investisseur')
+            <div class="pt-2 pb-3 space-y-1">
+                <x-responsive-nav-link href="{{ route('projets') }}" :active="request()->routeIs('projets')">
+                    {{ __('Mes projets') }}
+                </x-responsive-nav-link>
+            </div>
+        @endrole
+
+        @role('Investisseur')
+            <div class="pt-2 pb-3 space-y-1">
+                <x-responsive-nav-link href="{{ route('remboursement') }}" :active="request()->routeIs('remboursement')">
+                    {{ __('Remboursement') }}
+                </x-responsive-nav-link>
+            </div>
+        @endrole
+
+        @role('Investisseur')
+            <div class="pt-2 pb-3 space-y-1">
+                <x-responsive-nav-link href="{{ route('historique') }}" :active="request()->routeIs('historique')">
+                    {{ __('Historique') }}
+                </x-responsive-nav-link>
+            </div>
+        @endrole
+
+        @role('Investisseur')
+            <div class="pt-2 pb-3 space-y-1">
+                <x-responsive-nav-link href="{{ route('retrait') }}" :active="request()->routeIs('retrait')">
+                    {{ __('Retrait') }}
+                </x-responsive-nav-link>
+            </div>
+        @endrole
+
+        @role('Startup')
+            <div class="pt-2 pb-3 space-y-1">
+                <x-responsive-nav-link href="{{ route('dette') }}" :active="request()->routeIs('dette')">
+                    {{ __('Dettes') }}
+                </x-responsive-nav-link>
+            </div>
+        @endrole
+
+        @role('Startup')
+            <div class="pt-2 pb-3 space-y-1">
+                <x-responsive-nav-link href="{{ route('historique') }}" :active="request()->routeIs('historique')">
+                    {{ __('Historique') }}
+                </x-responsive-nav-link>
+            </div>
+        @endrole
+        @role('Startup')
+            <div class="pt-2 pb-3 space-y-1">
+                <x-responsive-nav-link href="{{ route('retrait') }}" :active="request()->routeIs('retrait')">
+                    {{ __('Retrait') }}
+                </x-responsive-nav-link>
+            </div>
+        @endrole
+
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
@@ -308,24 +399,24 @@ if (auth()->user()->hasRole('Investisseur')) {
                     <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
                 </div>
             </div>
-<!-- Affichage conditionnel des soldes -->
-<div class="flex items-center space-x-2 ml-3 mt-3">
-                                        @if (auth()->user()->hasRole('Investisseur'))
-                                            <p class="text-lg font-semibold text-gray-800">Solde : <span
-                                                    class="text-xl text-green-600">{{ number_format($soldeInvestisseur, 0, '.', ' ') }}
-                                                    FCFA</span></p>
-                                        @elseif (auth()->user()->hasRole('Startup'))
-                                            <p class="lg:text-lg font-semibold text-gray-800">Solde : <span
-                                                    class="lg:text-xl text-green-600">{{ number_format($soldeStartup, 0, '.', ' ') }}
-                                                    FCFA</span>
-                                            </p>
-                                        @elseif (auth()->user()->hasRole('Administrateur'))
-                                            <p class="text-lg font-semibold text-gray-800">Solde : <span
-                                                    class="text-xl text-green-600">{{ number_format($soldeAdmin, 0, '.', ' ') }}
-                                                    FCFA</span>
-                                            </p>
-                                        @endif
-                                    </div>
+            <!-- Affichage conditionnel des soldes -->
+            <div class="flex items-center space-x-2 ml-3 mt-3">
+                @if (auth()->user()->hasRole('Investisseur'))
+                    <p class="text-lg font-semibold text-gray-800">Solde : <span
+                            class="text-xl text-green-600">{{ number_format($soldeInvestisseur, 0, '.', ' ') }}
+                            FCFA</span></p>
+                @elseif (auth()->user()->hasRole('Startup'))
+                    <p class="lg:text-lg font-semibold text-gray-800">Solde : <span
+                            class="lg:text-xl text-green-600">{{ number_format($soldeStartup, 0, '.', ' ') }}
+                            FCFA</span>
+                    </p>
+                @elseif (auth()->user()->hasRole('Administrateur'))
+                    <p class="text-lg font-semibold text-gray-800">Solde : <span
+                            class="text-xl text-green-600">{{ number_format($soldeAdmin, 0, '.', ' ') }}
+                            FCFA</span>
+                    </p>
+                @endif
+            </div>
             <div class="mt-3 space-y-1">
                 <!-- Account Management -->
                 <x-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
