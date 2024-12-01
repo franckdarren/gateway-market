@@ -24,7 +24,7 @@
                 @role('Administrateur')
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                         <x-nav-link href="{{ route('investisseur') }}" :active="request()->routeIs('investisseur')">
-                            {{ __('Investisseur') }}
+                            {{ __('Investisseurs') }}
                         </x-nav-link>
                     </div>
                 @endrole
@@ -32,7 +32,7 @@
                 @role('Administrateur')
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                         <x-nav-link href="{{ route('startup') }}" :active="request()->routeIs('startup')">
-                            {{ __('Startup') }}
+                            {{ __('Startups') }}
                         </x-nav-link>
                     </div>
                 @endrole
@@ -40,7 +40,7 @@
                 @role('Administrateur')
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                         <x-nav-link href="{{ route('demandes') }}" :active="request()->routeIs('demandes')">
-                            {{ __('Demande de retrait') }}
+                            {{ __('Retraits') }}
                         </x-nav-link>
                     </div>
                 @endrole
@@ -48,7 +48,7 @@
                 @role('Administrateur')
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                         <x-nav-link href="{{ route('transaction') }}" :active="request()->routeIs('transaction')">
-                            {{ __('Transaction') }}
+                            {{ __('Transactions') }}
                         </x-nav-link>
                     </div>
                 @endrole
