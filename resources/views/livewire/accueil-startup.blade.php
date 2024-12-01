@@ -25,8 +25,8 @@
                         @forelse ($mesOffres as $offre)
                             <tr class="hover:bg-gray-100">
                                 <td class="border border-gray-300 px-4 py-2">{{ $offre->nom_projet }}</td>
-                                <td class="border border-gray-300 px-4 py-2">{{ $offre->taux_interet }} %</td>
-                                <td class="border border-gray-300 px-4 py-2">
+                                <td class="border border-gray-300 text-center text-green-500 px-4 py-2">{{ $offre->taux_interet }} %</td>
+                                <td class="border border-gray-300 text-xs lg:text-base font-bold px-2 py-2">
                                     {{ number_format($offre->montant, 0, '.', ' ') }} FCFA</td>
                                 <td class="border border-gray-300 px-2 py-2 text-center w-[250px]">
                                     <!-- Bouton Voir -->
@@ -37,13 +37,13 @@
 
                                     <!-- Bouton Éditer -->
                                     <a href="{{ route('offre.edit', $offre->id) }}"
-                                        class="inline-flex items-center px-2 py-1 text-sm font-semibold text-green-600 hover:text-green-800 border border-green-600 rounded-md hover:bg-green-100 ml-2">
+                                        class="inline-flex items-center mt-1 px-2 py-1 text-sm font-semibold text-green-600 hover:text-green-800 border border-green-600 rounded-md hover:bg-green-100 ml-2">
                                         Éditer
                                     </a>
 
                                     <!-- Bouton Supprimer -->
                                     <form action="{{ route('offre.destroy', $offre->id) }}" method="POST"
-                                        class="inline">
+                                        class="inline mt-1">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit"
