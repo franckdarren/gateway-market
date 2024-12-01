@@ -14,13 +14,13 @@
     @endif
     <div class="overflow-x-auto">
         <table class="min-w-full border-collapse border-none border-gray-200 bg-white shadow-md mt-3 rounded-lg w-full overflow-hidden">
-            <thead class="bg-gray-50">
-                <tr class="bg-[#1560BD] border-none">
-                    <th class="border border-gray-300 px-4 py-2 text-left text-white">Projet</th>
-                    <th class="border border-gray-300 px-4 py-2 text-left text-white">Date</th>
-                    <th class="border border-gray-300 px-4 py-2 text-left text-white">Remboursement</th>
-                    <th class="border border-gray-300 px-4 py-2 text-left text-white">Cumul Remboursement</th>
-                    <th class="border border-gray-300 px-4 py-2 text-left text-white">Statut</th>
+            <thead class="bg-gray-100">
+                <tr class="border-none">
+                    <th class="border border-gray-300 px-4 py-2 text-left text-gray-600">Projet</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left text-gray-600">Date</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left text-gray-600">Remboursement</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left text-gray-600">Cumul Remboursement</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left text-gray-600">Statut</th>
                 </tr>
             </thead>
             <tbody>
