@@ -1,4 +1,4 @@
-<div class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-lg">
+<div class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-lg bg-[#CFDFEA]">
     @if (session()->has('message'))
         <div x-data="{ show: true }" x-show="show"
             class="flex items-center bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg shadow-md mb-4"
