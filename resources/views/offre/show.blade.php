@@ -25,12 +25,12 @@
             </div>
         @endif
 
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="bg-white shadow-lg rounded-lg p-6 sm:p-8">
-                <div class="bg-[#C1D1FF] rounded-lg shadow-md p-4 sm:p-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
+            <div class="bg-[#CFDFEA] shadow-lg rounded-lg p-6 sm:p-8  ">
+                <div class="rounded-lg w-full  p-4 sm:p-6  shadow-lg">
                     <h2 class="text-2xl font-bold mb-4 text-center">Détails du projet</h2>
-                    <div class="space-y-4">
-                        <div class="p-4 rounded-md">
+                    <div class="space-y-4 bg-[#CFDFEA] ">
+                        <div class="p-4 rounded-md flex justify-content-around gap-5">
                             <h3 class="font-semibold text-sm mb-1">Nom du projet :</h3>
                             <p class="text-sm font-bold">{{ $offre->nom_projet }}</p>
                         </div>
@@ -45,7 +45,7 @@
                     </div>
         
                     <div class="mt-6">
-                        <h3 class="text-lg font-semibold text-gray-700 mb-4">Détails financiers :</h3>
+                        <h3 class="text-lg font-bold text-gray-900 mb-4">Détails financiers :</h3>
                         <div class="overflow-x-auto">
                             <table class="table-auto w-full border-collapse border border-gray-200 text-left">
                                 <thead>
