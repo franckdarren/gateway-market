@@ -11,7 +11,7 @@
         </h2>
     </x-slot>
 
-    <div class="py-2 lg:py-5">
+    <div class="py-2 lg:py-5 mt-10">
         @if (session('success'))
             <div class="bg-green-500 text-white p-4 rounded-md shadow-md mb-4 mx-10">
                 {{ session('success') }}
