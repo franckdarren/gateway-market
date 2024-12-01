@@ -31,7 +31,7 @@ class RemboursementCommand extends Command
         $today = now();
 
         // Récupérer tous les remboursements pour le mois actuel
-        $remboursements = Remboursements::where('mois', $today->translatedFormat('F Y'))
+        $remboursements = Remboursement::where('mois', $today->translatedFormat('F Y'))
             ->where('statut', 'En attente de paiement')
             ->get();
 

@@ -77,7 +77,6 @@ class OffreController extends Controller
             'nbre_mois_remboursement' => $request->nbre_mois_remboursement,
             'nbre_mois_grace' => $request->nbre_mois_grace,
             'taux_interet' => $request->taux_interet,
-            'montant_dette' => $montantDette,
             'url_business_plan' => $businessPlanPath,
             'url_etude_risque' => $etudeRisquePath,
             'van' => $request->van,

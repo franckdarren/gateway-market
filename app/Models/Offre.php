@@ -24,14 +24,13 @@ class Offre extends Model
         'krl',
         'compte_startup_id',
         'compte_investisseur_id',
-        'montant_dette',
         'statut',
 
     ];
 
     public function genererRemboursements()
     {
-        
+
     }
 
 
