@@ -12,6 +12,7 @@ use App\Models\CompteInvestisseur;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Filters\Filter;
 use Illuminate\Contracts\View\View;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Contracts\HasTable;
@@ -20,8 +21,8 @@ use Filament\Tables\Actions\ExportAction;
 use Filament\Tables\Actions\ImportAction;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Exports\BonPeseeExporter;
-use Filament\Tables\Actions\ExportBulkAction;
 
+use Filament\Tables\Actions\ExportBulkAction;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Actions\Exports\Enums\ExportFormat;
 use Filament\Tables\Concerns\InteractsWithTable;
@@ -58,6 +59,11 @@ class ListStartup extends Component implements HasForms, HasTable
                     })
                     ->sortable(),
 
+                TextColumn::make('user.type_abonnement')
+                    ->label("Type d'abonnement")
+                    ->searchable()
+                    ->sortable(),
+
                 TextColumn::make('email')
                     ->searchable()
                     ->sortable(),
@@ -89,13 +95,34 @@ class ListStartup extends Component implements HasForms, HasTable
                             'compte_id' => $record->id,
                             'statut' => 'En attente de traitement',
                         ]);
-
-                        // Notification::make()
-                        //     ->title('Dépôt effectué')
-                        //     ->success()
-                        //     ->body("Un dépôt de {$data['montant']} a été enregistré pour le compte #{$record->id}.")
-                        //     ->send();
                     }),
+
+                // Modifier le type d'abonnement
+                Action::make('modifierTypeAbonnement')
+                    ->label("Modifier le type d'abonnement")
+                    ->modalHeading("Modifier le type d'abonnement")
+                    ->form([
+                        Select::make('type_abonnement')
+                            ->label('Type d\'abonnement')
+                            ->required()
+                            ->options([
+                                'Premium' => 'Premium',
+                                'Simple' => 'Simple',
+                            ])
+                            ->placeholder('Choisissez un type d\'abonnement'),
+                    ])
+                    ->action(function (array $data, $record) {
+                        $user = $record->user; // Récupère l'utilisateur associé au compte startup
+
+                        if ($user) {
+                            $user->update([
+                                'type_abonnement' => $data['type_abonnement'],
+                            ]);
+                        }
+                    })
+                    ->requiresConfirmation()
+                    ->modalWidth('md')
+                    ->color('success'),
             ])
             ->bulkActions([]);
     }
