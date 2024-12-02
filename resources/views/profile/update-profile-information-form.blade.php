@@ -85,11 +85,26 @@
                 @endif
             @endif
         </div>
+
+        <!-- Role -->
         <div class="col-span-6 sm:col-span-4">
             <x-label for="role" value="{{ __('Rôle') }}" />
             <x-input id="role" type="text" class="mt-1 block w-full"
                 value="{{ Auth::user()->roles->pluck('name')->first() }}" disabled />
         </div>
+
+        <!-- Type Abonnement -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-label for="type_abonnement" value="{{ __('Type abonnement') }}" />
+            <select id="type_abonnement"
+                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50"
+                wire:model="state.type_abonnement" required>
+                <option value="Simple">{{ __('Simple') }}</option>
+                <option value="Premium">{{ __('Premium') }}</option>
+            </select>
+            <x-input-error for="type_abonnement" class="mt-2" />
+        </div>
+
     </x-slot>
 
     <x-slot name="actions">
