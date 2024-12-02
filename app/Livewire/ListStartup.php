@@ -124,7 +124,8 @@ class ListStartup extends Component implements HasForms, HasTable
                     ->modalWidth('md')
                     ->color('success'),
             ])
-            ->bulkActions([]);
+            ->bulkActions([])
+            ->poll(5);
     }
     public function render()
     {

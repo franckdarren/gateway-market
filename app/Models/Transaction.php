@@ -22,6 +22,7 @@ class Transaction extends Model
         'offre_id',
 
         'frais',
+        'numero_transaction'
     ];
 
     public function compte()

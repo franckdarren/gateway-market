@@ -15,13 +15,14 @@ use Illuminate\Contracts\View\View;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Contracts\HasTable;
+use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
 use Filament\Tables\Actions\ExportAction;
 use Filament\Tables\Actions\ImportAction;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Exports\BonPeseeExporter;
-use Filament\Tables\Actions\ExportBulkAction;
 
+use Filament\Tables\Actions\ExportBulkAction;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Actions\Exports\Enums\ExportFormat;
 use Filament\Tables\Concerns\InteractsWithTable;
@@ -98,16 +99,30 @@ class Demandes extends Component implements HasForms, HasTable
                     ->label("Confirmer l'envoi")
                     ->color('primary') // Couleur du bouton
                     ->visible(fn($record) => $record->statut === 'En attente de traitement') // Bouton visible uniquement pour ce statut
-                    ->action(function ($record) {
-                        $record->update(['statut' => 'En cours de traitement']); // Mise à jour du statut
+                    ->form([
+                        TextInput::make('numero_transaction')
+                            ->label('Numéro de transaction')
+                            ->required()
+                            ->placeholder('Exemple : TRX12345'),
+                    ])
+                    ->action(function (array $data, $record) {
+                        // Mise à jour du statut et ajout du numéro de transaction
+                        $record->update([
+                            'statut' => 'En cours de traitement',
+                            'numero_transaction' => $data['numero_transaction'], // Sauvegarde du numéro de transaction
+                        ]);
+
+                        // Notification de succès
                         Notification::make()
                             ->title('Statut mis à jour')
-                            ->body("La transaction #{$record->id} est maintenant en cours de traitement.")
+                            ->body("La transaction #{$record->id} est maintenant en cours de traitement avec le numéro de transaction {$data['numero_transaction']}.")
                             ->success()
                             ->send();
-                    }),
+                    })
+
             ])
-            ->bulkActions([]);
+            ->bulkActions([])
+            ->poll(5);
     }
 
     public function render()
