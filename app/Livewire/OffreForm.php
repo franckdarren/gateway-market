@@ -2,9 +2,10 @@
 
 namespace App\Livewire;
 
-use Livewire\Component;
-use Livewire\WithFileUploads;
 use App\Models\Offre;
+use Livewire\Component;
+use App\Models\CompteStartup;
+use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Storage;
 
 class OffreForm extends Component
@@ -44,6 +45,12 @@ class OffreForm extends Component
     {
         $this->validate();
 
+        // Vérifier si l'utilisateur a un compte startup
+        $compteStartup = CompteStartup::where('user_id', auth()->id())->first();
+        if (!$compteStartup) {
+            return redirect()->back()->withErrors(['error' => 'Aucun compte startup associé à cet utilisateur.']);
+        }
+
         // Store the uploaded files if they exist
         $businessPlanPath = $this->url_business_plan ? $this->url_business_plan->store('business_plans') : null;
         $etudeRisquePath = $this->url_etude_risque ? $this->url_etude_risque->store('etudes_risques') : null;
@@ -54,14 +61,16 @@ class OffreForm extends Component
             'description_projet' => $this->description_projet,
             'montant' => $this->montant,
             'nbre_mois_remboursement' => $this->nbre_mois_remboursement,
-            'delaiGrace' => $this->delaiGrace,
-            'tauxInteret' => $this->tauxInteret,
+            'nbre_mois_grace' => $this->delaiGrace,
+            'taux_interet' => $this->tauxInteret,
             'url_business_plan' => $businessPlanPath,
             'url_etude_risque' => $etudeRisquePath,
             'van' => $this->van,
             'ir' => $this->ir,
             'tri' => $this->tri,
             'krl' => $this->krl,
+            'compte_startup_id' => $compteStartup->id,
+
         ]);
 
         session()->flash('message', 'Offre créée avec succès.');
@@ -70,7 +79,7 @@ class OffreForm extends Component
         $this->reset();
 
         // Optionally, redirect to another page
-        // return redirect()->route('offres.index');
+        return redirect()->route('dashboard')->with('success', 'Offre créée avec succès.');
     }
 
     public function updated($propertyName)
