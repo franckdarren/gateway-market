@@ -8,6 +8,15 @@
     <div class="py-2 lg:py-5">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="">
+                @if ($errors->any())
+                    <div class="bg-red-100 text-red-600 p-4 rounded-lg">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <div class="max-w-3xl mx-auto bg-white shadow-md rounded-lg p-8 mt-10">
                     <h2 class="text-2xl font-bold text-gray-800 mb-6">Créer un Compte Startup</h2>
                     <form action="{{ route('compte_startup.store') }}" method="POST" class="space-y-6">
