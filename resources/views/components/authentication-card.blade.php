@@ -13,12 +13,12 @@
             </div>
         </div>
         <div class="bg-black z-20 relative md:flex hidden rounded-r-lg shadow-lg overflow-hidden">
-            <img class="h-full max-h-[520px] rounded-r-lg" src="asset/image.png" alt="image1">
+            <img class="h-full max-h-[520px] rounded-r-lg" src="../../asset/image.png" alt="image1">
         </div>
     </div>
 
     <div class="absolute z-0 flex ">
-        <img class="w-full lg:w-[450px]" src="asset/arrow.png" alt="image1">
-        <img class="w-[450px] hidden lg:flex" src="asset/arrow.png" alt="image1">
+        <img class="w-full lg:w-[450px]" src="../../../asset/arrow.png" alt="image1">
+        <img class="w-[450px] hidden lg:flex" src="../../../asset/arrow.png" alt="image1">
     </div>
 </div>
