@@ -956,7 +956,7 @@ body {
         <div class="relative min-h-screen flex flex-col  selection:bg-[#FF2D20] selection:text-white">
             <div class="flex justify-center w-full max-w-2xl px-6 lg:max-w-7xl">
                 <header class="flex justify-between items-center w-full py-5">
-                    <img class="w-20 h-10" src="asset/logo (3).png" alt="">
+                    <img class="md:w-32 md:h-10" src="asset/logo (3).png" alt="">
                     @if (Route::has('login'))
                         <nav class="flex flex-1 justify-end ">
                             @auth
@@ -972,7 +972,7 @@ body {
 
                                 @if (Route::has('register'))
                                     <a href="{{ route('register') }}"
-                                        class="px-10 py-3 mt-2 text-sm text-center bg-yellow-500 text-white rounded-full md:mt-8 md:ml-4 ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
+                                        class="md:px-10 py-3 mt-2 text-sm text-center bg-yellow-500 text-white rounded-full md:mt-8 md:ml-4 ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
                                         Créer un compte
                                     </a>
                                 @endif
@@ -986,8 +986,8 @@ body {
             <main class="">
                 <!-- <h1>Page d'acceuil</h1> -->
                 
-                <div class="bg-cream">
-                    <div class="max-w-screen-xl px-8 mx-auto flex flex-col lg:flex-row items-start">
+                <div class="bg-cream ">
+                    <div class="max-w-screen-xl p-8 mx-auto flex flex-col lg:flex-row items-start">
                         <!--Left Col-->
                         <div
                             class="flex flex-col w-full lg:w-6/12 justify-center lg:pt-24 items-start text-center lg:text-left mb-5 md:mb-0">
@@ -1233,41 +1233,27 @@ body {
                 <div class="flex flex-col md:flex-row items-center md:space-x-10 mt-16">
                     <div data-aos="fade-right" class="md:w-1/2 lg:pl-14">
                         <h1 class="text-black font-semibold text-3xl lg:pr-56"><span
-                                class="text-yellow-500">Tools</span> For Teachers And Learners</h1>
+                                class="text-yellow-500">Startup</span> Gabonaises et innovantes</h1>
                         <p class="text-gray-500 my-4 lg:pr-32">Class has a dynamic set of teaching tools built to be
                             deployed and used during class. Teachers can handout assignments in real-time for students
                             to complete and submit.</p>
                     </div>
-                    <img data-aos="fade-left" class="md:w-1/2" src="asset/girl-with-books.png">
+                    <img data-aos="fade-left" class="md:w-1/2" src="asset/idea.png">
                 </div>               
 
-                <!-- One-on-One Discussions -->
-                <div class="mt-24 flex flex-col-reverse md:flex-row items-center md:space-x-10">
-                    <div data-aos="fade-right" class="md:w-7/12">
-                        <img class="md:w-11/12" src="asset/discussion.png">
-                    </div>
-                    <div data-aos="fade-left" class="md:w-5/12 md:transform md:-translate-y-6">
-                        <h1 class="font-semibold text-black text-3xl lg:pr-64">One-on-One <span
-                                class="text-yellow-500">Discussions</span></h1>
-                        <p class="text-gray-500 my-5 lg:pr-24">Teachers and teacher assistants can talk with students
-                            privately without leaving the Zoom environment.</p>
-                    </div>
-                </div>
-
             
-
                 <!-- INTEGRATIONS -->
                 <div class="mt-24 flex flex-col md:flex-row items-start md:space-x-10">
                     <div data-aos="zoom-in-right" class="md:w-6/12">
-                        <img class="md:w-8/12 mx-auto" src="asset/integrations.png">
+                        <img class="md:w-8/12 mx-auto" src="asset/projet.jpg">
                     </div>
                     <div data-aos="zoom-in-left" class="md:w-6/12">
                         <div class="flex items-center space-x-20 mb-5">
                             <span class="border border-gray-300 w-14 absolute"></span>
-                            <h1 class="text-gray-400 tracking-widest text-sm">INTEGRATIONS</h1>
+                            <h1 class="text-gray-400 tracking-widest text-sm">PROJETS</h1>
                         </div>
-                        <h1 class="font-semibold text-black text-2xl lg:pr-40">200+ educational tools and platform
-                            <span class="text-yellow-500">integrations</span></h1>
+                        <h1 class="font-semibold text-black text-2xl lg:pr-40">+200 Projets rentables présents sur la plateforme
+                            <span class="text-yellow-500">Gateway Market</span></h1>
                         <p class="text-gray-500 my-5 lg:pr-20">Schoology has every tool your classroom needs and comes
                             pre-integrated with more than 200+ tools, student information systems (SIS), and education
                             platforms.</p>
@@ -1275,77 +1261,12 @@ body {
                     </div>
                 </div>
 
-                
-
-                <!-- Latest News and Resources -->
-                <div data-aos="zoom-in" class="mt-16 text-center">
-                    <h1 class="text-black text-2xl font-semibold">Latest News and Resources</h1>
-                    <p class="text-gray-500 my-5">See the developments that have occurred to Skillines in the world</p>
-                </div>
-                <div data-aos="zoom-in-up" class="my-14 flex flex-col lg:flex-row lg:space-x-20">
-                    <div class="lg:w-6/12">
-                        <img class="w-full mb-6" src="asset/laptop-news.png">
-                        <span
-                            class="bg-yellow-300 text-black font-semibold px-4 py-px text-sm rounded-full">NEWS</span>
-                        <h1 class="text-gray-800 font-semibold my-3 text-xl">Class adds $30 million to its balance sheet
-                            for a Zoom-friendly edtech solution</h1>
-                        <p class="text-gray-500 mb-3">Class, launched less than a year ago by Blackboard co-founder
-                            Michael Chasen, integrates exclusively...</p>
-                        <a href="" class="underline">Read more</a>
-                    </div>
-                    <div class="lg:w-7/12 flex flex-col justify-between mt-12 space-y-5 lg:space-y-0 lg:mt-0">
-                        <div class="flex space-x-5">
-                            <div class="w-4/12">
-                                <div class="relative">
-                                    <img class="rounded-xl w-full" src="asset/children-laptop.png">
-                                    <span
-                                        class="absolute bottom-2 right-2 bg-yellow-300 text-black font-semibold px-4 py-px text-sm rounded-full hidden sm:block">PRESS
-                                        RELEASE</span>
-                                </div>
-                            </div>
-                            <div class="w-8/12">
-                                <h1 class="text-gray-800 text-sm sm:text-lg font-semibold">Class Technologies Inc.
-                                    Closes $30 Million Series A Financing to Meet High Demand</h1>
-                                <p class="text-gray-500 my-2 sm:my-4 text-xs sm:text-md">Class Technologies Inc., the
-                                    company that created Class,...</p>
-                            </div>
-                        </div>
-                        <div class="flex space-x-5">
-                            <div class="w-4/12">
-                                <div class="relative">
-                                    <img class="rounded-xl w-full" src="asset/girl-laptop.png">
-                                    <span
-                                        class="absolute bottom-2 right-2 bg-yellow-300 text-black font-semibold px-4 py-px text-sm rounded-full hidden sm:block">NEWS</span>
-                                </div>
-                            </div>
-                            <div class="w-8/12">
-                                <h1 class="text-gray-800 text-sm sm:text-lg font-semibold">Zoom’s earliest investors are
-                                    betting millions on a better Zoom for schools</h1>
-                                <p class="text-gray-500 my-2 sm:my-4 text-xs sm:text-md">Zoom was never created to be a
-                                    consumer product. Nonetheless, the...</p>
-                            </div>
-                        </div>
-                        <div class="flex space-x-5">
-                            <div class="w-4/12">
-                                <div class="relative">
-                                    <img class="rounded-xl w-full" src="asset/cat-laptop.png">
-                                    <span
-                                        class="absolute bottom-2 right-2 bg-yellow-300 text-black font-semibold px-4 py-px text-sm rounded-full hidden sm:block">NEWS</span>
-                                </div>
-                            </div>
-                            <div class="w-8/12">
-                                <h1 class="text-gray-800 text-sm sm:text-lg font-semibold">Former Blackboard CEO Raises
-                                    $16M to Bring LMS Features to Zoom Classrooms</h1>
-                                <p class="text-gray-500 my-2 sm:my-4 text-xs sm:text-md">This year, investors have
-                                    reaped big financial returns from betting on Zoom...</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
     </div>
+    <footer class="flex justify-center items-cente p-10">
+        <h1>Tout droit réservé Gateway Market</h1>
+    </footer>
 </body>
 
 </html>
