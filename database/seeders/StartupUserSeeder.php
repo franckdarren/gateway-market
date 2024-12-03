@@ -20,6 +20,7 @@ class StartupUserSeeder extends Seeder
             'name' => 'Startup',
             'email' => 'startup@startup.com',
             'password' => bcrypt('password'), // Changez le mot de passe si nécessaire
+            'type_abonnement' => 'Simple',
             'email_verified_at' => Carbon::now(),
         ]);
 

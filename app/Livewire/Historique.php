@@ -118,6 +118,10 @@ class Historique extends Component implements HasForms, HasTable
                     ->color(fn($state) => $state == 'Traitée' ? 'success' : 'gray')
                     ->sortable(),
 
+                TextColumn::make('numero_transaction')
+                    ->searchable()
+                    ->sortable(),
+
                 TextColumn::make('created_at')
                     ->searchable()
                     ->label('Date')

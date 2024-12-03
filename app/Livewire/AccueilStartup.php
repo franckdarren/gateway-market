@@ -18,7 +18,7 @@ class AccueilStartup extends Component
         if ($user && $user->compteStartup) {
             $this->compteStartupId = $user->compteStartup->id;
             $this->hasCompteStartup = true;
-            $this->mesOffres = Offre::where('compte_startup_id', $this->compteStartupId)->get();
+            $this->mesOffres = Offre::where('compte_startup_id', $this->compteStartupId)->orderBy('created_at', 'desc')->get();
         } else {
             $this->hasCompteStartup = false;
         }

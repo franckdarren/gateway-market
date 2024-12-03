@@ -30,7 +30,13 @@ class Investisseur extends Component
     public function render()
     {
         // Paginer les offres au lieu de tout charger
-        $mesOffres = Offre::where('statut', 'Disponible')->paginate(12); // 25 offres par page
+        $mesOffres = Offre::select('offres.*')
+            ->join('compte_startups', 'offres.compte_startup_id', '=', 'compte_startups.id')
+            ->join('users', 'compte_startups.user_id', '=', 'users.id')
+            ->where('offres.statut', 'Disponible')
+            ->orderByRaw("CASE WHEN users.type_abonnement = 'Premium' THEN 0 ELSE 1 END")
+            ->orderBy('offres.created_at', 'desc')
+            ->paginate(12); // 25 offres par page
 
         return view('livewire.investisseur', [
             'mesOffres' => $mesOffres,

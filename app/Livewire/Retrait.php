@@ -31,7 +31,6 @@ class Retrait extends Component
         $userRole = auth()->user()->getRoleNames()->first();
         $user = auth()->user();
 
-
         // Vérifier quel type de compte est associé à cet utilisateur
         if ($userRole === 'Administrateur') {
             // Si l'utilisateur a un CompteAdmin
@@ -61,7 +60,26 @@ class Retrait extends Component
             return;
         }
 
-        $this->validate();
+        // Validation du numéro de compte en fonction du mode de retrait
+        $rules = [
+            'montant' => 'required|numeric',
+            'type' => 'required|string',
+            'description' => 'nullable|string',
+            'mode_retrait' => 'required|string',
+            'nom_compte' => 'required|string',
+            'numero_compte' => 'required|string',
+        ];
+
+        // Validation dynamique selon le mode de retrait
+        if ($this->mode_retrait == 'AirtelMoney' || $this->mode_retrait == 'MoovMoney') {
+            $rules['numero_compte'] = ['required', 'regex:/^\d{8,9}$/']; // Suite de 9 chiffres
+        }
+        // elseif ($this->mode_retrait == 'Virement') {
+        //     $rules['numero_compte'] = ['required', 'regex:/^[A-Za-z0-9]{22}$/']; // Format RIB (22 caractères alphanumériques)
+        // }
+
+        // Applique la validation
+        $this->validate($rules);
 
         // Créer la transaction
         $transaction = Transaction::create([
@@ -80,6 +98,7 @@ class Retrait extends Component
 
         session()->flash('message', 'Transaction créée avec succès.');
     }
+
 
     public function render()
     {

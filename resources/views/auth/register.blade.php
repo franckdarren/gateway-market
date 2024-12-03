@@ -33,6 +33,18 @@
                 </select>
             </div>
 
+            <div id="type-abonnement-field" class="mt-4" style="display: none;">
+                <x-label for="type_abonnement" value="{{ __('Type Abonnement') }}" />
+                <select id="type_abonnement" name="type_abonnement"
+                    class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50"
+                    required>
+                    <option value="Simple" {{ old('type_abonnement') == 'Simple' ? 'selected' : '' }}>
+                        {{ __('Simple') }}</option>
+                    <option value="Premium" {{ old('type_abonnement') == 'Premium' ? 'selected' : '' }}>
+                        {{ __('Premium') }}</option>
+                </select>
+            </div>
+
             <div class="mt-4">
                 <x-label for="password" value="{{ __('Mot de passe') }}" />
                 <x-input id="password" class="block mt-1 w-full" type="password" name="password" required
@@ -89,4 +101,24 @@
             </div>
         </form>
     </x-authentication-card>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const roleField = document.getElementById('role');
+            const typeAbonnementField = document.getElementById('type-abonnement-field');
+
+            function toggleTypeAbonnementField() {
+                if (roleField.value === 'Startup') {
+                    typeAbonnementField.style.display = 'block';
+                } else {
+                    typeAbonnementField.style.display = 'none';
+                }
+            }
+
+            // Initial check
+            toggleTypeAbonnementField();
+
+            // Listen for changes
+            roleField.addEventListener('change', toggleTypeAbonnementField);
+        });
+    </script>
 </x-guest-layout>

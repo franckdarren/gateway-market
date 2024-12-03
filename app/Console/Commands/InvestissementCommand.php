@@ -79,8 +79,6 @@ class InvestissementCommand extends Command
                 // Si le solde est insuffisant, envoyer un email d'annulation et arrêter l'opération
                 $this->error("Solde insuffisant pour la transaction ID {$transaction->id}");
 
-                // Envoi de l'email d'annulation
-                Mail::to($compteInvestisseur->email)->send(new AnnulationInvestissement($transaction, $compteInvestisseur));
 
                 // Marquer la transaction comme annulée
                 $transaction->statut = 'Annulée';
@@ -97,6 +95,8 @@ class InvestissementCommand extends Command
                 $offre->compte_investisseur_id = null;
                 $offre->save();
 
+                // Envoi de l'email d'annulation
+                Mail::to($compteInvestisseur->email)->send(new AnnulationInvestissement($transaction, $compteInvestisseur));
                 continue;
             }
 
@@ -137,12 +137,6 @@ class InvestissementCommand extends Command
             // Marquer la transaction comme traitée
             $transaction->statut = 'Traitée';
             $transaction->save();
-
-            // Envoyer l'email à l'investisseur
-            Mail::to($compteInvestisseur->email)->send(new NotificationInvestisseur($transaction, $compteInvestisseur));
-
-            // Envoyer l'email à la startup
-            Mail::to($compteStartup->email)->send(new NotificationStartup($transaction, $compteInvestisseur, $compteStartup));
 
             // Création des lignes dans la tables remboursements
 
@@ -195,7 +189,7 @@ class InvestissementCommand extends Command
                 $cumulRemboursement += $remboursementTotal;
 
                 // Créer l'entrée dans la table remboursements
-                Remboursements::create([
+                Remboursement::create([
                     'offre_id' => $offre->id,
                     'compte_startup_id' => $offre->compte_startup_id,
                     'compte_investisseur_id' => $offre->compte_investisseur_id,
@@ -208,6 +202,11 @@ class InvestissementCommand extends Command
                     'cumul_remboursement' => $cumulRemboursement,
                 ]);
             }
+            // Envoyer l'email à l'investisseur
+            Mail::to($compteInvestisseur->email)->send(new NotificationInvestisseur($transaction, $compteInvestisseur));
+
+            // Envoyer l'email à la startup
+            Mail::to($compteStartup->email)->send(new NotificationStartup($transaction, $compteInvestisseur, $compteStartup));
 
             $this->info("Transaction ID {$transaction->id} traitée avec succès.");
         }

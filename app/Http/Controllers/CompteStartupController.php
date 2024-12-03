@@ -32,6 +32,7 @@ class CompteStartupController extends Controller
      */
     public function store(Request $request)
     {
+
         // Vérifie si l'utilisateur a déjà un compte startup
         if (Auth::user()->compteStartup) {
             return redirect()->route('comptes.index')->with('error', 'Vous avez déjà un compte startup.');
@@ -43,8 +44,9 @@ class CompteStartupController extends Controller
             'date_creation' => 'required|date',
             'activite_principale' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:compte_startups,email',
-            'phone' => 'required|string|max:20|unique:compte_startups,phone',
+            'phone' => 'required|string|max:20',
         ]);
+
 
         // Créer un nouveau compte startup pour l'utilisateur
         $compte = CompteStartup::create([

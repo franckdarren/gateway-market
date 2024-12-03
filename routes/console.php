@@ -14,5 +14,5 @@ Artisan::command('inspire', function () {
 
 Schedule::command(InvestissementCommand::class, [])->monthlyOn(1, '1:00');
 Schedule::command(RemboursementCommand::class, [])->monthlyOn(1, '3:00');
-Schedule::command(RetraitCommand::class, [])->everyMinute();
-Schedule::command(DepotCommand::class, [])->everyMinute();
+Schedule::command(RetraitCommand::class, [])->everySecond();
+Schedule::command(DepotCommand::class, [])->everySecond();

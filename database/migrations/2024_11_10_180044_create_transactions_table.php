@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('numero_compte')->nullable();
             $table->string('nom_compte')->nullable();
             $table->integer('frais')->nullable();
+            $table->string('numero_transaction')->nullable();
+
 
             $table->string('statut')->default('En attente de traitement');
 
