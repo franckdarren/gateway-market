@@ -970,6 +970,8 @@
     </style>
 </head>
 
+
+
 <body class="font-sans antialiased dark:bg-black dark:text-white/50">
     <div class="bg-gray-50 text-black/50 dark:bg-black dark:text-white/50">
         <div class="relative min-h-screen flex flex-col  selection:bg-[#FF2D20] selection:text-white">
@@ -978,7 +980,7 @@
                     {{-- <img class="md:w-32 md:h-10" src="asset/logo (3).png" alt=""> --}}
                     <x-application-logo />
                     @if (Route::has('login'))
-                        <nav class="flex justify-end">
+                        <nav class="hidden lg:flex  justify-end">
                             @auth
                                 <a href="{{ url('/dashboard') }}"
                                     class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
@@ -999,9 +1001,68 @@
                             @endauth
                         </nav>
                     @endif
+                    <div id="mySidenav"
+                        class="h-full w-[250px] fixed z-10 top-0 left-[-250px] bg-[#e8e8e8] pt-[60px] transition-all duration-300 ease-in-out">
+                        <!-- Close Button -->
+                        <a id="closeBtn" href="#"
+                            class="absolute top-0 right-6 text-4xl py-2 pb-8 pt-2 text-[25px] text-[#818181] block transition hover:text-[#111]">×</a>
+                        <!-- Menu Items -->
+                        <ul class="p-0 m-0 list-none">
+                                                   
+                            @if (Route::has('login'))
+                        <nav class="flex flex-col space-y-5 justify-end">
+                            @auth
+                                <a href="{{ url('/dashboard') }}"
+                                    class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
+                                    Se connecter
+                                </a>
+                            @else
+                                <a href="{{ route('login') }}"
+                                    class="px-10 py-3 text-sm text-center bg-white text-gray-800 rounded-full ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
+                                    Se connecter
+                                </a>
+
+                                @if (Route::has('register'))
+                                    <a href="{{ route('register') }}"
+                                        class="md:px-10 py-3 text-sm text-center bg-yellow-500 text-white rounded-full ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
+                                        Créer un compte
+                                    </a>
+                                @endif
+                            @endauth
+                        </nav>
+                    @endif
+                        </ul>
+                    </div>
+
+                    <!-- Open Button -->
+                    <a href="#" id="openBtn" class="block lg:hidden">
+                        <span class="block w-9 h-1 rounded-md bg-black my-1"></span>
+                        <span class="block w-9 h-1 rounded-md bg-black my-1"></span>
+                        <span class="block w-9 h-1 rounded-md bg-black my-1"></span>
+                    </a>
                 </header>
             </div>
 
+            <script>
+                // Sidebar Elements
+                var sidenav = document.getElementById("mySidenav");
+                var openBtn = document.getElementById("openBtn");
+                var closeBtn = document.getElementById("closeBtn");
+
+                // Event Listeners
+                openBtn.onclick = openNav;
+                closeBtn.onclick = closeNav;
+
+                // Open Sidebar
+                function openNav() {
+                    sidenav.style.left = "0"; // Slide the sidebar into view
+                }
+
+                // Close Sidebar
+                function closeNav() {
+                    sidenav.style.left = "-250px"; // Slide the sidebar out of view
+                }
+            </script>
 
             <main class="">
                 <!-- <h1>Page d'acceuil</h1> -->
@@ -1010,7 +1071,7 @@
                     <div class="max-w-screen-xl p-8 mx-auto flex flex-col lg:flex-row items-start">
                         <!--Left Col-->
                         <div
-                            class="flex flex-col w-full lg:w-6/12 justify-center lg:pt-24 items-start text-center lg:text-left mb-5 md:mb-0">
+                            class="flex flex-col w-full lg:w-6/12 justify-center lg:py-24 items-start text-center lg:text-left mb-5 md:mb-0">
                             <h1 data-aos="fade-right" data-aos-once="true"
                                 class="my-4 text-5xl font-bold leading-tight text-[#3A88E9]">
                                 <span class="text-black">Investir</span> en ligne devient plus facile
@@ -1042,11 +1103,9 @@
                                 <svg class="h-16 sm:h-24" viewBox="0 0 149 149" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <g filter="url(#filter0_d)">
-                                        <rect x="40" y="32" width="69" height="69" rx="14"
-                                            fill="#F3627C" />
+                                        <rect x="40" y="32" width="69" height="69" rx="14" fill="#F3627C" />
                                     </g>
-                                    <rect x="51.35" y="44.075" width="47.3" height="44.85" rx="8"
-                                        fill="white" />
+                                    <rect x="51.35" y="44.075" width="47.3" height="44.85" rx="8" fill="white" />
                                     <path d="M74.5 54.425V78.575" stroke="#F25471" stroke-width="4"
                                         stroke-linecap="round" />
                                     <path d="M65.875 58.7375L65.875 78.575" stroke="#F25471" stroke-width="4"
@@ -1074,8 +1133,7 @@
                             <!-- ux class -->
                             <div data-aos="fade-up" data-aos-delay="500" data-aos-once="true"
                                 class="absolute bottom-14 -left-10 sm:left-2 sm:bottom-20 lg:bottom-24 lg:left-10 floating">
-                                <img class=" bg-opacity-80 rounded-lg h-20 sm:h-28" src="asset/plante.jpg"
-                                    alt="">
+                                <img class=" bg-opacity-80 rounded-lg h-20 sm:h-28" src="asset/plante.jpg" alt="">
                             </div>
                             <!-- congrats -->
                             <div data-aos="fade-up" data-aos-delay="600" data-aos-once="true"
@@ -1136,8 +1194,7 @@
                         <p class="px-4 text-gray-500">Offrez un contrôle simple et sécurisé des transactions
                             financières et légales entre investisseurs et startups. </p>
                     </div>
-                    <div data-aos="fade-up" data-aos-delay="150"
-                        class="bg-white shadow-xl p-6 text-center rounded-xl">
+                    <div data-aos="fade-up" data-aos-delay="150" class="bg-white shadow-xl p-6 text-center rounded-xl">
                         <div style="background: #3A88E9;"
                             class="rounded-full w-16 h-16 flex items-center justify-center mx-auto shadow-lg transform -translate-y-12">
                             <svg class="w-6 h-6 text-white" viewBox="0 0 48 48" fill="none"
@@ -1186,8 +1243,7 @@
                             startups en temps réel. Planifiez des réunions, suivez les mises à jour de projets et
                             accédez à des rapports détaillés sur l’évolution des entreprises financées.</p>
                     </div>
-                    <div data-aos="fade-up" data-aos-delay="300"
-                        class="bg-white shadow-xl p-6 text-center rounded-xl">
+                    <div data-aos="fade-up" data-aos-delay="300" class="bg-white shadow-xl p-6 text-center rounded-xl">
                         <div style="background: #29B9E7;"
                             class="rounded-full w-16 h-16 flex items-center justify-center mx-auto shadow-lg transform -translate-y-12">
                             <svg class="w-6 h-6 text-white" viewBox="0 0 55 44" fill="none"
