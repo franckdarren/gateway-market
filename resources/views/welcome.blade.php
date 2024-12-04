@@ -970,8 +970,6 @@
     </style>
 </head>
 
-
-
 <body class="font-sans antialiased dark:bg-black dark:text-white/50">
     <div class="bg-gray-50 text-black/50 dark:bg-black dark:text-white/50">
         <div class="relative min-h-screen flex flex-col  selection:bg-[#FF2D20] selection:text-white">
@@ -980,7 +978,7 @@
                     {{-- <img class="md:w-32 md:h-10" src="asset/logo (3).png" alt=""> --}}
                     <x-application-logo />
                     @if (Route::has('login'))
-                        <nav class="hidden lg:flex  justify-end">
+                        <nav class="flex justify-end">
                             @auth
                                 <a href="{{ url('/dashboard') }}"
                                     class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
@@ -1001,68 +999,9 @@
                             @endauth
                         </nav>
                     @endif
-                    <div id="mySidenav"
-                        class="h-full w-[250px] fixed z-10 top-0 left-[-250px] bg-[#e8e8e8] pt-[60px] transition-all duration-300 ease-in-out">
-                        <!-- Close Button -->
-                        <a id="closeBtn" href="#"
-                            class="absolute top-0 right-6 text-4xl py-2 pb-8 pt-2 text-[25px] text-[#818181] block transition hover:text-[#111]">×</a>
-                        <!-- Menu Items -->
-                        <ul class="p-0 m-0 list-none">
-                                                   
-                            @if (Route::has('login'))
-                        <nav class="flex flex-col space-y-5 justify-end">
-                            @auth
-                                <a href="{{ url('/dashboard') }}"
-                                    class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
-                                    Se connecter
-                                </a>
-                            @else
-                                <a href="{{ route('login') }}"
-                                    class="px-10 py-3 text-sm text-center bg-white text-gray-800 rounded-full ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
-                                    Se connecter
-                                </a>
-
-                                @if (Route::has('register'))
-                                    <a href="{{ route('register') }}"
-                                        class="md:px-10 py-3 text-sm text-center bg-yellow-500 text-white rounded-full ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
-                                        Créer un compte
-                                    </a>
-                                @endif
-                            @endauth
-                        </nav>
-                    @endif
-                        </ul>
-                    </div>
-
-                    <!-- Open Button -->
-                    <a href="#" id="openBtn" class="block lg:hidden">
-                        <span class="block w-9 h-1 rounded-md bg-black my-1"></span>
-                        <span class="block w-9 h-1 rounded-md bg-black my-1"></span>
-                        <span class="block w-9 h-1 rounded-md bg-black my-1"></span>
-                    </a>
                 </header>
             </div>
 
-            <script>
-                // Sidebar Elements
-                var sidenav = document.getElementById("mySidenav");
-                var openBtn = document.getElementById("openBtn");
-                var closeBtn = document.getElementById("closeBtn");
-
-                // Event Listeners
-                openBtn.onclick = openNav;
-                closeBtn.onclick = closeNav;
-
-                // Open Sidebar
-                function openNav() {
-                    sidenav.style.left = "0"; // Slide the sidebar into view
-                }
-
-                // Close Sidebar
-                function closeNav() {
-                    sidenav.style.left = "-250px"; // Slide the sidebar out of view
-                }
-            </script>
 
             <main class="">
                 <!-- <h1>Page d'acceuil</h1> -->

@@ -13,8 +13,8 @@
                 </a>
 
                 <table class="min-w-full border-collapse border border-gray-200 bg-white shadow-md">
-                    <thead class="bg-gray-50">
-                        <tr>
+                    <thead class="bg-gray-50 rounded-md">
+                        <tr class="rounded-md">
                             <th class="border border-gray-300 px-4 py-2 text-left text-gray-600">Désignation</th>
                             <th class="border border-gray-300 px-4 py-2 text-left text-gray-600">Intérêt</th>
                             <th class="border border-gray-300 px-4 py-2 text-left text-gray-600">Montant</th>
