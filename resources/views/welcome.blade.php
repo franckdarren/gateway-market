@@ -18,7 +18,6 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     @else
         <style>
-
             /* ! tailwindcss v3.4.1 | MIT License | https://tailwindcss.com */
             *,
             ::after,
@@ -910,55 +909,76 @@
 
     <style>
         /*primary color*/
-.bg-cream {
-    background-color: #C7EBFF;
-}
+        .bg-cream {
+            background-color: #C7EBFF;
+        }
 
-/*font*/
-body {
-    font-family: 'Poppins', sans-serif;
-}
+        /*font*/
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
 
-.bg-yellow-500 {
-    background-color: #3A88E9;
-}
-.text-yellow-500 {
-    color: #3A88E9;
-}
-.floating { 
-    animation-name: floating; 
-    animation-duration: 3s; 
-    animation-iteration-count: infinite; 
-    animation-timing-function: ease-in-out;
-} 
-@keyframes floating { 
-    0% { transform: translate(0, 0px); } 
-    50% { transform: translate(0, 8px); } 
-    100% { transform: translate(0, -0px); }  
-} 
-.floating-4 { 
-    animation-name: floating; 
-    animation-duration: 4s; 
-    animation-iteration-count: infinite; 
-    animation-timing-function: ease-in-out;
-} 
-@keyframes floating-4 { 
-    0% { transform: translate(0, 0px); } 
-    50% { transform: translate(0, 8px); } 
-    100% { transform: translate(0, -0px); }  
-}
+        .bg-yellow-500 {
+            background-color: #3A88E9;
+        }
 
+        .text-yellow-500 {
+            color: #3A88E9;
+        }
+
+        .floating {
+            animation-name: floating;
+            animation-duration: 3s;
+            animation-iteration-count: infinite;
+            animation-timing-function: ease-in-out;
+        }
+
+        @keyframes floating {
+            0% {
+                transform: translate(0, 0px);
+            }
+
+            50% {
+                transform: translate(0, 8px);
+            }
+
+            100% {
+                transform: translate(0, -0px);
+            }
+        }
+
+        .floating-4 {
+            animation-name: floating;
+            animation-duration: 4s;
+            animation-iteration-count: infinite;
+            animation-timing-function: ease-in-out;
+        }
+
+        @keyframes floating-4 {
+            0% {
+                transform: translate(0, 0px);
+            }
+
+            50% {
+                transform: translate(0, 8px);
+            }
+
+            100% {
+                transform: translate(0, -0px);
+            }
+        }
     </style>
 </head>
 
 <body class="font-sans antialiased dark:bg-black dark:text-white/50">
     <div class="bg-gray-50 text-black/50 dark:bg-black dark:text-white/50">
         <div class="relative min-h-screen flex flex-col  selection:bg-[#FF2D20] selection:text-white">
-            <div class="flex justify-center w-full max-w-2xl px-6 lg:max-w-7xl">
-                <header class="flex justify-between items-center w-full py-5">
-                    <img class="md:w-32 md:h-10" src="asset/logo (3).png" alt="">
+            <div class="flex justify-center w-full px-6">
+                <header class="flex justify-between items-center w-full my-3">
+                    {{-- <img class="md:w-32 md:h-10" src="asset/logo (3).png" alt=""> --}}
+                    <x-application-logo />
                     @if (Route::has('login'))
-                        <nav class="flex flex-1 justify-end ">
+                        <nav class="flex justify-end">
                             @auth
                                 <a href="{{ url('/dashboard') }}"
                                     class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
@@ -966,13 +986,13 @@ body {
                                 </a>
                             @else
                                 <a href="{{ route('login') }}"
-                                    class="px-10 py-3 mt-2 text-sm text-center bg-white text-gray-800 rounded-full md:mt-8 md:ml-4 ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
+                                    class="px-10 py-3 text-sm text-center bg-white text-gray-800 rounded-full ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
                                     Se connecter
                                 </a>
 
                                 @if (Route::has('register'))
                                     <a href="{{ route('register') }}"
-                                        class="md:px-10 py-3 mt-2 text-sm text-center bg-yellow-500 text-white rounded-full md:mt-8 md:ml-4 ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
+                                        class="md:px-10 py-3 text-sm text-center bg-yellow-500 text-white rounded-full ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
                                         Créer un compte
                                     </a>
                                 @endif
@@ -981,11 +1001,11 @@ body {
                     @endif
                 </header>
             </div>
-            
+
 
             <main class="">
                 <!-- <h1>Page d'acceuil</h1> -->
-                
+
                 <div class="bg-cream ">
                     <div class="max-w-screen-xl p-8 mx-auto flex flex-col lg:flex-row items-start">
                         <!--Left Col-->
@@ -996,14 +1016,15 @@ body {
                                 <span class="text-black">Investir</span> en ligne devient plus facile
                             </h1>
                             <p data-aos="fade-down" data-aos-once="true" data-aos-delay="300"
-                                class="leading-normal text-2xl mb-8">Gateway Market est la plateforme qui représente le pont entre les porteur de projet et les start-up</p>
+                                class="leading-normal text-2xl mb-8">Gateway Market est la plateforme qui représente le
+                                pont entre les porteur de projet et les start-up</p>
                             <div data-aos="fade-up" data-aos-once="true" data-aos-delay="700"
                                 class="w-full md:flex items-center justify-center lg:justify-start md:space-x-5">
                                 <button
                                     class="lg:mx-0 bg-[#3A88E9] text-white text-xl font-bold rounded-full py-4 px-9 focus:outline-none transform transition hover:scale-110 duration-300 ease-in-out">
-                                    inscrivez-vous
+                                    Inscrivez-vous
                                 </button>
-                                
+
                             </div>
                         </div>
                         <!--Right Col-->
@@ -1021,9 +1042,11 @@ body {
                                 <svg class="h-16 sm:h-24" viewBox="0 0 149 149" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <g filter="url(#filter0_d)">
-                                        <rect x="40" y="32" width="69" height="69" rx="14" fill="#F3627C" />
+                                        <rect x="40" y="32" width="69" height="69" rx="14"
+                                            fill="#F3627C" />
                                     </g>
-                                    <rect x="51.35" y="44.075" width="47.3" height="44.85" rx="8" fill="white" />
+                                    <rect x="51.35" y="44.075" width="47.3" height="44.85" rx="8"
+                                        fill="white" />
                                     <path d="M74.5 54.425V78.575" stroke="#F25471" stroke-width="4"
                                         stroke-linecap="round" />
                                     <path d="M65.875 58.7375L65.875 78.575" stroke="#F25471" stroke-width="4"
@@ -1077,7 +1100,8 @@ body {
 
                 <!-- trusted by -->
                 <div class="max-w-4xl mx-auto">
-                    <h1 class="text-center mb-3 text-gray-400 font-medium">Nous avons la confiance de +500 startUp Gabonaises</h1>
+                    <h1 class="text-center mb-3 text-gray-400 font-medium">Nous avons la confiance de +500 startUp
+                        Gabonaises</h1>
                     <div class="grid grid-cols-3 lg:grid-cols-6 gap-4 justify-items-center">
                         <img class="h-7" src="asset/company/google.svg">
                         <img class="h-7" src="asset/company/netflix.svg">
@@ -1091,8 +1115,9 @@ body {
                 <!-- All-In-One Cloud Software. -->
                 <div data-aos="flip-up" class="max-w-xl mx-auto text-center mt-24">
                     <h1 class="font-bold text-darken my-3 text-2xl">
-                    Plateforme d'investissement  <span class="text--[#3A88E9]">tout-en-un.</span></h1>
-                    <p class="leading-relaxed text-gray-500">Gateway Market est une solution en ligne puissante qui relie les particuliers aux startups innovantes.</p>
+                        Plateforme d'investissement <span class="text--[#3A88E9]">tout-en-un.</span></h1>
+                    <p class="leading-relaxed text-gray-500">Gateway Market est une solution en ligne puissante qui
+                        relie les particuliers aux startups innovantes.</p>
                 </div>
                 <!-- card -->
                 <div class="grid md:grid-cols-3 gap-14 md:gap-5 mt-20">
@@ -1108,9 +1133,11 @@ body {
                         </div>
                         <h1 class="font-medium text-xl mb-3 lg:px-14 text-black">Gestion des Investissements
                         </h1>
-                        <p class="px-4 text-gray-500">Offrez un contrôle simple et sécurisé des transactions financières et légales entre investisseurs et startups. </p>
+                        <p class="px-4 text-gray-500">Offrez un contrôle simple et sécurisé des transactions
+                            financières et légales entre investisseurs et startups. </p>
                     </div>
-                    <div data-aos="fade-up" data-aos-delay="150" class="bg-white shadow-xl p-6 text-center rounded-xl">
+                    <div data-aos="fade-up" data-aos-delay="150"
+                        class="bg-white shadow-xl p-6 text-center rounded-xl">
                         <div style="background: #3A88E9;"
                             class="rounded-full w-16 h-16 flex items-center justify-center mx-auto shadow-lg transform -translate-y-12">
                             <svg class="w-6 h-6 text-white" viewBox="0 0 48 48" fill="none"
@@ -1155,9 +1182,12 @@ body {
                         </div>
                         <h1 class="font-medium text-xl mb-3 lg:px-14 text-black">Suivi de Projets
                         </h1>
-                        <p class="px-4 text-gray-500">Permettez aux investisseurs de suivre les performances des startups en temps réel. Planifiez des réunions, suivez les mises à jour de projets et accédez à des rapports détaillés sur l’évolution des entreprises financées.</p>
+                        <p class="px-4 text-gray-500">Permettez aux investisseurs de suivre les performances des
+                            startups en temps réel. Planifiez des réunions, suivez les mises à jour de projets et
+                            accédez à des rapports détaillés sur l’évolution des entreprises financées.</p>
                     </div>
-                    <div data-aos="fade-up" data-aos-delay="300" class="bg-white shadow-xl p-6 text-center rounded-xl">
+                    <div data-aos="fade-up" data-aos-delay="300"
+                        class="bg-white shadow-xl p-6 text-center rounded-xl">
                         <div style="background: #29B9E7;"
                             class="rounded-full w-16 h-16 flex items-center justify-center mx-auto shadow-lg transform -translate-y-12">
                             <svg class="w-6 h-6 text-white" viewBox="0 0 55 44" fill="none"
@@ -1167,16 +1197,23 @@ body {
                                     fill="white" />
                             </svg>
                         </div>
-                        <h1 class="font-medium text-xl mb-3 lg:px-14 text-black lg:h-14 pt-3">Automatisation des Communications</h1>
-                        <p class="px-4 text-gray-500">Automatisez les emails et notifications pour maintenir une communication efficace entre les startups et les investisseurs. Un système intégré aide à organiser les relations et à assurer un engagement actif de la communauté. </p>
+                        <h1 class="font-medium text-xl mb-3 lg:px-14 text-black lg:h-14 pt-3">Automatisation des
+                            Communications</h1>
+                        <p class="px-4 text-gray-500">Automatisez les emails et notifications pour maintenir une
+                            communication efficace entre les startups et les investisseurs. Un système intégré aide à
+                            organiser les relations et à assurer un engagement actif de la communauté. </p>
                     </div>
                 </div>
 
                 <!-- lorem -->
                 <div class="mt-28">
                     <div data-aos="flip-down" class="text-center max-w-screen-md mx-auto">
-                        <h1 class="text-3xl font-bold mb-4">Qu'est ce que<span class="text-yellow-500"> Gateway Market?</span></h1>
-                        <p class="text-gray-500">Gateway Market est une solution en ligne puissante qui relie les particuliers aux startups innovantes. Elle regroupe tous les outils nécessaires pour simplifier les investissements, soutenir le développement des entreprises, et assurer la réussite des investisseurs et des entrepreneurs.</p>
+                        <h1 class="text-3xl font-bold mb-4">Qu'est ce que<span class="text-yellow-500"> Gateway
+                                Market?</span></h1>
+                        <p class="text-gray-500">Gateway Market est une solution en ligne puissante qui relie les
+                            particuliers aux startups innovantes. Elle regroupe tous les outils nécessaires pour
+                            simplifier les investissements, soutenir le développement des entreprises, et assurer la
+                            réussite des investisseurs et des entrepreneurs.</p>
                     </div>
                     <div data-aos="fade-up"
                         class="flex flex-col md:flex-row justify-center space-y-5 md:space-y-0 md:space-x-6 lg:space-x-10 mt-7">
@@ -1185,9 +1222,11 @@ body {
                             <div
                                 class="absolute bg-black bg-opacity-20 bottom-0 left-0 right-0 w-full h-full rounded-2xl">
                                 <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                                    <h1 class="uppercase text-white font-bold text-center text-sm lg:text-xl mb-3">POUR LES INVESTISSEURS</h1>
+                                    <h1 class="uppercase text-white font-bold text-center text-sm lg:text-xl mb-3">POUR
+                                        LES INVESTISSEURS</h1>
                                     <button
-                                        class="rounded-full text-white border text-xs lg:text-md px-6 py-3 w-full font-medium focus:outline-none transform transition hover:scale-110 duration-300 ease-in-out">Multipliez vos gains Aujourd'hui</button>
+                                        class="rounded-full text-white border text-xs lg:text-md px-6 py-3 w-full font-medium focus:outline-none transform transition hover:scale-110 duration-300 ease-in-out">Multipliez
+                                        vos gains Aujourd'hui</button>
                                 </div>
                             </div>
                         </div>
@@ -1196,7 +1235,8 @@ body {
                             <div
                                 class="absolute bg-black bg-opacity-20 bottom-0 left-0 right-0 w-full h-full rounded-2xl">
                                 <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                                    <h1 class="uppercase text-white font-bold text-center text-sm lg:text-xl mb-3">POUR LES STARTUPS</h1>
+                                    <h1 class="uppercase text-white font-bold text-center text-sm lg:text-xl mb-3">POUR
+                                        LES STARTUPS</h1>
                                     <button
                                         class="rounded-full text-white text-xs lg:text-md px-6 py-3 w-full font-medium focus:outline-none transform transition hover:scale-110 duration-300 ease-in-out"
                                         style="background: rgba(35, 189, 238, 0.9)">Intégrer votre Projet</button>
@@ -1206,7 +1246,7 @@ body {
                     </div>
                 </div>
 
-                
+
 
                 <div class="md:flex mt-40 md:space-x-10 items-start">
                     <div data-aos="fade-down" class="md:w-7/12 relative">
@@ -1221,8 +1261,8 @@ body {
                             class="w-5 h-5 rounded-full absolute z-0 right-52 bottom-1 animate-ping"></div>
                     </div>
                     <div data-aos="fade-right" class="md:w-1/2 lg:pl-14">
-                        <h1 class="text-black font-semibold text-3xl lg:pr-56"><span
-                                class="text-yellow-500">Tableau de bord</span> Intuitif pour mieux voir l'avancer des projets</h1>
+                        <h1 class="text-black font-semibold text-3xl lg:pr-56"><span class="text-yellow-500">Tableau
+                                de bord</span> Intuitif pour mieux voir l'avancer des projets</h1>
                         <p class="text-gray-500 my-4 lg:pr-32">Class has a dynamic set of teaching tools built to be
                             deployed and used during class. Teachers can handout assignments in real-time for students
                             to complete and submit.</p>
@@ -1239,9 +1279,9 @@ body {
                             to complete and submit.</p>
                     </div>
                     <img data-aos="fade-left" class="md:w-1/2" src="asset/idea.png">
-                </div>               
+                </div>
 
-            
+
                 <!-- INTEGRATIONS -->
                 <div class="mt-24 flex flex-col md:flex-row items-start md:space-x-10">
                     <div data-aos="zoom-in-right" class="md:w-6/12">
@@ -1252,12 +1292,14 @@ body {
                             <span class="border border-gray-300 w-14 absolute"></span>
                             <h1 class="text-gray-400 tracking-widest text-sm">PROJETS</h1>
                         </div>
-                        <h1 class="font-semibold text-black text-2xl lg:pr-40">+200 Projets rentables présents sur la plateforme
-                            <span class="text-yellow-500">Gateway Market</span></h1>
+                        <h1 class="font-semibold text-black text-2xl lg:pr-40">+200 Projets rentables présents sur la
+                            plateforme
+                            <span class="text-yellow-500">Gateway Market</span>
+                        </h1>
                         <p class="text-gray-500 my-5 lg:pr-20">Schoology has every tool your classroom needs and comes
                             pre-integrated with more than 200+ tools, student information systems (SIS), and education
                             platforms.</p>
-                       
+
                     </div>
                 </div>
 
