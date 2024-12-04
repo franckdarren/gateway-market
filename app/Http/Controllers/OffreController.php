@@ -246,7 +246,7 @@ class OffreController extends Controller
         Transaction::create([
             'montant' => $montantTotal,
             'frais' => $frais,
-            'type' => 'investissement',
+            'type' => 'Investissement',
             'description' => 'Investissement dans l\'offre ' . $offre->nom_projet,
             'compte_type' => 'Compte Investisseur',
             'compte_id' => $investisseur->id,

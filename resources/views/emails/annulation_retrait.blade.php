@@ -81,7 +81,7 @@
 
     <div class="container">
         <h2>Bonjour !</h2>
-        <p>Nous vous informons que votre retrait de <span class="highlight">{{ $montant }} FCFA</span> a été annulé,
+        <p>Nous vous informons que votre retrait de <span class="highlight">{{ number_format($montant, 0, ',', '.') }} FCFA</span> a été annulé,
             car votre solde actuel est insuffisant. Le montant demandé est supérieur à votre solde disponible.</p>
         <p>Merci de vérifier votre solde ou de contacter notre support si vous avez des questions.</p>
         <p>Cordialement,</p>

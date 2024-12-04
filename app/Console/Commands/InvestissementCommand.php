@@ -148,21 +148,15 @@ class InvestissementCommand extends Command
             $capitalTotalRestant = $capitalRestant; // Pour fixer le capital total restant après la période de grâce
             $cumulRemboursement = 0;
 
-            $currentMonth = now()->month;  // Mois actuel
-            $currentYear = now()->year;    // Année actuelle
+            $currentDay = now()->day; // Récupère le numéro du jour actuel
 
             // Parcours pour chaque mois (grâce + remboursement)
             for ($i = 1; $i <= $duree + $delaiGrace; $i++) {
-                // Calcul du mois suivant
-                $monthIndex = ($currentMonth + $i) % 12;
-                if ($monthIndex == 0) $monthIndex = 12; // Ajuster pour janvier (1er mois)
+                // Calcul de la date pour le mois suivant en gardant le jour actuel
+                $date = now()->addMonths($i)->setDay(min($currentDay, now()->addMonths($i)->daysInMonth));
 
-                // Incrémentation de l'année après chaque 12 mois
-                $yearOffset = intdiv(($currentMonth + $i - 1), 12);
-                $year = $currentYear + $yearOffset;
-
-                // Format du mois et de l'année
-                $mois = now()->setMonth($monthIndex)->translatedFormat('F') . " " . $year;
+                // Format du mois avec le jour
+                $mois = $date->translatedFormat('d F Y');
 
                 $remboursementCapital = 0;
                 $remboursementInteret = 0;

@@ -98,13 +98,13 @@
 
 <body>
     <div class="container">
-        <h1>Bonjour {{ $compteInvestisseur->nom }} {{ $compteInvestisseur->prenom }},</h1>
+        <h1>Bonjour {{ $compteStartup->nom }},</h1>
         <p>Nous avons le plaisir de vous informer que vous venez d'acquérir un nouvel investisseur.</p>
 
         <p><strong>Description de l'investissement :</strong> {{ $description }}</p>
-        <p><strong>Montant investi :</strong> <span class="highlight">{{ $montant }} FCFA</span></p>
+        <p><strong>Montant investi :</strong> <span class="highlight">{{ number_format($montant, 0, ',', '.') }} FCFA</span></p>
         <p><strong>Statut de la transaction :</strong> <span class="highlight">{{ $statut }}</span></p>
-        <p><strong>Votre nouveau solde est :</strong> <span class="highlight">{{ $compteStartup->solde }} FCFA</span></p>
+        <p><strong>Votre nouveau solde est :</strong> <span class="highlight">{{ number_format($compteStartup->solde, 0, ',', '.') }} FCFA</span></p>
 
         <p><strong>Investisseur :</strong> <span class="highlight">{{ $compteInvestisseur->nom }}
                 {{ $compteInvestisseur->prenom }}</span></p>
