@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->integer('montant');
-            $table->enum('type', ['depot', 'retrait', 'investissement', 'remboursement débit', 'remboursement crédit', 'remboursement ERREUR']);
+            $table->enum('type', ['Dépot', 'Retrait', 'Investissement', 'Remboursement débit', 'Remboursement crédit', 'Remboursement ERREUR']);
             $table->string('description')->nullable();
             $table->string('compte_type');
             $table->unsignedBigInteger('compte_id');

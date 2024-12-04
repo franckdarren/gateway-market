@@ -6,6 +6,11 @@ use App\Models\Offre;
 use App\Models\Transaction;
 use App\Models\Remboursement;
 use Illuminate\Console\Command;
+use App\Mail\RemboursementStartup;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\RemboursementInvestisseur;
+use App\Mail\ErreurRemboursementStartup;
+use App\Mail\ErreurRemboursementInvestisseur;
 
 class RemboursementCommand extends Command
 {
@@ -31,18 +36,17 @@ class RemboursementCommand extends Command
         $today = now();
 
         // Récupérer tous les remboursements pour le mois actuel
-        $remboursements = Remboursement::where('mois', $today->translatedFormat('F Y'))
+        $remboursements = Remboursement::where('mois', $today->translatedFormat('d F Y'))
             ->where('statut', 'En attente de paiement')
             ->get();
 
-        // dd($remboursements);
 
         if ($remboursements->isEmpty()) {
             $this->info('Aucun remboursement à traiter.');
             return Command::SUCCESS;
         }
 
-        $dateRemboursement = $today->translatedFormat('F Y');
+        $dateRemboursement = $today->translatedFormat('d F Y');
 
         foreach ($remboursements as $remboursement) {
             $startup = $remboursement->compteStartup;
@@ -56,11 +60,11 @@ class RemboursementCommand extends Command
                 $startup->save();
 
                 // Créer la trace dans la table Transaction
-                Transaction::create([
+                $transactionReussi = Transaction::create([
                     'compte_type' => 'Compte Startup',
                     'compte_id' => $startup->id,
                     'montant' => $remboursement->remboursement_total,
-                    'type' => "remboursement débit",
+                    'type' => "Remboursement débit",
                     'description' => "Remboursement pour l'offre {$offre->nom_projet} de " . $dateRemboursement,
                     'statut' => "Traitée",
 
@@ -75,7 +79,7 @@ class RemboursementCommand extends Command
                     'compte_type' => 'Compte Investisseur',
                     'compte_id' => $investisseur->id,
                     'montant' => $remboursement->remboursement_total,
-                    'type' => "remboursement crédit",
+                    'type' => "Remboursement crédit",
                     'description' => "Remboursement du projet {$offre->nom_projet} pour : " . $dateRemboursement,
                     'statut' => "Traitée",
 
@@ -85,15 +89,23 @@ class RemboursementCommand extends Command
                 $remboursement->statut = 'Remboursé';
                 $remboursement->save();
 
+
+                // Envoyer l'email à l'investisseur
+                Mail::to($investisseur->email)->send(new RemboursementInvestisseur($transactionReussi, $investisseur, $startup));
+
+                // Envoyer l'email à la startup
+                Mail::to($startup->email)->send(new RemboursementStartup($transactionReussi, $investisseur, $startup));
+
+
                 $this->info("Remboursement de {$remboursement->remboursement_total} traité pour l'offre {$remboursement->offre_id}.");
             } else {
 
                 // Créer la trace dans la table Transaction
-                Transaction::create([
+                $transactionErreur = Transaction::create([
                     'compte_type' => 'Compte Startup',
                     'compte_id' => $startup->id,
                     'montant' => $remboursement->remboursement_total,
-                    'type' => "remboursement ERREUR",
+                    'type' => "Remboursement ERREUR",
                     'description' => "Erreur de remboursement pour l'offre {$offre->nom_projet} de " . $dateRemboursement,
                     'statut' => "Traitée",
 
@@ -103,16 +115,22 @@ class RemboursementCommand extends Command
                     'compte_type' => 'Compte Investisseur',
                     'compte_id' => $investisseur->id,
                     'montant' => $remboursement->remboursement_total,
-                    'type' => "remboursement ERREUR",
+                    'type' => "Remboursement ERREUR",
                     'description' => "Erreur de remboursement du projet {$offre->nom_projet} pour : " . $dateRemboursement,
                     'statut' => "Traitée",
 
                 ]);
 
-                // Changement du statut
-                $remboursement->statut = 'Non Remboursé';
-                $remboursement->save();
+                // // Changement du statut
+                // $remboursement->statut = 'Non Remboursé';
+                // $remboursement->save();
                 $this->warn("Fonds insuffisants pour le CompteStartup {$startup->nom}.");
+
+                // Envoyer l'email à l'investisseur
+                Mail::to($investisseur->email)->send(new ErreurRemboursementInvestisseur($transactionErreur, $investisseur, $startup));
+
+                // Envoyer l'email à la startup
+                Mail::to($startup->email)->send(new ErreurRemboursementStartup($transactionErreur, $investisseur, $startup));
             }
 
             $this->info("Remboursement ID {$remboursement->id} traitée avec succès.");

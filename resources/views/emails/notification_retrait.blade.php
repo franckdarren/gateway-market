@@ -80,7 +80,7 @@
 
     <div class="container">
         <h2>Bonjour !</h2>
-        <p>Nous vous informons que votre retrait de <span class="highlight">{{ $montant }} FCFA</span> a été
+        <p>Nous vous informons que votre retrait de <span class="highlight">{{ number_format($montant, 0, ',', '.') }} FCFA</span> a été
             effectué
             avec succès.</p>
         <p>Le montant a été débité de votre compte.</p>

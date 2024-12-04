@@ -59,9 +59,9 @@ class Demandes extends Component implements HasForms, HasTable
                     ->searchable()
                     ->badge()
                     ->color(fn(?string $state): string => match ($state) {
-                        'investissement' => 'gray',
-                        'retrait' => 'warning',
-                        'depot' => 'success',
+                        'Investissement' => 'gray',
+                        'Retrait' => 'warning',
+                        'Dépot' => 'success',
                     })
                     ->sortable(),
 

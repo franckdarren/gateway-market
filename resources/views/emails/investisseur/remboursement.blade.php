@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Annulation de votre investissement</title>
+    <title>Remboursement</title>
     <style>
         /* Global styles */
         body {
@@ -25,11 +25,7 @@
         }
 
         .email-header {
-            background-color: #d32f2f;
-            color: #ffffff;
-            padding: 20px;
-            text-align: center;
-            border-radius: 8px 8px 0 0;
+            color: #000000;
         }
 
         .email-header h1 {
@@ -50,7 +46,7 @@
 
         .highlight {
             font-weight: bold;
-            color: #d32f2f;
+            color: #27AE60;
         }
 
         .footer {
@@ -81,29 +77,19 @@
     <div class="email-container">
         <!-- Header -->
         <div class="email-header">
-            <h1>Annulation de votre investissement</h1>
+            <h1>Remboursement</h1>
         </div>
 
         <!-- Body content -->
         <div class="email-content">
-            <p>Bonjour {{ $compteInvestisseur->nom }} {{ $compteInvestisseur->prenom }},</p>
-            <p>Nous regrettons de vous informer que votre demande d'investissement a été <span
-                    class="highlight">annulée</span> en raison d'un solde insuffisant sur votre compte.</p>
+            <p>Bonjour {{ $investisseur->nom }} {{ $investisseur->prenom }},</p>
+            <p>Nous vous informons que le remboursement de {{ number_format($montant, 0, ',', '.') }} FCFA a été <span
+                    class="highlight">effectué</span> par la Startup
+                {{ $startup->nom }}.</p>
+            <p><strong>Votre solde est de :</strong> <span class="highlight">{{ number_format($investisseur->solde, 0, ',', '.') }}
+                    FCFA</span></p>
 
-            <p><strong>Détails de la transaction :</strong></p>
-            <ul>
-                <li><strong>Description : </strong>{{ $description }}</li>
-                <li><strong>Montant à investir : </strong>{{ number_format($montant, 0, ',', '.') }} FCFA</li>
-                <li><strong>Votre solde : </strong>{{ number_format($compteInvestisseur->solde, 0, ',', '.') }} FCFA
-                </li>
-
-            </ul>
-
-            <p>Votre solde actuel est insuffisant pour compléter cette opération. Veuillez ajouter des fonds à votre
-                compte et réessayer si vous souhaitez poursuivre l'investissement.</p>
-
-            <p>Nous vous prions de nous excuser pour ce désagrément et restons à votre disposition pour toute question.
-            </p>
+            <p>Nous vous remercions pour votre confiance et restons à votre disposition pour toute question.</p>
 
         </div>
     </div>

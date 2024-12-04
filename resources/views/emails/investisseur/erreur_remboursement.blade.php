@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Annulation de votre investissement</title>
+    <title>Remboursement non éffectué</title>
     <style>
         /* Global styles */
         body {
@@ -81,26 +81,15 @@
     <div class="email-container">
         <!-- Header -->
         <div class="email-header">
-            <h1>Annulation de votre investissement</h1>
+            <h1>Remboursement non effectué</h1>
         </div>
 
         <!-- Body content -->
         <div class="email-content">
-            <p>Bonjour {{ $compteInvestisseur->nom }} {{ $compteInvestisseur->prenom }},</p>
-            <p>Nous regrettons de vous informer que votre demande d'investissement a été <span
-                    class="highlight">annulée</span> en raison d'un solde insuffisant sur votre compte.</p>
-
-            <p><strong>Détails de la transaction :</strong></p>
-            <ul>
-                <li><strong>Description : </strong>{{ $description }}</li>
-                <li><strong>Montant à investir : </strong>{{ number_format($montant, 0, ',', '.') }} FCFA</li>
-                <li><strong>Votre solde : </strong>{{ number_format($compteInvestisseur->solde, 0, ',', '.') }} FCFA
-                </li>
-
-            </ul>
-
-            <p>Votre solde actuel est insuffisant pour compléter cette opération. Veuillez ajouter des fonds à votre
-                compte et réessayer si vous souhaitez poursuivre l'investissement.</p>
+            <p>Bonjour {{ $investisseur->nom }} {{ $investisseur->prenom }},</p>
+            <p>Nous regrettons de vous informer que votre remboursement de {{ number_format($montant, 0, ',', '.') }} FCFA n'a pas été <span
+                    class="highlight">effectué</span> en raison d'un solde insuffisant sur le compte de la Startup
+                {{ $startup->nom }}.</p>
 
             <p>Nous vous prions de nous excuser pour ce désagrément et restons à votre disposition pour toute question.
             </p>
