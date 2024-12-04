@@ -171,7 +171,6 @@ class OffreController extends Controller
         $offre->nbre_mois_remboursement = $request->nbre_mois_remboursement;
         $offre->nbre_mois_grace = $request->nbre_mois_grace;
         $offre->taux_interet = $request->taux_interet;
-        $offre->montant_dette = $montantDette;
         $offre->van = $request->van;
         $offre->ir = $request->ir;
         $offre->tri = $request->tri;
