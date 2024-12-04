@@ -15,7 +15,6 @@
             <div class="">
                 <div class=" mx-auto p-6 bg-white shadow-lg rounded-lg">
                     <h2 class="text-2xl font-semibold text-center mb-6 text-gray-700">Créer une offre</h2>
-                    <!-- Livewire Formulaire pour capturer les données -->
                     <livewire:offre-form />
                 </div>
 
