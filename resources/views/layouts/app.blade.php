@@ -31,8 +31,6 @@
             {{ $slot }}
         </main> --}}
         <div>
-            <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-
             <div x-data="{ sidebarOpen: false }" class="flex h-screen bg-gray-200">
                 <div :class="sidebarOpen ? 'block' : 'hidden'" @click="sidebarOpen = false"
                     class="fixed inset-0 z-20 transition-opacity bg-black opacity-50 lg:hidden"></div>
@@ -49,9 +47,9 @@
 
                     <nav class="mt-10">
                         <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')" :icone='"<svg class=\"w-6 h-6\" xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z\"></path>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z\"></path>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </svg>"'>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z\"></path>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z\"></path>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </svg>"'>
                             @if (auth()->user()->hasRole('Administrateur'))
                                 {{ __('Dashboard') }}
                             @else
@@ -62,8 +60,8 @@
                         @role('Administrateur')
                             <!-- Lien Investisseurs -->
                             <x-nav-link href="{{ route('investisseur') }}" :active="request()->routeIs('investisseur')" :icone='"<svg class=\"w-6 h-6\" xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\">
-                                                                    <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M14 11H6m0 0L3 8m3 3l3 3m10-4h1a1 1 0 001-1V7a4 4 0 00-4-4H7a4 4 0 00-4 4v1a1 1 0 001 1h1m12 4a4 4 0 110 8 4 4 0 010-8z\"></path>
-                                                                </svg>"'>
+                                                                                                <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M14 11H6m0 0L3 8m3 3l3 3m10-4h1a1 1 0 001-1V7a4 4 0 00-4-4H7a4 4 0 00-4 4v1a1 1 0 001 1h1m12 4a4 4 0 110 8 4 4 0 010-8z\"></path>
+                                                                                            </svg>"'>
                                 {{ __('Investisseurs') }}
                             </x-nav-link>
                         @endrole
@@ -71,8 +69,8 @@
                         @role('Administrateur')
                             <!-- Lien Startups -->
                             <x-nav-link href="{{ route('startup') }}" :active="request()->routeIs('startup')" :icone='"<svg class=\"w-6 h-6\" xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\">
-                                                                    <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M12 2a10 10 0 0110 10v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4a10 10 0 0110-10zm0 6v6m4-3H8\"></path>
-                                                                </svg>"'>
+                                                                                                <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M12 2a10 10 0 0110 10v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4a10 10 0 0110-10zm0 6v6m4-3H8\"></path>
+                                                                                            </svg>"'>
                                 {{ __('Startups') }}
                             </x-nav-link>
                         @endrole
@@ -80,8 +78,8 @@
                         @role('Administrateur')
                             <!-- Lien Retraits -->
                             <x-nav-link href="{{ route('demandes') }}" :active="request()->routeIs('demandes')" :icone='"<svg class=\"w-6 h-6\" xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\">
-                                                                    <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M12 19v-7m0 7l-4-4m4 4l4-4M6 6h12\"></path>
-                                                                </svg>"'>
+                                                                                                <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M12 19v-7m0 7l-4-4m4 4l4-4M6 6h12\"></path>
+                                                                                            </svg>"'>
                                 {{ __('Retraits') }}
                             </x-nav-link>
                         @endrole
@@ -89,8 +87,8 @@
                         @role('Administrateur')
                             <!-- Lien Transactions -->
                             <x-nav-link href="{{ route('transaction') }}" :active="request()->routeIs('transaction')" :icone='"<svg class=\"w-6 h-6\" xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\">
-                                                                    <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M5 12h14M5 12l4-4m-4 4l4 4m10-4l-4-4m4 4l-4 4\"></path>
-                                                                </svg>"'>
+                                                                                                <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M5 12h14M5 12l4-4m-4 4l4 4m10-4l-4-4m4 4l-4 4\"></path>
+                                                                                            </svg>"'>
                                 {{ __('Transactions') }}
                             </x-nav-link>
                         @endrole
@@ -99,8 +97,8 @@
                         @role('Investisseur')
                             <!-- Lien Mes projets -->
                             <x-nav-link href="{{ route('projets') }}" :active="request()->routeIs('projets')" :icone='"<svg class=\"w-6 h-6\" xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\">
-                                        <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M19 3L9 12l-5-5\"/>
-                                    </svg>"'>
+                                                                    <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M19 3L9 12l-5-5\"/>
+                                                                </svg>"'>
                                 {{ __('Mes projets') }}
                             </x-nav-link>
                         @endrole
@@ -108,8 +106,8 @@
                         @role('Investisseur')
                             <!-- Lien Remboursement -->
                             <x-nav-link href="{{ route('remboursement') }}" :active="request()->routeIs('remboursement')" :icone='"<svg class=\"w-6 h-6\" xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\">
-                                        <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M3 4v16c0 1.104.896 2 2 2h14c1.104 0 2-.896 2-2V4H3zm6 14V8l6 5-6 5z\"/>
-                                    </svg>"'>
+                                                                    <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M3 4v16c0 1.104.896 2 2 2h14c1.104 0 2-.896 2-2V4H3zm6 14V8l6 5-6 5z\"/>
+                                                                </svg>"'>
                                 {{ __('Remboursement') }}
                             </x-nav-link>
                         @endrole
@@ -117,8 +115,8 @@
                         @role('Investisseur')
                             <!-- Lien Historique -->
                             <x-nav-link href="{{ route('historique') }}" :active="request()->routeIs('historique')" :icone='"<svg class=\"w-6 h-6\" xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\">
-                                        <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M5 12h14M5 12l4-4m-4 4l4 4m10-4l-4-4m4 4l-4 4\"></path>
-                                    </svg>"'>
+                                                                    <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M5 12h14M5 12l4-4m-4 4l4 4m10-4l-4-4m4 4l-4 4\"></path>
+                                                                </svg>"'>
                                 {{ __('Historique') }}
                             </x-nav-link>
                         @endrole
@@ -126,8 +124,8 @@
                         @role('Investisseur')
                             <!-- Lien Retrait -->
                             <x-nav-link href="{{ route('retrait') }}" :active="request()->routeIs('retrait')" :icone='"<svg class=\"w-6 h-6\" xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\">
-                                        <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M12 19v-7m0 7l-4-4m4 4l4-4M6 6h12\"></path>
-                                    </svg>"'>
+                                                                    <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M12 19v-7m0 7l-4-4m4 4l4-4M6 6h12\"></path>
+                                                                </svg>"'>
                                 {{ __('Retrait') }}
                             </x-nav-link>
                         @endrole
@@ -135,23 +133,23 @@
 
                         @role('Startup')
                             <x-nav-link href="{{ route('dette') }}" :active="request()->routeIs('dette')" :icone='"<svg class=\"w-6 h-6\" xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\">
-                                        <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M4 10h16M4 6h16M4 14h16M4 18h16\"></path>
-                                    </svg>"'>
+                                                                    <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M4 10h16M4 6h16M4 14h16M4 18h16\"></path>
+                                                                </svg>"'>
                                 {{ __('Dette') }}
                             </x-nav-link>
                         @endrole
 
                         @role('Startup')
                             <x-nav-link href="{{ route('historique') }}" :active="request()->routeIs('historique')" :icone='"<svg class=\"w-6 h-6\" xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\">
-                                        <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M5 12h14M5 12l4-4m-4 4l4 4m10-4l-4-4m4 4l-4 4\"></path>
-                                    </svg>"'>
+                                                                    <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M5 12h14M5 12l4-4m-4 4l4 4m10-4l-4-4m4 4l-4 4\"></path>
+                                                                </svg>"'>
                                 {{ __('Historique') }}
                             </x-nav-link>
                         @endrole
                         @role('Startup')
                             <x-nav-link href="{{ route('retrait') }}" :active="request()->routeIs('retrait')" :icone='"<svg class=\"w-6 h-6\" xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\">
-                                        <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M12 19v-7m0 7l-4-4m4 4l4-4M6 6h12\"></path>
-                                    </svg>"'>
+                                                                    <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M12 19v-7m0 7l-4-4m4 4l4-4M6 6h12\"></path>
+                                                                </svg>"'>
                                 {{ __('Retrait') }}
                             </x-nav-link>
                         @endrole
