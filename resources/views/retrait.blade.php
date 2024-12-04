@@ -1,12 +1,12 @@
 <x-app-layout>
-    <x-slot name="header">
+    {{-- <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Effectuer un retrait') }}
         </h2>
-    </x-slot>
+    </x-slot> --}}
 
     <div class="py-2  lg:py-5">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-9xl mx-auto sm:px-6 lg:px-8">
             <div class="">
                 @livewire('retrait')
             </div>
