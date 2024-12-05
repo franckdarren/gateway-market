@@ -13,7 +13,11 @@ class Projets extends Component
     public function render()
     {
         $compte = auth()->user()->compteInvestisseur;
-        $mesOffres = Offre::where('compte_investisseur_id', $compte->id)->paginate(12);
+        $mesOffres = Offre::where('compte_investisseur_id', $compte->id)
+            ->whereDoesntHave('remboursements', function ($query) {
+                $query->where('statut', '!=', 'Remboursé');
+            })
+            ->paginate(12);
         return view('livewire.projets', [
             'mesOffres' => $mesOffres,
         ]);

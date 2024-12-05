@@ -28,12 +28,6 @@ class Offre extends Model
 
     ];
 
-    public function genererRemboursements()
-    {
-
-    }
-
-
     public function compteStartup()
     {
         return $this->belongsTo(CompteStartup::class);
@@ -42,5 +36,10 @@ class Offre extends Model
     public function compteInvestisseur()
     {
         return $this->belongsTo(CompteInvestisseur::class);
+    }
+
+    public function remboursements()
+    {
+        return $this->hasMany(Remboursement::class);
     }
 }
