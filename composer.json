@@ -6,6 +6,8 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "blade-ui-kit/blade-ui-kit": "^0.6.4",
+        "codeat3/blade-jam-icons": "^1.6",
         "filament/filament": "^3.2",
         "filament/tables": "^3.2",
         "laravel/framework": "^11.9",

@@ -1,5 +1,5 @@
 <div>
-    <form wire:submit.prevent="submit">
+    <form class="grid gap-5 md:grid-cols-3 lg:grid-cols-4" wire:submit.prevent="submit">
         @csrf
 
         <!-- Nom du projet -->
@@ -54,7 +54,7 @@
             <select name="taux_interet" id="taux_interet" wire:model="tauxInteret"
                 class="mt-1 block w-full px-4 py-2 bg-gray-100 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 required>
-                <option>Selectionner un taux</option>
+                <option class="text-[10px]">Selectionner un taux</option>
                 <option value="3">3%</option>
                 <option value="6">6%</option>
                 <option value="9">9%</option>

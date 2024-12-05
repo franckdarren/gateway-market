@@ -1020,10 +1020,12 @@
                                 pont entre les porteur de projet et les start-up</p>
                             <div data-aos="fade-up" data-aos-once="true" data-aos-delay="700"
                                 class="w-full md:flex items-center justify-center lg:justify-start md:space-x-5">
-                                <button
-                                    class="lg:mx-0 bg-[#3A88E9] text-white text-xl font-bold rounded-full py-4 px-9 focus:outline-none transform transition hover:scale-110 duration-300 ease-in-out">
+                               <a href="{{ route('register') }}">
+                               <button
+                                     class="lg:mx-0 bg-[#3A88E9] text-white text-xl font-bold rounded-full py-4 px-9 focus:outline-none transform transition hover:scale-110 duration-300 ease-in-out">
                                     Inscrivez-vous
                                 </button>
+                               </a> 
 
                             </div>
                         </div>
