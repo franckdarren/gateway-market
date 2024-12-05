@@ -26,7 +26,6 @@ class NotificationInvestisseur extends Mailable
     {
         $this->transaction = $transaction;
         $this->compteInvestisseur = $compteInvestisseur;
-
     }
 
     /**
@@ -46,7 +45,9 @@ class NotificationInvestisseur extends Mailable
             ->view('emails.investisseur.notification')
             ->with([
                 'description' => $this->transaction->description,
-                'montant' => $this->transaction->montant,
+                'montant' => $this->transaction->montant - $this->transaction->frais,
+                'frais' => $this->transaction->frais,
+                'total' => $this->transaction->montant,
                 'statut' => $this->transaction->statut,
                 'compteInvestisseur' => $this->compteInvestisseur,
             ]);

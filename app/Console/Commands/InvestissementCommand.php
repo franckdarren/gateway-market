@@ -31,7 +31,6 @@ class InvestissementCommand extends Command
      */
     protected $description = 'Command description';
 
-    public $montantDepart;
     public $taux_interet;
     public $duree_remboursement;
     public $delaiGrace;
@@ -65,7 +64,6 @@ class InvestissementCommand extends Command
             $montant = $transaction->montant;
             $montantAdmin = $transaction->frais; // 2%
             $montantStartup = $transaction->montant - $transaction->frais; // 98%
-            // $montantDepart = $montantStartup;
 
             // Récupérer le compte investisseur
             $compteInvestisseur = CompteInvestisseur::find($transaction->compte_id);

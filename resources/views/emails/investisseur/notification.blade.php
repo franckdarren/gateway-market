@@ -103,9 +103,15 @@
                 class="highlight">traitée avec succès</span>.</p>
 
         <p><strong>Description :</strong> {{ $description }}</p>
-        <p><strong>Montant investi :</strong> <span class="highlight">{{ number_format($montant, 0, ',', '.') }} FCFA</span></p>
+        <p><strong>Montant investi :</strong> <span class="highlight">{{ number_format($montant, 0, ',', '.') }}
+                FCFA</span></p>
+        <p><strong>Frais de transaction :</strong> <span class="highlight">{{ number_format($frais, 0, ',', '.') }}
+                FCFA</span></p>
+        <p><strong>Total :</strong> <span class="highlight">{{ number_format($total, 0, ',', '.') }} FCFA</span></p>
+
         <p><strong>Statut de la transaction :</strong> <span class="highlight">{{ $statut }}</span></p>
-        <p><strong>Votre solde restant est de :</strong> <span class="highlight">{{ number_format($compteInvestisseur->solde, 0, ',', '.') }}
+        <p><strong>Votre solde restant est de :</strong> <span
+                class="highlight">{{ number_format($compteInvestisseur->solde, 0, ',', '.') }}
                 FCFA</span></p>
 
         <p>Nous vous remercions pour votre confiance et restons à votre disposition pour toute question.</p>

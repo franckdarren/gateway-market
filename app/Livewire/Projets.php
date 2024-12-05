@@ -14,8 +14,13 @@ class Projets extends Component
     {
         $compte = auth()->user()->compteInvestisseur;
         $mesOffres = Offre::where('compte_investisseur_id', $compte->id)
-            ->whereDoesntHave('remboursements', function ($query) {
-                $query->where('statut', '!=', 'Remboursé');
+            ->where(function ($query) {
+                // Inclure les offres sans remboursements
+                $query->doesntHave('remboursements')
+                    // Inclure les offres avec au moins un remboursement non "Remboursé"
+                    ->orWhereHas('remboursements', function ($subQuery) {
+                        $subQuery->where('statut', '!=', 'Remboursé');
+                    });
             })
             ->paginate(12);
         return view('livewire.projets', [
