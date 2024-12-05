@@ -7,13 +7,13 @@
             <div class="flex flex-col">
                 <label for="montantEmprunte" class="block text-sm font-medium text-gray-700 mb-2">Montant emprunté
                     :</label>
-                <input type="number" id="montantEmprunte" wire:model="montantEmprunte" required
+                <input type="number" id="montantEmprunte" wire:model="montantEmprunte" required disabled
                     class="px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none text-sm">
             </div>
 
             <div class="flex flex-col">
                 <label for="duree" class="block text-sm font-medium text-gray-700 mb-2">Durée (en mois) :</label>
-                <input type="number" id="duree" wire:model="duree" required
+                <input type="number" id="duree" wire:model="duree" required disabled
                     class="px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none text-sm">
             </div>
         </div>
@@ -22,14 +22,14 @@
             <div class="flex flex-col">
                 <label for="tauxInteret" class="block text-sm font-medium text-gray-700 mb-2">Taux d'intérêt (%)
                     :</label>
-                <input type="number" id="tauxInteret" wire:model="tauxInteret" required
+                <input type="number" id="tauxInteret" wire:model="tauxInteret" required disabled
                     class="px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none text-sm">
             </div>
 
             <div class="flex flex-col">
                 <label for="delaiGrace" class="block text-sm font-medium text-gray-700 mb-2">Délai de grâce (en mois)
                     :</label>
-                <input type="number" id="delaiGrace" wire:model="delaiGrace" required
+                <input type="number" id="delaiGrace" wire:model="delaiGrace" required disabled
                     class="px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none text-sm">
             </div>
         </div>

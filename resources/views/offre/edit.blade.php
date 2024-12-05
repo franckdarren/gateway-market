@@ -1,9 +1,9 @@
 <x-app-layout>
-    <x-slot name="header">
+    {{-- <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Créer une offres') }}
         </h2>
-    </x-slot>
+    </x-slot> --}}
 
     <div class="py-2 lg:py-5">
         @if (session('success'))
@@ -22,12 +22,13 @@
         @endif
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="">
-                <div class="container mx-auto mt-10">
+                <div class="container mx-auto">
                     <div class="bg-white shadow-md rounded-lg p-6">
                         <h2 class="text-2xl font-bold mb-4">Modifier l'offre</h2>
 
                         <form action="{{ route('offre.update', $offre->id) }}" method="POST"
-                            enctype="multipart/form-data" class="space-y-6 md:grid md:grid-cols-2 lg:grid-cols-4 gap-5 ">
+                            enctype="multipart/form-data"
+                            class="space-y-6 md:grid md:grid-cols-2 lg:grid-cols-4 gap-5 ">
                             @csrf
                             @method('PUT')
 
@@ -170,7 +171,7 @@
                             <div class="flex justify-end">
                                 <button type="submit"
                                     class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
-                                    Enregistrer les modifications
+                                    Enregistrer
                                 </button>
                             </div>
                         </form>
