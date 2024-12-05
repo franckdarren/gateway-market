@@ -239,7 +239,7 @@ class OffreController extends Controller
 
         if ($investisseur->solde < $montantTotal) {
             // Si le solde est insuffisant pour l'investissement + frais, retourner une erreur ou un message
-            return redirect()->back()->with('error', 'Solde insuffisant pour cet investissement.');
+            return redirect()->back()->with('error', 'Solde insuffisant pour effectuer cet investissement.');
         }
 
         Transaction::create([
