@@ -21,11 +21,15 @@ class ProfilStartup extends Component
 
     public function mount($startup)
     {
+        Carbon::setLocale('fr');
+
         $this->nom = $startup->nom;
         $this->activite_principale = $startup->activite_principale;
         $this->email = $startup->email;
         $this->phone = $startup->phone;
-        $this->date_creation = Carbon::parse($startup->date_creation)->format('d-M-Y');
+        $this->date_creation = Carbon::parse($startup->date_creation)
+            ->locale('fr')  // Appliquer la locale
+            ->isoFormat('D MMMM YYYY');
     }
 
     public function updateCompteInformation()
