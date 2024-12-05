@@ -238,17 +238,51 @@
                     @endrole
                     @role('Startup')
                         <div class="flex gap-10 mt-6">
-                            <a href="{{ route('offre.edit', $offre->id) }}"
-                                class="px-4 py-2 text-white bg-green-500 rounded-md hover:bg-green-600">Éditer</a>
-                            <form action="{{ route('offre.destroy', $offre->id) }}" method="POST" class="ml-4">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit"
-                                    onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette offre ?')"
+                            <div x-data="{ showDeleteModal: false }">
+                                <!-- Bouton pour ouvrir la modale de suppression -->
+                                <button @click="showDeleteModal = true"
                                     class="px-4 py-2 text-white bg-red-500 rounded-md hover:bg-red-600">
                                     Supprimer
                                 </button>
-                            </form>
+
+                                <!-- Modale -->
+                                <div x-show="showDeleteModal" x-cloak
+                                    class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+                                    <div class="p-6 mx-3 bg-white rounded-lg shadow-lg lg:w-1/3">
+                                        <h2 class="mb-4 text-3xl font-bold text-center text-red-600">Confirmation de
+                                            suppression</h2>
+                                        <p class="mb-4 text-gray-700">Êtes-vous sûr de vouloir supprimer cette offre ?
+                                            Cette action est irréversible.</p>
+
+                                        <!-- Récapitulatif -->
+                                        <ul class="mb-4 text-gray-600">
+                                            <li><strong>Offre :</strong> {{ $offre->nom_projet }}</li>
+                                            <li><strong>Montant :</strong>
+                                                {{ number_format($offre->montant, 0, '.', ' ') }} FCFA</li>
+                                        </ul>
+
+                                        <!-- Boutons -->
+                                        <div class="flex justify-end space-x-4">
+                                            <!-- Bouton pour fermer la modale -->
+                                            <button @click="showDeleteModal = false"
+                                                class="px-4 py-2 text-gray-800 bg-gray-300 rounded hover:bg-gray-400">
+                                                Annuler
+                                            </button>
+                                            <!-- Bouton pour confirmer la suppression -->
+                                            <form action="{{ route('offre.destroy', $offre->id) }}" method="POST"
+                                                class="inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit"
+                                                    class="px-4 py-2 text-white bg-red-600 rounded hover:bg-red-700">
+                                                    Confirmer
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     @endrole
                 </div>
