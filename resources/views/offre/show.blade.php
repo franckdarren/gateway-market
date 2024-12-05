@@ -33,7 +33,7 @@
             </div>
         @endif
 
-        <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="max-w-7xl sm:px-6 lg:px-8">
             <div class="p-6 bg-white rounded-lg shadow-lg sm:p-8">
                 <div class="w-full p-4 text-white bg-blue-500 rounded-lg shadow-lg sm:p-6">
                     <h2 class="mb-4 text-3xl font-bold text-center">Détails du projet</h2>
