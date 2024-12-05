@@ -37,20 +37,6 @@
                             class="inline-flex items-center px-2 py-1 text-sm font-semibold text-blue-600 hover:text-blue-800 border border-blue-600 rounded-md hover:bg-blue-100">
                             Voir les détails
                         </a>
-                        <!-- Bouton Annuler -->
-                        {{-- <a href="{{ route('offre.investir', $offre->id) }}"
-                            class="px-4 py-4 bg-green-500 text-white rounded-md hover:bg-green-600">
-                            Investir
-                        </a> --}}
-                        <form action="{{ route('offre.annuler', $offre->id) }}" method="POST" class="inline">
-                            @csrf
-                            @method('GET')
-                            <button type="submit"
-                                onclick="return confirm('Êtes-vous sûr de vouloir annuler cette offre ?')"
-                                class="inline-flex items-center px-2 py-1 text-sm font-semibold text-red-600 hover:text-red-800 border border-red-600 rounded-md hover:bg-red-100 ml-2">
-                                Annuler
-                            </button>
-                        </form>
                     </td>
                 </tr>
             @empty

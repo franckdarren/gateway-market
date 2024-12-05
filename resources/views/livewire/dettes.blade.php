@@ -32,7 +32,10 @@
                         {{ number_format($remboursement->remboursement_total, 0, '.', ' ') }} FCFA</td>
                     <td class="border border-gray-300 px-4 py-2">
                         {{ number_format($remboursement->cumul_remboursement, 0, '.', ' ') }} FCFA</td>
-                    <td class="border border-gray-300 px-4 py-2">{{ $remboursement->statut }}</td>
+                    <td
+                        class="border border-gray-300 px-4 py-2 {{ $remboursement->statut === 'Remboursé' ? 'text-green-600' : '' }}">
+                        {{ $remboursement->statut }}
+                    </td>
 
                 </tr>
             @empty
