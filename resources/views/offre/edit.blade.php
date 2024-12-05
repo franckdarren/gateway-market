@@ -27,7 +27,7 @@
                         <h2 class="text-2xl font-bold mb-4">Modifier l'offre</h2>
 
                         <form action="{{ route('offre.update', $offre->id) }}" method="POST"
-                            enctype="multipart/form-data" class="space-y-6">
+                            enctype="multipart/form-data" class="space-y-6 md:grid md:grid-cols-2 lg:grid-cols-4 gap-5 ">
                             @csrf
                             @method('PUT')
 
