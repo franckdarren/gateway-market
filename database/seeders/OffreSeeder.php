@@ -17,7 +17,7 @@ class OffreSeeder extends Seeder
         // Pour chaque compte startup, créer deux offres associées
         CompteStartup::all()->each(function ($compteStartup) {
             // Créer deux offres associées
-            Offre::factory()->times(50)->create([
+            Offre::factory()->times(20)->create([
                 'compte_startup_id' => $compteStartup->id,
             ]);
         });

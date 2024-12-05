@@ -32,7 +32,7 @@ class CompteStartupFactory extends Factory
             'activite_principale' => $this->faker->catchPhrase,
             'email' => $this->faker->unique()->companyEmail,
             'phone' => $this->faker->phoneNumber,
-            'solde' => $this->faker->numberBetween(100000, 10000000),
+            'solde' => $this->faker->numberBetween(100, 500) * 10000,
             'user_id' => $userId, // on utilise la variable $userId définie précédemment
         ];
     }

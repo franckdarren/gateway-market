@@ -178,16 +178,50 @@
                         @endif
                     </div>
                 </div>
+                <div class="mt-6">
+                    @role('Investisseur')
+
+                        @php
+                            $compteInvestisseurId = auth()->user()->compteInvestisseur->id ?? null;
+                        @endphp
+
+                        @if ($offre->compte_investisseur_id !== $compteInvestisseurId)
+                            <a href="{{ route('offre.investir', $offre->id) }}"
+                                class="px-4 py-4 bg-[#18181b] text-white rounded-md hover:bg-blue-700 text-center">
+                                Investir
+                            </a>
+                        @endif
+                    @endrole
+                    @role('Startup')
+                        <div class="mt-6 flex gap-10">
+                            <a href="{{ route('offre.edit', $offre->id) }}"
+                                class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600">Éditer</a>
+                            <form action="{{ route('offre.destroy', $offre->id) }}" method="POST" class="ml-4">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit"
+                                    onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette offre ?')"
+                                    class="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600">
+                                    Supprimer
+                                </button>
+                            </form>
+                        </div>
+                    @endrole
+                </div>
+
             </div>
+
         </div>
 
-        <h1 class="text-xl font-bold text-gray-800 my-6 text-center">Simulateur de prévision de remboursement
-        </h1>
-        @livewire('prevision', [
-            'montantEmprunte' => $offre->montant,
-            'duree' => $offre->nbre_mois_remboursement,
-            'tauxInteret' => $offre->taux_interet,
-            'delaiGrace' => $offre->nbre_mois_grace,
-        ])
+    </div>
+
+    <h1 class="text-xl font-bold text-gray-800 my-6 text-center">Simulateur de prévision de remboursement
+    </h1>
+    @livewire('prevision', [
+        'montantEmprunte' => $offre->montant,
+        'duree' => $offre->nbre_mois_remboursement,
+        'tauxInteret' => $offre->taux_interet,
+        'delaiGrace' => $offre->nbre_mois_grace,
+    ])
     </div>
 </x-app-layout>
