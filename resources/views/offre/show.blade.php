@@ -7,7 +7,7 @@
 
     <div class="py-2 lg:py-5">
         @if (session('success'))
-            <div class="fixed flex items-center justify-between p-4 space-x-4 text-white bg-green-500 rounded-md shadow-md top-5 right-5"
+            <div class="flex items-center justify-between p-4 mx-auto mb-4 space-x-4 text-white bg-green-500 rounded-md shadow-md md:fixed md:top-5 md:right-5"
                 x-data="{ open: true }" x-show="open" x-transition>
                 <span>{{ session('success') }}</span>
                 <button class="text-white hover:text-gray-200 focus:outline-none" @click="open = false">
@@ -20,7 +20,7 @@
             </div>
         @endif
         @if (session('error'))
-            <div class="fixed flex items-center justify-between p-4 space-x-4 text-white bg-red-500 rounded-md shadow-md top-5 right-5"
+            <div class="flex items-center justify-between p-4 mx-auto mb-4 space-x-4 text-white bg-red-500 rounded-md shadow-md md:fixed md:top-5 md:right-5"
                 x-data="{ open: true }" x-show="open" x-transition>
                 <span>{{ session('error') }}</span>
                 <button class="text-white hover:text-gray-200 focus:outline-none" @click="open = false">
@@ -204,7 +204,7 @@
                                 <!-- Modale -->
                                 <div x-show="showModal" x-cloak
                                     class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-                                    <div class="w-1/3 p-6 bg-white rounded-lg shadow-lg">
+                                    <div class="p-6 mx-3 bg-white rounded-lg shadow-lg lg:w-1/3 ">
                                         <h2 class="mb-4 text-3xl text-center font-2bold">Confirmation</h2>
                                         <p class="mb-4">Êtes-vous sûr de vouloir investir sur ce projet ?</p>
 

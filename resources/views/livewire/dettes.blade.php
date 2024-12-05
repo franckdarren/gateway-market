@@ -1,6 +1,6 @@
 <div class="overflow-x-auto">
     @if (session('error'))
-            <div class="fixed flex items-center justify-between p-4 space-x-4 text-white bg-red-500 rounded-md shadow-md top-5 right-5"
+            <div class="flex items-center justify-between p-4 mx-auto mb-4 space-x-4 text-white bg-red-500 rounded-md shadow-md md:fixed md:top-5 md:right-5"
                 x-data="{ open: true }" x-show="open" x-transition>
                 <span>{{ session('error') }}</span>
                 <button class="text-white hover:text-gray-200 focus:outline-none" @click="open = false">

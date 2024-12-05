@@ -1,17 +1,17 @@
 <x-app-layout>
     {{-- <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="text-xl font-semibold leading-tight text-gray-800">
             {{ __('Créer une offres') }}
         </h2>
     </x-slot> --}}
 
     <div class="py-2 lg:py-5">
         @if (session('success'))
-            <div class="fixed top-5 right-5 p-4 bg-green-500 text-white rounded-md shadow-md flex items-center justify-between space-x-4"
+            <div class="flex items-center justify-between p-4 mx-auto mb-4 space-x-4 text-white bg-green-500 rounded-md shadow-md md:fixed md:top-5 md:right-5"
                 x-data="{ open: true }" x-show="open" x-transition>
                 <span>{{ session('success') }}</span>
                 <button class="text-white hover:text-gray-200 focus:outline-none" @click="open = false">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M6 18L18 6M6 6l12 12" />
@@ -20,7 +20,7 @@
             </div>
         @endif
         @if ($errors->any())
-            <div class="bg-red-500 text-white p-4 rounded-md mb-4 mx-10">
+            <div class="p-4 mx-10 mb-4 text-white bg-red-500 rounded-md">
                 <ul>
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
@@ -28,15 +28,15 @@
                 </ul>
             </div>
         @endif
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="">
                 <div class="container mx-auto">
-                    <div class="bg-white shadow-md rounded-lg p-6">
-                        <h2 class="text-2xl font-bold mb-4">Modifier l'offre</h2>
+                    <div class="p-6 bg-white rounded-lg shadow-md">
+                        <h2 class="mb-4 text-2xl font-bold">Modifier l'offre</h2>
 
                         <form action="{{ route('offre.update', $offre->id) }}" method="POST"
                             enctype="multipart/form-data"
-                            class="space-y-6 md:grid md:grid-cols-2 lg:grid-cols-4 gap-5 ">
+                            class="gap-5 space-y-6 md:grid md:grid-cols-2 lg:grid-cols-4 ">
                             @csrf
                             @method('PUT')
 
@@ -46,7 +46,7 @@
                                     projet</label>
                                 <input type="text" id="nom_projet" name="nom_projet"
                                     value="{{ old('nom_projet', $offre->nom_projet) }}"
-                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                                    class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
                                     required>
                             </div>
 
@@ -55,7 +55,7 @@
                                 <label for="description_projet"
                                     class="block text-sm font-medium text-gray-700">Description</label>
                                 <textarea id="description_projet" name="description_projet" rows="4"
-                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                                    class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
                                     required>{{ old('description_projet', $offre->description_projet) }}</textarea>
                             </div>
 
@@ -64,7 +64,7 @@
                                 <label for="montant" class="block text-sm font-medium text-gray-700">Montant</label>
                                 <input type="number" id="montant" name="montant"
                                     value="{{ old('montant', $offre->montant) }}"
-                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                                    class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
                                     required>
                             </div>
 
@@ -74,7 +74,7 @@
                                     mois de remboursement</label>
                                 <input type="number" id="nbre_mois_remboursement" name="nbre_mois_remboursement"
                                     value="{{ old('nbre_mois_remboursement', $offre->nbre_mois_remboursement) }}"
-                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                                    class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
                                     required>
                             </div>
 
@@ -84,7 +84,7 @@
                                     mois de grâce</label>
                                 <input type="number" id="nbre_mois_grace" name="nbre_mois_grace"
                                     value="{{ old('nbre_mois_grace', $offre->nbre_mois_grace) }}"
-                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                                    class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
                                     required>
                             </div>
 
@@ -93,7 +93,7 @@
                                 <label for="taux_interet" class="block text-sm font-medium text-gray-700">Taux
                                     d'intérêt</label>
                                 <select id="taux_interet" name="taux_interet"
-                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                                    class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
                                     required>
                                     @foreach ([3, 6, 9, 12, 15, 18, 21] as $value)
                                         <option value="{{ $value }}"
@@ -110,7 +110,7 @@
                                     Nette (VAN)</label>
                                 <input type="number" id="van" name="van"
                                     value="{{ old('van', $offre->van) }}"
-                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                                    class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
                                     required>
                             </div>
 
@@ -120,7 +120,7 @@
                                     Rentabilité (IR)</label>
                                 <input type="number" step="0.01" id="ir" name="ir"
                                     value="{{ old('ir', $offre->ir) }}"
-                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                                    class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
                                     required>
                             </div>
 
@@ -130,7 +130,7 @@
                                     Interne (TRI)</label>
                                 <input type="number" step="0.01" id="tri" name="tri"
                                     value="{{ old('tri', $offre->tri) }}"
-                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                                    class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
                                     required>
                             </div>
 
@@ -139,7 +139,7 @@
                                 <label for="krl" class="block text-sm font-medium text-gray-700">KRL</label>
                                 <input type="number" step="0.01" id="krl" name="krl"
                                     value="{{ old('krl', $offre->krl) }}"
-                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                                    class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
                                     required>
                             </div>
 
@@ -148,9 +148,9 @@
                                 <label for="url_business_plan" class="block text-sm font-medium text-gray-700">Business
                                     Plan (PDF)</label>
                                 <input type="file" id="url_business_plan" name="url_business_plan"
-                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
+                                    class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
                                 @if ($offre->url_business_plan)
-                                    <p class="text-sm text-gray-600 mt-1">
+                                    <p class="mt-1 text-sm text-gray-600">
                                         <a href="{{ Storage::url($offre->url_business_plan) }}" target="_blank"
                                             class="text-blue-600 hover:underline">
                                             Voir le fichier actuel
@@ -164,9 +164,9 @@
                                 <label for="url_etude_risque" class="block text-sm font-medium text-gray-700">Étude de
                                     Risque (PDF)</label>
                                 <input type="file" id="url_etude_risque" name="url_etude_risque"
-                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
+                                    class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
                                 @if ($offre->url_etude_risque)
-                                    <p class="text-sm text-gray-600 mt-1">
+                                    <p class="mt-1 text-sm text-gray-600">
                                         <a href="{{ Storage::url($offre->url_etude_risque) }}" target="_blank"
                                             class="text-blue-600 hover:underline">
                                             Voir le fichier actuel
@@ -178,7 +178,7 @@
                             <!-- Bouton de soumission -->
                             <div class="flex justify-end">
                                 <button type="submit"
-                                    class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
+                                    class="px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600">
                                     Enregistrer
                                 </button>
                             </div>
@@ -186,7 +186,7 @@
                     </div>
                 </div>
             </div>
-            <h1 class="text-xl font-bold text-gray-800 my-6 text-center">Simulateur de prévision de remboursement
+            <h1 class="my-6 text-xl font-bold text-center text-gray-800">Simulateur de prévision de remboursement
             </h1>
             @livewire('prevision', [
                 'montantEmprunte' => $offre->montant,
