@@ -93,10 +93,15 @@ class Retrait extends Component
             'compte_id' => $compte_id,
         ]);
 
+        // Débiter le montant du compte
+        $compte->solde -= $this->montant;
+        $compte->save();
+
+
         // Réinitialiser les champs après soumission
         $this->reset();
 
-        session()->flash('message', 'Transaction créée avec succès.');
+        session()->flash('success', 'Transaction créée avec succès.');
     }
 
 

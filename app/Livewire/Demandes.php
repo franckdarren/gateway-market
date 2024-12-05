@@ -54,7 +54,6 @@ class Demandes extends Component implements HasForms, HasTable
                     })
                     ->sortable(),
 
-
                 TextColumn::make('type')
                     ->searchable()
                     ->badge()
