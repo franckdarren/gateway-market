@@ -36,7 +36,7 @@
                     class="fixed inset-0 z-20 transition-opacity bg-blue-200 opacity-50 lg:hidden"></div>
 
                 <div :class="sidebarOpen ? 'translate-x-0 ease-out' : '-translate-x-full ease-in'"
-                    class="fixed inset-y-0 left-0 z-30 w-64 overflow-y-auto transition duration-300 transform bg-gray-900 lg:translate-x-0 lg:static lg:inset-0">
+                    class="fixed inset-y-0 left-0 z-30 w-64 overflow-y-auto transition duration-300 transform rounded-tr-xl rounded-br-xl  bg-[#0A52AB] lg:translate-x-0 lg:static lg:inset-0">
                     <div class="flex items-center justify-center mt-8">
                         <div class="flex items-center">
                             <a href="{{ route('dashboard') }}">
@@ -165,7 +165,8 @@
                     </nav>
                 </div>
                 <div class="flex flex-col flex-1 overflow-hidden">
-                    <header class="flex items-center justify-between px-6 py-4 bg-white border-b-4 border-indigo-600">
+                    <header class="flex items-center justify-between px-6 py-4 bg-white "> 
+                    <!-- border-b-4 border-[#0A52AB] -->
                         <div class="flex items-center mr-5 md:mr-0">
                             <button @click="sidebarOpen = true" class="text-gray-500 focus:outline-none lg:hidden">
                                 <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none"

@@ -1030,7 +1030,7 @@
                             </div>
                         </div>
                         <!--Right Col-->
-                        <div class="w-full lg:w-6/12 lg:-mt-10 relative" id="girl">
+                        <div class="w-full hidden md:flex lg:w-6/12 lg:-mt-10 relative" id="girl">
                             <img data-aos="fade-up" data-aos-once="true" class="w-10/12 mx-auto 2xl:-mb-20"
                                 src="asset/arrow.png" />
                             <!-- calendar -->
@@ -1246,7 +1246,7 @@
 
 
                 <div class="md:flex mt-40 md:space-x-10 items-start">
-                    <div data-aos="fade-down" class="md:w-7/12 relative">
+                    <div data-aos="fade-down" class="md:w-7/12 mb-3 relative">
                         <div style="background: #33EFA0"
                             class="w-32 h-32 rounded-full absolute z-0 left-4 -top-12 animate-pulse"></div>
                         <div style="background: #33D9EF;"
@@ -1257,7 +1257,7 @@
                         <div style="background: #F56666;"
                             class="w-5 h-5 rounded-full absolute z-0 right-52 bottom-1 animate-ping"></div>
                     </div>
-                    <div data-aos="fade-right" class="md:w-1/2 lg:pl-14">
+                    <div data-aos="fade-right" class="md:w-1/2 space-y-2 lg:pl-14">
                         <h1 class="text-black font-semibold text-3xl lg:pr-56"><span class="text-yellow-500">Tableau
                                 de bord</span> Intuitif pour mieux voir l'avancer des projets</h1>
                         <p class="text-gray-500 my-4 lg:pr-32">Class has a dynamic set of teaching tools built to be
@@ -1267,7 +1267,7 @@
                 </div>
 
                 <!-- Tools For Teachers And Learners -->
-                <div class="flex flex-col md:flex-row items-center md:space-x-10 mt-16">
+                <div class="flex flex-col-reverse md:flex-row items-center md:space-x-10 mt-16">
                     <div data-aos="fade-right" class="md:w-1/2 lg:pl-14">
                         <h1 class="text-black font-semibold text-3xl lg:pr-56"><span
                                 class="text-yellow-500">Startup</span> Gabonaises et innovantes</h1>

@@ -2,9 +2,9 @@
     @if ($hasCompteStartup)
         <div class="container mx-auto md:p-4">
 
-            <div class="overflow-x-auto">
+            <div class="overflow-x-auto bg-white rounded-md px-5 pt-2">
                 <a href="{{ route('offre.create') }}"
-                    class="inline-flex items-center justify-center px-4 py-2 bg-[#18181b] text-white font-semibold text-sm rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 transition duration-200 ease-in-out float-right mb-3">
+                    class="inline-flex items-center justify-center px-4 py-2 mr-2 bg-[#18181b] text-white font-semibold text-sm rounded-lg shadow-md hover:bg-[#0A52AB] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 transition duration-200 ease-in-out float-right mb-3">
                     <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
@@ -12,23 +12,23 @@
                     Créer une offre
                 </a>
 
-                <table class="min-w-full border-collapse border border-gray-200 bg-white shadow-md">
+                <table class="min-w-full border-none shadow-none rounded-md">
                     <thead class="bg-gray-50 rounded-md">
                         <tr class="rounded-md">
-                            <th class="border border-gray-300 px-4 py-2 text-left text-gray-600">Désignation</th>
-                            <th class="border border-gray-300 px-4 py-2 text-left text-gray-600">Intérêt</th>
-                            <th class="border border-gray-300 px-4 py-2 text-left text-gray-600">Montant</th>
-                            <th class="border border-gray-300 px-2 py-2 text-center text-gray-600 w-[250px]">Action</th>
+                            <th class="border-r border-white rounded-l-lg  px-4 py-2 text-left text-gray-600">Désignation</th>
+                            <th class="border-r border-white px-4 py-2 text-left text-gray-600">Intérêt</th>
+                            <th class="border-r border-white px-4 py-2 text-left text-gray-600">Montant</th>
+                            <th class="rounded-r-lg px-2 py-2 text-center text-gray-600 w-[250px]">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse ($mesOffres as $offre)
-                            <tr class="hover:bg-gray-100">
-                                <td class="border border-gray-300 px-4 py-2">{{ $offre->nom_projet }}</td>
-                                <td class="border border-gray-300 text-center text-green-500 px-4 py-2">{{ $offre->taux_interet }} %</td>
-                                <td class="border border-gray-300 text-xs lg:text-base font-bold px-2 py-2">
+                            <tr class="hover:bg-gray-100 border-b py-2 border-gray-400 ">
+                                <td class=" p-4">{{ $offre->nom_projet }}</td>
+                                <td class=" text-center text-green-500 p-4">{{ $offre->taux_interet }} %</td>
+                                <td class=" text-xs lg:text-base font-bold p-4">
                                     {{ number_format($offre->montant, 0, '.', ' ') }} FCFA</td>
-                                <td class="border flex flex-col justify-center items-center md:flex-row border-gray-300 h-full md:px-2 py-2 text-center md:w-[250px]">
+                                <td class=" flex flex-col justify-center items-center md:flex-row h-full md:p-4 text-center md:w-[250px]">
                                     <!-- Bouton Voir -->
                                     <a href="{{ route('offre.show', $offre->id) }}"
                                         class="hidden md:inline-flex items-center px-2 py-1 text-sm font-semibold text-blue-600 hover:text-blue-800 border border-blue-600 rounded-md hover:bg-blue-100">
