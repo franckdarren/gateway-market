@@ -36,7 +36,7 @@
 
                         <form action="{{ route('offre.update', $offre->id) }}" method="POST"
                             enctype="multipart/form-data"
-                            class="gap-5 space-y-6 md:grid md:grid-cols-2 lg:grid-cols-4 ">
+                            class="gap-5 space-y-6 md:grid md:grid-cols-2 ">
                             @csrf
                             @method('PUT')
 
@@ -46,7 +46,7 @@
                                     projet</label>
                                 <input type="text" id="nom_projet" name="nom_projet"
                                     value="{{ old('nom_projet', $offre->nom_projet) }}"
-                                    class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                                    class="block w-full mt-1 border-gray-300 bg-gray-100 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
                                     required>
                             </div>
 
@@ -55,7 +55,7 @@
                                 <label for="description_projet"
                                     class="block text-sm font-medium text-gray-700">Description</label>
                                 <textarea id="description_projet" name="description_projet" rows="4"
-                                    class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                                    class="block w-full mt-1 border-gray-300 rounded-md bg-gray-100 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
                                     required>{{ old('description_projet', $offre->description_projet) }}</textarea>
                             </div>
 
@@ -64,7 +64,7 @@
                                 <label for="montant" class="block text-sm font-medium text-gray-700">Montant</label>
                                 <input type="number" id="montant" name="montant"
                                     value="{{ old('montant', $offre->montant) }}"
-                                    class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                                    class="block w-full mt-1 border-gray-300 bg-gray-100 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
                                     required>
                             </div>
 
@@ -74,7 +74,7 @@
                                     mois de remboursement</label>
                                 <input type="number" id="nbre_mois_remboursement" name="nbre_mois_remboursement"
                                     value="{{ old('nbre_mois_remboursement', $offre->nbre_mois_remboursement) }}"
-                                    class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                                    class="block w-full mt-1 border-gray-300 bg-gray-100 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
                                     required>
                             </div>
 
@@ -84,7 +84,7 @@
                                     mois de grâce</label>
                                 <input type="number" id="nbre_mois_grace" name="nbre_mois_grace"
                                     value="{{ old('nbre_mois_grace', $offre->nbre_mois_grace) }}"
-                                    class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                                    class="block w-full mt-1 border-gray-300 bg-gray-100 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
                                     required>
                             </div>
 
@@ -93,7 +93,7 @@
                                 <label for="taux_interet" class="block text-sm font-medium text-gray-700">Taux
                                     d'intérêt</label>
                                 <select id="taux_interet" name="taux_interet"
-                                    class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                                    class="block w-full mt-1 border-gray-300 rounded-md bg-gray-100 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
                                     required>
                                     @foreach ([3, 6, 9, 12, 15, 18, 21] as $value)
                                         <option value="{{ $value }}"
@@ -110,7 +110,7 @@
                                     Nette (VAN)</label>
                                 <input type="number" id="van" name="van"
                                     value="{{ old('van', $offre->van) }}"
-                                    class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                                    class="block w-full mt-1 border-gray-300 bg-gray-100 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
                                     required>
                             </div>
 
@@ -120,7 +120,7 @@
                                     Rentabilité (IR)</label>
                                 <input type="number" step="0.01" id="ir" name="ir"
                                     value="{{ old('ir', $offre->ir) }}"
-                                    class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                                    class="block w-full mt-1 border-gray-300 bg-gray-100 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
                                     required>
                             </div>
 
@@ -130,7 +130,7 @@
                                     Interne (TRI)</label>
                                 <input type="number" step="0.01" id="tri" name="tri"
                                     value="{{ old('tri', $offre->tri) }}"
-                                    class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                                    class="block w-full mt-1 border-gray-300 bg-gray-100 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
                                     required>
                             </div>
 
@@ -139,7 +139,7 @@
                                 <label for="krl" class="block text-sm font-medium text-gray-700">KRL</label>
                                 <input type="number" step="0.01" id="krl" name="krl"
                                     value="{{ old('krl', $offre->krl) }}"
-                                    class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                                    class="block w-full mt-1 border-gray-300 bg-gray-100 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
                                     required>
                             </div>
 
@@ -148,7 +148,7 @@
                                 <label for="url_business_plan" class="block text-sm font-medium text-gray-700">Business
                                     Plan (PDF)</label>
                                 <input type="file" id="url_business_plan" name="url_business_plan"
-                                    class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
+                                    class="block w-full mt-1 border-gray-300  rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
                                 @if ($offre->url_business_plan)
                                     <p class="mt-1 text-sm text-gray-600">
                                         <a href="{{ Storage::url($offre->url_business_plan) }}" target="_blank"

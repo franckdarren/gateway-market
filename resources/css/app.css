@@ -21,7 +21,7 @@
     }
 
     tr:hover {
-        @apply bg-red-100;
+        @apply bg-blue-100;
     }
 
     .pagination {
