@@ -55,12 +55,12 @@
 
                 <div class="mt-6">
                     <h3 class="mb-4 text-lg font-bold text-gray-800">Détails financiers :</h3>
-                    <div class="space-y-6 overflow-x-auto">
+                    <div class="space-y-6">
 
                         <div class="hidden lg:flex">
-                            <table class="w-full text-left border border-collapse border-gray-300 table-auto">
+                            <table class="w-full rounded-md text-left table-auto">
                                 <thead>
-                                    <tr class="bg-gray-200">
+                                    <tr class="bg-gray-100 rounded-md">
                                         <th
                                             class="px-2 py-2 text-sm font-semibold text-gray-700 border border-gray-300 sm:px-4">
                                             Mois de remboursement</th>
@@ -105,7 +105,8 @@
                             </table>
                         </div>
                         <table
-                            class="block w-full text-left border border-collapse border-gray-300 table-auto lg:hidden">
+                        
+                            class=" w-full text-left border border-collapse border-gray-300 table-auto lg:hidden">
                             <thead>
                                 <tr class="bg-gray-200">
                                     <th
@@ -131,8 +132,8 @@
                             </tbody>
                         </table>
                         <table
-                            class="block w-full text-left border border-collapse border-gray-300 table-auto lg:hidden">
-                            <thead>
+                            class=" w-full text-left border border-collapse border-gray-300 table-auto lg:hidden">
+                            <thead class="w-full">
                                 <tr class="bg-gray-200">
                                     <th
                                         class="px-2 py-2 text-sm font-semibold text-gray-700 border border-gray-300 sm:px-4">
@@ -197,7 +198,7 @@
                             <div x-data="{ showModal: false }">
                                 <!-- Bouton d'ouverture de la modale -->
                                 <a href="javascript:void(0)" @click="showModal = true"
-                                    class="px-4 py-4 bg-[#18181b] text-white rounded-md hover:bg-blue-700 text-center">
+                                    class="px-4 py-4 bg-[#0A52AB] hover:bg-[#478bc4] text-white rounded-md text-center">
                                     Investir
                                 </a>
 

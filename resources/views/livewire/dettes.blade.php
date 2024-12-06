@@ -20,7 +20,6 @@
                 <th class="px-4 py-2 text-left text-gray-600 border border-gray-300">Remboursement</th>
                 <th class="px-4 py-2 text-left text-gray-600 border border-gray-300">Cumul Remboursement</th>
                 <th class="px-4 py-2 text-left text-gray-600 border border-gray-300">Statut</th>
-
             </tr>
         </thead>
         <tbody>
@@ -40,7 +39,7 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="6" class="py-4 text-center text-gray-600">Aucune remboursement disponible</td>
+                    <td colspan="6" class="py-4 text-center text-gray-600">Aucun remboursement disponible</td>
                 </tr>
             @endforelse
         </tbody>
