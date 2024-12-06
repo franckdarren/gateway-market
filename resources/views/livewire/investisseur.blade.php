@@ -1,7 +1,7 @@
 <div wire:poll.1m>
     @if ($hasCompteInvestisseur)
-        <div class="container mx-auto xl:p-4">
-            
+        <div class="container mx-auto">
+
             <div class="space-y-2">
     @forelse ($mesOffres as $offre)
         <div class="flex flex-col md:grid md:grid-cols-2 xl:grid-cols-4 items-center justify-between bg-[#FDF1F0] rounded-lg shadow-md p-4 gap-5">
