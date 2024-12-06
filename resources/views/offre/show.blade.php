@@ -35,7 +35,7 @@
 
         <div class="max-w-7xl sm:px-6 lg:px-8">
             <div class="p-6 bg-white rounded-lg shadow-lg sm:p-8">
-                <div class="w-full p-4 text-blue-900 rounded-lg shadow-lg sm:p-6">
+                <div class="text-blue-900">
                     <h2 class="mb-4 text-3xl font-bold text-center">Détails du projet</h2>
                     <div class="space-y-4">
                         <div class="flex gap-5 p-4 text-black bg-blue-100 rounded-md">
@@ -295,11 +295,14 @@
 
     <h1 class="my-6 text-xl font-bold text-center text-gray-800">Simulateur de prévision de remboursement
     </h1>
-    @livewire('prevision', [
-        'montantEmprunte' => $offre->montant,
-        'duree' => $offre->nbre_mois_remboursement,
-        'tauxInteret' => $offre->taux_interet,
-        'delaiGrace' => $offre->nbre_mois_grace,
-    ])
+    <div class="sm:px-6 lg:px-8">
+        @livewire('prevision', [
+            'montantEmprunte' => $offre->montant,
+            'duree' => $offre->nbre_mois_remboursement,
+            'tauxInteret' => $offre->taux_interet,
+            'delaiGrace' => $offre->nbre_mois_grace,
+        ])
+
+    </div>
     </div>
 </x-app-layout>

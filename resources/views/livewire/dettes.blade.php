@@ -12,14 +12,14 @@
                 </button>
             </div>
         @endif
-    <table class="min-w-full mt-3 border-none bg-white border border-collapse border-gray-200 shadow-none rounded-md">
-        <thead class="bg-gray-50 rounded-md">
-            <tr class="rounded-md">
-                <th class="border-r border-white px-4 py-2 text-left text-gray-600 border border-gray-300">Projet</th>
-                <th class="border-r border-white px-4 py-2 text-left text-gray-600 border border-gray-300">Date</th>
-                <th class="border-r border-white px-4 py-2 text-left text-gray-600 border border-gray-300">Remboursement</th>
-                <th class="border-r border-white px-4 py-2 text-left text-gray-600 border border-gray-300">Cumul Remboursement</th>
-                <th class="rounded-r-lg px-4 py-2 text-left text-gray-600 border border-gray-300">Statut</th>
+    <table class="min-w-full bg-white border border-collapse border-gray-200 shadow-md">
+        <thead class="bg-gray-50">
+            <tr>
+                <th class="px-4 py-2 text-left text-gray-600 border border-gray-300">Projet</th>
+                <th class="px-4 py-2 text-left text-gray-600 border border-gray-300">Date</th>
+                <th class="px-4 py-2 text-left text-gray-600 border border-gray-300">Remboursement</th>
+                <th class="px-4 py-2 text-left text-gray-600 border border-gray-300">Cumul Remboursement</th>
+                <th class="px-4 py-2 text-left text-gray-600 border border-gray-300">Statut</th>
 
             </tr>
         </thead>
