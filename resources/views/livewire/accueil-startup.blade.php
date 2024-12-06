@@ -4,7 +4,7 @@
 
             <div class="overflow-x-auto bg-white rounded-md px-5 pt-2">
                 <a href="{{ route('offre.create') }}"
-                    class="inline-flex items-center justify-center px-4 py-2 mr-2 bg-[#18181b] text-white font-semibold text-sm rounded-lg shadow-md hover:bg-[#0A52AB] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 transition duration-200 ease-in-out float-right mb-3">
+                    class="inline-flex items-center justify-center px-4 py-2 mr-2 bg-[#0A52AB] text-white font-semibold text-sm rounded-lg shadow-md hover:bg-[#478bc4] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 transition duration-200 ease-in-out float-right mb-3">
                     <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
@@ -23,7 +23,7 @@
                     </thead>
                     <tbody>
                         @forelse ($mesOffres as $offre)
-                            <tr class="hover:bg-gray-100 border-b py-2 border-gray-400 ">
+                            <tr class="hover:bg-gray-100 border-b-4 py-2 border-gray-100 ">
                                 <td class=" p-4">{{ $offre->nom_projet }}</td>
                                 <td class=" text-center text-green-500 p-4">{{ $offre->taux_interet }} %</td>
                                 <td class=" text-xs lg:text-base font-bold p-4">

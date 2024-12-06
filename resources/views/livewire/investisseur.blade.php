@@ -4,29 +4,29 @@
             
             <div class="space-y-2">
     @forelse ($mesOffres as $offre)
-        <div class="flex flex-col md:grid md:grid-cols-2 xl:grid-cols-4 items-center justify-between bg-[#FDF1F0] rounded-lg shadow-md p-4 gap-5">
+        <div class="flex flex-col md:grid md:grid-cols-3 lg:flex lg:flex-row items-center justify-between bg-[#FDF1F0] rounded-lg shadow-md p-4 gap-5">
             <!-- Section: Nom du Projet et Propriétaire -->
             <div class="flex flex-col lg:flex-row lg:items-center flex-1 text-gray-800">
-                <h2 class="font-semibold text-lg mb-2 lg:mb-0 lg:mr-6  bg-[#C1D1FF] p-4 rounded-md">
+                <h2 class="font-semibold text-lg mb-2 lg:mb-0 lg:mr-6 rounded-md">
                     <span class="font-regular">Par :</span> {{ $offre->nom_projet }}
                 </h2>
             </div>
 
             <!-- Section: Taux d'intérêt -->
             <div class="flex flex-col items-center lg:items-start mb-4 lg:mb-0 lg:mr-8">
-                <p class="text-2xl font-bold text-black">{{ $offre->taux_interet }}%</p>
+                <p class="text-lg font-medium text-black">{{ $offre->taux_interet }}%</p>
                 <p class="text-sm text-gray-600">Taux d'intérêt</p>
             </div>
 
             <!-- Section: Durée -->
             <div class="flex flex-col items-center lg:items-start mb-4 lg:mb-0 lg:mr-8">
-                <p class="text-2xl font-bold text-black">{{ $offre->nbre_mois_remboursement }}</p>
+                <p class="text-lg font-medium text-black">{{ $offre->nbre_mois_remboursement }}</p>
                 <p class="text-sm text-gray-600">Mois de remboursement</p>
             </div>
 
             <!-- Section: Montant -->
             <div class="flex flex-col items-center lg:items-start mb-4 lg:mb-0">
-                <p class="text-2xl font-bold text-black">
+                <p class="text-lg font-medium text-black">
                     {{ number_format($offre->montant, 0, '.', ' ') }} FCFA
                 </p>
                 <p class="text-sm text-gray-600">Montant du projet</p>

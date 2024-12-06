@@ -240,7 +240,7 @@ if (auth()->user()->hasRole('Investisseur')) {
                                     <form method="POST" action="{{ route('logout') }}">
                                         @csrf
                                         <button type="submit"
-                                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#18181b] hover:text-white w-full text-left">
+                                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#1973E2] hover:text-white w-full text-left">
                                             {{ __('Log Out') }}
                                         </button>
                                     </form>
@@ -250,7 +250,7 @@ if (auth()->user()->hasRole('Investisseur')) {
                     </header>
                     <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
                         <div class="container px-6 py-6 mx-auto md:py-8">
-                            <!-- Page Heading -->
+                            <!-- Page Heading bg-gradient-to-r from-[#6067F2] via-[#343434] to-[#77609D]-->
                             @if (isset($header))
                                 <header class="">
                                     <div class="">

@@ -38,15 +38,15 @@
                 <div class="w-full p-4 text-blue-900 rounded-lg shadow-lg sm:p-6">
                     <h2 class="mb-4 text-3xl font-bold text-center">Détails du projet</h2>
                     <div class="space-y-4">
-                        <div class="flex gap-5 p-4 text-blue-900 bg-blue-100 rounded-md">
+                        <div class="flex gap-5 p-4 text-black bg-blue-100 rounded-md">
                             <h3 class="text-sm font-bold">Nom du projet :</h3>
                             <p class="text-sm ">{{ $offre->nom_projet }}</p>
                         </div>
-                        <div class="p-4 text-blue-900 bg-blue-100 rounded-md">
-                            <h3 class="text-sm font-bold">Description :</h3>
-                            <p class="text-sm">{{ $offre->description_projet }}</p>
-                        </div>
                         <div class="p-4 text-black bg-blue-100 rounded-md">
+                            <h3 class="text-sm font-bold">Description :</h3>
+                            <p class="text-sm text-black">{{ $offre->description_projet }}</p>
+                        </div>
+                        <div class="flex gap-5 p-4 text-black bg-blue-100 rounded-md">
                             <h3 class="text-sm font-semibold">Montant :</h3>
                             <p class="text-sm font-bold">{{ number_format($offre->montant, 0, ',', ' ') }} FCFA</p>
                         </div>
