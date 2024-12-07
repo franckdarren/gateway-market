@@ -1,4 +1,4 @@
-<div class="px-5 pt-2 overflow-x-auto bg-white rounded-md">
+<div class="overflow-x-auto bg-white rounded-lg">
     @if (session('error'))
             <div class="flex items-center justify-between p-4 mx-auto mb-4 space-x-4 text-white bg-red-500 rounded-md shadow-md md:fixed md:top-5 md:right-5"
                 x-data="{ open: true }" x-show="open" x-transition>
@@ -13,9 +13,9 @@
             </div>
         @endif
     <table class="min-w-full border-none rounded-md shadow-none">
-        <thead class="rounded-md bg-gray-50">
+        <thead class="bg-gray-50">
             <tr class="rounded-md">
-                <th class="px-4 py-2 text-left text-gray-600 border-r border-white rounded-l-lg">Projet</th>
+                <th class="px-6 py-3 text-left text-sm font-medium text-black tracking-wider">Projet</th>
                 <th class="px-4 py-2 text-left text-gray-600 border-r border-white">Date</th>
                 <th class="px-4 py-2 text-left text-gray-600 border-r border-white">Remboursement</th>
                 <th class="px-4 py-2 text-left text-gray-600 border-r border-white">Cumul Remboursement</th>
@@ -23,17 +23,17 @@
 
             </tr>
         </thead>
-        <tbody>
+        <tbody class="divide-y divide-gray-200 bg-white">
             @forelse ($remboursements as $remboursement)
                 <tr class="hover:bg-gray-100">
-                    <td class="px-4 py-2 border border-gray-300">{{ $remboursement->offre->nom_projet }}</td>
-                    <td class="px-4 py-2 border border-gray-300">{{ $remboursement->mois }}</td>
-                    <td class="px-4 py-2 border border-gray-300">
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $remboursement->offre->nom_projet }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $remboursement->mois }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                         {{ number_format($remboursement->remboursement_total, 0, '.', ' ') }} FCFA</td>
-                    <td class="px-4 py-2 border border-gray-300">
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                         {{ number_format($remboursement->cumul_remboursement, 0, '.', ' ') }} FCFA</td>
                     <td
-                        class="border border-gray-300 px-4 py-2 {{ $remboursement->statut === 'Remboursé' ? 'text-green-600' : '' }}">
+                        class="px-6 py-4 whitespace-nowrap text-sm{{ $remboursement->statut === 'Remboursé' ? 'text-green-600' : '' }}">
                         {{ $remboursement->statut }}
                     </td>
 

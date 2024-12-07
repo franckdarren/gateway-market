@@ -1,4 +1,4 @@
-<div class="overflow-x-auto">
+<div class="overflow-x-auto bg-white rounded-lg">
     @if (session('error'))
             <div class="flex items-center justify-between p-4 mx-auto mb-4 space-x-4 text-white bg-red-500 rounded-md shadow-md md:fixed md:top-5 md:right-5"
                 x-data="{ open: true }" x-show="open" x-transition>
@@ -12,25 +12,25 @@
                 </button>
             </div>
         @endif
-    <table class="min-w-full border-none rounded-md shadow-none">
-        <thead class="rounded-md bg-gray-50">
-            <tr class="rounded-md">
-                <th class="px-4 py-2 text-left text-gray-600 border-r border-white rounded-l-lg">Désignation</th>
-                <th class="px-4 py-2 text-left text-gray-600 border-r border-white">Intérêt</th>
+    <table class="overflow-hidden border border-gray-200 shadow-md">
+        <thead class="bg-gray-50">
+            <tr class="">
+                <th class="px-6 py-3 text-left text-sm font-medium text-black tracking-wider">Désignation</th>
+                <th class="px-6 py-3 text-left text-sm font-medium text-black tracking-wider">Intérêt</th>
                 <th class="px-4 py-2 text-left text-gray-600 border-r border-white">Montant</th>
-                <th class="rounded-r-lg px-2 py-2 text-center text-gray-600 w-[250px]">Statut</th>
+                <th class="px-6 py-3 text-left text-sm font-medium text-black tracking-wider">Statut</th>
 
-                <th class="border border-gray-300 px-2 py-2 text-center text-gray-600 w-[250px]">Action</th>
+                <th class="px-6 py-3 text-left text-sm font-medium text-black tracking-wider w-[250px]">Action</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody  class="divide-y divide-gray-200 bg-white">
             @forelse ($mesOffres as $offre)
                 <tr class="hover:bg-gray-100">
-                    <td class="px-4 py-2 border border-gray-300">{{ $offre->nom_projet }}</td>
-                    <td class="px-4 py-2 border border-gray-300">{{ $offre->taux_interet }} %</td>
-                    <td class="px-4 py-2 border border-gray-300">
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $offre->nom_projet }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $offre->taux_interet }} %</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                         {{ number_format($offre->montant, 0, '.', ' ') }} FCFA</td>
-                    <td class="px-4 py-2 border border-gray-300">{{ $offre->statut }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $offre->statut }}</td>
 
                     <td class="border border-gray-300 px-2 py-2 text-center w-[250px]">
                         <a href="{{ route('offre.show', $offre->id) }}"
