@@ -1,9 +1,9 @@
 <x-app-layout>
-    <x-slot name="header">
+    {{-- <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight text-gray-800">
             {{ __('Créer une offres') }}
         </h2>
-    </x-slot>
+    </x-slot> --}}
 
     <div class="py-2 lg:py-5">
         @if (session('success'))

@@ -35,7 +35,7 @@
 
         <div class="max-w-7xl sm:px-6 lg:px-8">
             <div class="p-6 bg-white rounded-lg shadow-lg sm:p-8">
-                <div class="text-blue-900">
+                <div class="text-black">
                     <h2 class="mb-4 text-3xl font-bold text-center">Détails du projet</h2>
                     <div class="space-y-4">
                         <div class="flex gap-5 p-4 text-black bg-blue-100 rounded-md">
@@ -58,7 +58,7 @@
                     <div class="space-y-6">
 
                         <div class="hidden lg:flex">
-                            <table class="w-full rounded-md text-left table-auto">
+                            <table class="w-full text-left rounded-md table-auto">
                                 <thead>
                                     <tr class="bg-gray-100 rounded-md">
                                         <th
@@ -105,8 +105,8 @@
                             </table>
                         </div>
                         <table
-                        
-                            class=" w-full text-left border border-collapse border-gray-300 table-auto lg:hidden">
+
+                            class="w-full text-left border border-collapse border-gray-300 table-auto  lg:hidden">
                             <thead>
                                 <tr class="bg-gray-200">
                                     <th
@@ -132,7 +132,7 @@
                             </tbody>
                         </table>
                         <table
-                            class=" w-full text-left border border-collapse border-gray-300 table-auto lg:hidden">
+                            class="w-full text-left border border-collapse border-gray-300 table-auto  lg:hidden">
                             <thead class="w-full">
                                 <tr class="bg-gray-200">
                                     <th
