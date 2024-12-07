@@ -18,7 +18,7 @@
                 <th class="px-6 py-3 text-left text-sm font-medium text-black tracking-wider">Projet</th>
                 <th class="px-4 py-2 text-left text-gray-600 border-r border-white">Date</th>
                 <th class="px-4 py-2 text-left text-gray-600 border-r border-white">Remboursement</th>
-                <th class="px-4 py-2 text-left text-gray-600 border-r border-white">Cumul Remboursement</th>
+                <th class="px-4 py-2 text-left text-gray-600 border-r border-white">Cumul</th>
                 <th class="rounded-r-lg px-2 py-2 text-center text-gray-600 w-[250px]">Statut</th>
 
             </tr>

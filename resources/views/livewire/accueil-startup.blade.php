@@ -2,9 +2,9 @@
     @if ($hasCompteStartup)
         <div class="container mx-auto">
 
-            <div class="px-5 pt-2 overflow-x-auto bg-white rounded-md">
+            <div class=" pt-2 overflow-x-auto bg-white rounded-md">
                 <a href="{{ route('offre.create') }}"
-                    class="inline-flex items-center justify-center px-4 py-2 mr-2 bg-[#0A52AB] text-white font-semibold text-sm rounded-lg shadow-md hover:bg-[#478bc4] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 transition duration-200 ease-in-out float-right mb-3">
+                    class="inline-flex items-center justify-center px-4 py-2 mr-2 bg-[#0A52AB] text-white font-semibold text-sm rounded-lg shadow-md hover:bg-[#478bc4] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 transition duration-200 ease-in-out float-right mb-2">
                     <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
@@ -12,14 +12,14 @@
                     Créer une offre
                 </a>
 
-                <table class="min-w-full border-none rounded-md shadow-none">
-                    <thead class="rounded-md bg-gray-50">
-                        <tr class="rounded-md">
-                            <th class="px-4 py-2 text-left text-gray-600 border-r border-white rounded-l-lg">
+                <table class="min-w-full border-none shadow-none">
+                    <thead class="bg-gray-50">
+                        <tr class="">
+                            <th class="px-4 py-2 text-left text-gray-600 border-r border-white">
                                 Désignation</th>
                             <th class="px-4 py-2 text-left text-gray-600 border-r border-white">Intérêt</th>
                             <th class="px-4 py-2 text-left text-gray-600 border-r border-white">Montant</th>
-                            <th class="rounded-r-lg px-2 py-2 text-center text-gray-600 w-[250px]">Action</th>
+                            <th class="px-2 py-2 text-center text-gray-600 w-[250px]">Action</th>
                         </tr>
                     </thead>
                     <tbody>
