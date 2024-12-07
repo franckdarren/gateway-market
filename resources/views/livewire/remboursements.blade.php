@@ -12,14 +12,16 @@
                 </button>
             </div>
         @endif
-    <table class="min-w-full border-none rounded-md shadow-none">
+    <table class="overflow-hidden border border-gray-200 shadow-md">
         <thead class="bg-gray-50">
             <tr class="rounded-md">
                 <th class="px-6 py-3 text-left text-sm font-medium text-black tracking-wider">Projet</th>
-                <th class="px-4 py-2 text-left text-gray-600 border-r border-white">Date</th>
-                <th class="px-4 py-2 text-left text-gray-600 border-r border-white">Remboursement</th>
-                <th class="px-4 py-2 text-left text-gray-600 border-r border-white">Cumul</th>
-                <th class="rounded-r-lg px-2 py-2 text-center text-gray-600 w-[250px]">Statut</th>
+
+                <th class="px-6 py-3 text-left text-sm font-medium text-black tracking-wider">Date</th>
+                <th class="px-6 py-3 text-left text-sm font-medium text-black tracking-wider">Remboursement</th>
+                <th class="px-6 py-3 text-left text-sm font-medium text-black tracking-wider">Cumul Remboursement</th>
+                <th class="px-6 py-3 text-left text-sm font-medium text-black tracking-wider w-[250px]">Statut</th>
+
 
             </tr>
         </thead>
@@ -32,9 +34,11 @@
                         {{ number_format($remboursement->remboursement_total, 0, '.', ' ') }} FCFA</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                         {{ number_format($remboursement->cumul_remboursement, 0, '.', ' ') }} FCFA</td>
-                    <td
-                        class="px-6 py-4 whitespace-nowrap text-sm{{ $remboursement->statut === 'Remboursé' ? 'text-green-600' : '' }}">
-                        {{ $remboursement->statut }}
+                    <td class="px-6 py-4 whitespace-nowrap text-sm">
+                        <span
+                            class="inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium border
+                                {{ $remboursement->statut === 'Remboursé' ? 'bg-[#f0fdf4] text-[#16A34A] border-green-100' : 'bg-[#fffbeb] text-[#D97706] border-yellow-100' }}">{{ $remboursement->statut }}
+                        </span>
                     </td>
 
                 </tr>
