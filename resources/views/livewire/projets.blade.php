@@ -12,13 +12,13 @@
                 </button>
             </div>
         @endif
-    <table class="min-w-full bg-white border border-collapse border-gray-200 shadow-md">
-        <thead class="bg-gray-50">
-            <tr>
-                <th class="px-4 py-2 text-left text-gray-600 border border-gray-300">Désignation</th>
-                <th class="px-4 py-2 text-left text-gray-600 border border-gray-300">Intérêt</th>
-                <th class="px-4 py-2 text-left text-gray-600 border border-gray-300">Montant</th>
-                <th class="px-4 py-2 text-left text-gray-600 border border-gray-300">Statut</th>
+    <table class="min-w-full border-none rounded-md shadow-none">
+        <thead class="rounded-md bg-gray-50">
+            <tr class="rounded-md">
+                <th class="px-4 py-2 text-left text-gray-600 border-r border-white rounded-l-lg">Désignation</th>
+                <th class="px-4 py-2 text-left text-gray-600 border-r border-white">Intérêt</th>
+                <th class="px-4 py-2 text-left text-gray-600 border-r border-white">Montant</th>
+                <th class="rounded-r-lg px-2 py-2 text-center text-gray-600 w-[250px]">Statut</th>
 
                 <th class="border border-gray-300 px-2 py-2 text-center text-gray-600 w-[250px]">Action</th>
             </tr>

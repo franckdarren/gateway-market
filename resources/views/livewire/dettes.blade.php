@@ -1,4 +1,4 @@
-<div class="overflow-x-auto">
+<div class="px-5 pt-2 overflow-x-auto bg-white rounded-md">
     @if (session('error'))
             <div class="flex items-center justify-between p-4 mx-auto mb-4 space-x-4 text-white bg-red-500 rounded-md shadow-md md:fixed md:top-5 md:right-5"
                 x-data="{ open: true }" x-show="open" x-transition>
@@ -12,14 +12,14 @@
                 </button>
             </div>
         @endif
-    <table class="min-w-full bg-white border border-collapse border-gray-200 shadow-md">
-        <thead class="bg-gray-50">
-            <tr>
-                <th class="px-4 py-2 text-left text-gray-600 border border-gray-300">Projet</th>
-                <th class="px-4 py-2 text-left text-gray-600 border border-gray-300">Date</th>
-                <th class="px-4 py-2 text-left text-gray-600 border border-gray-300">Remboursement</th>
-                <th class="px-4 py-2 text-left text-gray-600 border border-gray-300">Cumul Remboursement</th>
-                <th class="px-4 py-2 text-left text-gray-600 border border-gray-300">Statut</th>
+    <table class="min-w-full border-none rounded-md shadow-none">
+        <thead class="rounded-md bg-gray-50">
+            <tr class="rounded-md">
+                <th class="px-4 py-2 text-left text-gray-600 border-r border-white rounded-l-lg">Projet</th>
+                <th class="px-4 py-2 text-left text-gray-600 border-r border-white">Date</th>
+                <th class="px-4 py-2 text-left text-gray-600 border-r border-white">Remboursement</th>
+                <th class="px-4 py-2 text-left text-gray-600 border-r border-white">Cumul Remboursement</th>
+                <th class="rounded-r-lg px-2 py-2 text-center text-gray-600 w-[250px]">Statut</th>
             </tr>
         </thead>
         <tbody>
