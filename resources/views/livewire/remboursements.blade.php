@@ -12,7 +12,7 @@
                 </button>
             </div>
         @endif
-    <table class="min-w-full border-none rounded-md shadow-none">
+    <table class="overflow-hidden border border-gray-200 shadow-md">
         <thead class="bg-gray-50">
             <tr class="rounded-md">
                 <th class="px-6 py-3 text-left text-sm font-medium text-black tracking-wider">Projet</th>
