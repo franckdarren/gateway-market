@@ -170,7 +170,12 @@
                     <div class="flex flex-col flex-wrap gap-4 sm:flex-row">
                         @if ($offre->url_business_plan)
                             <a href="{{ Storage::url($offre->url_business_plan) }}" target="_blank"
-                                class="flex items-center justify-center gap-5 px-4 py-2 text-center text-white bg-green-500 rounded-md shadow hover:bg-green-600">
+                                class="flex items-center justify-center gap-2 px-4 py-2 text-center text-white bg-green-500 rounded-md shadow hover:bg-green-600">
+                                <svg width="19" height="23" viewBox="0 0 19 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M13.668 3.16683H15.7513C16.3038 3.16683 16.8337 3.38632 17.2244 3.77702C17.6151 4.16772 17.8346 4.69763 17.8346 5.25016V19.8335C17.8346 20.386 17.6151 20.9159 17.2244 21.3066C16.8337 21.6973 16.3038 21.9168 15.7513 21.9168H3.2513C2.69877 21.9168 2.16886 21.6973 1.77816 21.3066C1.38746 20.9159 1.16797 20.386 1.16797 19.8335V5.25016C1.16797 4.69763 1.38746 4.16772 1.77816 3.77702C2.16886 3.38632 2.69877 3.16683 3.2513 3.16683H5.33464M6.3763 1.0835H12.6263C13.2016 1.0835 13.668 1.54987 13.668 2.12516V4.2085C13.668 4.78379 13.2016 5.25016 12.6263 5.25016H6.3763C5.80101 5.25016 5.33464 4.78379 5.33464 4.2085V2.12516C5.33464 1.54987 5.80101 1.0835 6.3763 1.0835Z" stroke="#F5F5F5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                    
+                                    
                                 Voir le Business Plan
                             </a>
                         @else
@@ -179,7 +184,13 @@
 
                         @if ($offre->url_etude_risque)
                             <a href="{{ Storage::url($offre->url_etude_risque) }}" target="_blank"
-                                class="flex items-center justify-center gap-5 px-4 py-2 text-center text-white bg-green-500 rounded-md shadow hover:bg-green-600">
+                                class="flex items-center justify-center gap-2 px-4 py-2 text-center text-white bg-green-500 rounded-md shadow hover:bg-green-600">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M6.03906 12.3178L8.53334 9.07598L11.3785 11.3109L13.8194 8.16064" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <circle cx="16.6643" cy="3.50027" r="1.60183" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M12.4385 2.6001H6.38201C3.87247 2.6001 2.31641 4.37737 2.31641 6.8869V13.6222C2.31641 16.1318 3.84196 17.9014 6.38201 17.9014H13.5521C16.0616 17.9014 17.6177 16.1318 17.6177 13.6222V7.75647" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                    
                                 Voir l'étude de risque
                             </a>
                         @else

@@ -9,11 +9,11 @@
 
 
     table {
-        @apply w-full bg-white border border-gray-200 shadow-lg rounded-lg; 
+        @apply min-w-full border-none  shadow-none; 
     }
-
+    
     table th {
-        @apply bg-[#CFDFEA] text-white py-3 px-6 text-left;
+        @apply bg-[#CFDFEA] px-4 py-2 text-left text-gray-600 border-r border-white ;
     }
 
     table td {
