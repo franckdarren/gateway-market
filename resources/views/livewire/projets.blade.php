@@ -48,7 +48,7 @@
     </table>
 
     <!-- Pagination -->
-    <div class="px-6 my-4">
+    {{-- <div class="px-6 my-4">
         {{ $mesOffres->links() }}
-    </div>
+    </div> --}}
 </div>

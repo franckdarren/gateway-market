@@ -16,10 +16,12 @@
         <thead class="bg-gray-50">
             <tr class="rounded-md">
                 <th class="px-6 py-3 text-left text-sm font-medium text-black tracking-wider">Projet</th>
+
                 <th class="px-6 py-3 text-left text-sm font-medium text-black tracking-wider">Date</th>
                 <th class="px-6 py-3 text-left text-sm font-medium text-black tracking-wider">Remboursement</th>
                 <th class="px-6 py-3 text-left text-sm font-medium text-black tracking-wider">Cumul Remboursement</th>
                 <th class="px-6 py-3 text-left text-sm font-medium text-black tracking-wider w-[250px]">Statut</th>
+
 
             </tr>
         </thead>
