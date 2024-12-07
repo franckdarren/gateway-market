@@ -17,7 +17,7 @@
             <tr class="">
                 <th class="px-6 py-3 text-left text-sm font-medium text-black tracking-wider">Désignation</th>
                 <th class="px-6 py-3 text-left text-sm font-medium text-black tracking-wider">Intérêt</th>
-                <th class="px-4 py-2 text-left text-gray-600 border-r border-white">Montant</th>
+                <th class="px-6 py-3 text-left text-sm font-medium text-black tracking-wider">Montant</th>
                 <th class="px-6 py-3 text-left text-sm font-medium text-black tracking-wider">Statut</th>
 
                 <th class="px-6 py-3 text-left text-sm font-medium text-black tracking-wider w-[250px]">Action</th>
