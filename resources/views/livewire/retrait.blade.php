@@ -30,7 +30,7 @@
             <div>
                 <label for="montant" class="block text-sm font-medium text-gray-700">Montant (en</label>
                 <input type="number" wire:model="montant" id="montant"
-                    class="block w-full px-4 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                    class="block w-full px-4 py-2 mt-1 border bg-gray-100 border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                     required>
                 @error('montant')
                     <span class="text-sm text-red-500">{{ $message }}</span>
@@ -42,7 +42,7 @@
         <div>
             <label for="mode_retrait" class="block text-sm font-medium text-gray-700">Mode de Retrait</label>
             <select wire:model="mode_retrait" id="mode_retrait"
-                class="block w-full px-4 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                class="block w-full px-4 py-2 mt-1 border bg-gray-100 border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
                 <option>Choisir un mode de retrait</option>
                 <option value="AirtelMoney">AirtelMoney</option>
                 <option value="MoovMoney">MoovMoney</option>
@@ -58,7 +58,7 @@
         <div>
             <label for="numero_compte" class="block text-sm font-medium text-gray-700">Numéro ou RIB</label>
             <input type="text" wire:model="numero_compte" id="numero_compte"
-                class="block w-full px-4 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                class="block w-full px-4 py-2 mt-1 bg-gray-100 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                 required>
             @error('numero_compte')
                 <span class="text-sm text-red-500">{{ $message }}</span>
@@ -69,7 +69,7 @@
         <div>
             <label for="nom_compte" class="block text-sm font-medium text-gray-700">Nom du Compte</label>
             <input type="text" wire:model="nom_compte" id="nom_compte"
-                class="block w-full px-4 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                class="block w-full px-4 py-2 mt-1 bg-gray-100 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                 required>
             @error('nom_compte')
                 <span class="text-sm text-red-500">{{ $message }}</span>
@@ -78,7 +78,7 @@
 
         <div class="flex justify-center mt-6">
             <button type="submit"
-                class="px-6 py-3 bg-[#18181b] text-white font-semibold rounded-md shadow-md hover:bg-[#0A52AB] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
+                class="px-6 py-3 text-white font-semibold rounded-md shadow-md bg-[#0A52AB] hover:bg-[#478bc4] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
                 Soumettre
             </button>
         </div>

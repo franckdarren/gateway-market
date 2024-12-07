@@ -4,7 +4,7 @@
 
             <div class="px-5 pt-2 overflow-x-auto bg-white rounded-md">
                 <a href="{{ route('offre.create') }}"
-                    class="inline-flex items-center justify-center px-4 py-2 mr-2 bg-[#18181b] text-white font-semibold text-sm rounded-lg shadow-md hover:bg-[#0A52AB] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 transition duration-200 ease-in-out float-right mb-3">
+                    class="inline-flex items-center justify-center px-4 py-2 mr-2 bg-[#0A52AB] text-white font-semibold text-sm rounded-lg shadow-md hover:bg-[#478bc4] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 transition duration-200 ease-in-out float-right mb-3">
                     <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
@@ -24,7 +24,7 @@
                     </thead>
                     <tbody>
                         @forelse ($mesOffres as $offre)
-                            <tr class="py-2 border-b border-gray-400 hover:bg-gray-100 ">
+                            <tr class="py-2 border-b-4 border-gray-200 hover:bg-gray-100 ">
                                 <td class="p-4 ">{{ $offre->nom_projet }}</td>
                                 <td class="p-4 text-center text-green-500 ">{{ $offre->taux_interet }} %</td>
                                 <td class="p-4 text-xs font-bold lg:text-base">
@@ -33,7 +33,7 @@
                                     class=" flex flex-col justify-center items-center md:flex-row h-full md:p-4 text-center md:w-[250px]">
                                     <!-- Bouton Voir -->
                                     <a href="{{ route('offre.show', $offre->id) }}"
-                                        class="items-center hidden px-2 py-1 text-sm font-semibold text-blue-600 border border-blue-600 rounded-md md:inline-flex hover:text-blue-800 hover:bg-blue-100">
+                                        class="items-center hidden px-2 py-1 mt-1 text-sm font-semibold text-white bg-blue-600 border border-blue-600 rounded-md md:inline-flex hover:text-blue-800 hover:bg-blue-300">
                                         Voir
                                     </a>
                                     <a href="{{ route('offre.show', $offre->id) }}"
@@ -43,7 +43,7 @@
 
                                     <!-- Bouton Éditer -->
                                     <a href="{{ route('offre.edit', $offre->id) }}"
-                                        class="items-center hidden px-2 py-1 mt-1 ml-2 text-sm font-semibold text-green-600 border border-green-600 rounded-md md:inline-flex hover:text-green-800 hover:bg-green-100">
+                                        class="items-center hidden px-2 py-1 mt-1 ml-2 text-sm font-semibold text-white bg-green-600 border border-green-600 rounded-md md:inline-flex hover:text-green-800 hover:bg-green-300">
                                         Éditer
                                     </a>
 
@@ -59,7 +59,7 @@
                                         @method('DELETE')
                                         <button type="submit"
                                             onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette offre ?')"
-                                            class="items-center hidden px-2 py-1 ml-2 text-sm font-semibold text-red-600 border border-red-600 rounded-md md:inline-flex hover:text-red-800 hover:bg-red-100">
+                                            class="items-center hidden px-2 py-1 ml-2 text-sm font-semibold text-white bg-red-600 border border-red-600 rounded-md md:inline-flex hover:text-red-800 hover:bg-red-300">
                                             Supprimer
                                         </button>
                                         <button type="submit"
