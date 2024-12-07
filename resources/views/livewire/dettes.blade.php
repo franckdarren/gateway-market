@@ -31,9 +31,11 @@
                         {{ number_format($remboursement->remboursement_total, 0, '.', ' ') }} FCFA</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                         {{ number_format($remboursement->cumul_remboursement, 0, '.', ' ') }} FCFA</td>
-                    <td
-                        class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 {{ $remboursement->statut === 'Remboursé' ? 'text-green-600' : '' }}">
-                        {{ $remboursement->statut }}
+                    <td class="px-6 py-4 whitespace-nowrap text-sm">
+                        <span
+                            class="inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium border
+                                {{ $remboursement->statut === 'Remboursé' ? 'bg-[#f0fdf4] text-[#16A34A] border-green-100' : 'bg-[#fffbeb] text-[#D97706] border-yellow-100' }}">{{ $remboursement->statut }}
+                        </span>
                     </td>
 
                 </tr>
