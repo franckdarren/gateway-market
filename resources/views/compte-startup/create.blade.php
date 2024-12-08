@@ -1,9 +1,9 @@
 <x-app-layout>
-    <x-slot name="header">
+    {{-- <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Créer un compte startup') }}
         </h2>
-    </x-slot>
+    </x-slot> --}}
 
     <div class="py-2 lg:py-5">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -17,8 +17,8 @@
                         </ul>
                     </div>
                 @endif
-                <div class="max-w-3xl mx-auto bg-white shadow-md rounded-lg p-8 mt-10">
-                    <h2 class="text-2xl font-bold text-gray-800 mb-6">Créer un Compte Startup</h2>
+                <div class="max-w-3xl mx-auto bg-white shadow-md rounded-lg p-8">
+                    <h2 class="text-2xl font-semibold text-black mb-6 text-center">Créer un Compte Startup</h2>
                     <form action="{{ route('compte_startup.store') }}" method="POST" class="space-y-6">
                         @csrf
 

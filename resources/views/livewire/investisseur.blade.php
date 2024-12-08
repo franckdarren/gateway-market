@@ -43,7 +43,8 @@
                         <div class="flex md:hidden flex-col-reverse mr-3 md:mr-0 items-end">
                             <!-- Section: Taux d'intérêt -->
                             <div class="flex flex-col items-center lg:items-start mb-4 lg:mb-0 lg:mr-8">
-                                <p class="text-sm md:text-lg font-medium text-green-600 ">{{ $offre->taux_interet }}%</p>
+                                <p class="text-sm md:text-lg font-medium text-green-600 ">{{ $offre->taux_interet }}%
+                                </p>
                                 <p class="text-sm hidden md:flex text-gray-600">Taux d'intérêt</p>
                             </div>
 
@@ -88,7 +89,7 @@
             </div>
         </div>
     @else
-        <div class="flex flex-col items-center justify-center h-full py-10 bg-gray-100">
+        <div class="flex flex-col items-center justify-center h-full py-10 bg-white rounded-lg">
             <h1 class="text-2xl font-bold text-gray-800 mb-4">Aucun compte Investisseur trouvé</h1>
             <p class="text-gray-600 text-center mb-6">
                 Vous n'avez pas encore de compte Investisseur. Créez-en un pour commencer.

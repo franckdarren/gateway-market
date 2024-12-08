@@ -112,7 +112,7 @@
                     </tbody>
                 </table>
             @else
-                <div class="flex flex-col items-center justify-center h-full py-10 bg-gray-100">
+                <div class="flex flex-col items-center justify-center h-full py-10 bg-white rounded-lg">
                     <h1 class="mb-4 text-2xl font-bold text-gray-800">Aucun compte Startup trouvé</h1>
                     <p class="mb-6 text-center text-gray-600">
                         Vous n'avez pas encore de compte Startup. Créez-en un pour commencer.
