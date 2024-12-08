@@ -103,7 +103,7 @@
             </div>
         </div>
     @else
-        <div class="flex flex-col items-center justify-center h-full py-10 bg-gray-100">
+        <div class="flex flex-col items-center justify-center h-full py-10 bg-white rounded-lg">
             <h1 class="text-2xl font-bold text-gray-800 mb-4">Aucun compte Investisseur trouvé</h1>
             <p class="text-gray-600 text-center mb-6">
                 Vous n'avez pas encore de compte Investisseur. Créez-en un pour commencer.

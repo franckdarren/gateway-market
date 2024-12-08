@@ -1,9 +1,9 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="text-xl font-semibold leading-tight text-gray-800">
+    {{-- <x-slot name="header">
+        <h2 class="text-3xl font-medium text-gray-700">
             {{ __('Créer un compte investisseur') }}
         </h2>
-    </x-slot>
+    </x-slot> --}}
 
     <div class="py-2 lg:py-5">
         @if (session('success'))
@@ -19,8 +19,9 @@
                 </button>
             </div>
         @endif
-        <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-            <div class="">
+        <div class="sm:px-6 lg:px-8">
+            <div class="max-w-3xl mx-auto bg-white shadow-md rounded-lg p-8">
+                <h2 class="text-2xl font-semibold text-black mb-6 text-center">Créer un Compte Investisseur</h2>
                 <form method="POST" action="{{ route('compte_investisseur.store') }}" class="space-y-6">
                     @csrf
                     <div class="grid grid-cols-1 gap-6 md:grid-cols-2">

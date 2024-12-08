@@ -54,7 +54,7 @@ class CompteInvestisseurController extends Controller
         ]);
 
         // Retourner une réponse, redirection, ou vue selon besoin
-        return redirect()->route('compte_investisseur.index')->with('success', 'Compte créé avec succès!');
+        return redirect()->route('dashboard')->with('success', 'Compte créé avec succès!');
     }
 
     // Afficher les détails d'un compte investisseur spécifique
