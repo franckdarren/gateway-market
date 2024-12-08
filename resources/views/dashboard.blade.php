@@ -25,7 +25,7 @@
                 </button>
             </div>
         @endif
-        <div class="mx-auto max-w-9xl sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-9xl sm:px-6 lg:px-0 xl:px-8">
             <div class="">
                 @if (auth()->user()->hasRole('Administrateur'))
                     @livewire('dashboard-admin')
