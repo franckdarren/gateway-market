@@ -30,7 +30,11 @@
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $offre->taux_interet }} %</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                         {{ number_format($offre->montant, 0, '.', ' ') }} FCFA</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $offre->statut }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm">
+                            <span
+                                class="inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium border bg-[#f0fdf4] text-[#16A34A] border-green-100">{{ $offre->statut }}
+                            </span>
+                        </td>
 
                     <td class="border border-gray-300 px-2 py-2 text-center w-[250px]">
                         <a href="{{ route('offre.show', $offre->id) }}"
