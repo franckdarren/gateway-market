@@ -76,10 +76,6 @@ class RetraitCommand extends Command
             // Récupérer le compte admin
             $compteAdmin = CompteAdmin::first();
 
-            // Effectuer les opérations financières
-            $compte->solde -= $montant;
-            $compte->save();
-
             // Marquer la transaction comme traitée
             $transaction->statut = 'Traitée';
             $transaction->save();
