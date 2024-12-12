@@ -227,6 +227,7 @@ class OffreController extends Controller
         // Récupérer l'investisseur (utilisateur connecté)
         $investisseur = CompteInvestisseur::where('user_id', Auth::id())->first();
         $startup = $offre->compteStartup;
+        $admin = CompteAdmin::first();
 
         if (!$investisseur) {
             // Si l'investisseur n'existe pas, retourner une erreur ou rediriger
@@ -262,6 +263,17 @@ class OffreController extends Controller
             'statut' => "Traitée",
 
         ]);
+
+        $admin->transactions()->create([
+            // 'compte_type' => 'Compte Startup',
+            // 'compte_id' => $startup->id,
+            'montant' => $frais,
+            'type' => "Commission",
+            'description' => "Commission pour le financement du projet {$offre->nom_projet} par " . $investisseur->nom . " " . $investisseur->prenom,
+            'statut' => "Traitée",
+
+        ]);
+
 
         // Mettre à jour l'offre avec le compte investisseur et changer son statut
         $offre->compte_investisseur_id = $investisseur->id;

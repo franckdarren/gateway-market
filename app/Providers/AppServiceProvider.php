@@ -29,6 +29,8 @@ class AppServiceProvider extends ServiceProvider
         Relation::morphMap([
             'Compte Startup' => \App\Models\CompteStartup::class,
             'Compte Investisseur' => \App\Models\CompteInvestisseur::class,
+            'Compte Admin' => \App\Models\CompteAdmin::class,
+
         ]);
     }
 }

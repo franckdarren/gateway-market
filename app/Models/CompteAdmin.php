@@ -18,4 +18,14 @@ class CompteAdmin extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function transactions()
+    {
+        return $this->morphMany(Transaction::class, 'compte');
+    }
+
+    public function getMorphClass()
+    {
+        return 'Compte Admin';
+    }
 }
