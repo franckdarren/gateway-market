@@ -4,6 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+
 
     <title>Gateway Market</title>
 
@@ -1025,7 +1027,7 @@
                                      class="lg:mx-0 bg-[#3A88E9] text-white text-xl font-bold rounded-full py-4 px-9 focus:outline-none transform transition hover:scale-110 duration-300 ease-in-out">
                                     Inscrivez-vous
                                 </button>
-                               </a> 
+                               </a>
 
                             </div>
                         </div>
