@@ -139,7 +139,8 @@ class Historique extends Component implements HasForms, HasTable
                 TextColumn::make('created_at')
                     ->searchable()
                     ->label('Date')
-                    ->sortable(),
+                    ->sortable()
+                    ->formatStateUsing(fn ($state) => \Carbon\Carbon::parse($state)->format('d-m-Y \à H\hi')),
 
             ])
             ->filters([])

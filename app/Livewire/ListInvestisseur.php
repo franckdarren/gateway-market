@@ -109,7 +109,8 @@ class ListInvestisseur extends Component implements HasForms, HasTable
                     }),
 
             ])
-            ->bulkActions([]);
+            ->bulkActions([])
+            ->poll(5);
     }
 
     public function render()
