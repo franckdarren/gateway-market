@@ -70,7 +70,13 @@ class Historique extends Component implements HasForms, HasTable
 
 
             ->columns([
+                TextColumn::make('compte.nom_complet')
+                    ->label('Nom')
+                    ->searchable()
+                    ->sortable(),
+
                 TextColumn::make('compte_type')
+                    ->label('Nature')
                     ->searchable()
                     ->sortable(),
 
@@ -99,6 +105,13 @@ class Historique extends Component implements HasForms, HasTable
                 TextColumn::make('description')
                     ->searchable()
                     ->sortable(),
+
+                TextColumn::make('compte.solde')
+                    ->label('Solde')
+                    ->searchable()
+                    ->sortable()
+                    ->formatStateUsing(fn(string|int|null $state): string => $state ? number_format($state, 0, '.', ' ') . ' FCFA' : '0 FCFA'),
+
 
                 TextColumn::make('mode_retrait')
                     ->searchable()

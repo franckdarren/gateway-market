@@ -20,6 +20,11 @@ class CompteStartup extends Model
 
     ];
 
+    public function getNomCompletAttribute()
+    {
+        return "{$this->nom}";
+    }
+
     public function getMorphClass()
     {
         return 'Compte Startup';
