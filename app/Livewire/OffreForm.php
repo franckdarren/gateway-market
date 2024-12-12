@@ -43,6 +43,8 @@ class OffreForm extends Component
 
     public function submit()
     {
+        dd($this->url_business_plan, $this->url_etude_risque);
+
         $this->validate();
 
         // Vérifier si l'utilisateur a un compte startup
@@ -52,8 +54,8 @@ class OffreForm extends Component
         }
 
         // Store the uploaded files if they exist
-        $businessPlanPath = $this->url_business_plan ? $this->url_business_plan->store('business_plans') : null;
-        $etudeRisquePath = $this->url_etude_risque ? $this->url_etude_risque->store('etudes_risques') : null;
+        $businessPlanPath = $this->url_business_plan ? $this->url_business_plan->store('pdf/business_plans') : null;
+        $etudeRisquePath = $this->url_etude_risque ? $this->url_etude_risque->store('pdf/etudes_risques') : null;
 
         // Create a new Offre
         Offre::create([

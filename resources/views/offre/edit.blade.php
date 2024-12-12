@@ -37,12 +37,6 @@
                     </div>
                 </div>
             </div>
-            {{-- @livewire('prevision', [
-                'montantEmprunte' => $offre->montant,
-                'duree' => $offre->nbre_mois_remboursement,
-                'tauxInteret' => $offre->taux_interet,
-                'delaiGrace' => $offre->nbre_mois_grace,
-            ]) --}}
         </div>
     </div>
 </x-app-layout>

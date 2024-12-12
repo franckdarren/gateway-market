@@ -7,6 +7,7 @@ use Livewire\Component;
 use App\Models\CompteStartup;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Storage;
+use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
 class EditOffreForm extends Component
 {
@@ -65,6 +66,8 @@ class EditOffreForm extends Component
     {
         $this->validate();
 
+        // dd($this->url_business_plan, $this->url_etude_risque);
+
         // Vérifier si l'utilisateur a un compte startup
         $compteStartup = CompteStartup::where('user_id', auth()->id())->first();
         if (!$compteStartup) {
@@ -79,8 +82,8 @@ class EditOffreForm extends Component
         }
 
         // Gérer le fichier du Business Plan
-        if ($this->url_business_plan instanceof \Livewire\TemporaryUploadedFile) {
-            $businessPlanPath = $this->url_business_plan->store('business-plans');
+        if ($this->url_business_plan instanceof TemporaryUploadedFile) {
+            $businessPlanPath = $this->url_business_plan->store('pdf/business_plans');
             if ($this->current_business_plan) {
                 Storage::delete($this->current_business_plan); // Supprimer l'ancien fichier
             }
@@ -89,8 +92,8 @@ class EditOffreForm extends Component
         }
 
         // Gérer le fichier de l'étude de risque
-        if ($this->url_etude_risque instanceof \Livewire\TemporaryUploadedFile) {
-            $etudeRisquePath = $this->url_etude_risque->store('etudes-risque');
+        if ($this->url_etude_risque instanceof TemporaryUploadedFile) {
+            $etudeRisquePath = $this->url_etude_risque->store('pdf/etudes_risques');
             if ($this->current_etude_risque) {
                 Storage::delete($this->current_etude_risque); // Supprimer l'ancien fichier
             }

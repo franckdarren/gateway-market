@@ -28,8 +28,8 @@ class OffreFactory extends Factory
             'nbre_mois_remboursement' => $this->faker->numberBetween(4, 10),
             'nbre_mois_grace' => $this->faker->numberBetween(1, 3),
             'taux_interet' => $taux_interet,
-            'url_business_plan' => 'pdf/business_plan_1.pdf',  // URL vers le fichier PDF business plan
-            'url_etude_risque' => 'pdf/etude_risque_1.pdf',  // URL vers le fichier PDF étude de risque
+            'url_business_plan' => '',  // URL vers le fichier PDF business plan
+            'url_etude_risque' => '',  // URL vers le fichier PDF étude de risque
             'van' => $this->faker->numberBetween(50000, 500000),
             'ir' => $this->faker->randomFloat(2, 25, 100),
             'tri' => $this->faker->randomFloat(2, 25, 100),

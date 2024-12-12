@@ -97,6 +97,7 @@
                 <input type="file" name="url_business_plan" id="url_business_plan" wire:model="url_business_plan"
                     class="mt-1 block w-full px-4 py-2 bg-gray-100 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     accept=".pdf">
+                <div wire:loading wire:target="url_business_plan">Chargement...</div>
                 @error('url_business_plan')
                     <span class="text-xs text-red-500">{{ $message }}</span>
                 @enderror
@@ -117,6 +118,7 @@
                 <input type="file" name="url_etude_risque" id="url_etude_risque" wire:model="url_etude_risque"
                     class="mt-1 block w-full px-4 py-2 bg-gray-100 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     accept=".pdf">
+                <div wire:loading wire:target="url_etude_risque">Chargement...</div>
                 @error('url_etude_risque')
                     <span class="text-xs text-red-500">{{ $message }}</span>
                 @enderror
