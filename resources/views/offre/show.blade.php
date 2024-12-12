@@ -313,8 +313,6 @@
 
     </div>
 
-    <h1 class="my-6 text-xl font-bold text-center text-gray-800">Simulateur de prévision de remboursement
-    </h1>
     <div class="sm:px-6 lg:px-8">
         @livewire('prevision', [
             'montantEmprunte' => $offre->montant,

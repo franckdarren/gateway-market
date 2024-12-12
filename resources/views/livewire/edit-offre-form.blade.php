@@ -1,7 +1,27 @@
 <div>
-    <form class="" wire:submit.prevent="submit">
+    @if (session('success'))
+        <div class="flex items-center justify-between p-4 mx-auto mb-4 space-x-4 text-white bg-green-500 rounded-md shadow-md md:fixed md:top-5 md:right-5"
+            x-data="{ open: true }" x-show="open" x-transition>
+            <span>{{ session('success') }}</span>
+            <button class="text-white hover:text-gray-200 focus:outline-none" @click="open = false">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+    @endif
+    @if ($errors->any())
+        <div class="p-4 mx-10 mb-4 text-white bg-red-500 rounded-md">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+    <form wire:submit.prevent="submit" enctype="multipart/form-data" class="">
         @csrf
-
         <div class="grid gap-5 md:grid-cols-2">
             <!-- Nom du projet -->
             <div class="mb-4">
@@ -77,16 +97,39 @@
                 <input type="file" name="url_business_plan" id="url_business_plan" wire:model="url_business_plan"
                     class="mt-1 block w-full px-4 py-2 bg-gray-100 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     accept=".pdf">
+                @error('url_business_plan')
+                    <span class="text-xs text-red-500">{{ $message }}</span>
+                @enderror
+                @if ($current_business_plan)
+                    <p class="mt-1 text-sm text-gray-600">
+                        <a href="{{ Storage::url($current_business_plan) }}" target="_blank"
+                            class="text-blue-600 hover:underline">
+                            Voir le fichier actuel
+                        </a>
+                    </p>
+                @endif
             </div>
 
             <!-- URL de l'étude de risque (Fichier) -->
             <div class="mb-4">
-                <label for="url_etude_risque" class="block text-sm font-medium text-gray-700">Étude de
-                    Risque (PDF)</label>
+                <label for="url_etude_risque" class="block text-sm font-medium text-gray-700">Étude de Risque
+                    (PDF)</label>
                 <input type="file" name="url_etude_risque" id="url_etude_risque" wire:model="url_etude_risque"
                     class="mt-1 block w-full px-4 py-2 bg-gray-100 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     accept=".pdf">
+                @error('url_etude_risque')
+                    <span class="text-xs text-red-500">{{ $message }}</span>
+                @enderror
+                @if ($current_etude_risque)
+                    <p class="mt-1 text-sm text-gray-600">
+                        <a href="{{ Storage::url($current_etude_risque) }}" target="_blank"
+                            class="text-blue-600 hover:underline">
+                            Voir le fichier actuel
+                        </a>
+                    </p>
+                @endif
             </div>
+
 
             <!-- VAN -->
             <div class="mb-4">
@@ -120,7 +163,6 @@
                     required>
             </div>
         </div>
-
         <!-- Simulateur -->
         <div>
             @if ($remboursements)
@@ -151,7 +193,8 @@
                                             {{ $remboursement['mois'] }}
                                         </td>
                                         <td class="px-6 py-4 text-sm text-gray-900">
-                                            {{ number_format($remboursement['capital_restant'], 0, '', '.') }} FCFA</td>
+                                            {{ number_format($remboursement['capital_restant'], 0, '', '.') }} FCFA
+                                        </td>
                                         <td class="px-6 py-4 text-sm text-gray-900">
                                             {{ number_format($remboursement['interet_du'], 0, '', '.') }} FCFA</td>
                                         <td class="px-6 py-4 text-sm text-gray-900">
@@ -176,11 +219,12 @@
             @endif
         </div>
 
-        <!-- Soumettre le formulaire -->
-        <div class="flex justify-end">
+
+        <!-- Bouton de soumission -->
+        <div class="flex justify-center mt-3">
             <button type="submit"
-                class="mt-3 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition duration-200 ease-in-out">
-                Créer l'Offre
+                class="px-4 py-2 text-white bg-blue-500 rounded-md focus:outline-none hover:bg-blue-600">
+                Enregistrer
             </button>
         </div>
     </form>

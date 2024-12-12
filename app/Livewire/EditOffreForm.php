@@ -8,7 +8,7 @@ use App\Models\CompteStartup;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Storage;
 
-class OffreForm extends Component
+class EditOffreForm extends Component
 {
     use WithFileUploads;
 
@@ -20,11 +20,31 @@ class OffreForm extends Component
     public $tauxInteret;
     public $url_business_plan;
     public $url_etude_risque;
+    public $current_business_plan;
+    public $current_etude_risque;
     public $van;
     public $ir;
     public $tri;
     public $krl;
     public $remboursements = [];
+    public $offre;
+
+    public function mount(Offre $offre)
+    {
+        $this->offre = $offre;
+        $this->nom_projet = $offre->nom_projet;
+        $this->description_projet = $offre->description_projet;
+        $this->montant = $offre->montant;
+        $this->nbre_mois_remboursement = $offre->nbre_mois_remboursement;
+        $this->delaiGrace = $offre->nbre_mois_grace;
+        $this->tauxInteret = $offre->taux_interet;
+        $this->current_business_plan = $offre->url_business_plan;
+        $this->current_etude_risque = $offre->url_etude_risque;
+        $this->van = $offre->van;
+        $this->ir = $offre->ir;
+        $this->tri = $offre->tri;
+        $this->krl = $offre->krl;
+    }
 
     protected $rules = [
         'nom_projet' => 'required|string|max:255',
@@ -48,15 +68,38 @@ class OffreForm extends Component
         // Vérifier si l'utilisateur a un compte startup
         $compteStartup = CompteStartup::where('user_id', auth()->id())->first();
         if (!$compteStartup) {
-            return redirect()->back()->withErrors(['error' => 'Aucun compte startup associé à cet utilisateur.']);
+            session()->flash('error', 'Aucun compte startup associé à cet utilisateur.');
+            return;
         }
 
-        // Store the uploaded files if they exist
-        $businessPlanPath = $this->url_business_plan ? $this->url_business_plan->store('business_plans') : null;
-        $etudeRisquePath = $this->url_etude_risque ? $this->url_etude_risque->store('etudes_risques') : null;
+        // Vérifier que l'offre à modifier existe
+        if (!$this->offre || $this->offre->compte_startup_id !== $compteStartup->id) {
+            session()->flash('error', 'Offre introuvable ou non autorisée.');
+            return;
+        }
 
-        // Create a new Offre
-        Offre::create([
+        // Gérer le fichier du Business Plan
+        if ($this->url_business_plan instanceof \Livewire\TemporaryUploadedFile) {
+            $businessPlanPath = $this->url_business_plan->store('business-plans');
+            if ($this->current_business_plan) {
+                Storage::delete($this->current_business_plan); // Supprimer l'ancien fichier
+            }
+        } else {
+            $businessPlanPath = $this->current_business_plan; // Conserver le fichier existant
+        }
+
+        // Gérer le fichier de l'étude de risque
+        if ($this->url_etude_risque instanceof \Livewire\TemporaryUploadedFile) {
+            $etudeRisquePath = $this->url_etude_risque->store('etudes-risque');
+            if ($this->current_etude_risque) {
+                Storage::delete($this->current_etude_risque); // Supprimer l'ancien fichier
+            }
+        } else {
+            $etudeRisquePath = $this->current_etude_risque; // Conserver le fichier existant
+        }
+
+        // Mettre à jour l'offre
+        $this->offre->update([
             'nom_projet' => $this->nom_projet,
             'description_projet' => $this->description_projet,
             'montant' => $this->montant,
@@ -69,17 +112,9 @@ class OffreForm extends Component
             'ir' => $this->ir,
             'tri' => $this->tri,
             'krl' => $this->krl,
-            'compte_startup_id' => $compteStartup->id,
-
         ]);
 
-        session()->flash('message', 'Offre créée avec succès.');
-
-        // Reset form fields
-        $this->reset();
-
-        // Optionally, redirect to another page
-        return redirect()->route('dashboard')->with('success', 'Offre créée avec succès.');
+        session()->flash('success', 'Offre modifiée avec succès.');
     }
 
     public function updated($propertyName)
@@ -92,8 +127,6 @@ class OffreForm extends Component
             $this->calculatePrevisions();
         }
     }
-
-
 
     public function calculatePrevisions()
     {
@@ -160,7 +193,6 @@ class OffreForm extends Component
         $this->remboursements = $remboursements;
     }
 
-
     public function render()
     {
         // Exécutez calculatePrevisions au chargement initial si les champs sont déjà remplis
@@ -168,8 +200,6 @@ class OffreForm extends Component
             $this->calculatePrevisions();
         }
 
-        return view('livewire.offre-form', [
-            'remboursements' => $this->remboursements,
-        ]);
+        return view('livewire.edit-offre-form');
     }
 }
