@@ -82,7 +82,7 @@ class Retrait extends Component
         $this->validate($rules);
 
         // Créer la transaction
-        $transaction = Transaction::create([
+        $transaction = $compte->transactions()->create([
             'montant' => $this->montant,
             'type' => $this->type,
             'description' => $this->description,

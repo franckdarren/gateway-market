@@ -92,13 +92,12 @@ class ListInvestisseur extends Component implements HasForms, HasTable
                             ->label('Montant'),
                     ])
                     ->action(function (array $data, $record) {
-                        // Création manuelle de la transaction sans utiliser la relation morphique
-                        Transaction::create([
+                        // Création de la transaction en utilisant la relation morphique
+                        $record->transactions()->create([
                             'montant' => $data['montant'],
-                            'type' => 'depot',
+                            'type' => 'Dépot',
                             'description' => "Dépôt d'argent au compte " . $record->nom . ' ' . $record->prenom,
-                            'compte_type' => "Compte Investisseur", // Valeur fixe
-                            'compte_id' => $record->id,
+                            // 'compte_type' => "Compte Investisseur",
                             'statut' => 'En attente de traitement',
                         ]);
 

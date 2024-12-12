@@ -20,6 +20,11 @@ class CompteStartup extends Model
 
     ];
 
+    public function getMorphClass()
+    {
+        return 'Compte Startup';
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

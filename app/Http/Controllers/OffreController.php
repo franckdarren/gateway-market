@@ -226,6 +226,7 @@ class OffreController extends Controller
     {
         // Récupérer l'investisseur (utilisateur connecté)
         $investisseur = CompteInvestisseur::where('user_id', Auth::id())->first();
+        $startup = $offre->compteStartup;
 
         if (!$investisseur) {
             // Si l'investisseur n'existe pas, retourner une erreur ou rediriger
@@ -242,14 +243,24 @@ class OffreController extends Controller
             return redirect()->back()->with('error', 'Solde insuffisant pour effectuer cet investissement.');
         }
 
-        Transaction::create([
+        $investisseur->transactions()->create([
             'montant' => $montantTotal,
             'frais' => $frais,
             'type' => 'Investissement',
             'description' => 'Investissement dans l\'offre ' . $offre->nom_projet,
-            'compte_type' => 'Compte Investisseur',
-            'compte_id' => $investisseur->id,
+            // 'compte_type' => 'Compte Investisseur',
+            // 'compte_id' => $investisseur->id,
             'offre_id' => $offre->id,
+        ]);
+
+        $startup->transactions()->create([
+            // 'compte_type' => 'Compte Startup',
+            // 'compte_id' => $startup->id,
+            'montant' => $montantInvestissement,
+            'type' => "Dépot",
+            'description' => "Financement du projet {$offre->nom_projet} par " . $investisseur->nom . " " . $investisseur->prenom,
+            'statut' => "Traitée",
+
         ]);
 
         // Mettre à jour l'offre avec le compte investisseur et changer son statut

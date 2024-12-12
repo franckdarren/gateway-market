@@ -16,8 +16,7 @@ return new class extends Migration
             $table->integer('montant');
             $table->enum('type', ['Dépot', 'Retrait', 'Investissement', 'Remboursement débit', 'Remboursement crédit', 'Remboursement ERREUR']);
             $table->string('description')->nullable();
-            $table->string('compte_type');
-            $table->unsignedBigInteger('compte_id');
+            $table->morphs('compte');;
             $table->string('mode_retrait')->nullable();
             $table->string('numero_compte')->nullable();
             $table->string('nom_compte')->nullable();

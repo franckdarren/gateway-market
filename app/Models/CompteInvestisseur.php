@@ -23,6 +23,11 @@ class CompteInvestisseur extends Model
         'solde'
     ];
 
+    public function getMorphClass()
+    {
+        return 'Compte Investisseur';
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

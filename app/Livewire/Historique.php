@@ -77,7 +77,7 @@ class Historique extends Component implements HasForms, HasTable
                 TextColumn::make('montant')
                     ->searchable()
                     ->formatStateUsing(function ($state, $record) {
-                        $prefix = ($record->type === 'Dépot' || $record->type === 'Investissement' || $record->type === 'Remboursement crédit') ? '+' : '-';
+                        $prefix = ($record->type === 'Dépot' || $record->type === 'Remboursement crédit') ? '+' : '-';
                         return $prefix . ' ' . number_format($state, 0, '', ' ') . ' FCFA';
                     })
                     ->sortable(),
