@@ -43,8 +43,6 @@ class OffreForm extends Component
 
     public function submit()
     {
-        dd($this->url_business_plan, $this->url_etude_risque);
-
         $this->validate();
 
         // Vérifier si l'utilisateur a un compte startup
