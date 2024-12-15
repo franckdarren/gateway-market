@@ -10,6 +10,8 @@ use App\Models\CompteAdmin;
 use App\Models\Transaction;
 use App\Models\CompteStartup;
 use App\Models\CompteInvestisseur;
+use Filament\Actions\StaticAction;
+use Illuminate\Support\HtmlString;
 use Filament\Forms\Components\Grid;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Filters\Filter;
@@ -80,6 +82,31 @@ class ListOffre extends Component implements HasForms, HasTable
             ])
             ->filters([])
             ->actions([
+
+                //Affichage pdf Business Plan
+                Action::make('url_business_plan')
+                    ->label('Business Plan')
+                    ->modalContent(fn(Offre $record) => new HtmlString(
+                        '<iframe src="' . Storage::disk('public')->url($record->url_business_plan) . '" width="100%" height="600px"></iframe>'
+                    ))
+                    ->modalWidth('7xl')
+                    ->requiresConfirmation(false)
+                    ->modalSubmitAction(false)
+                    ->modalFooterActionsAlignment('right')
+                    ->modalCancelAction(fn(StaticAction $action) => $action),
+
+                //Affichage pdf Business Plan
+                Action::make('url_etude_risque')
+                    ->label('Etude de risque')
+                    ->modalContent(fn(Offre $record) => new HtmlString(
+                        '<iframe src="' . Storage::disk('public')->url($record->url_etude_risque) . '" width="100%" height="600px"></iframe>'
+                    ))
+                    ->modalWidth('7xl')
+                    ->requiresConfirmation(false)
+                    ->modalSubmitAction(false)
+                    ->modalFooterActionsAlignment('right')
+                    ->modalCancelAction(fn(StaticAction $action) => $action),
+
                 // Bouton personnalisé "Modifier"
                 Action::make('modifier')
                     ->label('Modifier')
@@ -148,37 +175,13 @@ class ListOffre extends Component implements HasForms, HasTable
                                     FileUpload::make('url_business_plan')
                                         ->label('Business Plan')
                                         ->acceptedFileTypes(['application/pdf'])
-                                        ->directory('pdf/business_plans')
-                                        ->helperText(function ($state) {
-                                            // Vérifier si $state est un tableau ou une chaîne
-                                            if (is_array($state)) {
-                                                $state = $state[0] ?? null;
-                                            }
-
-                                            if ($state) {
-                                                return '<a href="' . Storage::url($state) . '" target="_blank" class="text-blue-600 underline">Voir le Business Plan existant</a>';
-                                            }
-
-                                            return null;
-                                        }),
+                                        ->directory('pdf/business_plans'),
 
                                     FileUpload::make('url_etude_risque')
                                         ->label('Étude de risque')
                                         ->acceptedFileTypes(['application/pdf'])
                                         ->directory('pdf/etudes_risque')
                                         ->visibility('public')
-                                        ->helperText(function ($state) {
-                                            if (is_array($state)) {
-                                                $state = $state[0] ?? null;
-                                            }
-
-                                            if ($state) {
-                                                return '<a href="' . Storage::url($state) . '" target="_blank" class="text-blue-600 underline">Voir l\'Étude de risque existante</a>';
-                                            }
-
-                                            return null;
-                                        }),
-
                                 ]),
                         ];
                     }),
