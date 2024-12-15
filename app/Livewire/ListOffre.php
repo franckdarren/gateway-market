@@ -23,6 +23,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Contracts\HasTable;
 use Illuminate\Support\Facades\Storage;
 use Filament\Forms\Components\TextInput;
+use Filament\Tables\Actions\ActionGroup;
 use Filament\Forms\Components\FileUpload;
 use Filament\Tables\Actions\ExportAction;
 use Filament\Tables\Actions\ImportAction;
@@ -82,113 +83,116 @@ class ListOffre extends Component implements HasForms, HasTable
             ])
             ->filters([])
             ->actions([
+                ActionGroup::make([
+                    //Affichage pdf Business Plan
+                    Action::make('url_business_plan')
+                        ->label('Voir Business Plan')
+                        ->modalContent(fn(Offre $record) => new HtmlString(
+                            '<iframe src="' . Storage::disk('public')->url($record->url_business_plan) . '" width="100%" height="600px"></iframe>'
+                        ))
+                        ->modalWidth('7xl')
+                        ->requiresConfirmation(false)
+                        ->modalSubmitAction(false)
+                        ->modalFooterActionsAlignment('right')
+                        ->modalCancelAction(fn(StaticAction $action) => $action),
 
-                //Affichage pdf Business Plan
-                Action::make('url_business_plan')
-                    ->label('Business Plan')
-                    ->modalContent(fn(Offre $record) => new HtmlString(
-                        '<iframe src="' . Storage::disk('public')->url($record->url_business_plan) . '" width="100%" height="600px"></iframe>'
-                    ))
-                    ->modalWidth('7xl')
-                    ->requiresConfirmation(false)
-                    ->modalSubmitAction(false)
-                    ->modalFooterActionsAlignment('right')
-                    ->modalCancelAction(fn(StaticAction $action) => $action),
+                    //Affichage pdf Business Plan
+                    Action::make('url_etude_risque')
+                        ->label('Voir Etude de risque')
+                        ->modalContent(fn(Offre $record) => new HtmlString(
+                            '<iframe src="' . Storage::disk('public')->url($record->url_etude_risque) . '" width="100%" height="600px"></iframe>'
+                        ))
+                        ->modalWidth('7xl')
+                        ->requiresConfirmation(false)
+                        ->modalSubmitAction(false)
+                        ->modalFooterActionsAlignment('right')
+                        ->modalCancelAction(fn(StaticAction $action) => $action),
 
-                //Affichage pdf Business Plan
-                Action::make('url_etude_risque')
-                    ->label('Etude de risque')
-                    ->modalContent(fn(Offre $record) => new HtmlString(
-                        '<iframe src="' . Storage::disk('public')->url($record->url_etude_risque) . '" width="100%" height="600px"></iframe>'
-                    ))
-                    ->modalWidth('7xl')
-                    ->requiresConfirmation(false)
-                    ->modalSubmitAction(false)
-                    ->modalFooterActionsAlignment('right')
-                    ->modalCancelAction(fn(StaticAction $action) => $action),
+                    // Bouton personnalisé "Modifier"
+                    Action::make('modifier')
+                        ->label('Modifier')
+                        // ->icon('heroicon-o-pencil')
+                        ->action(function (Offre $record, array $data): void {
+                            $record->update($data); // Met à jour l'enregistrement
+                        })
+                        ->form(function (Offre $record) {
+                            return [
+                                Grid::make(2) // Deux colonnes
+                                    ->schema([
+                                        TextInput::make('nom_projet')
+                                            ->required()
+                                            ->default($record->nom_projet),
 
-                // Bouton personnalisé "Modifier"
-                Action::make('modifier')
-                    ->label('Modifier')
-                    ->icon('heroicon-o-pencil')
-                    ->action(function (Offre $record, array $data): void {
-                        $record->update($data); // Met à jour l'enregistrement
-                    })
-                    ->form(function (Offre $record) {
-                        return [
-                            Grid::make(2) // Deux colonnes
-                                ->schema([
-                                    TextInput::make('nom_projet')
-                                        ->required()
-                                        ->default($record->nom_projet),
+                                        TextInput::make('montant')
+                                            ->numeric()
+                                            ->required()
+                                            ->default($record->montant),
 
-                                    TextInput::make('montant')
-                                        ->numeric()
-                                        ->required()
-                                        ->default($record->montant),
+                                        TextInput::make('nbre_mois_remboursement')
+                                            ->numeric()
+                                            ->label('Mois de remboursement')
+                                            ->required()
+                                            ->default($record->nbre_mois_remboursement),
 
-                                    TextInput::make('nbre_mois_remboursement')
-                                        ->numeric()
-                                        ->label('Mois de remboursement')
-                                        ->required()
-                                        ->default($record->nbre_mois_remboursement),
+                                        TextInput::make('nbre_mois_grace')
+                                            ->numeric()
+                                            ->label('Mois de grâce')
+                                            ->required()
+                                            ->default($record->nbre_mois_grace),
 
-                                    TextInput::make('nbre_mois_grace')
-                                        ->numeric()
-                                        ->label('Mois de grâce')
-                                        ->required()
-                                        ->default($record->nbre_mois_grace),
+                                        TextInput::make('taux_interet')
+                                            ->numeric()
+                                            ->required()
+                                            ->default($record->taux_interet),
 
-                                    TextInput::make('taux_interet')
-                                        ->numeric()
-                                        ->required()
-                                        ->default($record->taux_interet),
+                                        TextInput::make('van')
+                                            ->numeric()
+                                            ->required()
+                                            ->default($record->van),
 
-                                    TextInput::make('van')
-                                        ->numeric()
-                                        ->required()
-                                        ->default($record->van),
+                                        TextInput::make('ir')
+                                            ->numeric()
+                                            ->required()
+                                            ->default($record->ir),
 
-                                    TextInput::make('ir')
-                                        ->numeric()
-                                        ->required()
-                                        ->default($record->ir),
+                                        TextInput::make('tri')
+                                            ->numeric()
+                                            ->required()
+                                            ->default($record->tri),
 
-                                    TextInput::make('tri')
-                                        ->numeric()
-                                        ->required()
-                                        ->default($record->tri),
+                                        TextInput::make('krl')
+                                            ->numeric()
+                                            ->required()
+                                            ->default($record->krl),
 
-                                    TextInput::make('krl')
-                                        ->numeric()
-                                        ->required()
-                                        ->default($record->krl),
+                                        Select::make('statut')
+                                            ->options([
+                                                'En attente de validation' => 'En attente de validation',
+                                                'Disponible' => 'Disponible',
+                                            ])
+                                            ->default($record->statut)
+                                            ->required(),
 
-                                    Select::make('statut')
-                                        ->options([
-                                            'En attente de validation' => 'En attente de validation',
-                                            'Disponible' => 'Disponible',
-                                        ])
-                                        ->default($record->statut)
-                                        ->required(),
+                                        FileUpload::make('url_business_plan')
+                                            ->label('Business Plan')
+                                            ->acceptedFileTypes(['application/pdf'])
+                                            ->directory('pdf/business_plans')
+                                            ->visibility('public')
+                                            ->default(fn($record) => $record->url_business_plan),
 
-                                    FileUpload::make('url_business_plan')
-                                        ->label('Business Plan')
-                                        ->acceptedFileTypes(['application/pdf'])
-                                        ->directory('pdf/business_plans')
-                                        ->visibility('public')
-                                        ->default(fn($record) => $record->url_business_plan),
+                                        FileUpload::make('url_etude_risque')
+                                            ->label('Étude de risque')
+                                            ->acceptedFileTypes(['application/pdf'])
+                                            ->directory('pdf/etudes_risque')
+                                            ->visibility('public')
+                                            ->default(fn($record) => $record->url_etude_risque),
 
-                                    FileUpload::make('url_etude_risque')
-                                        ->label('Étude de risque')
-                                        ->acceptedFileTypes(['application/pdf'])
-                                        ->directory('pdf/etudes_risque')
-                                        ->visibility('public')
-                                        ->default(fn($record) => $record->url_etude_risque),
+                                    ]),
+                            ];
+                        }),
+                ])
 
-                                ]),
-                        ];
-                    }),
+
             ])
             ->bulkActions([])
             ->poll(5);
