@@ -175,13 +175,17 @@ class ListOffre extends Component implements HasForms, HasTable
                                     FileUpload::make('url_business_plan')
                                         ->label('Business Plan')
                                         ->acceptedFileTypes(['application/pdf'])
-                                        ->directory('pdf/business_plans'),
+                                        ->directory('pdf/business_plans')
+                                        ->visibility('public')
+                                        ->default(fn($record) => $record->url_business_plan),
 
                                     FileUpload::make('url_etude_risque')
                                         ->label('Étude de risque')
                                         ->acceptedFileTypes(['application/pdf'])
                                         ->directory('pdf/etudes_risque')
                                         ->visibility('public')
+                                        ->default(fn($record) => $record->url_etude_risque),
+
                                 ]),
                         ];
                     }),
