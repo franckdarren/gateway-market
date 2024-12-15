@@ -4,9 +4,9 @@
             @if (auth()->user()->hasRole('Administrateur'))
                 {{ __('Dashboard') }}
             @elseif (auth()->user()->hasRole('Startup'))
-                {{ __('Liste des offres') }}
+                {{ __('Mes offres') }} ({{ $mesOffres }})
             @else
-                {{ __('Liste des offres') }}
+                {{ __('Liste des offres') }} ({{ $mesOffres }})
             @endif
         </h2>
     </x-slot>

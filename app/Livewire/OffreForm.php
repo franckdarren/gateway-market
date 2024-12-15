@@ -69,6 +69,7 @@ class OffreForm extends Component
             'ir' => $this->ir,
             'tri' => $this->tri,
             'krl' => $this->krl,
+            'statut' => 'En attente de validation',
             'compte_startup_id' => $compteStartup->id,
 
         ]);

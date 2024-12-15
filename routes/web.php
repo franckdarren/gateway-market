@@ -1,6 +1,8 @@
 <?php
 
+use App\Models\Offre;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OffreController;
 use App\Http\Controllers\CompteStartupController;
 use App\Http\Controllers\CompteInvestisseurController;
@@ -14,11 +16,14 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+
+    //Page d'acceuil
+    Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
 
     //Routes admins
+    Route::get('/validations-offres', function () {
+        return view('validations-offres');
+    })->name('validations-offres');
     Route::get('/investisseurs', function () {
         return view('investisseur');
     })->name('investisseur');

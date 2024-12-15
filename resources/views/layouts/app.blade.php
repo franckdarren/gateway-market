@@ -59,6 +59,15 @@
 
                         @role('Administrateur')
                             <!-- Lien Investisseurs -->
+                            <x-nav-link href="{{ route('validations-offres') }}" :active="request()->routeIs('validations-offres')" :icone='"<svg class=\"w-6 h-6\" xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\">
+                                                                                                                                                                                                                <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M14 11H6m0 0L3 8m3 3l3 3m10-4h1a1 1 0 001-1V7a4 4 0 00-4-4H7a4 4 0 00-4 4v1a1 1 0 001 1h1m12 4a4 4 0 110 8 4 4 0 010-8z\"></path>
+                                                                                                                                                                                                            </svg>"'>
+                                {{ __('Offres') }}
+                            </x-nav-link>
+                        @endrole
+
+                        @role('Administrateur')
+                            <!-- Lien Investisseurs -->
                             <x-nav-link href="{{ route('investisseur') }}" :active="request()->routeIs('investisseur')" :icone='"<svg class=\"w-6 h-6\" xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\">
                                                                                                                                                                                                                 <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M14 11H6m0 0L3 8m3 3l3 3m10-4h1a1 1 0 001-1V7a4 4 0 00-4-4H7a4 4 0 00-4 4v1a1 1 0 001 1h1m12 4a4 4 0 110 8 4 4 0 010-8z\"></path>
                                                                                                                                                                                                             </svg>"'>
@@ -87,8 +96,7 @@
                         @role('Administrateur')
                             <!-- Lien Transactions -->
                             <x-nav-link href="{{ route('transaction') }}" :active="request()->routeIs('transaction')" :icone='"<svg class=\"w-6 h-6\" xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\">
-                                                                                                                                                                                                                <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M5 12h14M5 12l4-4m-4 4l4 4m10-4l-4-4m4 4l-4 4\"></path>
-                                                                                                                                                                                                            </svg>"'>
+                            <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M5 12h14M5 12l4-4m-4 4l4 4m10-4l-4-4m4 4l-4 4\"></path></svg>"'>
                                 {{ __('Transactions') }}
                             </x-nav-link>
                         @endrole

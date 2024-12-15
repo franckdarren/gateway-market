@@ -20,6 +20,7 @@ class OffreFactory extends Factory
         // Générer les valeurs de montant et taux_interet
         $montant = $this->faker->numberBetween(200, 1000) * 10000;
         $taux_interet = $this->faker->randomElement([3, 6, 9, 12, 15, 18, 21]);
+        $statut = $this->faker->randomElement(['En attente de validation', 'Disponible']);
 
         return [
             'nom_projet' => $this->faker->company,
@@ -34,7 +35,7 @@ class OffreFactory extends Factory
             'ir' => $this->faker->randomFloat(2, 25, 100),
             'tri' => $this->faker->randomFloat(2, 25, 100),
             'krl' => $this->faker->randomFloat(2, 0, 1),
-            'statut' => 'Disponible',
+            'statut' => $statut,
 
             // Lier l'offre à un compte startup existant
             'compte_startup_id' => CompteStartup::inRandomOrder()->first()->id,

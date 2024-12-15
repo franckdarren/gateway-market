@@ -50,6 +50,10 @@
                             <h3 class="text-sm font-semibold">Montant :</h3>
                             <p class="text-sm font-bold">{{ number_format($offre->montant, 0, ',', ' ') }} FCFA</p>
                         </div>
+                        <div class="flex gap-5 p-4 text-black bg-[#cfdfea] rounded-md">
+                            <h3 class="text-sm font-semibold">Statut :</h3>
+                            <p class="text-sm">{{ $offre->statut }}</p>
+                        </div>
                     </div>
                 </div>
 
