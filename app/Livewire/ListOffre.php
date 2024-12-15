@@ -19,6 +19,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Log;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Contracts\HasForms;
+use Filament\Support\Enums\ActionSize;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Contracts\HasTable;
 use Illuminate\Support\Facades\Storage;
@@ -190,7 +191,11 @@ class ListOffre extends Component implements HasForms, HasTable
                                     ]),
                             ];
                         }),
-                ])
+                ])->label('Actions')
+                ->icon('heroicon-m-ellipsis-vertical')
+                ->size(ActionSize::Small)
+                ->color('primary')
+                ->button()
 
 
             ])
