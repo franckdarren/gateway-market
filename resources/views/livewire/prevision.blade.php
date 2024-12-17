@@ -36,7 +36,7 @@
 
         <div class="flex justify-center items-end">
             <button type="submit"focus:ring-offset-2
-                class=" px-6 py-3 font-semibold text-white bg-[#1973E2] rounded-lg shadow-md md:w-auto hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 ">
+                class=" px-6 py-3 font-semibold text-white bg-[#0A52AB] hover:bg-[#478bc4] rounded-lg shadow-md md:w-auto focus:outline-none focus:ring-2 focus:ring-blue-500 ">
                 Calculer
             </button>
         </div>
