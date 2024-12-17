@@ -6,24 +6,3 @@
 [x-cloak] {
     display: none;
 }
-
-
-    table {
-        @apply min-w-full border-none  shadow-none; 
-    }
-    
-    table th {
-        @apply bg-[#CFDFEA] px-4 py-2 text-left text-gray-600 border-r border-white ;
-    }
-
-    table td {
-        @apply py-3 px-6 text-gray-700;
-    }
-
-    tr:hover {
-        @apply bg-blue-100;
-    }
-
-    .pagination {
-        @apply flex justify-center;
-    }
