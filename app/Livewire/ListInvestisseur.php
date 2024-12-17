@@ -9,10 +9,13 @@ use App\Models\CompteAdmin;
 use App\Models\Transaction;
 use App\Models\CompteStartup;
 use App\Models\CompteInvestisseur;
+use Filament\Forms\Components\Grid;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Filters\Filter;
 use Illuminate\Contracts\View\View;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Contracts\HasForms;
+use Filament\Forms\Components\Fieldset;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Forms\Components\TextInput;
@@ -106,6 +109,80 @@ class ListInvestisseur extends Component implements HasForms, HasTable
                         //     ->success()
                         //     ->body("Un dépôt de {$data['montant']} a été enregistré pour le compte #{$record->id}.")
                         //     ->send();
+                    }),
+
+                Action::make('modifier')
+                    ->label('Modifier')
+                    ->action(function (CompteInvestisseur $record, array $data): void {
+                        // Mettre à jour les données du CompteInvestisseur
+                        $record->update($data);
+
+                        // Mettre à jour les données de l'utilisateur lié
+                        if (isset($data['user'])) {
+                            $record->user()->update($data['user']);
+                        }
+                    })
+                    ->form(function (CompteInvestisseur $record) {
+                        return [
+
+                            Grid::make(2) // Deux colonnes pour un affichage propre
+                                ->schema([
+
+                                    Fieldset::make('Information du compte')
+                                        ->schema([
+                                            // Champs pour CompteInvestisseur
+                                            TextInput::make('nom')
+                                                ->required()
+                                                ->default($record->nom),
+
+                                            TextInput::make('prenom')
+                                                ->required()
+                                                ->default($record->prenom),
+
+                                            TextInput::make('pays')
+                                                ->required()
+                                                ->default($record->pays),
+
+                                            TextInput::make('etat_province')
+                                                ->default($record->etat_province),
+
+                                            TextInput::make('ville')
+                                                ->default($record->ville),
+
+                                            TextInput::make('code_postal')
+                                                ->default($record->code_postal),
+
+                                            TextInput::make('phone')
+                                                ->required()
+                                                ->default($record->phone),
+
+                                            TextInput::make('email')
+                                                ->required()
+                                                ->default($record->email),
+
+                                            TextInput::make('profession')
+                                                ->required()
+                                                ->default($record->profession),
+                                        ]),
+
+                                    Fieldset::make('Information de l\'utilisateur')
+                                        ->schema([
+                                            // Champs pour User lié
+                                            Grid::make(2) // Grid supplémentaire pour les champs User
+                                                ->schema([
+                                                    TextInput::make('user.name')
+                                                        ->label('Nom de l\'utilisateur')
+                                                        ->required()
+                                                        ->default($record->user?->name),
+
+                                                    TextInput::make('user.email')
+                                                        ->label('Email de l\'utilisateur')
+                                                        ->required()
+                                                        ->default($record->user?->email),
+                                                ]),
+                                        ])
+                                ]),
+                        ];
                     }),
 
             ])
