@@ -33,8 +33,8 @@ class OffreForm extends Component
         'nbre_mois_remboursement' => 'required|integer|min:1',
         'delaiGrace' => 'required|integer|min:0',
         'tauxInteret' => 'required|in:3,6,9,12,15,18,21',
-        'url_business_plan' => 'nullable|file|mimes:pdf|max:10240', // 10MB max
-        'url_etude_risque' => 'nullable|file|mimes:pdf|max:10240', // 10MB max
+        'url_business_plan' => 'nullable|file|mimes:pdf', // 10MB max
+        'url_etude_risque' => 'nullable|file|mimes:pdf', // 10MB max
         'van' => 'required|numeric|min:0',
         'ir' => 'required|numeric|min:0',
         'tri' => 'required|numeric|min:0',
@@ -52,8 +52,8 @@ class OffreForm extends Component
         }
 
         // Store the uploaded files if they exist
-        $businessPlanPath = $this->url_business_plan ? $this->url_business_plan->store('business_plans') : null;
-        $etudeRisquePath = $this->url_etude_risque ? $this->url_etude_risque->store('etudes_risques') : null;
+        $businessPlanPath = $this->url_business_plan ? $this->url_business_plan->store('pdf/business_plans') : null;
+        $etudeRisquePath = $this->url_etude_risque ? $this->url_etude_risque->store('pdf/etudes_risques') : null;
 
         // Create a new Offre
         Offre::create([
@@ -69,6 +69,7 @@ class OffreForm extends Component
             'ir' => $this->ir,
             'tri' => $this->tri,
             'krl' => $this->krl,
+            'statut' => 'En attente de validation',
             'compte_startup_id' => $compteStartup->id,
 
         ]);
@@ -84,11 +85,16 @@ class OffreForm extends Component
 
     public function updated($propertyName)
     {
+        // dd($this->montant, $this->nbre_mois_remboursement, $this->delaiGrace, $this->tauxInteret);
+
         // Vérifiez si toutes les propriétés nécessaires sont remplies
-        if ($this->montant && $this->nbre_mois_remboursement && $this->delaiGrace && $this->tauxInteret) {
+        if ($this->montant && $this->nbre_mois_remboursement && $this->delaiGrace >= 0 && $this->tauxInteret) {
+            // dd("calculatePrevisions");
             $this->calculatePrevisions();
         }
     }
+
+
 
     public function calculatePrevisions()
     {
@@ -103,9 +109,10 @@ class OffreForm extends Component
         $capitalTotalRestant = $capitalRestant;
         $interetDu = 0;
 
-        // Récupérer le mois et l'année de départ
+        // Récupérer le mois, l'année et le jour de départ
         $currentMonth = now()->month;  // Mois actuel
         $currentYear = now()->year;    // Année actuelle
+        $currentDay = now()->day;      // Jour actuel
 
         for ($i = 1; $i <= $this->nbre_mois_remboursement + $this->delaiGrace; $i++) {
             $monthIndex = ($currentMonth + $i) % 12;
@@ -114,7 +121,9 @@ class OffreForm extends Component
             $yearOffset = intdiv(($currentMonth + $i - 1), 12); // Incrémenter l'année après 12 mois
             $year = $currentYear + $yearOffset;
 
-            $monthName = now()->setMonth($monthIndex)->translatedFormat('F');
+            // Calculer le jour du mois à afficher
+            $date = now()->setMonth($monthIndex)->setYear($year)->day($currentDay); // Utilisation du jour actuel
+            $monthNameWithDay = $date->translatedFormat('d F Y'); // Format : "Jour Mois Année"
 
             $remboursementCapital = 0;
             $remboursementInteret = 0;
@@ -137,8 +146,9 @@ class OffreForm extends Component
             $remboursementTotal = $remboursementCapital + $remboursementInteret;
             $cumulRemboursement += $remboursementTotal;
 
+            // Ajouter le jour actuel dans le format mois jour année
             $remboursements[] = [
-                'mois' => "$monthName $year",
+                'mois' => $monthNameWithDay,
                 'capital_restant' => (int) max(0, $capitalRestant),
                 'interet_du' => (int) ($i <= $this->delaiGrace ? $interetDu : 0),
                 'remboursement_capital' => (int) $remboursementCapital,
@@ -151,9 +161,13 @@ class OffreForm extends Component
         $this->remboursements = $remboursements;
     }
 
+
     public function render()
     {
-        // $this->calculatePrevisions();
+        // Exécutez calculatePrevisions au chargement initial si les champs sont déjà remplis
+        if ($this->montant && $this->nbre_mois_remboursement && $this->delaiGrace && $this->tauxInteret) {
+            $this->calculatePrevisions();
+        }
 
         return view('livewire.offre-form', [
             'remboursements' => $this->remboursements,

@@ -49,7 +49,7 @@ class CompteStartupController extends Controller
 
 
         // Créer un nouveau compte startup pour l'utilisateur
-        $compte = CompteStartup::create([
+        $compteStartup = CompteStartup::create([
             'nom' => $validatedData['nom'],
             'date_creation' => $validatedData['date_creation'],
             'activite_principale' => $validatedData['activite_principale'],

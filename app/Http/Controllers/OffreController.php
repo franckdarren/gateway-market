@@ -45,8 +45,8 @@ class OffreController extends Controller
             'montant' => 'required|integer',
             'nbre_mois_grace' => 'required|integer',
             'taux_interet' => 'required|integer',
-            'url_business_plan' => 'nullable|file|mimes:pdf|max:10240',
-            'url_etude_risque' => 'nullable|file|mimes:pdf|max:10240',
+            'url_business_plan' => 'nullable|file|mimes:pdf',
+            'url_etude_risque' => 'nullable|file|mimes:pdf',
             'van' => 'required|integer',
             'ir' => 'required|numeric',
             'tri' => 'required|numeric',
@@ -126,8 +126,8 @@ class OffreController extends Controller
             'nbre_mois_remboursement' => 'required|integer',
             'nbre_mois_grace' => 'required|integer',
             'taux_interet' => 'required|integer',
-            'url_business_plan' => 'nullable|file|mimes:pdf|max:10240',
-            'url_etude_risque' => 'nullable|file|mimes:pdf|max:10240',
+            'url_business_plan' => 'nullable|file|mimes:pdf',
+            'url_etude_risque' => 'nullable|file|mimes:pdf',
             'van' => 'required|numeric',
             'ir' => 'required|numeric',
             'tri' => 'required|numeric',
@@ -226,6 +226,8 @@ class OffreController extends Controller
     {
         // Récupérer l'investisseur (utilisateur connecté)
         $investisseur = CompteInvestisseur::where('user_id', Auth::id())->first();
+        $startup = $offre->compteStartup;
+        $admin = CompteAdmin::first();
 
         if (!$investisseur) {
             // Si l'investisseur n'existe pas, retourner une erreur ou rediriger
@@ -242,15 +244,36 @@ class OffreController extends Controller
             return redirect()->back()->with('error', 'Solde insuffisant pour effectuer cet investissement.');
         }
 
-        Transaction::create([
+        $investisseur->transactions()->create([
             'montant' => $montantTotal,
             'frais' => $frais,
             'type' => 'Investissement',
             'description' => 'Investissement dans l\'offre ' . $offre->nom_projet,
-            'compte_type' => 'Compte Investisseur',
-            'compte_id' => $investisseur->id,
+            // 'compte_type' => 'Compte Investisseur',
+            // 'compte_id' => $investisseur->id,
             'offre_id' => $offre->id,
         ]);
+
+        $startup->transactions()->create([
+            // 'compte_type' => 'Compte Startup',
+            // 'compte_id' => $startup->id,
+            'montant' => $montantInvestissement,
+            'type' => "Dépot",
+            'description' => "Financement du projet {$offre->nom_projet} par " . $investisseur->nom . " " . $investisseur->prenom,
+            'statut' => "Traitée",
+
+        ]);
+
+        $admin->transactions()->create([
+            // 'compte_type' => 'Compte Startup',
+            // 'compte_id' => $startup->id,
+            'montant' => $frais,
+            'type' => "Commission",
+            'description' => "Commission pour le financement du projet {$offre->nom_projet} par " . $investisseur->nom . " " . $investisseur->prenom,
+            'statut' => "Traitée",
+
+        ]);
+
 
         // Mettre à jour l'offre avec le compte investisseur et changer son statut
         $offre->compte_investisseur_id = $investisseur->id;

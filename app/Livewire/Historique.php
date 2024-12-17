@@ -70,14 +70,20 @@ class Historique extends Component implements HasForms, HasTable
 
 
             ->columns([
+                TextColumn::make('compte.nom_complet')
+                    ->label('Nom')
+                    ->searchable()
+                    ->sortable(),
+
                 TextColumn::make('compte_type')
+                    ->label('Nature')
                     ->searchable()
                     ->sortable(),
 
                 TextColumn::make('montant')
                     ->searchable()
                     ->formatStateUsing(function ($state, $record) {
-                        $prefix = ($record->type === 'Dépot' || $record->type === 'Investissement' || $record->type === 'Remboursement crédit') ? '+' : '-';
+                        $prefix = ($record->type === 'Dépot' || $record->type === 'Commission' || $record->type === 'Remboursement crédit') ? '+' : '-';
                         return $prefix . ' ' . number_format($state, 0, '', ' ') . ' FCFA';
                     })
                     ->sortable(),
@@ -93,12 +99,20 @@ class Historique extends Component implements HasForms, HasTable
                         'Remboursement débit' => 'warning',
                         'Remboursement crédit' => 'success',
                         'Remboursement ERREUR' => 'danger',
+                        'Commission' => 'info',
                     })
                     ->sortable(),
 
                 TextColumn::make('description')
                     ->searchable()
                     ->sortable(),
+
+                TextColumn::make('compte.solde')
+                    ->label('Solde')
+                    ->searchable()
+                    ->sortable()
+                    ->formatStateUsing(fn(string|int|null $state): string => $state ? number_format($state, 0, '.', ' ') . ' FCFA' : '0 FCFA'),
+
 
                 TextColumn::make('mode_retrait')
                     ->searchable()
@@ -125,7 +139,8 @@ class Historique extends Component implements HasForms, HasTable
                 TextColumn::make('created_at')
                     ->searchable()
                     ->label('Date')
-                    ->sortable(),
+                    ->sortable()
+                    ->formatStateUsing(fn ($state) => \Carbon\Carbon::parse($state)->format('d-m-Y \à H\hi')),
 
             ])
             ->filters([])

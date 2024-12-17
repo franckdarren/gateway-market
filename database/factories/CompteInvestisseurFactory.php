@@ -30,7 +30,7 @@ class CompteInvestisseurFactory extends Factory
             'phone' => $this->faker->phoneNumber,
             'email' => $this->faker->unique()->safeEmail,
             'profession' => $this->faker->jobTitle,
-            'solde' => 10000000,
+            'solde' => 0,
             'user_id' => User::role('Investisseur')->whereDoesntHave('compteInvestisseur')->inRandomOrder()->first()->id ?? null, // Assurer qu'un investisseur n'a qu'un seul compte
         ];
     }

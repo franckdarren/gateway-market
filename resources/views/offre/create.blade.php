@@ -19,6 +19,15 @@
                 </button>
             </div>
         @endif
+        @if ($errors->any())
+            <div class="p-4 mx-10 mb-4 text-white bg-red-500 rounded-md">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="">
                 <div class="p-6 mx-auto bg-white rounded-lg shadow-lg ">

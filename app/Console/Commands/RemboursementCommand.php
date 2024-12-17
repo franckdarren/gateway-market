@@ -60,9 +60,9 @@ class RemboursementCommand extends Command
                 $startup->save();
 
                 // Créer la trace dans la table Transaction
-                $transactionReussi = Transaction::create([
-                    'compte_type' => 'Compte Startup',
-                    'compte_id' => $startup->id,
+                $transactionReussi = $startup->transactions()->create([
+                    // 'compte_type' => 'Compte Startup',
+                    // 'compte_id' => $startup->id,
                     'montant' => $remboursement->remboursement_total,
                     'type' => "Remboursement débit",
                     'description' => "Remboursement pour l'offre {$offre->nom_projet} de " . $dateRemboursement,
@@ -75,9 +75,9 @@ class RemboursementCommand extends Command
                 $investisseur->save();
 
                 // Créer la trace dans la table Transaction
-                Transaction::create([
-                    'compte_type' => 'Compte Investisseur',
-                    'compte_id' => $investisseur->id,
+                $investisseur->transactions()->create([
+                    // 'compte_type' => 'Compte Investisseur',
+                    // 'compte_id' => $investisseur->id,
                     'montant' => $remboursement->remboursement_total,
                     'type' => "Remboursement crédit",
                     'description' => "Remboursement du projet {$offre->nom_projet} pour : " . $dateRemboursement,
@@ -101,9 +101,9 @@ class RemboursementCommand extends Command
             } else {
 
                 // Créer la trace dans la table Transaction
-                $transactionErreur = Transaction::create([
-                    'compte_type' => 'Compte Startup',
-                    'compte_id' => $startup->id,
+                $transactionErreur = $startup->transactions()->create([
+                    // 'compte_type' => 'Compte Startup',
+                    // 'compte_id' => $startup->id,
                     'montant' => $remboursement->remboursement_total,
                     'type' => "Remboursement ERREUR",
                     'description' => "Erreur de remboursement pour l'offre {$offre->nom_projet} de " . $dateRemboursement,
@@ -111,9 +111,9 @@ class RemboursementCommand extends Command
 
                 ]);
 
-                Transaction::create([
-                    'compte_type' => 'Compte Investisseur',
-                    'compte_id' => $investisseur->id,
+                $investisseur->transactions()->create([
+                    // 'compte_type' => 'Compte Investisseur',
+                    // 'compte_id' => $investisseur->id,
                     'montant' => $remboursement->remboursement_total,
                     'type' => "Remboursement ERREUR",
                     'description' => "Erreur de remboursement du projet {$offre->nom_projet} pour : " . $dateRemboursement,
