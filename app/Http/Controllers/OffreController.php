@@ -277,7 +277,7 @@ class OffreController extends Controller
 
         // Mettre à jour l'offre avec le compte investisseur et changer son statut
         $offre->compte_investisseur_id = $investisseur->id;
-        $offre->statut = 'En attente'; // Vous pouvez définir un autre statut selon vos besoins
+        $offre->statut = 'En attente de traitement'; // Vous pouvez définir un autre statut selon vos besoins
         $offre->save();
 
         // Retourner à la page de l'offre avec un message de succès

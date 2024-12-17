@@ -81,8 +81,40 @@ class ListOffre extends Component implements HasForms, HasTable
                     })
                     ->sortable(),
 
+                TextColumn::make('created_at')
+                    ->searchable()
+                    ->label('Date création')
+                    ->sortable()
+                    ->formatStateUsing(fn($state) => \Carbon\Carbon::parse($state)
+                        ->locale('fr') // Utilise la locale française
+                        ->isoFormat('D MMMM YYYY [à] HH[h]mm')),
+
             ])
-            ->filters([])
+            ->filters([
+                // Filtre en fonction du statut
+                Filter::make('statut')
+                    ->label('Filtrer par statut')
+                    ->form([
+                        Select::make('statut')
+                            ->label('Statut')
+                            ->options([
+                                'En attente de validation' => 'En attente de validation',
+                                'En cours' => 'En cours',
+                                'Disponible' => 'Disponible',
+                            ])
+                    ])
+                    ->query(function (Builder $query, $data) {
+                        if (!empty($data['statut'])) {
+                            $query->where('statut', $data['statut']);
+                        }
+                    })
+                    ->indicateUsing(function ($data) {
+                        return !empty($data['statut']) ? "Statut: {$data['statut']}" : null;
+                    }),
+
+
+
+            ])
             ->actions([
                 ActionGroup::make([
                     //Affichage pdf Business Plan
@@ -192,10 +224,10 @@ class ListOffre extends Component implements HasForms, HasTable
                             ];
                         }),
                 ])->label('Action')
-                ->icon('heroicon-m-ellipsis-vertical')
-                ->size(ActionSize::Small)
-                ->color('primary')
-                ->button()
+                    ->icon('heroicon-m-ellipsis-vertical')
+                    ->size(ActionSize::Small)
+                    ->color('primary')
+                    ->button()
 
             ])
             ->bulkActions([])

@@ -67,6 +67,8 @@ class ListStartup extends Component implements HasForms, HasTable
                 TextColumn::make('user.type_abonnement')
                     ->label("Type d'abonnement")
                     ->searchable()
+                    ->badge()
+                    ->color('gray')
                     ->sortable(),
 
                 TextColumn::make('email')
@@ -78,7 +80,31 @@ class ListStartup extends Component implements HasForms, HasTable
                     ->sortable(),
 
             ])
-            ->filters([])
+            ->filters([
+                // Filtre en fonction du type d'abonnement
+                Filter::make('type_abonnement')
+                    ->label('Filtrer par type d\'abonnement')
+                    ->form([
+                        Select::make('type_abonnement')
+                            ->label('Type d\'abonnement')
+                            ->options([
+                                'Premium' => 'Premium',
+                                'Simple' => 'Simple',
+                            ])
+                    ])
+                    ->query(function (Builder $query, $data) {
+                        if (!empty($data['type_abonnement'])) {
+                            // Jointure avec la table users pour accéder à la colonne type_abonnement
+                            $query->whereHas('user', function ($subQuery) use ($data) {
+                                $subQuery->where('type_abonnement', $data['type_abonnement']);
+                            });
+                        }
+                    })
+                    ->indicateUsing(function ($data) {
+                        return !empty($data['type_abonnement']) ? "Statut: {$data['type_abonnement']}" : null;
+                    }),
+
+            ])
             ->actions([
                 ActionGroup::make([
                     // Faire un dépot

@@ -12,6 +12,7 @@ use App\Models\CompteInvestisseur;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Filters\Filter;
 use Illuminate\Contracts\View\View;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Contracts\HasTable;
@@ -20,8 +21,8 @@ use Filament\Notifications\Notification;
 use Filament\Tables\Actions\ExportAction;
 use Filament\Tables\Actions\ImportAction;
 use Illuminate\Database\Eloquent\Builder;
-use App\Filament\Exports\BonPeseeExporter;
 
+use App\Filament\Exports\BonPeseeExporter;
 use Filament\Tables\Actions\ExportBulkAction;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Actions\Exports\Enums\ExportFormat;
@@ -42,41 +43,27 @@ class Demandes extends Component implements HasForms, HasTable
             })
 
             ->columns([
+                TextColumn::make('nom_compte')
+                    ->searchable()
+                    ->sortable(),
+
                 TextColumn::make('compte_type')
-                    ->searchable()
-                    ->sortable(),
-
-                TextColumn::make('montant')
-                    ->searchable()
-                    ->formatStateUsing(function ($state, $record) {
-                        $prefix = ($record->type === 'depot' || $record->type === 'investissement') ? '+' : '-';
-                        return $prefix . ' ' . number_format($state, 0, '', ' ') . ' FCFA';
-                    })
-                    ->sortable(),
-
-                TextColumn::make('type')
-                    ->searchable()
-                    ->badge()
-                    ->color(fn(?string $state): string => match ($state) {
-                        'Investissement' => 'gray',
-                        'Retrait' => 'warning',
-                        'Dépot' => 'success',
-                    })
-                    ->sortable(),
-
-                TextColumn::make('description')
-                    ->searchable()
-                    ->sortable(),
-
-                TextColumn::make('mode_retrait')
                     ->searchable()
                     ->sortable(),
 
                 TextColumn::make('numero_compte')
                     ->searchable()
+                    ->label('Numéro ou RIB')
                     ->sortable(),
 
-                TextColumn::make('nom_compte')
+                TextColumn::make('montant')
+                    ->searchable()
+                    ->formatStateUsing(function ($state, $record) {
+                        return number_format($state, 0, '', ' ') . ' FCFA';
+                    })
+                    ->sortable(),
+
+                TextColumn::make('mode_retrait')
                     ->searchable()
                     ->sortable(),
 
@@ -86,13 +73,57 @@ class Demandes extends Component implements HasForms, HasTable
                     ->color(fn($state) => $state == 'Traitée' ? 'success' : 'gray')
                     ->sortable(),
 
-                TextColumn::make('created_at')
+                    TextColumn::make('created_at')
                     ->searchable()
-                    ->label('Date')
-                    ->sortable(),
+                    ->label('Date création')
+                    ->sortable()
+                    ->formatStateUsing(fn($state) => \Carbon\Carbon::parse($state)
+                        ->locale('fr') // Utilise la locale française
+                        ->isoFormat('D MMMM YYYY [à] HH[h]mm')),
 
             ])
-            ->filters([])
+            ->filters([
+                // FIltrer par le mode de retrait
+                Filter::make('mode_retrait')
+                    ->label('Filtrer par mode de retrait')
+                    ->form([
+                        Select::make('mode_retrait')
+                            ->label('Mode de retrait')
+                            ->options([
+                                'AirtelMoney' => 'AirtelMoney',
+                                'MoovMoney' => 'MoovMoney',
+                                'Virement' => 'Virement',
+                            ])
+                    ])
+                    ->query(function (Builder $query, $data) {
+                        if (!empty($data['mode_retrait'])) {
+                            $query->where('mode_retrait', $data['mode_retrait']);
+                        }
+                    })
+                    ->indicateUsing(function ($data) {
+                        return !empty($data['mode_retrait']) ? "Mode de retrait: {$data['mode_retrait']}" : null;
+                    }),
+
+                // FIltrer par le type de compte
+                Filter::make('compte_type')
+                    ->label('Filtrer par le type de compte')
+                    ->form([
+                        Select::make('compte_type')
+                            ->label('Type de compte')
+                            ->options([
+                                'Compte Investisseur' => 'Compte Investisseur',
+                                'Compte Startup' => 'Compte Startup',
+                            ])
+                    ])
+                    ->query(function (Builder $query, $data) {
+                        if (!empty($data['compte_type'])) {
+                            $query->where('compte_type', $data['compte_type']);
+                        }
+                    })
+                    ->indicateUsing(function ($data) {
+                        return !empty($data['compte_type']) ? "Type de compte: {$data['compte_type']}" : null;
+                    }),
+            ])
             ->actions([
                 Action::make('envoyer')
                     ->label("Confirmer l'envoi")
