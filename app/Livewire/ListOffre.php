@@ -191,12 +191,11 @@ class ListOffre extends Component implements HasForms, HasTable
                                     ]),
                             ];
                         }),
-                ])->label('Actions')
+                ])->label('Action')
                 ->icon('heroicon-m-ellipsis-vertical')
                 ->size(ActionSize::Small)
                 ->color('primary')
                 ->button()
-
 
             ])
             ->bulkActions([])
