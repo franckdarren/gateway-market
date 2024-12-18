@@ -31,6 +31,7 @@ use Filament\Tables\Actions\ExportBulkAction;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Actions\Exports\Enums\ExportFormat;
 use Filament\Tables\Concerns\InteractsWithTable;
+use Spatie\Permission\Models\Role;
 
 class ListStartup extends Component implements HasForms, HasTable
 {
@@ -131,6 +132,7 @@ class ListStartup extends Component implements HasForms, HasTable
 
                     Action::make('modifier')
                         ->label('Modifier')
+                        ->visible(fn() => auth()->user()->hasRole('Administrateur'))
                         ->action(function (CompteInvestisseur $record, array $data): void {
                             // Mettre à jour les données du CompteStartup
                             $record->update($data);

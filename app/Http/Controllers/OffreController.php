@@ -192,11 +192,15 @@ class OffreController extends Controller
         // Récupérer l'offre par son ID
         $offre = Offre::findOrFail($id);
 
-        // Supprimer l'offre
-        $offre->delete();
+        if ($offre->statut === 'Disponible' || $offre->statut === 'En attente de validation') {
+            // Supprimer l'offre
+            $offre->delete();
 
-        // Rediriger avec un message de succès
-        return redirect()->route('dashboard')->with('success', 'Offre supprimée avec succès.');
+            // Rediriger avec un message de succès
+            return redirect()->route('dashboard')->with('success', 'Offre supprimée avec succès.');
+        } else {
+            return redirect()->route('dashboard')->with('error', 'Impossible de supprimer cette offre car elle est en cours de remboursement.');
+        }
     }
 
     public function annuler(string $id)

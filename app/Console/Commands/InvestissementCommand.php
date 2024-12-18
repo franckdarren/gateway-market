@@ -48,7 +48,7 @@ class InvestissementCommand extends Command
         $this->info('Début du traitement des transactions de type investissement...');
 
         // Récupérer toutes les transactions "investissement" non traitées
-        $investissements = Transaction::where('type', 'investissement')
+        $investissements = Transaction::where('type', 'Investissement')
             ->where('statut', 'En attente de traitement')
             ->get();
 
@@ -120,6 +120,7 @@ class InvestissementCommand extends Command
 
             // Modifier le statut de l'offre
             $offre->statut = 'En cours';
+            $offre->compte_investisseur_id = $compteInvestisseur->id;
             $offre->save();
 
             // Effectuer les opérations financières
