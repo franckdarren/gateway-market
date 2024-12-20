@@ -203,29 +203,6 @@ class OffreController extends Controller
         }
     }
 
-    public function annuler(string $id)
-    {
-        // Récupérer l'offre par son ID
-        $offre = Offre::findOrFail($id);
-
-        // Vérifier si l'offre a le statut "En attente"
-        if ($offre->statut === 'En attente') {
-            // Réinitialiser l'offre
-            $offre->statut = 'Disponible';
-            $offre->compte_investisseur_id = null;
-
-            // Enregistrer les modifications dans la base de données
-            $offre->save();
-
-            // Rediriger avec un message de succès
-            return redirect()->route('projets')->with('success', 'L\'offre a été annulée avec succès.');
-        }
-
-        // Si le statut de l'offre n'est pas "En attente"
-        return redirect()->route('projets')->with('error', 'Seules les offres en attente peuvent être annulées.');
-    }
-
-
     public function investir(Offre $offre)
     {
         // Récupérer l'investisseur (utilisateur connecté)
