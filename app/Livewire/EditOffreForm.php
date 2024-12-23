@@ -149,8 +149,20 @@ class EditOffreForm extends Component
         $currentYear = now()->year;    // Année actuelle
         $currentDay = now()->day;      // Jour actuel
 
+        // Ajouter une ligne initiale pour afficher le montant emprunté
+        $remboursements[] = [
+            'mois' => now()->translatedFormat('d F Y'), // Date actuelle
+            'capital_restant' => (int) $capitalRestant,
+            'interet_du' => 0,
+            'remboursement_capital' => 0,
+            'remboursement_interet' => 0,
+            'remboursement_total' => 0,
+            'cumul_remboursement' => 0,
+        ];
+
+        // Boucle pour les périodes suivantes
         for ($i = 1; $i <= $this->nbre_mois_remboursement + $this->delaiGrace; $i++) {
-            $monthIndex = ($currentMonth + $i) % 12;
+            $monthIndex = ($currentMonth + $i - 1) % 12;
             if ($monthIndex == 0) $monthIndex = 12; // Ajuster pour janvier (1er mois)
 
             $yearOffset = intdiv(($currentMonth + $i - 1), 12); // Incrémenter l'année après 12 mois
@@ -162,29 +174,32 @@ class EditOffreForm extends Component
 
             $remboursementCapital = 0;
             $remboursementInteret = 0;
+            $capitalRestantDebutMois = $capitalRestant; // Capital restant avant remboursement
 
+            // Phase de délai de grâce
             if ($i <= $this->delaiGrace) {
-                $interetDu = floor($capitalRestant * ($this->tauxInteret / 100));
-                $capitalRestant += $interetDu;
+                $interetDu = floor($capitalRestantDebutMois * ($this->tauxInteret / 100));
+                $capitalRestant += $interetDu; // Augmenter le capital restant des intérêts
             }
 
+            // Phase de remboursement
             if ($i > $this->delaiGrace) {
                 if ($i == $this->delaiGrace + 1) {
                     $capitalTotalRestant = $capitalRestant;
                 }
 
                 $remboursementCapital = floor($capitalTotalRestant / $this->nbre_mois_remboursement);
-                $remboursementInteret = floor($capitalRestant * ($this->tauxInteret / 100));
-                $capitalRestant -= $remboursementCapital;
+                $remboursementInteret = floor($capitalRestantDebutMois * ($this->tauxInteret / 100));
+                $capitalRestant -= $remboursementCapital; // Mise à jour du capital restant après remboursement
             }
 
             $remboursementTotal = $remboursementCapital + $remboursementInteret;
             $cumulRemboursement += $remboursementTotal;
 
-            // Ajouter le jour actuel dans le format mois jour année
+            // Ajouter une entrée pour le mois courant
             $remboursements[] = [
                 'mois' => $monthNameWithDay,
-                'capital_restant' => (int) max(0, $capitalRestant),
+                'capital_restant' => (int) max(0, $capitalRestantDebutMois), // Afficher le capital avant remboursement
                 'interet_du' => (int) ($i <= $this->delaiGrace ? $interetDu : 0),
                 'remboursement_capital' => (int) $remboursementCapital,
                 'remboursement_interet' => (int) $remboursementInteret,
@@ -195,6 +210,7 @@ class EditOffreForm extends Component
 
         $this->remboursements = $remboursements;
     }
+
 
     public function render()
     {

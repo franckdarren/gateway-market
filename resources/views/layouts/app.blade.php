@@ -52,8 +52,12 @@
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 </svg>"'>
                             @if (auth()->user()->hasRole('Administrateur'))
                                 {{ __('Dashboard') }}
-                            @else
+                            @elseif (auth()->user()->hasRole('Investisseur'))
                                 {{ __('Accueil') }}
+                            @elseif (auth()->user()->hasRole('Startup'))
+                                {{ __('Accueil') }}
+                            @else
+                                {{ __('Dashboard') }}
                             @endif
                         </x-nav-link>
 
@@ -66,7 +70,7 @@
                             </x-nav-link>
                         @endrole
 
-                        @role('Administrateur')
+                        @role(['Administrateur', 'Superviseur'])
                             <!-- Lien Investisseurs -->
                             <x-nav-link href="{{ route('investisseur') }}" :active="request()->routeIs('investisseur')" :icone='"<svg class=\"w-6 h-6\" xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\">
                                                                                                                                                                                                                 <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M14 11H6m0 0L3 8m3 3l3 3m10-4h1a1 1 0 001-1V7a4 4 0 00-4-4H7a4 4 0 00-4 4v1a1 1 0 001 1h1m12 4a4 4 0 110 8 4 4 0 010-8z\"></path>
@@ -75,7 +79,7 @@
                             </x-nav-link>
                         @endrole
 
-                        @role('Administrateur')
+                        @role(['Administrateur', 'Superviseur'])
                             <!-- Lien Startups -->
                             <x-nav-link href="{{ route('startup') }}" :active="request()->routeIs('startup')" :icone='"<svg class=\"w-6 h-6\" xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\">
                                                                                                                                                                                                                 <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M12 2a10 10 0 0110 10v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4a10 10 0 0110-10zm0 6v6m4-3H8\"></path>
@@ -84,7 +88,7 @@
                             </x-nav-link>
                         @endrole
 
-                        @role('Administrateur')
+                        @role(['Administrateur', 'Superviseur'])
                             <!-- Lien Retraits -->
                             <x-nav-link href="{{ route('demandes') }}" :active="request()->routeIs('demandes')" :icone='"<svg class=\"w-6 h-6\" xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\">
                                                                                                                                                                                                                 <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M12 19v-7m0 7l-4-4m4 4l4-4M6 6h12\"></path>

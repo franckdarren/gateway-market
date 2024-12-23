@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             AdminUserSeeder::class,
             StartupUserSeeder::class,
             InvestisseurUserSeeder::class,
+            SuperviseurUserSeeder::class,
 
             CompteAdminSeeder::class,
 

@@ -25,7 +25,7 @@ return new class extends Migration
             $table->float('ir');
             $table->float('tri');
             $table->float('krl');
-            $table->enum('statut', ['En attente de validation', 'Disponible', 'En cours']);
+            $table->enum('statut', ['En attente de validation', 'En attente de traitement', 'Disponible', 'En cours']);
 
             $table->foreignId('compte_startup_id')->constrained()->onDelete('cascade'); // clé étrangère obligatoire
             $table->foreignId('compte_investisseur_id')->nullable()->constrained()->onDelete('set null'); // clé étrangère optionnelle

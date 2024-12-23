@@ -192,35 +192,16 @@ class OffreController extends Controller
         // Récupérer l'offre par son ID
         $offre = Offre::findOrFail($id);
 
-        // Supprimer l'offre
-        $offre->delete();
-
-        // Rediriger avec un message de succès
-        return redirect()->route('dashboard')->with('success', 'Offre supprimée avec succès.');
-    }
-
-    public function annuler(string $id)
-    {
-        // Récupérer l'offre par son ID
-        $offre = Offre::findOrFail($id);
-
-        // Vérifier si l'offre a le statut "En attente"
-        if ($offre->statut === 'En attente') {
-            // Réinitialiser l'offre
-            $offre->statut = 'Disponible';
-            $offre->compte_investisseur_id = null;
-
-            // Enregistrer les modifications dans la base de données
-            $offre->save();
+        if ($offre->statut === 'Disponible' || $offre->statut === 'En attente de validation') {
+            // Supprimer l'offre
+            $offre->delete();
 
             // Rediriger avec un message de succès
-            return redirect()->route('projets')->with('success', 'L\'offre a été annulée avec succès.');
+            return redirect()->route('dashboard')->with('success', 'Offre supprimée avec succès.');
+        } else {
+            return redirect()->route('dashboard')->with('error', 'Impossible de supprimer cette offre car elle est en cours de remboursement.');
         }
-
-        // Si le statut de l'offre n'est pas "En attente"
-        return redirect()->route('projets')->with('error', 'Seules les offres en attente peuvent être annulées.');
     }
-
 
     public function investir(Offre $offre)
     {
@@ -277,7 +258,7 @@ class OffreController extends Controller
 
         // Mettre à jour l'offre avec le compte investisseur et changer son statut
         $offre->compte_investisseur_id = $investisseur->id;
-        $offre->statut = 'En attente'; // Vous pouvez définir un autre statut selon vos besoins
+        $offre->statut = 'En attente de traitement'; // Vous pouvez définir un autre statut selon vos besoins
         $offre->save();
 
         // Retourner à la page de l'offre avec un message de succès

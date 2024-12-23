@@ -12,9 +12,11 @@ use App\Models\CompteStartup;
 use App\Models\CompteInvestisseur;
 use Filament\Tables\Filters\Filter;
 use Illuminate\Contracts\View\View;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Contracts\HasTable;
+use Filament\Forms\Components\DatePicker;
 use Filament\Tables\Actions\ExportAction;
 use Filament\Tables\Actions\ImportAction;
 use Illuminate\Database\Eloquent\Builder;
@@ -66,12 +68,18 @@ class Historique extends Component implements HasForms, HasTable
                     ->orderByDesc('created_at');
             })
 
-
-
-
             ->columns([
                 TextColumn::make('compte.nom_complet')
                     ->label('Nom')
+                    ->sortable(),
+
+                TextColumn::make('compte.nom')
+                    ->hidden()
+                    ->searchable()
+                    ->sortable(),
+
+                TextColumn::make('compte.prenom')
+                    ->hidden()
                     ->searchable()
                     ->sortable(),
 
@@ -138,12 +146,96 @@ class Historique extends Component implements HasForms, HasTable
 
                 TextColumn::make('created_at')
                     ->searchable()
-                    ->label('Date')
+                    ->label('Date création')
                     ->sortable()
-                    ->formatStateUsing(fn ($state) => \Carbon\Carbon::parse($state)->format('d-m-Y \à H\hi')),
+                    ->formatStateUsing(fn($state) => \Carbon\Carbon::parse($state)
+                        ->locale('fr') // Utilise la locale française
+                        ->isoFormat('D MMMM YYYY [à] HH[h]mm')), // Format souhaité : 12 janvier 2024 à 14h30
+            ])
+            ->filters([
+                // Filtrer par le type de transaction
+                Filter::make('type')
+                    ->label('Filtrer par le type de transaction')
+                    ->form([
+                        Select::make('type')
+                            ->label('Type de transaction')
+                            ->options([
+                                'Investissement' => 'Investissement',
+                                'Retrait' => 'Retrait',
+                                'Dépot' => 'Dépot',
+                                'Remboursement débit' => 'Remboursement débit',
+                                'Remboursement crédit' => 'Remboursement crédit',
+                                'Remboursement ERREUR' => 'Remboursement ERREUR',
+                                'Commission' => 'Commission',
+                            ])
+                    ])
+                    ->query(function (Builder $query, $data) {
+                        if (!empty($data['type'])) {
+                            $query->where('type', $data['type']);
+                        }
+                    })
+                    ->indicateUsing(function ($data) {
+                        return !empty($data['type']) ? "Type de compte: {$data['type']}" : null;
+                    }),
+
+                // FIltrer par le mode de retrait
+                Filter::make('mode_retrait')
+                    ->label('Filtrer par mode de retrait')
+                    ->form([
+                        Select::make('mode_retrait')
+                            ->label('Mode de retrait')
+                            ->options([
+                                'AirtelMoney' => 'AirtelMoney',
+                                'MoovMoney' => 'MoovMoney',
+                                'Virement' => 'Virement',
+                            ])
+                    ])
+                    ->query(function (Builder $query, $data) {
+                        if (!empty($data['mode_retrait'])) {
+                            $query->where('mode_retrait', $data['mode_retrait']);
+                        }
+                    })
+                    ->indicateUsing(function ($data) {
+                        return !empty($data['mode_retrait']) ? "Mode de retrait: {$data['mode_retrait']}" : null;
+                    }),
+
+                // FIltrer par le type de compte
+                Filter::make('compte_type')
+                    ->label('Filtrer par le type de compte')
+                    ->form([
+                        Select::make('compte_type')
+                            ->label('Type de compte')
+                            ->options([
+                                'Compte Investisseur' => 'Compte Investisseur',
+                                'Compte Startup' => 'Compte Startup',
+                            ])
+                    ])
+                    ->query(function (Builder $query, $data) {
+                        if (!empty($data['compte_type'])) {
+                            $query->where('compte_type', $data['compte_type']);
+                        }
+                    })
+                    ->indicateUsing(function ($data) {
+                        return !empty($data['compte_type']) ? "Type de compte: {$data['compte_type']}" : null;
+                    }),
+
+                //Filtrer par période
+                // Filter::make('created_at')
+                //     ->label('Filtrer par période')
+                //     ->form([
+                //         DatePicker::make('date_debut')
+                //             ->label('Date de début'),
+                //         DatePicker::make('date_fin')
+                //             ->label('Date de fin')
+                //             ->placeholder('Choisissez une date de fin')
+                //     ])
+                //     ->query(function (Builder $query, $data) {
+                //         if (!empty($data['date_debut']) && !empty($data['date_fin'])) {
+                //             $query->whereBetween('created_at', [$data['date_debut'], $data['date_fin']]);
+                //         }
+                //     }),
 
             ])
-            ->filters([])
             ->actions([
                 // ...
             ])

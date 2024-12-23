@@ -18,14 +18,16 @@ class RolePermissionSeeder extends Seeder
         $startup = Role::where('name', 'Startup')->first();
         $investisseur = Role::where('name', 'Investisseur')->first();
         $administrateur = Role::where('name', 'Administrateur')->first();
+        $superviseur = Role::where('name', 'Superviseur')->first();
+
 
 
 
         // Récupérer les permissions
-        $createOffres = Permission::where('name', 'create offre')->first();
-        $editOffres = Permission::where('name', 'edit offre')->first();
-        $deleteOffres = Permission::where('name', 'delete offre')->first();
-        $viewOffres = Permission::where('name', 'view offre')->first();
+        $createOffre = Permission::where('name', 'create offre')->first();
+        $editOffre = Permission::where('name', 'edit offre')->first();
+        $deleteOffre = Permission::where('name', 'delete offre')->first();
+        $viewOffre = Permission::where('name', 'view offre')->first();
 
         $createStartup = Permission::where('name', 'create startup')->first();
         $editStartup = Permission::where('name', 'edit startup')->first();
@@ -42,18 +44,29 @@ class RolePermissionSeeder extends Seeder
         $deleteTransaction = Permission::where('name', 'delete transaction')->first();
         $viewTransaction = Permission::where('name', 'view transaction')->first();
 
+        $createUser = Permission::where('name', 'create user')->first();
+        $editUser = Permission::where('name', 'edit user')->first();
+        $deleteUser = Permission::where('name', 'delete user')->first();
+        $viewUser = Permission::where('name', 'view user')->first();
+
 
         // Assigner des permissions aux rôles
         $administrateur->givePermissionTo([
+
+            $createUser,
+            $editUser,
+            $deleteUser,
+            $viewUser,
+
             $createStartup,
             $editStartup,
             $deleteStartup,
             $viewStartup,
 
-            $createOffres,
-            $editOffres,
-            $deleteOffres,
-            $viewOffres,
+            $createOffre,
+            $editOffre,
+            $deleteOffre,
+            $viewOffre,
 
             $createInvestisseur,
             $editInvestisseur,
@@ -66,16 +79,21 @@ class RolePermissionSeeder extends Seeder
             $viewTransaction,
         ]);
 
+        $superviseur->givePermissionTo([
+            $editTransaction,
+            $viewTransaction,
+        ]);
+
         $startup->givePermissionTo([
             $createStartup,
             $editStartup,
             $deleteStartup,
             $viewStartup,
 
-            $createOffres,
-            $editOffres,
-            $deleteOffres,
-            $viewOffres,
+            $createOffre,
+            $editOffre,
+            $deleteOffre,
+            $viewOffre,
 
             $createTransaction,
             $viewTransaction,
