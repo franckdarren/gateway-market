@@ -111,8 +111,8 @@
                         @endrole
 
                         @role('Investisseur')
-                        <!-- Lien Remboursement -->
-                        <x-nav-link href="{{ route('remboursement') }}" :active="request()->routeIs('remboursement')"
+                        <!-- Lien Favoris -->
+                        <x-nav-link href="{{ route('favoris') }}" :active="request()->routeIs('favoris')"
                             :icone="'<i class=\'text-2xl fa-solid fa-star\'></i>'">
                             {{ __('Favoris') }}
                         </x-nav-link>

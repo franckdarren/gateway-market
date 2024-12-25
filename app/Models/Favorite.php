@@ -1,0 +1,14 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Favorite extends Model
+{
+    protected $fillable = [
+        'compte_investisseur_id',
+        'offre_id',
+
+    ];
+}

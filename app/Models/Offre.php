@@ -42,4 +42,9 @@ class Offre extends Model
     {
         return $this->hasMany(Remboursement::class);
     }
+
+    public function favoritedBy()
+    {
+        return $this->belongsToMany(CompteInvestisseur::class, 'favorites')->withTimestamps();
+    }
 }

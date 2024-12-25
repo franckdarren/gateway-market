@@ -4,6 +4,7 @@ use App\Models\Offre;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OffreController;
+use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\CompteStartupController;
 use App\Http\Controllers\CompteInvestisseurController;
 
@@ -55,6 +56,16 @@ Route::middleware([
         Route::get('/projets', function () {
             return view('projets');
         })->name('projets');
+
+        Route::get('/favoris', function () {
+            return view('favoris');
+        })->name('favoris');
+
+        // Ajouter/Enlever une offre en favoris
+        Route::post('/offers/{offer}/favorite', [FavoriteController::class, 'toggleFavorite']);
+        
+        // Récupérer la liste des favoris
+        Route::get('/favorites', [FavoriteController::class, 'listFavorites']);
 
         // Investir sur une offre
         Route::get('/investir/{offre}', [OffreController::class, 'investir'])->name('offre.investir');

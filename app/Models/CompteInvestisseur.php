@@ -47,4 +47,9 @@ class CompteInvestisseur extends Model
     {
         return $this->hasMany(Offre::class);
     }
+
+    public function favorites()
+    {
+        return $this->belongsToMany(Offre::class, 'favorites')->withTimestamps();
+    }
 }
