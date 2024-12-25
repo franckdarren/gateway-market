@@ -21,6 +21,7 @@ use Filament\Tables\Actions\ExportAction;
 use Filament\Tables\Actions\ImportAction;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Exports\BonPeseeExporter;
+use Filament\Tables\Columns\Summarizers\Sum;
 use Filament\Tables\Actions\ExportBulkAction;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Actions\Exports\Enums\ExportFormat;
@@ -94,7 +95,14 @@ class Historique extends Component implements HasForms, HasTable
                         $prefix = ($record->type === 'Dépot' || $record->type === 'Commission' || $record->type === 'Remboursement crédit') ? '+' : '-';
                         return $prefix . ' ' . number_format($state, 0, '', ' ') . ' FCFA';
                     })
-                    ->sortable(),
+                    ->sortable()
+                    ->summarize(
+                        Sum::make()
+                            ->label('Total')
+                            ->formatStateUsing(function ($state) {
+                                return number_format($state, 0, '', ' ') . ' FCFA';
+                            })
+                    ),
 
 
                 TextColumn::make('type')
