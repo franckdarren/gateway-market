@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('compte_investisseur_id');
             $table->unsignedBigInteger('offre_id');
-            $table->timestamps();
 
             $table->foreign('compte_investisseur_id')->references('id')->on('compte_investisseurs')->onDelete('cascade');
             $table->foreign('offre_id')->references('id')->on('offres')->onDelete('cascade');
