@@ -93,16 +93,12 @@
 
 
 
-            <!-- Pagination -->
-            <div class="my-6">
-                {{ $mesOffres->links() }}
-            </div>
+
 
             @if  (auth()->user()->hasRole('Investisseur'))
                 <div>
 
-                    <div
-                        class="w-full flex flex-col xl:max-w-[500px] bg-[#F5F5F5] rounded-t-2xl container mx-auto md:py-8">
+                    <div class="w-full flex flex-col xl:max-w-[500px] bg-[#F5F5F5] rounded-t-2xl container mx-auto md:py-8">
                         <header class="">
                             <div class="flex border-b-4 border-[#8BC48A] pb-5 items-center space-x-5 mx-5">
                                 <i class="fa-solid fa-circle text-[#8BC48A] text-[8px]"></i>
@@ -188,6 +184,12 @@
                 </div>
 
             @endif
+
+
+        </div>
+        <!-- Pagination -->
+        <div class="my-6">
+            {{ $mesOffres->links() }}
         </div>
     @else
         <div class="flex flex-col items-center justify-center h-full py-10 bg-white rounded-lg">
