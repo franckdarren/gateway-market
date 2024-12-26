@@ -1,6 +1,70 @@
 <div>
     @if ($hasCompteStartup)
         <div class="container mx-auto">
+            <div class="flex space-x-5">
+                <div
+                    class="flex sm:space-x-4 items-center bg-[#F5F5F5] p-4 rounded-md shadow-md w-full justify-between mx-auto">
+                    <!-- Bouton Filtre avec Critères -->
+                    <div class="flex flex-col md:flex-row-reverse justify-between ">
+                        <div
+                            class="flex flex-col xl:flex-row space-y-5  xl:ml-6 justify-between md:justify-normal xl:items-end space-x-5">
+                            <!-- <button
+                                class="flex items-center px-4 py-1 shadow-md bg-white text-[#5030E5] hover:text-white text-sm font-semibold rounded-md hover:bg-[#5030E5]/70 transition duration-200 focus:outline-none"
+                                onclick="toggleFilterDropdown()">
+                                <i class="fa-solid fa-filter mr-2"></i>
+                                Filtrer
+                            </button>Bouton Filtrer par Date -->
+                            <button
+                                class="flex items-center
+                                md:ml-5 shadow-md px-4 py-1  bg-white text-[#5030E5] h-[50px] hover:text-white text-sm font-semibold rounded-md hover:bg-[#5030E5]/70 transition duration-200 focus:outline-none"
+                                onclick="filterByDate()">
+                                <i class="fa-regular fa-calendar mr-2"></i>
+                                Filtrer par date
+                            </button>
+                            <div class="flex items-center h-[50px] bg-white rounded-md max-w-[400px] px-4 shadow-md">
+                                <i class="fa-solid fa-magnifying-glass text-[#787486] text-[18px] mr-3"></i>
+                                <input type="text" placeholder="Recherchez une Startup..."
+                                    class="w-full bg-white text-[#0D062D] text-[14px] border-[#5030E5] outline-none placeholder-[#A0A0A0] focus:ring-2 focus:ring-[#5030E5] rounded-md" />
+                                <button
+                                    class="ml-3 px-4 py-2 bg-[#5030E5] text-white text-[14px] font-semibold rounded-md hover:bg-[#5030E5]/90 transition duration-200">
+                                    Chercher
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Dropdown des critères -->
+                        <div id="filterDropdown"
+                            class="flex mt-2 bg-white border border-gray-200 rounded-md shadow-lg ">
+                            <div class="grid grid-cols-2 xl:flex items-end w-full space-y-4 p-4 space-x-4">
+                                <!-- Pourcentage -->
+                                <div class="flex flex-col justify-between space-y-4">
+                                    <label class="text-sm text-gray-600">Pourcentage</label>
+                                    <select class="border-gray-300 text-sm rounded-md">
+                                        <option value="inf10">Inférieur à 10%</option>
+                                        <option value="sup10">Supérieur à 10%</option>
+                                    </select>
+                                </div>
+                                <!-- Nombre de mois -->
+                                <div class="flex flex-col justify-between space-y-4">
+                                    <label class="text-sm text-gray-600">Nombre de mois</label>
+                                    <select class="border-gray-300 text-sm rounded-md">
+                                        <option value="inf5">Inférieur à 5 mois</option>
+                                        <option value="sup5">Supérieur à 5 mois</option>
+                                    </select>
+                                </div>
+                                <!-- Bouton Appliquer -->
+                                <button
+                                    class=" bg-[#5030E5] text-white text-sm p-4 rounded-md hover:bg-[#5030E5]/70 transition duration-200">
+                                    Appliquer
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
 
             <div class=" pt-2 overflow-x-auto bg-white rounded-md">
                 <a href="{{ route('offre.create') }}"
