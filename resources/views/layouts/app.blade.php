@@ -27,7 +27,7 @@
 <body class="font-sans antialiased">
     <x-banner />
 
-    <div class="min-h-screen bg-gray-100">
+    <div class="min-h-screen bg-white">
         {{-- @livewire('navigation-menu') --}}
 
         <!-- Page Content -->
@@ -35,7 +35,7 @@
             {{ $slot }}
         </main> --}}
         <div>
-            <div x-data="{ sidebarOpen: false }" class="flex h-screen bg-gray-200">
+            <div x-data="{ sidebarOpen: false }" class="flex h-screen bg-white">
                 <div :class="sidebarOpen ? 'block' : 'hidden'" @click="sidebarOpen = false"
                     class="fixed inset-0 z-20 transition-opacity bg-blue-200 opacity-50 lg:hidden"></div>
 
@@ -88,8 +88,7 @@
 
                         @role(['Administrateur', 'Superviseur'])
                         <!-- Lien Retraits -->
-                        <x-nav-link href="{{ route('demandes') }}" :active="request()->routeIs('demandes')"
-                            :icone="'<i class=\'text-2xl fa-solid fa-money-bill-wave\'></i>'">
+                        <x-nav-link href="{{ route('demandes') }}" :active="request()->routeIs('demandes')" :icone="'<i class=\'text-2xl fa-solid fa-money-bill-wave\'></i>'">
                             {{ __('Retraits') }}
                         </x-nav-link>
                         @endrole
@@ -112,8 +111,7 @@
 
                         @role('Investisseur')
                         <!-- Lien Favoris -->
-                        <x-nav-link href="{{ route('favoris') }}" :active="request()->routeIs('favoris')"
-                            :icone="'<i class=\'text-2xl fa-solid fa-star\'></i>'">
+                        <x-nav-link href="{{ route('favoris') }}" :active="request()->routeIs('favoris')" :icone="'<i class=\'text-2xl fa-solid fa-star\'></i>'">
                             {{ __('Favoris') }}
                         </x-nav-link>
                         @endrole
@@ -174,7 +172,7 @@
                     </nav>
                 </div>
                 <div class="flex flex-col flex-1 overflow-hidden">
-                    <header class="flex items-center justify-between px-6 py-4 bg-white ">
+                    <header class="flex items-center justify-between px-6 py-4 bg-white border-b-2 ">
                         <!-- border-b-4 border-[#0A52AB] -->
                         <div class="flex items-center mr-5 md:mr-0">
                             <button @click="sidebarOpen = true" class="text-gray-500 focus:outline-none lg:hidden">
@@ -304,20 +302,194 @@
                             </div>
                         </div>
                     </header>
-                    <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
-                        <div class="container px-6 py-6 mx-auto md:py-8">
-                            <!-- Page Heading bg-gradient-to-r from-[#6067F2] via-[#343434] to-[#77609D]-->
-                            @if (isset($header))
-                                <header class="">
-                                    <div class="">
-                                        {{ $header }}
+                    <main class="flex-1 overflow-x-hidden overflow-y-auto bg-white p-6 ">
+                        <div class="space-y-5">
+                            <div class="flex space-x-5">
+
+                                <div
+                                    class="flex sm:space-x-4 items-center bg-[#F5F5F5] p-4 rounded-md shadow-md w-full justify-between mx-auto">
+                                    <!-- Bouton Filtre avec Critères -->
+                                    <div class="flex flex-col md:flex-row-reverse justify-between ">
+                                        <div class="flex flex-col xl:flex-row space-y-5  xl:ml-6 justify-between md:justify-normal xl:items-end space-x-5">
+                                             <!-- <button
+                                                class="flex items-center px-4 py-1 shadow-md bg-white text-[#5030E5] hover:text-white text-sm font-semibold rounded-md hover:bg-[#5030E5]/70 transition duration-200 focus:outline-none"
+                                                onclick="toggleFilterDropdown()">
+                                                <i class="fa-solid fa-filter mr-2"></i>
+                                                Filtrer
+                                            </button>Bouton Filtrer par Date -->
+                                            <button
+                                                class="flex items-center
+                                                md:ml-5 shadow-md px-4 py-1  bg-white text-[#5030E5] h-[50px] hover:text-white text-sm font-semibold rounded-md hover:bg-[#5030E5]/70 transition duration-200 focus:outline-none"
+                                                onclick="filterByDate()">
+                                                <i class="fa-regular fa-calendar mr-2"></i>
+                                                Filtrer par date
+                                            </button>
+                                            <div
+                                            class="flex items-center h-[50px] bg-white rounded-md max-w-[400px] px-4 shadow-md">
+                                                <i
+                                                    class="fa-solid fa-magnifying-glass text-[#787486] text-[18px] mr-3"></i>
+                                                <input type="text" placeholder="Recherchez une Startup..."
+                                                    class="w-full bg-white text-[#0D062D] text-[14px] border-[#5030E5] outline-none placeholder-[#A0A0A0] focus:ring-2 focus:ring-[#5030E5] rounded-md" />
+                                                <button
+                                                    class="ml-3 px-4 py-2 bg-[#5030E5] text-white text-[14px] font-semibold rounded-md hover:bg-[#5030E5]/90 transition duration-200">
+                                                    Chercher
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <!-- Dropdown des critères -->
+                                        <div id="filterDropdown"
+                                            class="flex mt-2 bg-white border border-gray-200 rounded-md shadow-lg ">
+                                            <div class="grid grid-cols-2 xl:flex items-end w-full space-y-4 p-4 space-x-4">
+                                                <!-- Pourcentage -->
+                                                <div class="flex flex-col justify-between space-y-4">
+                                                    <label class="text-sm text-gray-600">Pourcentage</label>
+                                                    <select class="border-gray-300 text-sm rounded-md">
+                                                        <option value="inf10">Inférieur à 10%</option>
+                                                        <option value="sup10">Supérieur à 10%</option>
+                                                    </select>
+                                                </div>
+                                                <!-- Nombre de mois -->
+                                                <div class="flex flex-col justify-between space-y-4">
+                                                    <label class="text-sm text-gray-600">Nombre de mois</label>
+                                                    <select class="border-gray-300 text-sm rounded-md">
+                                                        <option value="inf5">Inférieur à 5 mois</option>
+                                                        <option value="sup5">Supérieur à 5 mois</option>
+                                                    </select>
+                                                </div>
+                                                <!-- Bouton Appliquer -->
+                                                <button
+                                                    class=" bg-[#5030E5] text-white text-sm p-4 rounded-md hover:bg-[#5030E5]/70 transition duration-200">
+                                                    Appliquer
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
-                                </header>
-                            @endif
-                            <div class="">
-                                {{ $slot }}
+
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="flex space-x-5">
+
+                                <div class="w-full bg-[#F5F5F5] rounded-t-2xl container mx-auto md:py-8">
+                                    @if (isset($header))
+                                        <header class="">
+                                            <div
+                                                class="flex justify-between border-b-4 border-[#5030E5] pb-5 items-center mx-5">
+                                                {{ $header }}
+                                            </div>
+                                        </header>
+                                    @endif
+                                    <div class="">
+                                        {{ $slot }}
+                                    </div>
+                                </div>
+                                @if  (auth()->user()->hasRole('Investisseur'))
+                                    <div>
+
+                                        <div
+                                            class="w-full hidden xl:flex xl:flex-col xl:max-w-[500px] bg-[#F5F5F5] rounded-t-2xl container mx-auto md:py-8">
+                                            <header class="">
+                                                <div
+                                                    class="flex border-b-4 border-[#8BC48A] pb-5 items-center space-x-5 mx-5">
+                                                    <i class="fa-solid fa-circle text-[#8BC48A] text-[8px]"></i>
+                                                    <h2 class="text-[16px] font-medium text-[#0D062D]">
+                                                        Start Up Premium
+                                                    </h2>
+                                                </div>
+                                            </header>
+
+                                            <div class="p-5">
+                                                <div
+                                                    class="flex space-y-3 flex-col lg:flex-row justify-between p-2 bg-white rounded-lg">
+
+
+                                                    <div
+                                                        class="flex justify-start items-center lg:justify-between lg:space-y-4 flex-col">
+                                                        <div
+                                                            class="w-full items-center p-2 flex justify-between space-x-5 ">
+
+                                                            <h2
+                                                                class="flex text-[#0D062D] font-semibold text-[18px] mb-2 rounded-md">
+                                                                <span class="font-regular"></span>
+                                                                Nom de la start up
+                                                            </h2>
+
+                                                            <div class=" space-x-5 flex text-base  font-semibold ">
+                                                                <img class="rounded-full bg-cover bg-center h-[50px] w-auto"
+                                                                    src="/asset/tune.jpg" alt="">
+                                                                <a href="#"
+                                                                    class="flex md:justify-start text-[18px] md:text-center text-black">
+
+                                                                    <i class="fa-solid fa-ellipsis"></i> </a>
+                                                            </div>
+
+
+
+                                                        </div>
+
+                                                        <img class="rounded-md h-[100px] w-auto" src="/asset/dash.jpg"
+                                                            alt="">
+                                                        <div class="p-2 flex flex-col w-full">
+                                                            <p class="hidden md:flex text-[#787486]  text-[14px] mb-4">
+                                                                <span class="font-regular"></span>
+                                                                Big Mac Bacon Lorem ipsum dolor sit amet consectetur
+                                                                adipisicing
+                                                                elit. veritatis aspernatur, quo ipsum? Accusantium,
+                                                                consequatur!
+                                                            </p>
+                                                            <div
+                                                                class="flex items-center w-full md:items-center justify-between bg-white rounded-lg gap-2 md:gap-4">
+
+                                                                <!-- Section: Montant -->
+                                                                <div class="flex items-center space-x-2">
+                                                                    <i
+                                                                        class="text-[#808080] fa-solid fa-money-bill-1-wave"></i>
+                                                                    <p class="text-[12px] font-medium text-[#8D6CFF]">
+                                                                        1000 000 FCFA
+                                                                    </p>
+                                                                </div>
+
+
+                                                                <!-- Section: Durée -->
+                                                                <div class="flex items-center space-x-2">
+
+                                                                    <i class="text-[#808080] fa-regular fa-calendar"></i>
+                                                                    <p class="text-[12px] font-medium text-black">
+                                                                        9 mois</p>
+                                                                </div>
+
+
+                                                                <!-- Section: Taux d'intérêt -->
+                                                                <div class="flex items-center space-x-2 ">
+                                                                    <i class="text-[#808080] fa-solid fa-chart-line"></i>
+                                                                    <p class="text-[12px] font-medium text-green-600 ">
+                                                                        13 %</p>
+
+                                                                </div>
+
+
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                @endif
+
                             </div>
                         </div>
+
+
                     </main>
                 </div>
             </div>
