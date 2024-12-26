@@ -1,109 +1,87 @@
 <div wire:poll.1m>
     @if ($hasCompteInvestisseur)
-        <div class="container mx-auto">
+        <div class="container flex flex-col-reverse xl:flex-row mx-auto">
 
-            <div class="space-y-2">
+            <div class="space-y-5 px-2">
                 @forelse ($mesOffres as $offre)
-                    <div class="lg:flex lg:flex-col lg:items-center lg:justify-center bg-white rounded-lg">
-                        <div
-                            class="flex md:grid md:grid-cols-3 lg:flex lg:flex-row items-center w-full md:items-center justify-between bg-white rounded-lg p-4 gap-2 md:gap-4">
-                            <!-- Section: Nom du Projet et Propriétaire -->
-                            <div class="flex flex-col lg:justify-start justify-center lg:flex-row lg:items-center flex-1 text-gray-800">
-                                <h2 class="md:hidden flex font-semibold text-md md:text-lg mb-2 md:mb-0 xl:mr-6 rounded-md">
-                                    <span class="font-regular"></span>
-                                    {{ \Illuminate\Support\Str::limit($offre->nom_projet, 25, "...") }}
-                                </h2>
-                                <h2 class="hidden md:flex font-semibold text-md md:text-lg mb-2 md:mb-0 lg:mr-6 rounded-md">
-                                    <span class="font-regular"></span>
-                                    {{ $offre->nom_projet }}
-                                </h2>
+                    <div class="flex space-y-3 flex-col lg:flex-row justify-between p-2 bg-white rounded-lg">
+
+                        <div class="flex justify-between lg:justify-center items-start md:items-center space-x-3">
+                            <img class="rounded-full hidden lg:flex bg-cover bg-center h-[50px] w-auto" src="/asset/tune.jpg"
+                                alt="">
+                            <div class="flex space-x-3">
+                                <img class="rounded-full flex lg:hidden bg-cover bg-center h-[50px] w-auto"
+                                    src="/asset/tune.jpg" alt="">
+                                <div>
+                                    <h2 class="flex text-[#0D062D] font-semibold text-[18px] mb-2 md:mb-0 lg:mr-2 rounded-md">
+                                        <span class="font-regular"></span>
+                                        Nom de la start up
+                                    </h2>
+                                    <p class="flex md:hidden">{{ $offre->nom_projet }}</p>
+                                    <p class="hidden md:flex text-[#787486]  text-[14px] mb-2 md:mb-0 xl:mr-2 rounded-md">
+                                        <span class="font-regular"></span>
+                                        {{ \Illuminate\Support\Str::limit($offre->nom_projet, 25, "...") }}
+                                    </p>
+                                </div>
+
+                            </div>
+                            <div class="items-center flex lg:hidden space-x-5 ">
+                                <div class=" text-base  font-semibold ">
+                                    <x-heroicon-s-star class="w-6 h-6" />
+
+                                </div>
+                                <a href="{{ route('offre.show', $offre->id) }}"
+                                    class="flex md:justify-center text-[18px] md:text-center text-black">
+
+                                    <i class="fa-solid fa-ellipsis"></i> </a>
+                            </div>
+                        </div>
+                        <!-- Section: Bouton Voir Détails -->
+                        <div class="flex justify-start items-end lg:justify-between lg:space-y-4 flex-col">
+                            <div class="items-center hidden lg:flex space-x-5 ">
+                                <div class=" text-base  font-semibold ">
+                                    <x-heroicon-s-star class="w-6 h-6" />
+                                </div>
+                                <a href="{{ route('offre.show', $offre->id) }}"
+                                    class="flex md:justify-center text-[18px] md:text-center text-black">
+
+                                    <i class="fa-solid fa-ellipsis"></i> </a>
+
+
+                            </div>
+                            <div
+                                class="flex md:grid md:grid-cols-3 lg:flex lg:flex-row items-center w-full md:items-center justify-between bg-white rounded-lg xl:p-4 gap-2 md:gap-4">
 
                                 <!-- Section: Montant -->
-                                <div class="flex flex-col md:hidden items-start lg:items-start lg:mb-0">
-                                    <p class="text-md md:text-lg font-medium text-black">
+                                <div class="flex items-center space-x-5">
+                                    <i class="text-[#808080] fa-solid fa-money-bill-1-wave"></i>
+                                    <p class="text-[12px] font-medium text-[#8D6CFF]">
                                         {{ number_format($offre->montant, 0, '.', ' ') }} FCFA
                                     </p>
-                                    <p class="text-sm hidden md:flex text-gray-600">Montant du projet</p>
                                 </div>
 
-                            </div>
-                            <!-- Section: Montant -->
-                            <div class="hidden md:flex flex-col items-start lg:items-start lg:mb-0">
-                                <p class="text-md md:text-lg font-medium text-black">
-                                    {{ number_format($offre->montant, 0, '.', ' ') }} FCFA
-                                </p>
-                                <p class="text-sm hidden md:flex text-gray-600">Montant du projet</p>
-                            </div>
-
-
-                            <!-- Section: Durée -->
-                            <div class="hidden md:flex flex-col items-center lg:items-start mb-4 lg:mb-0 xl:mr-8">
-                                <p class="text-lg font-medium text-black">{{ $offre->nbre_mois_remboursement }} mois</p>
-                                <p class="text-sm  text-gray-600">Remboursement</p>
-                            </div>
-
-
-                            <!-- Section: Taux d'intérêt -->
-                            <div class="md:flex hidden flex-col items-center lg:items-start mb-4 lg:mb-0 xl:mr-8">
-                                <p class="text-md md:text-lg font-medium text-green-600 ">{{ $offre->taux_interet }}%</p>
-                                <p class="text-sm hidden md:flex text-gray-600">Taux d'intérêt</p>
-                            </div>
-
-
-
-
-                            <div class="flex  md:hidden h-full flex-col-reverse mr-3 md:mr-0 items-end justify-center">
-                                <!-- Section: Taux d'intérêt -->
-                                <div class="flex flex-col items-center justify-center lg:items-start md:mb-4 lg:mb-0 lg:mr-8">
-                                    <p class="text-md h-full  md:text-lg font-bold text-green-600 ">{{ $offre->taux_interet }}%
-                                    </p>
-                                    <p class="text-sm hidden md:flex text-gray-600">Taux d'intérêt</p>
-                                </div>
 
                                 <!-- Section: Durée -->
-                                <div class=" md:hidden flex justify-center items-center space-x-2">
-                                    <p class="text-md font-medium text-black">{{ $offre->nbre_mois_remboursement }}</p>
-                                    <p class="text-sm text-black">Mois</p>
+                                <div class="flex items-center space-x-4 md:mx-4">
+
+                                    <i class="text-[#808080] fa-regular fa-calendar"></i>
+                                    <p class="text-[12px] font-medium text-black">{{ $offre->nbre_mois_remboursement }} mois</p>
                                 </div>
 
-                                <!-- Section: Montant -->
-                                <div class="hidden md:flex flex-col items-center lg:items-start lg:mb-0">
-                                    <p class="text-md md:text-lg font-medium text-black">
-                                        {{ number_format($offre->montant, 0, '.', ' ') }} FCFA
-                                    </p>
-                                    <p class="text-sm hidden md:flex text-gray-600">Montant du projet</p>
+
+                                <!-- Section: Taux d'intérêt -->
+                                <div class="flex items-center space-x-4 ">
+                                    <i class="text-[#808080] fa-solid fa-chart-line"></i>
+                                    <p class="text-[12px] font-medium text-green-600 ">{{ $offre->taux_interet }}%</p>
+
                                 </div>
-                            </div>
 
 
-
-
-
-
-                            <!-- Section: Bouton Voir Détails -->
-                            <div class="md:mt-4 lg:mt-0">
-                                <a href="{{ route('offre.show', $offre->id) }}"
-                                    class="bg-blue-600 hidden md:flex md:justify-center text-[12px] md:text-center text-white py-1 px-2 rounded-lg shadow hover:bg-blue-700 transition">
-                                    Voir détails
-                                </a>
-
-                                <a href="{{ route('offre.show', $offre->id) }}"
-                                    class="bg-blue-600 flex md:hidden text-sm md:text-base text-white font-semibold p-2 rounded-lg shadow hover:bg-blue-700 transition">
-                                    <x-heroicon-s-eye class="w-6 h-6" />
-                                </a>
                             </div>
                         </div>
-                        <div class="md:mt-4 hidden lg:mt-0">
-                            <a href="{{ route('offre.show', $offre->id) }}"
-                                class="bg-blue-600 hidden md:flex md:justify-center text-sm md:text-base md:text-center text-white font-semibold py-2 px-4 rounded-lg shadow hover:bg-blue-700 transition">
-                                Voir détails
-                            </a>
 
-                            <a href="{{ route('offre.show', $offre->id) }}"
-                                class="bg-blue-600 flex md:hidden text-sm md:text-base text-white font-semibold p-2 rounded-lg shadow hover:bg-blue-700 transition">
-                                <x-heroicon-s-eye class="w-6 h-6" />
-                            </a>
-                        </div>
+
+
                     </div>
 
                 @empty
@@ -114,10 +92,102 @@
             </div>
 
 
+
             <!-- Pagination -->
             <div class="my-6">
                 {{ $mesOffres->links() }}
             </div>
+
+            @if  (auth()->user()->hasRole('Investisseur'))
+                <div>
+
+                    <div
+                        class="w-full flex flex-col xl:max-w-[500px] bg-[#F5F5F5] rounded-t-2xl container mx-auto md:py-8">
+                        <header class="">
+                            <div class="flex border-b-4 border-[#8BC48A] pb-5 items-center space-x-5 mx-5">
+                                <i class="fa-solid fa-circle text-[#8BC48A] text-[8px]"></i>
+                                <h2 class="text-[16px] font-medium text-[#0D062D]">
+                                    Start Up Premium
+                                </h2>
+                            </div>
+                        </header>
+
+                        <div class="p-5 border-b-4 xl:border-none mx-5 xl:mx-0 border-[#8BC48A]">
+                            <div class="flex space-y-3 flex-col lg:flex-row justify-between p-2 bg-white rounded-lg">
+
+
+                                <div class="flex justify-start items-center lg:justify-between lg:space-y-4 flex-col">
+                                    <div class="w-full items-center p-2 flex justify-between space-x-5 ">
+
+                                        <h2 class="flex text-[#0D062D] font-semibold text-[18px] mb-2 rounded-md">
+                                            <span class="font-regular"></span>
+                                            Nom de la start up
+                                        </h2>
+
+                                        <div class=" space-x-5 flex text-base  font-semibold ">
+                                            <img class="rounded-full bg-cover bg-center h-[50px] w-auto" src="/asset/tune.jpg"
+                                                alt="">
+                                            <a href="#" class="flex md:justify-start text-[18px] md:text-center text-black">
+
+                                                <i class="fa-solid fa-ellipsis"></i> </a>
+                                        </div>
+
+
+
+                                    </div>
+
+                                    <img class="rounded-md h-[100px] w-auto" src="/asset/dash.jpg" alt="">
+                                    <div class="p-2 flex flex-col w-full">
+                                        <p class=" text-[#787486]  text-[14px] mb-4">
+                                            <span class="font-regular"></span>
+                                            Big Mac Bacon Lorem ipsum dolor sit amet consectetur
+                                            adipisicing
+                                            elit. veritatis aspernatur, quo ipsum? Accusantium,
+                                            consequatur!
+                                        </p>
+                                        <div
+                                            class="flex items-center w-full md:items-center justify-between bg-white rounded-lg gap-2 md:gap-4">
+
+                                            <!-- Section: Montant -->
+                                            <div class="flex items-center space-x-2">
+                                                <i class="text-[#808080] fa-solid fa-money-bill-1-wave"></i>
+                                                <p class="text-[12px] font-medium text-[#8D6CFF]">
+                                                    1000 000 FCFA
+                                                </p>
+                                            </div>
+
+
+                                            <!-- Section: Durée -->
+                                            <div class="flex items-center space-x-2">
+
+                                                <i class="text-[#808080] fa-regular fa-calendar"></i>
+                                                <p class="text-[12px] font-medium text-black">
+                                                    9 mois</p>
+                                            </div>
+
+
+                                            <!-- Section: Taux d'intérêt -->
+                                            <div class="flex items-center space-x-2 ">
+                                                <i class="text-[#808080] fa-solid fa-chart-line"></i>
+                                                <p class="text-[12px] font-medium text-green-600 ">
+                                                    13 %</p>
+
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            @endif
         </div>
     @else
         <div class="flex flex-col items-center justify-center h-full py-10 bg-white rounded-lg">
@@ -131,4 +201,5 @@
             </a>
         </div>
     @endif
+
 </div>
