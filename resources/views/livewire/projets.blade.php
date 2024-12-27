@@ -1,4 +1,4 @@
-<div class="overflow-x-auto bg-white rounded-lg">
+<div class="overflow-x-auto rounded-lg">
     @if (session('error'))
         <div class="flex items-center justify-between p-4 mx-auto mb-4 space-x-4 text-white bg-red-500 rounded-md shadow-md md:fixed md:top-5 md:right-5"
             x-data="{ open: true }" x-show="open" x-transition>
@@ -52,7 +52,7 @@
     </table>
 
 
-    <div class="flex space-x-4">
+    <div class="flex flex-col justify-center items-center overflow-y-auto space-y-4">
         @forelse ($mesOffres as $offre)
             <div
                 class="flex flex-col xl:flex-row space-y-5 justify-between w-full xl:items-center border border-gray-200 rounded-lg shadow-md p-4 bg-white hover:shadow-lg transition-shadow">
