@@ -79,7 +79,7 @@
                             <div class="flex border-b-4 border-[#8BC48A] pb-5 items-center space-x-5 mx-5">
                                 <i class="fa-solid fa-circle text-[#8BC48A] text-[8px]"></i>
                                 <h2 class="text-[16px] font-medium text-[#0D062D]">
-                                    Start Up Premium
+                                    Startup(s) Premium(s)
                                 </h2>
                             </div>
                         </header>
@@ -109,9 +109,10 @@
                                             </a>
                                         </div>
 
-                                        <img class="rounded-md h-[100px] w-full object-cover"
-                                            src={{ $offrePremium->url_image }} alt="">
+
                                         <div class="p-2 flex flex-col w-full">
+                                            <img class="rounded-md h-[100px] w-full object-cover"
+                                            src={{ $offrePremium->url_image }} alt="">
                                             <p class=" text-[#787486]  text-[14px] mb-4">
                                                 <span class="font-regular"></span>
                                                 {{ $offrePremium->description_projet }}
