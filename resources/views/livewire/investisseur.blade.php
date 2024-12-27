@@ -100,8 +100,8 @@
                                                     class="flex text-[#0D062D] font-semibold text-[18px] mb-2 rounded-md">
                                                     <span class="font-regular"></span>
                                                     {{ $offrePremium->compteStartup->nom }}
-                                                </h2><p>nom du projet</p></div>
-                                                
+                                                </h2><p>{{ $offrePremium->nom_projet }}</p></div>
+
                                             </div>
 
                                             <a href="#"
