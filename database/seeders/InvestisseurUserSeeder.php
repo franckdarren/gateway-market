@@ -19,7 +19,7 @@ class InvestisseurUserSeeder extends Seeder
         $investisseur = User::create([
             'name' => 'Investisseur',
             'email' => 'investisseur@investisseur.com',
-            'password' => bcrypt('password'), // Changez le mot de passe si nécessaire
+            'password' => bcrypt('password'),
             'email_verified_at' => Carbon::now(),
         ]);
 

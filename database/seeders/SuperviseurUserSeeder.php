@@ -19,7 +19,7 @@ class SuperviseurUserSeeder extends Seeder
         $superviseur = User::create([
             'name' => 'Superviseur',
             'email' => 'superviseur@superviseur.com',
-            'password' => bcrypt('password'), // Changez le mot de passe si nécessaire
+            'password' => bcrypt('password'), 
             'email_verified_at' => Carbon::now(),
         ]);
 

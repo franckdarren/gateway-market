@@ -14,7 +14,7 @@ class CompteAdminSeeder extends Seeder
      */
     public function run(): void
     {
-        // Trouver l'utilisateur admin, vous pouvez ajuster cette logique en fonction de votre base de données
+        // Récupérer l'utilisateur avec le rôle 'admin',
         $adminUser = User::where('email', 'admin@admin.com')->first();
 
         // Si l'utilisateur admin existe, on crée un compte_admin associé

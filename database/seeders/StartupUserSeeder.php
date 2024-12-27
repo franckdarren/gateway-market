@@ -19,7 +19,7 @@ class StartupUserSeeder extends Seeder
         $startup = User::create([
             'name' => 'Startup',
             'email' => 'startup@startup.com',
-            'password' => bcrypt('password'), // Changez le mot de passe si nécessaire
+            'password' => bcrypt('password'),
             'type_abonnement' => 'Simple',
             'email_verified_at' => Carbon::now(),
         ]);
