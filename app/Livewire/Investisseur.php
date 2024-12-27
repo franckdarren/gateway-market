@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\CompteStartup;
 use App\Models\Offre;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -29,17 +30,31 @@ class Investisseur extends Component
 
     public function render()
     {
-        // Paginer les offres au lieu de tout charger
-        $mesOffres = Offre::select('offres.*')
+
+        // Offres premiums
+        $mesOffresPremiums = Offre::select('offres.*')
             ->join('compte_startups', 'offres.compte_startup_id', '=', 'compte_startups.id')
             ->join('users', 'compte_startups.user_id', '=', 'users.id')
             ->where('offres.statut', 'Disponible')
-            ->orderByRaw("CASE WHEN users.type_abonnement = 'Premium' THEN 0 ELSE 1 END")
+            ->where('users.type_abonnement', 'Premium')
+            ->with('compteStartup')
             ->orderBy('offres.created_at', 'desc')
-            ->paginate(12); // 25 offres par page
+            ->paginate(24);
+
+        // Offres simples
+        $mesOffresSimples = Offre::select('offres.*')
+            ->join('compte_startups', 'offres.compte_startup_id', '=', 'compte_startups.id')
+            ->join('users', 'compte_startups.user_id', '=', 'users.id')
+            ->where('offres.statut', 'Disponible')
+            ->with('compteStartup')
+            ->orderByRaw("CASE WHEN users.type_abonnement = 'Simple' THEN 0 ELSE 1 END")
+            ->orderBy('offres.created_at', 'desc')
+            ->paginate(24);
 
         return view('livewire.investisseur', [
-            'mesOffres' => $mesOffres,
+            'mesOffresSimples' => $mesOffresSimples,
+            'mesOffresPremiums' => $mesOffresPremiums,
+
         ]);
     }
 }

@@ -33,7 +33,9 @@ class CompteStartupFactory extends Factory
             'email' => $this->faker->unique()->companyEmail,
             'phone' => $this->faker->phoneNumber,
             'solde' => 0,
-            'user_id' => $userId, // on utilise la variable $userId définie précédemment
+            'user_id' => $userId,
+            'url_logo' => 'https://picsum.photos/150/150',
+
         ];
     }
 }

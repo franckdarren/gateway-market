@@ -36,12 +36,14 @@ class OffreFactory extends Factory
             'tri' => $this->faker->randomFloat(2, 25, 100),
             'krl' => $this->faker->randomFloat(2, 0, 1),
             'statut' => $statut,
+            'url_image' => 'https://picsum.photos/600/800',
 
             // Lier l'offre à un compte startup existant
             'compte_startup_id' => CompteStartup::inRandomOrder()->first()->id,
 
             // Définir compte_investisseur_id comme null
             'compte_investisseur_id' => null,
+
         ];
     }
 }
