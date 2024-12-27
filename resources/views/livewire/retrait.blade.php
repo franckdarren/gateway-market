@@ -78,7 +78,7 @@
 
         <div class="flex justify-center mt-6">
             <button type="submit"
-                class="px-6 py-3 text-white font-semibold rounded-md shadow-md bg-[#0A52AB] hover:bg-[#478bc4] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
+                class="px-6 py-3 text-white font-semibold rounded-md shadow-md   bg-[#5B3FFC] hover:bg-[#5B3FFC]/90 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
                 Soumettre
             </button>
         </div>

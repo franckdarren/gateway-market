@@ -71,13 +71,14 @@ class Historique extends Component implements HasForms, HasTable
 
             ->columns([
                 TextColumn::make('compte.nom_complet')
-                    ->label('Nom')
+                    ->label('Nom') // Gardez le label par défaut
                     ->sortable(),
 
                 TextColumn::make('compte.nom')
                     ->hidden()
                     ->searchable()
                     ->sortable(),
+
 
                 TextColumn::make('compte.prenom')
                     ->hidden()
@@ -93,8 +94,10 @@ class Historique extends Component implements HasForms, HasTable
                     ->searchable()
                     ->formatStateUsing(function ($state, $record) {
                         $prefix = ($record->type === 'Dépot' || $record->type === 'Commission' || $record->type === 'Remboursement crédit') ? '+' : '-';
-                        return $prefix . ' ' . number_format($state, 0, '', ' ') . ' FCFA';
+                        $colorClass = ($prefix === '+') ? 'text-green-500' : 'text-red-500';
+                        return '<span class="' . $colorClass . '">' . $prefix . ' ' . number_format($state, 0, '', ' ') . ' FCFA</span>';
                     })
+                    ->html()
                     ->sortable()
                     ->summarize(
                         Sum::make()
@@ -159,6 +162,7 @@ class Historique extends Component implements HasForms, HasTable
                         ->locale('fr') // Utilise la locale française
                         ->isoFormat('D MMMM YYYY [à] HH[h]mm')), // Format souhaité : 12 janvier 2024 à 14h30
             ])
+
             ->filters([
                 // Filtrer par le type de transaction
                 Filter::make('type')

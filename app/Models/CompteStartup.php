@@ -16,7 +16,8 @@ class CompteStartup extends Model
         'email',
         'phone',
         'user_id',
-        'solde'
+        'solde',
+        'url_logo',
 
     ];
 

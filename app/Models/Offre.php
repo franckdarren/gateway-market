@@ -25,6 +25,7 @@ class Offre extends Model
         'compte_startup_id',
         'compte_investisseur_id',
         'statut',
+        'url_image',
 
     ];
 

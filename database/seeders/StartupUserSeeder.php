@@ -16,11 +16,19 @@ class StartupUserSeeder extends Seeder
     public function run(): void
     {
         // Créer l'utilisateur startup
-        $startup = User::create([
-            'name' => 'Startup',
+        $startup1 = User::create([
+            'name' => 'Startup Simple',
             'email' => 'startup@startup.com',
             'password' => bcrypt('password'),
             'type_abonnement' => 'Simple',
+            'email_verified_at' => Carbon::now(),
+        ]);
+
+        $startup2 = User::create([
+            'name' => 'Startup Premium',
+            'email' => 'startup2@startup.com',
+            'password' => bcrypt('password'),
+            'type_abonnement' => 'Premium',
             'email_verified_at' => Carbon::now(),
         ]);
 
@@ -29,7 +37,8 @@ class StartupUserSeeder extends Seeder
 
         // Vérifier que le rôle existe avant de l'assigner
         if ($role) {
-            $startup->assignRole($role);
+            $startup1->assignRole($role);
+            $startup2->assignRole($role);
         } else {
             // Si le rôle n'existe pas, lever une exception ou ajouter un message d'erreur
             $this->command->error('Le rôle Startup n\'existe pas dans la base de données.');
