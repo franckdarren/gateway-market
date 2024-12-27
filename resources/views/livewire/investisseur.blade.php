@@ -85,12 +85,12 @@
                         </header>
 
                         <div class="py-5 sm:p-5 border-b-4 xl:border-none mx-5 mb-10 xl:mb-0 xl:mx-0 border-[#8BC48A]">
-                            <div class="flex space-y-3 flex-col justify-between p-2 bg-white rounded-lg">
+                            <div class="flex xl:overflow-y-auto overflow-x-auto max-w-screen-md xl:max-h-screen  space-x-3 space-y-3 xl:flex-col justify-between p-2 bg-white rounded-lg">
 
                                 {{-- Liste des Offres premiums --}}
                                 @foreach ($mesOffresPremiums as $offrePremium)
                                     <div
-                                        class="flex justify-start items-center lg:justify-between lg:space-y-4 flex-col shadow-lg ">
+                                        class="flex min-w-[300px] justify-start items-center lg:justify-between lg:space-y-4 flex-col shadow-lg ">
                                         <div class="w-full items-center p-2 flex justify-between space-x-5">
 
                                             <div class=" space-x-2 flex text-base  font-semibold items-center ">
@@ -118,7 +118,7 @@
                                                 {{ $offrePremium->description_projet }}
                                             </p>
                                             <div
-                                                class="flex items-center w-full md:items-center justify-between bg-white rounded-lg gap-2 md:gap-4">
+                                                class="flex flex-col lg:flex-row items-start w-full md:items-center lg:justify-between bg-white rounded-lg gap-2 md:gap-4">
 
                                                 <!-- Section: Montant -->
                                                 <div class="flex items-center space-x-2">
