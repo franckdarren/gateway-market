@@ -1,10 +1,10 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="text-3xl font-medium text-gray-700">
-            {{ __('Mes projets') }}
+        <h2 class="flex items-center space-x-4"><i class="fa-solid fa-circle text-[#5030E5] mr-4 text-[8px]"></i>
+            {{ __('Mes placements') }}
         </h2>
     </x-slot>
-    <div class="py-2 lg:py-5">
+    <div class="py-2 px-1 lg:py-5">
         @if (session('success'))
             <div class="flex items-center justify-between p-4 mx-auto mb-4 space-x-4 text-white bg-green-500 rounded-md shadow-md md:fixed md:top-5 md:right-5"
                 x-data="{ open: true }" x-show="open" x-transition>
