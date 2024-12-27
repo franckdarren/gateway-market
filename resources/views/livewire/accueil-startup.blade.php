@@ -4,7 +4,7 @@
         <div class="container flex flex-col-reverse xl:flex-row mx-auto ">
 
 
-            <div class=" space-y-5 px-2 bg-gray-300 rounded-2xl">
+            <div class="space-y-5 px-2 bg-[#F5F5F5] rounded-t-2xl">
                 <!-- partie A -->
                 <div class="col-start-2 relative h-20">
                     <div class="flex justify-between px-2">
@@ -33,7 +33,7 @@
                         </a>
                     </div>
 
-                    <hr class="absolute bottom-0 left-0 w-full border-t-4 border-purple-500 ">
+                    <!--hr class="absolute bottom-0 left-0 w-full border-t-4 border-[#5030E5] "-->
                 </div>
 
                 <!-- partie B -->
@@ -41,15 +41,17 @@
                 @forelse ($mesOffres as $offre)
                     <div
                         class="flex justify-between px-2 mx-2 py-4 rounded-lg hover:bg-[#CFDFEA] bg-white mb-4 mr-2 sm:max-w-2xl ">
-                        <!-- img offre -->
-                        <img class="rounded-full flex lg:hidden bg-cover bg-center h-[50px] w-auto" src="/asset/"
-                            alt="">
-                        <div class="flex flex-col">
-                            <img class="rounded-full flex lg:hidden bg-cover bg-center h-[50px] w-auto"
-                                src="/asset/tune.jpg" alt="">
-                            <!-- nom et date de crea-->
-                            <div class="w-1/1 px-4 py-2 font-bold break-words ">{{ $offre->nom_projet }}</div>
-                            <p class="tex sm:break-normal px-4 py-2 text-justify">{{ $offre->created_at }}</p>
+
+                        <div class="flex justify-between">
+                            <!-- img offre -->
+                            <img class="rounded-full flex lbg-cover bg-center h-[50px] w-auto" src="/asset/tune.jpg"
+                                alt="">
+                            <div class="flex flex-col">
+
+                                <!-- nom et date de crea-->
+                                <div class="w-1/1 px-4 py-2 font-bold break-words ">{{ $offre->nom_projet }}</div>
+                                <p class="tex sm:break-normal px-4 py-2 text-justify">{{ $offre->created_at }}</p>
+                            </div>
                         </div>
 
 
@@ -215,7 +217,7 @@
 
     @endif
 </div>
-<div class="w-full flex flex-col xl:max-w-[500px] bg-[#F5F5F5] rounded-t-2xl container mx-auto md:py-8 ">
+<div class="w-full flex flex-col xl:max-w-[500px] bg-[#F5F5F5] rounded-2xl container mx-auto md:py-8">
     <div class="">
         <div class="flex border-b-4 border-[#8BC48A] pb-5 items-center space-x-5 mx-5">
             <i class="fa-solid fa-circle text-[#8BC48A] text-[8px]"></i>
