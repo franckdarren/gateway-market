@@ -151,8 +151,7 @@ class Demandes extends Component implements HasForms, HasTable
                     })
 
             ])
-            ->bulkActions([])
-            ->poll(5);
+            ->bulkActions([]);
     }
 
     public function render()

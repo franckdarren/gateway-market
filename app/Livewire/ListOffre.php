@@ -230,8 +230,7 @@ class ListOffre extends Component implements HasForms, HasTable
                     ->button()
 
             ])
-            ->bulkActions([])
-            ->poll(5);
+            ->bulkActions([]);
     }
 
     public function render()

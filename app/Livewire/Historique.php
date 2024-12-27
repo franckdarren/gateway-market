@@ -104,7 +104,6 @@ class Historique extends Component implements HasForms, HasTable
                             })
                     ),
 
-
                 TextColumn::make('type')
                     ->searchable()
                     ->badge()
