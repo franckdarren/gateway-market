@@ -90,17 +90,18 @@
                                 {{-- Liste des Offres premiums --}}
                                 @foreach ($mesOffresPremiums as $offrePremium)
                                     <div
-                                        class="flex min-w-[300px] justify-start items-center lg:justify-between lg:space-y-4 flex-col shadow-lg ">
+                                        class="flex min-w-[300px] py-4 justify-start items-center lg:justify-between lg:space-y-4 flex-col shadow-lg ">
                                         <div class="w-full items-center p-2 flex justify-between space-x-5">
 
                                             <div class=" space-x-2 flex text-base  font-semibold items-center ">
                                                 <img class="rounded-full bg-cover bg-center h-[50px] w-auto"
                                                     src={{ $offrePremium->compteStartup->url_logo }} alt="">
-                                                <h2
+                                                    <div class="flex flex-col"><h2
                                                     class="flex text-[#0D062D] font-semibold text-[18px] mb-2 rounded-md">
                                                     <span class="font-regular"></span>
                                                     {{ $offrePremium->compteStartup->nom }}
-                                                </h2>
+                                                </h2><p>nom du projet</p></div>
+                                                
                                             </div>
 
                                             <a href="#"
