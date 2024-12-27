@@ -7,13 +7,13 @@
                 <table class="min-w-full table-auto">
                     <thead class="bg-gray-100">
                         <tr>
-                            <th class="px-6 py-3 text-sm font-medium text-left text-gray-500">Mois</th>
-                            <th class="px-6 py-3 text-sm font-medium text-left text-gray-500">Capital restant</th>
-                            <th class="px-6 py-3 text-sm font-medium text-left text-gray-500">Intérêt dû</th>
-                            <th class="px-6 py-3 text-sm font-medium text-left text-gray-500">Remboursement capital</th>
-                            <th class="px-6 py-3 text-sm font-medium text-left text-gray-500">Remboursement intérêt</th>
-                            <th class="px-6 py-3 text-sm font-medium text-left text-gray-500">Remboursement total</th>
-                            <th class="px-6 py-3 text-sm font-medium text-left text-gray-500">Cumul remboursement</th>
+                            <th class="px-6 py-3 text-sm font-medium text-left text-white">Mois</th>
+                            <th class="px-6 py-3 text-sm font-medium text-left text-white">Capital restant</th>
+                            <th class="px-6 py-3 text-sm font-medium text-left text-white">Intérêt dû</th>
+                            <th class="px-6 py-3 text-sm font-medium text-left text-white">Remboursement capital</th>
+                            <th class="px-6 py-3 text-sm font-medium text-left text-white">Remboursement intérêt</th>
+                            <th class="px-6 py-3 text-sm font-medium text-left text-white">Remboursement total</th>
+                            <th class="px-6 py-3 text-sm font-medium text-left text-white">Cumul remboursement</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200">
@@ -31,7 +31,7 @@
                                     {{ number_format($remboursement['remboursement_interet'], 0, '', ' ') }} FCFA</td>
                                 <td class="px-6 py-4 text-sm text-gray-900">
                                     {{ number_format($remboursement['remboursement_total'], 0, '', ' ') }} FCFA</td>
-                                <td class="px-6 py-4 text-sm text-gray-900">
+                                <td class="px-6 py-4 text-sm font-extrabold text-green-700">
                                     {{ number_format($remboursement['cumul_remboursement'], 0, '', ' ') }} FCFA</td>
                             </tr>
                         @endforeach

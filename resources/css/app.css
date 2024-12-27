@@ -9,11 +9,15 @@
 
 
 table {
-    @apply min-w-full border-none  shadow-none; 
+    @apply min-w-full border-none   shadow-none; 
+}
+
+table tr {
+    @apply rounded-t-md py-2
 }
 
 table th {
-    @apply bg-[#CFDFEA] px-4 py-2 text-left text-gray-600 border-r border-white ;
+    @apply bg-[#5B3FFC] px-4 py-2 text-left text-white border-r border-white ;
 }
 
 table td {

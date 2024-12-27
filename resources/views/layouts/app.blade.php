@@ -119,9 +119,7 @@
                         @role('Investisseur')
                         <!-- Lien Remboursement -->
                         <x-nav-link href="{{ route('remboursement') }}" :active="request()->routeIs('remboursement')"
-                            :icone='"<svg class=\"w-6 h-6\" xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\">
-                                                                                                                                                                                    <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M3 4v16c0 1.104.896 2 2 2h14c1.104 0 2-.896 2-2V4H3zm6 14V8l6 5-6 5z\"/>
-                                                                                                                                                                                </svg>"'>
+                            :icone="'<i class=\'text-2xl fa-solid fa-coins\'></i>'">
                             {{ __('Remboursement') }}
                         </x-nav-link>
                         @endrole
