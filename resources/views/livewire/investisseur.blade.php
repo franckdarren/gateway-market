@@ -20,7 +20,7 @@
                                     <p class="flex md:hidden">{{ $offre->nom_projet }}</p>
                                     <p class="hidden md:flex text-[#787486]  text-[14px] mb-2 md:mb-0 xl:mr-2 rounded-md">
                                         <span class="font-regular"></span>
-                                        {{ \Illuminate\Support\Str::limit($offre->nom_projet, 25, "...") }}
+                                        {{ \Illuminate\Support\Str::limit($offre->nom_projet, 20, "...") }}
                                     </p>
                                 </div>
 
