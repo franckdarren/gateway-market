@@ -104,7 +104,7 @@
 
                                             </div>
 
-                                            <a href="#"
+                                            <a href="{{ route('offre.show', $offrePremium->id) }}"
                                                 class="flex md:justify-start text-[18px] md:text-center text-black">
                                                 <i class="fa-solid fa-ellipsis"></i>
                                             </a>
