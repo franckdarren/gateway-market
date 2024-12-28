@@ -1,4 +1,5 @@
 <div class="">
+
     @if ($hasCompteStartup)
 
         <div class="container flex flex-col-reverse xl:flex-row mx-auto gap-10">
@@ -30,24 +31,26 @@
 
                 @forelse ($mesOffres as $offre)
                     <div
-                        class="space-x-5 flex justify-between px-2 mx-2 my-0 py-2 rounded-lg hover:bg-[#CFDFEA] bg-white p-6 sm:gap-2">
+                        class="space-x-5 flex justify-between px-2 mx-2 my-0 py-2 rounded-lg hover:bg-[#CFDFEA] bg-white p-6 sm:gap-2  ">
 
-                        <div class="flex flex-col justify-between sm:flex-row">
+                        <div class="ml-2 flex flex-col gap-4 md:items-center  sm:flex-row ">
                             <!-- img offre -->
-                            <img class="rounded-full flex lbg-cover bg-center h-[50px] w-auto"
-                                src={{ $offre->url_image }} alt="">
+                            <div class="w-[50px] space-x-2 flex  items-center ">
+                                <img class="rounded-full rounded-end-4 bg-cover bg-center h-[50px] w-full"
+                                    src={{ $offre->url_image }} alt="">
+                            </div>
                             <div class="flex flex-col">
 
                                 <!-- nom et date de crea-->
-                                <div class="w-1/1 px-4 py-2 font-bold break-words ">{{ $offre->nom_projet }}</div>
-                                <p class="tex sm:break-normal px-4 py-2 text-justify">{{ $offre->created_at }}</p>
+                                <div class="w-1/1  font-bold break-words ">{{ $offre->nom_projet }}</div>
+                                <p class="tex sm:break-normal  text-justify">{{ $offre->created_at }}</p>
                             </div>
                         </div>
 
                         <div class="w-1/2 flex flex-col gap-16 sm:block">
 
                             <!-- ls-->
-                            <div class=" w-full flex justify-between sm:justify-content-center ">
+                            <div class=" w-full flex sm:justify-content-center justify-end">
                                 <!-- status -->
                                 <div class="md:max-w-2xl break-words flex justify-center items-center text-center">
                                     <span
@@ -149,16 +152,16 @@
                                 </div>
                             </div>
                             <!-- important -->
-                            <div class="w-full flex justify-between mt-4 ">
+                            <div class="w-full flex sm:justify-content-center justify-end  ">
 
-                                <div class=" flex flex-row-reverse gap-2 text-center items-center">
+                                <div class=" flex flex-row-reverse  gap-2 text-center items-center">
 
                                     <p class="text-[14px] font-medium text-[#8D6CFF] sm:break-all">
                                         {{ number_format($offre->montant, 0, '.', ' ') }} FCFA
                                     </p>
                                     <i class="text-[#808080] fa-solid fa-money-bill-1-wave"></i>
                                 </div>
-                                <div class="w-1/2 flex flex-row-reverse gap-1 text-center items-center p-4">
+                                <div class="flex flex-row-reverse gap-1 text-center items-center p-4">
 
                                     <p class="text-[14px] font-medium text-green-600 ">
                                         {{ $offre->taux_interet }}%</p>
@@ -200,64 +203,52 @@
     <!-- Section: pour voir les investisseurs qui ont place de l'argent sur une des mes offres -->
 
     <div class="p-5 border-b-4 xl:border-none mx-5 xl:mx-0 border-[#8BC48A]">
-        <div class="flex flex-col lg:flex-row bg-white rounded-lg">
+        <div class="flex flex-col  bg-white rounded-lg">
 
 
-            <div class="w-full items-center flex space-x-5 ">
+            <div class="w-full items-center flex justify-between ">
 
-                <div class=" space-x-5 flex text-base font-semibold ">
-                    <img class="rounded-full bg-cover bg-center h-[50px] w-auto" src="/asset/tune.jpg" alt="">
-
-                </div>
-
-                <h2 class="flex text-[#0D062D] font-semibold text-[18px] mb-2 rounded-md">
-
-                    Jack Meek
-                </h2>
-
-
-
-            </div>
-            <div class="flex flex-col">
-                <div class="flex justify-between p-2 ">
-                    <span></span>
-                    <a href="#" class="flex md:justify-content-end text-[18px] md:text-center text-black">
-
-                        <i class="fa-solid fa-ellipsis"></i>
-                    </a>
-                </div>
-
-                <div class="p-2 flex flex-col w-full">
-
-                    <div
-                        class="flex items-center w-full md:items-center justify-between bg-white rounded-lg gap-2 md:gap-4">
-
-                        <!-- Section: Montant qu'il doit -->
-                        <div class="flex items-center space-x-2">
-                            <i class="text-[#808080] fa-solid fa-money-bill-1-wave"></i>
-                            <p class="text-[12px] font-medium text-[#8D6CFF]">
-                                {{ $offre->montant }}
-                            </p>
-                        </div>
-
-                        <!-- Section: nombre de mois restant -->
-                        <div class="flex items-center space-x-2">
-
-                            <i class="text-[#808080] fa-regular fa-calendar"></i>
-                            <p class="text-[12px] font-medium text-black">
-                                {{ $offre->nbre_mois_remboursement }}</p>
-                        </div>
-
-                        <!-- Section: Taux d'intérêt -->
-                        <div class="flex items-center space-x-2 ">
-                            <i class="text-[#808080] fa-solid fa-chart-line"></i>
-                            <p class="text-[12px] font-medium text-green-600 ">
-                                {{ $offre->taux_interet }}</p>
-
-                        </div>
+                <div class="w-full items-center p-2 flex flex-row gap-4">
+                    <div class=" w-[50px] space-x-5 flex text-base  font-semibold ">
+                        <img class="rounded-full bg-cover bg-center h-[50px] w-full" src="/asset/tune.jpg"
+                            alt="">
 
                     </div>
+
+                    <h2 class="flex text-[#03314B] text-[18px] font-semibold text-[18px] rounded-md">
+
+                        Jack Meek
+                    </h2>
                 </div>
+
+                <div
+                    class="flex flex-col p-4 w-full   bg-white rounded-lg gap-1 ">
+
+                    <!-- Section: Montant rembourser -->
+                    <div class="flex justify-end gap-2 ">
+                        
+                        <p class="text-[16px] font-bold text-[#03314B]">
+                            180 000 FCFA
+                        </p>
+                    </div>
+
+
+
+                    <!-- Section: % de remboursement -->
+                    <div class="flex justify-end gap-2 ">
+   
+                        <p class="text-[16px] breark-normal font-bold text-[#1D82CC] ">
+                            18%</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="p-2 flex flex-col font-bold text-[18px] text-[#03314B] items-center w-full">
+                <h1>Projet X</h1>
+
+
             </div>
 
 
