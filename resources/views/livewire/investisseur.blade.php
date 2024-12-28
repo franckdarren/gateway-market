@@ -3,6 +3,7 @@
         <div class="container flex flex-col-reverse xl:flex-row mx-auto">
             <div class="space-y-5 w-full px-2">
                 @forelse ($mesOffresSimples as $offre)
+
                     <div
                         class="flex space-y-3 flex-col lg:flex-row justify-between py-2 px-4 bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 ease-in-out">
                         <div class="flex justify-between lg:justify-center items-start lg:items-center space-x-3">
@@ -22,6 +23,7 @@
                                             {{ \Illuminate\Support\Str::limit($offre->nom_projet, 20, '...') }}
                                         </p>
                                     </div>
+
                                 </div>
                             </div>
 
@@ -47,7 +49,9 @@
                                     <i class="fa-solid fa-ellipsis"></i>
                                 </a>
                             </div>
+
                             <div class="flex items-center w-full md:justify-end justify-between xl:py-4 gap-2 md:gap-4">
+
                                 <!-- Section: Montant -->
                                 <div class="flex items-center space-x-2">
                                     <i class="text-[#808080] fa-solid fa-money-bill-1-wave"></i>
@@ -92,18 +96,23 @@
                         </header>
 
                         <div class="py-5 sm:p-5 border-b-4 xl:border-none mx-5 mb-10 xl:mb-0 xl:mx-0 border-[#8BC48A]">
+
                             <div
                                 class="flex xl:overflow-y-auto overflow-x-auto max-w-screen-md xl:max-h-screen  space-x-3 xl:space-x-0 space-y-3 xl:flex-col items-center justify-center xl:justify-between p-2 bg-white rounded-lg">
+
 
                                 {{-- Liste des Offres premiums --}}
                                 @foreach ($mesOffresPremiums as $offrePremium)
                                     <div
                                         class="flex min-w-[300px] py-2 justify-start items-center lg:justify-between lg:space-y-4 flex-col shadow-lg ">
+
                                         <div class="w-full items-center px-2 flex justify-between space-x-5 ">
+
 
                                             <div class=" space-x-2 flex text-base  font-semibold items-center ">
                                                 <img class="rounded-full bg-cover bg-center h-[50px] w-auto"
                                                     src={{ $offrePremium->compteStartup->url_logo }} alt="">
+
                                                 <div>
                                                     <h2
                                                         class="flex text-[#0D062D] font-semibold text-[18px] rounded-md">
@@ -114,6 +123,7 @@
                                                         {{ $offrePremium->nom_projet }}</p>
                                                 </div>
 
+
                                             </div>
 
                                             <a href="{{ route('offre.show', $offrePremium->id) }}"
@@ -123,10 +133,12 @@
                                         </div>
 
                                         <div class="p-2 flex flex-col w-full">
+
                                             <div class="relative overflow-hidden rounded-md h-[100px] w-full">
                                                 <img class="transition-transform duration-300 ease-in-out transform hover:scale-125 object-cover h-full w-full"
                                                     src="{{ $offrePremium->url_image }}" alt="">
                                             </div>
+
                                             <p class=" text-[#787486]  text-[14px] my-4">
                                                 <span class="font-regular"></span>
                                                 {{ $offrePremium->description_projet }}
