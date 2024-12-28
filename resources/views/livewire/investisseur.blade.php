@@ -3,7 +3,7 @@
         <div class="container flex flex-col-reverse xl:flex-row mx-auto">
             <div class="space-y-5 w-full px-2">
                 @forelse ($mesOffresSimples as $offre)
-                    <div class="flex space-y-3 flex-col lg:flex-row justify-between p-2 bg-white rounded-lg">
+                    <div class="flex space-y-3 flex-col lg:flex-row justify-between py-2 px-4 bg-white rounded-lg">
                         <div class="flex justify-between lg:justify-center items-start md:items-center space-x-3">
                             <img class="rounded-full hidden lg:flex bg-cover bg-center h-[50px] w-auto"
                                 src={{ $offre->compteStartup->url_logo }} alt="">
@@ -40,7 +40,7 @@
                                     <i class="fa-solid fa-ellipsis"></i> </a>
                             </div>
                             <div
-                                class="flex items-center w-full md:justify-end justify-between bg-white rounded-lg px-2 xl:p-4 gap-2 md:gap-4">
+                                class="flex items-center w-full md:justify-end justify-between bg-white rounded-lg  xl:py-4 gap-2 md:gap-4">
                                 <!-- Section: Montant -->
                                 <div class="flex items-center space-x-2">
                                     <i class="text-[#808080] fa-solid fa-money-bill-1-wave"></i>
@@ -78,29 +78,29 @@
                         <header class="">
                             <div class="flex border-b-4 border-[#8BC48A] pb-5 items-center space-x-5 mx-5">
                                 <i class="fa-solid fa-circle text-[#8BC48A] text-[8px]"></i>
-                                <h2 class="text-[16px] font-medium text-[#0D062D]">
+                                <h2 class="text-[21px] font-medium text-[#0D062D]">
                                     Startup(s) Premium(s)
                                 </h2>
                             </div>
                         </header>
 
                         <div class="py-5 sm:p-5 border-b-4 xl:border-none mx-5 mb-10 xl:mb-0 xl:mx-0 border-[#8BC48A]">
-                            <div class="flex xl:overflow-y-auto overflow-x-auto max-w-screen-md xl:max-h-screen  space-x-3 space-y-3 xl:flex-col justify-between p-2 bg-white rounded-lg">
+                            <div class="flex xl:overflow-y-auto overflow-x-auto max-w-screen-md xl:max-h-screen  space-x-3 space-y-3 xl:flex-col items-center justify-center xl:justify-between p-2 bg-white rounded-lg">
 
                                 {{-- Liste des Offres premiums --}}
                                 @foreach ($mesOffresPremiums as $offrePremium)
                                     <div
-                                        class="flex min-w-[300px] py-4 justify-start items-center lg:justify-between lg:space-y-4 flex-col shadow-lg ">
-                                        <div class="w-full items-center p-2 flex justify-between space-x-5">
+                                        class="flex min-w-[300px] py-2 justify-start items-center lg:justify-between lg:space-y-4 flex-col shadow-lg ">
+                                        <div class="w-full items-center px-2 flex justify-between space-x-5">
 
                                             <div class=" space-x-2 flex text-base  font-semibold items-center ">
                                                 <img class="rounded-full bg-cover bg-center h-[50px] w-auto"
                                                     src={{ $offrePremium->compteStartup->url_logo }} alt="">
-                                                    <div class="flex flex-col"><h2
-                                                    class="flex text-[#0D062D] font-semibold text-[18px] mb-2 rounded-md">
+                                                    <div><h2
+                                                    class="flex text-[#0D062D] font-semibold text-[18px] rounded-md">
                                                     <span class="font-regular"></span>
                                                     {{ $offrePremium->compteStartup->nom }}
-                                                </h2><p>{{ $offrePremium->nom_projet }}</p></div>
+                                                </h2><p class="text-[#787486]  text-[14px]">{{ $offrePremium->nom_projet }}</p></div>
 
                                             </div>
 
@@ -114,12 +114,12 @@
                                         <div class="p-2 flex flex-col w-full">
                                             <img class="rounded-md h-[100px] w-full object-cover"
                                             src={{ $offrePremium->url_image }} alt="">
-                                            <p class=" text-[#787486]  text-[14px] mb-4">
+                                            <p class=" text-[#787486]  text-[14px] my-4">
                                                 <span class="font-regular"></span>
                                                 {{ $offrePremium->description_projet }}
                                             </p>
                                             <div
-                                                class="flex flex-col lg:flex-row items-start w-full md:items-center lg:justify-between bg-white rounded-lg gap-2 md:gap-4">
+                                                class="flex flex-col lg:flex-row items-start w-full xl:items-center lg:justify-between bg-white rounded-lg gap-2 md:gap-4">
 
                                                 <!-- Section: Montant -->
                                                 <div class="flex items-center space-x-2">
