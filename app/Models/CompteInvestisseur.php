@@ -50,6 +50,6 @@ class CompteInvestisseur extends Model
 
     public function favorites()
     {
-        return $this->belongsToMany(Offre::class, 'favorites')->withTimestamps();
+        return $this->belongsToMany(Offre::class, 'favorites', 'compte_investisseur_id', 'offre_id');
     }
 }
