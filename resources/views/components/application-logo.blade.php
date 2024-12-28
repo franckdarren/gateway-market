@@ -2,7 +2,7 @@
 	<title>GAMA 1</title>
 	<style>
 		.s0 { fill: #30cbff }
-		.s1 { fill: #ffffff }
+		.s1 { fill: #000 }
 		.s2 { fill: #30cbff }
 	</style>
 	<g>
