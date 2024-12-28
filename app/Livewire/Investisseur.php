@@ -30,7 +30,6 @@ class Investisseur extends Component
 
     public function render()
     {
-
         // Offres premiums
         $mesOffresPremiums = Offre::select('offres.*')
             ->join('compte_startups', 'offres.compte_startup_id', '=', 'compte_startups.id')
