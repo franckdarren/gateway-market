@@ -34,8 +34,8 @@
 
                         <div class="flex flex-col justify-between sm:flex-row">
                             <!-- img offre -->
-                            <img class="rounded-full flex lbg-cover bg-center h-[50px] w-auto" src="/asset/tune.jpg"
-                                alt="">
+                            <img class="rounded-full flex lbg-cover bg-center h-[50px] w-auto"
+                                src={{ $offre->url_image }} alt="">
                             <div class="flex flex-col">
 
                                 <!-- nom et date de crea-->
@@ -67,7 +67,7 @@
                                     <div x-data="{ showDeleteModal: false }">
                                         <!-- Bouton pour ouvrir la modale de suppression -->
                                         <button @click="showDeleteModal = true"
-                                            class="{{ $offre->statut === 'En attente de validation' ? 'hidden' : '' }}">
+                                            class="{{ in_array($offre->statut, ['investis', 'En attente de validation']) ? 'hidden' : '' }}">
                                             <span>
                                                 <svg width="16" height="18" viewBox="0 0 16 18" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
@@ -122,7 +122,7 @@
                                     </div>
                                     <!-- Bouton modifier -->
                                     <a href="{{ route('offre.edit', $offre->id) }}"
-                                        class="{{ $offre->statut === 'En attente de validation' ? 'hidden' : '' }}">
+                                        class="{{ in_array($offre->statut, ['investis', 'En attente de validation']) ? 'hidden' : '' }}">
                                         <span>
                                             <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
