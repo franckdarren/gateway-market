@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex items-center space-x-4"><i class="fa-solid fa-circle text-[#5030E5] text-[8px]"></i>
-            <h2 class="text-[16px] font-medium text-[#0D062D]">
+            <h2 class="text-[21px] font-medium text-[#0D062D]">
                 @if (auth()->user()->hasRole('Administrateur'))
                     {{ __('Dashboard') }}
                 @elseif (auth()->user()->hasRole('Startup'))
