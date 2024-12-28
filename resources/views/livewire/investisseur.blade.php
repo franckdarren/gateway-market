@@ -85,13 +85,13 @@
                         </header>
 
                         <div class="py-5 sm:p-5 border-b-4 xl:border-none mx-5 mb-10 xl:mb-0 xl:mx-0 border-[#8BC48A]">
-                            <div class="flex xl:overflow-y-auto overflow-x-auto max-w-screen-md xl:max-h-screen  space-x-3 space-y-3 xl:flex-col items-center justify-center xl:justify-between p-2 bg-white rounded-lg">
+                            <div class="flex xl:overflow-y-auto overflow-x-auto max-w-screen-md xl:max-h-screen  space-x-3 xl:space-x-0 space-y-3 xl:flex-col items-center justify-center xl:justify-between p-2 bg-white rounded-lg">
 
                                 {{-- Liste des Offres premiums --}}
                                 @foreach ($mesOffresPremiums as $offrePremium)
                                     <div
                                         class="flex min-w-[300px] py-2 justify-start items-center lg:justify-between lg:space-y-4 flex-col shadow-lg ">
-                                        <div class="w-full items-center px-2 flex justify-between space-x-5">
+                                        <div class="w-full items-center px-2 flex justify-between space-x-5 ">
 
                                             <div class=" space-x-2 flex text-base  font-semibold items-center ">
                                                 <img class="rounded-full bg-cover bg-center h-[50px] w-auto"
