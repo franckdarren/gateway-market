@@ -54,8 +54,8 @@
                                 <!-- status -->
                                 <div class="md:max-w-2xl break-words flex justify-center items-center text-center">
                                     <span
-                                        class="w-full 
-    @if ($offre->statut === 'En attente de validation') text-orange-500 
+                                        class="w-full
+    @if ($offre->statut === 'En attente de validation') text-orange-500
     @elseif($offre->statut === 'rejeter') text-red-500
     @elseif($offre->statut === 'Disponible') text-green-500
     @else text-gray-500 @endif">
@@ -196,7 +196,7 @@
         <div class="flex border-b-4 border-[#8BC48A] pb-5 items-center space-x-5 mx-5">
             <i class="fa-solid fa-circle text-[#8BC48A] text-[8px]"></i>
             <h2 class="text-[16px] font-medium text-[#0D062D]">
-                investisseurs
+                Investisseurs
             </h2>
         </div>
     </div>
@@ -221,12 +221,11 @@
                     </h2>
                 </div>
 
-                <div
-                    class="flex flex-col p-4 w-full   bg-white rounded-lg gap-1 ">
+                <div class="flex flex-col p-4 w-full   bg-white rounded-lg gap-1 ">
 
                     <!-- Section: Montant rembourser -->
                     <div class="flex justify-end gap-2 ">
-                        
+
                         <p class="text-[16px] font-bold text-[#03314B]">
                             180 000 FCFA
                         </p>
@@ -236,7 +235,7 @@
 
                     <!-- Section: % de remboursement -->
                     <div class="flex justify-end gap-2 ">
-   
+
                         <p class="text-[16px] breark-normal font-bold text-[#1D82CC] ">
                             18%</p>
 
