@@ -12,6 +12,15 @@
                     required>
             </div>
 
+              <!-- URL de l'image de publication -->
+            <div class="mb-4">
+                <label for="url_image" class="block text-sm font-medium text-gray-700">Image de Publication
+                    (JPG)</label>
+                <input type="file" name="url_image" id="url_image" wire:model="url_image"
+                    class="mt-1 block w-full px-4 py-2 bg-gray-100 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    accept=".jpg">
+            </div>
+
             <!-- Description du projet -->
             <div class="mb-4">
                 <label for="description_projet" class="block text-sm font-medium text-gray-700">Description
@@ -96,9 +105,9 @@
                     required>
             </div>
 
-            <!-- IR -->
+            <!-- RSI -->
             <div class="mb-4">
-                <label for="ir" class="block text-sm font-medium text-gray-700">IR</label>
+                <label for="ir" class="block text-sm font-medium text-gray-700">RSI</label>
                 <input type="number" step="0.01" name="ir" id="ir" wire:model="ir"
                     class="mt-1 block w-full px-4 py-2 bg-gray-100 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     required>

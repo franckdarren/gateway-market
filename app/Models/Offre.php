@@ -48,4 +48,15 @@ class Offre extends Model
     {
         return $this->belongsToMany(CompteInvestisseur::class, 'favorites')->withTimestamps();
     }
+
+    public function isFavoris()
+    {
+        $compteInvestisseur = auth()->user()->compteInvestisseur;
+
+        if (!$compteInvestisseur) {
+            return false;
+        }
+
+        return $compteInvestisseur->favorites()->where('offre_id', $this->id)->exists();
+    }
 }

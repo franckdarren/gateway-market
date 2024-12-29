@@ -1,8 +1,8 @@
 <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 461 461" width="150" height="150">
-	<title>GAMA 1</title>
+	<title>GAMA logo auth</title>
 	<style>
 		.s0 { fill: #30cbff }
-		.s1 { fill: #ffffff }
+		.s1 { fill: #000 }
 		.s2 { fill: #30cbff }
 	</style>
 	<g>
