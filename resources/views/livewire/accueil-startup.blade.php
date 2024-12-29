@@ -31,19 +31,19 @@
 
                 @forelse ($mesOffres as $offre)
                     <div
-                        class="space-x-5 flex justify-between px-2 mx-2 my-0 py-2 rounded-lg hover:bg-[#CFDFEA] bg-white p-6 sm:gap-2  ">
+                        class="space-x-5 flex justify-between px-2 mx-2 my-0 py-2 rounded-lg hover:bg-[#CFDFEA] bg-white p-6 sm:gap-2 ">
 
-                        <div class="ml-2 flex flex-col gap-4 md:items-center  sm:flex-row ">
+                        <div class="ml-2 flex flex-col gap-4 md:items-center sm:flex-row ">
                             <!-- img offre -->
-                            <div class="w-[50px] space-x-2 flex  items-center ">
+                            <div class="w-[50px] space-x-2 flex items-center ">
                                 <img class="rounded-full rounded-end-4 bg-cover bg-center h-[50px] w-full"
                                     src={{ $offre->url_image }} alt="">
                             </div>
                             <div class="flex flex-col">
 
                                 <!-- nom et date de crea-->
-                                <div class="w-1/1  font-bold break-words ">{{ $offre->nom_projet }}</div>
-                                <p class="tex sm:break-normal  text-justify">{{ $offre->created_at }}</p>
+                                <div class="w-1/1 font-bold break-words ">{{ $offre->nom_projet }}</div>
+                                <p class="tex sm:break-normal text-justify">{{ $offre->created_at }}</p>
                             </div>
                         </div>
 
@@ -152,9 +152,9 @@
                                 </div>
                             </div>
                             <!-- important -->
-                            <div class="w-full flex sm:justify-content-center justify-end  ">
+                            <div class="w-full flex sm:justify-content-center justify-end ">
 
-                                <div class=" flex flex-row-reverse  gap-2 text-center items-center">
+                                <div class=" flex flex-row-reverse gap-2 text-center items-center">
 
                                     <p class="text-[14px] font-medium text-[#8D6CFF] sm:break-all">
                                         {{ number_format($offre->montant, 0, '.', ' ') }} FCFA
@@ -173,7 +173,6 @@
                         </div>
 
                     </div>
-
 
                 @empty
                 @endforelse
@@ -202,14 +201,13 @@
     </div>
     <!-- Section: pour voir les investisseurs qui ont place de l'argent sur une des mes offres -->
 
-    <div class="p-5 border-b-4 xl:border-none mx-5 xl:mx-0 border-[#8BC48A]">
-        <div class="flex flex-col  bg-white rounded-lg">
-
+    <div class="w-full p-5 border-b-4 xl:border-none mx-0 xl:mx-0 border-[#8BC48A]">
+        <div class="flex flex-col bg-white rounded-lg">
 
             <div class="w-full items-center flex justify-between ">
 
                 <div class="w-full items-center p-2 flex flex-row gap-4">
-                    <div class=" w-[50px] space-x-5 flex text-base  font-semibold ">
+                    <div class=" w-[50px] space-x-5 flex text-base font-semibold ">
                         <img class="rounded-full bg-cover bg-center h-[50px] w-full" src="/asset/tune.jpg"
                             alt="">
 
@@ -221,23 +219,23 @@
                     </h2>
                 </div>
 
-                <div class="flex flex-col p-4 w-full   bg-white rounded-lg gap-1 ">
+                <div class="w-full grid grid-cols-1 bg-white rounded-lg gap-1 p-2 ">
 
                     <!-- Section: Montant rembourser -->
-                    <div class="flex justify-end gap-2 ">
+                    <div class="w-full flex justify-end max-w-md ">
 
-                        <p class="text-[16px] font-bold text-[#03314B]">
-                            180 000 FCFA
-                        </p>
+                        <h1
+                            class="text-[14px] sm:text-[14px] md:text-[16px] lg:text-[14px] text-center break-normal font-bold text-[#03314B]">
+                            180 000 000 FCFA</h1>
                     </div>
 
 
-
                     <!-- Section: % de remboursement -->
-                    <div class="flex justify-end gap-2 ">
+                    <div class="w-full flex justify-end xl:justify-around ">
 
-                        <p class="text-[16px] breark-normal font-bold text-[#1D82CC] ">
-                            18%</p>
+                        <h1
+                            class="text-[18px] sm:text-[14px] md:text-[16px] lg:text-[16px] break-normal font-bold text-[#1D82CC] ">
+                            18%</h1>
 
                     </div>
 
@@ -247,9 +245,7 @@
             <div class="p-2 flex flex-col font-bold text-[18px] text-[#03314B] items-center w-full">
                 <h1>Projet X</h1>
 
-
             </div>
-
 
         </div>
 
