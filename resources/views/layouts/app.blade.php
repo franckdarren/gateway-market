@@ -86,7 +86,7 @@
                         @role(['Administrateur', 'Superviseur'])
                             <!-- Lien Retraits -->
                             <x-nav-link href="{{ route('demandes') }}" :active="request()->routeIs('demandes')" :icone="'<i class=\'text-2xl fa-solid fa-money-bill-wave\'></i>'">
-                                {{ __('Retraits') }}
+                                {{ __('Dépots/Retraits') }}
                             </x-nav-link>
                         @endrole
 
@@ -132,7 +132,7 @@
                         @role('Investisseur')
                             <!-- Lien Retrait -->
                             <x-nav-link href="{{ route('retrait') }}" :active="request()->routeIs('retrait')" :icone="'<i class=\'text-2xl fa-solid fa-money-bill-wave\'></i>'">
-                                {{ __('Retrait') }}
+                                {{ __('Dépot/Retrait') }}
                             </x-nav-link>
                         @endrole
 
@@ -152,12 +152,12 @@
                         @endrole
                         @role('Startup')
                             <x-nav-link href="{{ route('retrait') }}" :active="request()->routeIs('retrait')" :icone="'<i class=\'text-2xl fa-solid fa-money-bill-wave\'></i>'">
-                                {{ __('Retrait') }}
+                                {{ __('Dépot/Retrait') }}
                             </x-nav-link>
                         @endrole
                         <x-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')" :icone='"<svg class=\"w-6 h-6\" xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\">
                                                                             <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z\"></path>
-                        
+
                                                                                                                         </svg>"'>
                             {{ __('Profil') }}
                         </x-nav-link>

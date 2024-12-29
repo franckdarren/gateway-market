@@ -12,5 +12,3 @@ Artisan::command('inspire', function () {
 })->purpose('Display an inspiring quote')->hourly();
 
 Schedule::command(RemboursementCommand::class, [])->daily();
-Schedule::command(RetraitCommand::class, [])->everySecond();
-Schedule::command(DepotCommand::class, [])->everySecond();

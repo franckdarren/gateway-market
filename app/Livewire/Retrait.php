@@ -11,18 +11,19 @@ use App\Models\CompteInvestisseur;
 class Retrait extends Component
 {
     public $montant;
-    public $type = 'retrait';
+    public $type;
     public $description = "Retrait d'argent";
     public $mode_retrait;
+    public $mode_depot;
+
     public $nom_compte;
     public $compte_id;
     public $compte_type;
-
     public $numero_compte;
+    public $numero_transaction;
 
     protected $rules = [
         'montant' => 'required|numeric',
-        'mode_retrait' => 'required|string',
     ];
 
     public function submit()
@@ -64,8 +65,6 @@ class Retrait extends Component
         $rules = [
             'montant' => 'required|numeric',
             'type' => 'required|string',
-            'description' => 'nullable|string',
-            'mode_retrait' => 'required|string',
             'nom_compte' => 'required|string',
             'numero_compte' => 'required|string',
         ];
@@ -82,21 +81,35 @@ class Retrait extends Component
         $this->validate($rules);
 
         // Créer la transaction
-        $transaction = $compte->transactions()->create([
-            'montant' => $this->montant,
-            'type' => $this->type,
-            'description' => $this->description,
-            'compte_type' => $compteType,
-            'mode_retrait' => $this->mode_retrait,
-            'nom_compte' => $this->nom_compte,
-            'numero_compte' => $this->numero_compte,
-            'compte_id' => $compte_id,
-        ]);
+        if ($this->type == 'depot') {
+            $transaction = $compte->transactions()->create([
+                'montant' => $this->montant,
+                'type' => $this->type,
+                'description' => $this->description,
+                'compte_type' => $compteType,
+                'mode_retrait' => $this->mode_depot,
+                'nom_compte' => $this->nom_compte,
+                'numero_compte' => $this->numero_compte,
+                'compte_id' => $compte_id,
+                'numero_transaction' => $this->numero_transaction,
+            ]);
+        } else {
+            $transaction = $compte->transactions()->create([
+                'montant' => $this->montant,
+                'type' => $this->type,
+                'description' => $this->description,
+                'compte_type' => $compteType,
+                'mode_retrait' => $this->mode_retrait,
+                'nom_compte' => $this->nom_compte,
+                'numero_compte' => $this->numero_compte,
+                'compte_id' => $compte_id,
+                'numero_transaction' => $this->numero_transaction,
+            ]);
 
-        // Débiter le montant du compte
-        $compte->solde -= $this->montant;
-        $compte->save();
-
+            // Débiter le montant du compte
+            $compte->solde -= $this->montant;
+            $compte->save();
+        }
 
         // Réinitialiser les champs après soumission
         $this->reset();
