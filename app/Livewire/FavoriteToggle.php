@@ -23,11 +23,11 @@ class FavoriteToggle extends Component
         if ($this->isFavoris) {
             $compteInvestisseur->favorites()->detach($this->offre->id);
             $this->isFavoris = false;
-            session()->flash('success', 'Cette offre a été retirée dans la liste des favoris.');
+            session()->flash('success', 'Cette offre a été retirée de la liste des favoris.');
         } else {
             $compteInvestisseur->favorites()->attach($this->offre->id);
             $this->isFavoris = true;
-            session()->flash('success', 'Cette offre a été ajoutée de la liste des favoris.');
+            session()->flash('success', 'Cette offre a été ajoutée dans la liste des favoris.');
         }
     }
 
