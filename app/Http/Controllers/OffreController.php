@@ -8,6 +8,9 @@ use App\Models\Transaction;
 use Illuminate\Http\Request;
 use App\Models\CompteStartup;
 use App\Models\CompteInvestisseur;
+use Illuminate\Support\Facades\DB;
+use App\Jobs\ProcessInvestissement;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -95,7 +98,7 @@ class OffreController extends Controller
     {
         // Récupérer l'offre par son ID
         $offre = Offre::findOrFail($id);
-        
+
 
         // Afficher les détails de l'offre
         return view('offre.show', compact('offre'));
@@ -226,41 +229,60 @@ class OffreController extends Controller
             return redirect()->back()->with('error', 'Solde insuffisant pour effectuer cet investissement.');
         }
 
-        $investisseur->transactions()->create([
-            'montant' => $montantTotal,
-            'frais' => $frais,
-            'type' => 'Investissement',
-            'description' => 'Investissement dans l\'offre ' . $offre->nom_projet,
-            // 'compte_type' => 'Compte Investisseur',
-            // 'compte_id' => $investisseur->id,
-            'offre_id' => $offre->id,
-        ]);
+        try {
+            DB::transaction(function () use ($offre, $investisseur, $admin, $startup, $montantTotal, $montantInvestissement, $frais) {
+                // Mettre à jour l'offre avec le compte investisseur et changer son statut
+                $offre->compte_investisseur_id = $investisseur->id;
+                $offre->statut = 'En cours';
+                $offre->save();
 
-        $startup->transactions()->create([
-            // 'compte_type' => 'Compte Startup',
-            // 'compte_id' => $startup->id,
-            'montant' => $montantInvestissement,
-            'type' => "Dépot",
-            'description' => "Financement du projet {$offre->nom_projet} par " . $investisseur->nom . " " . $investisseur->prenom,
-            'statut' => "Traitée",
+                // Effectuer les opérations financières
+                $investisseur->solde -= $montantTotal;
+                $investisseur->save();
 
-        ]);
+                $admin->solde += $frais;
+                $admin->save();
 
-        $admin->transactions()->create([
-            // 'compte_type' => 'Compte Startup',
-            // 'compte_id' => $startup->id,
-            'montant' => $frais,
-            'type' => "Commission",
-            'description' => "Commission pour le financement du projet {$offre->nom_projet} par " . $investisseur->nom . " " . $investisseur->prenom,
-            'statut' => "Traitée",
+                $startup->solde += $montantInvestissement;
+                $startup->save();
 
-        ]);
+                // Trace écrite transaction Investissement
+                $transaction = $investisseur->transactions()->create([
+                    'montant' => $montantTotal,
+                    'frais' => $frais,
+                    'type' => 'Investissement',
+                    'description' => 'Investissement dans l\'offre ' . $offre->nom_projet,
+                    'offre_id' => $offre->id,
+                ]);
 
+                // Trace écrite transaction Dépôt chez la Startup
+                $startup->transactions()->create([
+                    'montant' => $montantInvestissement,
+                    'type' => "Dépôt",
+                    'description' => "Financement du projet {$offre->nom_projet} par " . $investisseur->nom . " " . $investisseur->prenom,
+                    'statut' => "Traitée",
+                ]);
 
-        // Mettre à jour l'offre avec le compte investisseur et changer son statut
-        $offre->compte_investisseur_id = $investisseur->id;
-        $offre->statut = 'En attente de traitement'; // Vous pouvez définir un autre statut selon vos besoins
-        $offre->save();
+                // Trace écrite transaction Commission chez l'Admin
+                $admin->transactions()->create([
+                    'montant' => $frais,
+                    'type' => "Commission",
+                    'description' => "Commission pour le financement du projet {$offre->nom_projet} par " . $investisseur->nom . " " . $investisseur->prenom,
+                    'statut' => "Traitée",
+                ]);
+
+                // Remplissage de la table remboursement et envoi des emails
+                ProcessInvestissement::dispatch($offre, $montantInvestissement, $investisseur, $startup, $transaction);
+            });
+        } catch (\Exception $e) {
+            // Enregistrer l'erreur dans les logs
+            Log::error('Erreur lors de la transaction : ' . $e->getMessage());
+
+            // Optionnel : afficher un message d'erreur ou rediriger l'utilisateur
+            return response()->json([
+                'message' => 'Une erreur est survenue lors de la transaction. Veuillez réessayer plus tard.',
+            ], 500);
+        }
 
         // Retourner à la page de l'offre avec un message de succès
         return redirect()->route('offre.show', $offre->id)->with('success', 'Investissement en cours de traitement. Un email vous sera envoyé pour confirmer la transaction.');

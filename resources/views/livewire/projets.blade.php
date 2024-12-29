@@ -59,7 +59,7 @@
                 <div class="space-y-5 w-full md:space-y-0 flex flex-col md:flex-row">
                     <div class="flex items-end justify-end w-full md:hidden space-x-5">
                         <p
-                            class="text-center px-2 py-1 md:px-1 text-xs font-medium rounded-md border 
+                            class="text-center px-2 py-1 md:px-1 text-xs font-medium rounded-md border
                                            {{ $offre->statut === 'Approuvé' ? 'bg-green-100 text-green-600' : 'bg-yellow-100 text-yellow-600' }}">
                             {{ $offre->statut }}
                         </p><a href="{{ route('offre.show', $offre->id) }}"
@@ -67,13 +67,13 @@
                             <i class="fa-solid fa-ellipsis"></i>
                         </a>
                     </div>
-                    <div class="flex items-center"> <img src="{{ $offre->image_url ?? 'https://via.placeholder.com/150' }}"
+                    <div class="flex items-center"> <img src="{{ $offre->url_image ?? 'https://via.placeholder.com/150' }}"
                             alt="Image de {{ $offre->nom_projet }}" class="w-16 h-16 rounded-full object-cover mr-4">
 
 
                         <div class="flex flex-col">
                             <h3 class="text-lg font-semibold text-gray-900">{{ $offre->nom_projet }}</h3>
-                            <p>nom de la start up</p>
+                            <p>{{ $offre->compteStartup->nom }}</p>
                         </div>
                     </div>
                 </div>
@@ -82,7 +82,7 @@
                     <!-- Actions -->
                     <div class="md:flex hidden space-x-5">
                         <p
-                            class="text-center py-1 px-2 text-xs font-medium rounded-full border 
+                            class="text-center py-1 px-2 text-xs font-medium rounded-full border
                                            {{ $offre->statut === 'Approuvé' ? 'bg-green-100 text-green-600' : 'bg-yellow-100 text-yellow-600' }}">
                             {{ $offre->statut }}
                         </p><a href="{{ route('offre.show', $offre->id) }}"

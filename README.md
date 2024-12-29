@@ -44,10 +44,10 @@ identifiant : superviseur@superviseur.com
 password : password
 
 
-Pour lancer la commande qui traite les investissements
-`php artisan investissement:command`
+Pour lancer la commande qui traite les workers
+`php artisan queue:work`
 
-Pour lancer la commande qui traite les remboursements
+Pour lancer manuellement la commande qui traite les remboursements
 `php artisan remboursement:command`
 
 

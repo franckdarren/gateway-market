@@ -22,7 +22,10 @@ class Projets extends Component
                         $subQuery->where('statut', '!=', 'Remboursé');
                     });
             })
+            ->with('compteStartup')
+            ->orderBy('created_at', 'desc')
             ->paginate(12);
+
         return view('livewire.projets', [
             'mesOffres' => $mesOffres,
         ]);
