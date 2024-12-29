@@ -87,7 +87,7 @@
                 <div class="w-full xl:max-w-[400px]">
                     <div class=" flex flex-col  bg-[#F5F5F5] rounded-t-2xl container mx-auto">
                         <header class="">
-                            <div class="flex border-b-4 border-[#8BC48A] pb-5 items-center space-x-5 mx-5">
+                            <div class="flex border-b-4 border-[#8BC48A] py-5 items-center space-x-5 mx-5">
                                 <i class="fa-solid fa-circle text-[#8BC48A] text-[8px]"></i>
                                 <h2 class="text-[21px] font-medium text-[#0D062D]">
                                     Startup(s) Premium(s)

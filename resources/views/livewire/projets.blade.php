@@ -1,4 +1,4 @@
-<div class="overflow-x-auto bg-white rounded-lg">
+<div class="overflow-x-auto rounded-lg">
     @if (session('error'))
         <div class="flex items-center justify-between p-4 mx-auto mb-4 space-x-4 text-white bg-red-500 rounded-md shadow-md md:fixed md:top-5 md:right-5"
             x-data="{ open: true }" x-show="open" x-transition>
@@ -52,43 +52,61 @@
     </table>
 
 
-    <div class="flex space-x-4">
+    <div class="flex flex-col space-y-4">
         @forelse ($mesOffres as $offre)
             <div
-                class="flex flex-col xl:flex-row space-y-5 justify-between w-full xl:items-center border border-gray-200 rounded-lg shadow-md p-4 bg-white hover:shadow-lg transition-shadow">
-                <div class="flex"> <img src="{{ $offre->image_url ?? 'https://via.placeholder.com/150' }}"
-                        alt="Image de {{ $offre->nom_projet }}" class="w-16 h-16 rounded-full object-cover mr-4">
+                class="flex flex-col md:flex-row justify-between w-full border border-gray-200 rounded-lg shadow-md p-4 bg-white hover:shadow-lg items-center transition-shadow">
+                <div class="space-y-5 w-full md:space-y-0 flex flex-col md:flex-row">
+                    <div class="flex items-end justify-end w-full md:hidden space-x-5">
+                        <p
+                            class="text-center px-2 py-1 md:px-1 text-xs font-medium rounded-md border 
+                                           {{ $offre->statut === 'Approuvé' ? 'bg-green-100 text-green-600' : 'bg-yellow-100 text-yellow-600' }}">
+                            {{ $offre->statut }}
+                        </p><a href="{{ route('offre.show', $offre->id) }}"
+                            class=" text-sm font-semibold text-black hover:text-black/90">
+                            <i class="fa-solid fa-ellipsis"></i>
+                        </a>
+                    </div>
+                    <div class="flex items-center"> <img src="{{ $offre->image_url ?? 'https://via.placeholder.com/150' }}"
+                            alt="Image de {{ $offre->nom_projet }}" class="w-16 h-16 rounded-full object-cover mr-4">
 
 
-                    <div class="flex flex-col">
-                        <h3 class="text-lg font-semibold text-gray-900">{{ $offre->nom_projet }}</h3>
-                        <p>nom de la start up</p>
+                        <div class="flex flex-col">
+                            <h3 class="text-lg font-semibold text-gray-900">{{ $offre->nom_projet }}</h3>
+                            <p>nom de la start up</p>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Contenu -->
-                <div class="md:flex grid grid-cols-2 items-center justify-between gap-2 lg:space-x-5">
-                    <p class="text-sm text-gray-400">
-                    <i class="text-sm fa-solid fa-chart-line"></i> <span class="font-medium text-blue-600">{{ $offre->taux_interet }}%</span>
-                    </p>
-                    <p class="text-sm text-gray-600">
-                    <i class="text-sm fa-solid fa-money-bill"></i> <span class="font-medium text-green-600">{{ number_format($offre->montant, 0, '.', ' ') }}
-                            FCFA</span>
-                    </p>
-                    <span
-                        class="inline-block px-3 py-1 text-xs font-medium rounded-full border 
-                               {{ $offre->statut === 'Approuvé' ? 'bg-green-100 text-green-600' : 'bg-yellow-100 text-yellow-600' }}">
-                        {{ $offre->statut }}
-                    </span>
+                <div class="flex flex-col space-y-5 justify-between items-end w-full h-full">
+                    <!-- Actions -->
+                    <div class="md:flex hidden space-x-5">
+                        <p
+                            class="text-center py-1 px-2 text-xs font-medium rounded-full border 
+                                           {{ $offre->statut === 'Approuvé' ? 'bg-green-100 text-green-600' : 'bg-yellow-100 text-yellow-600' }}">
+                            {{ $offre->statut }}
+                        </p><a href="{{ route('offre.show', $offre->id) }}"
+                            class=" text-sm font-semibold text-black hover:text-black/90">
+                            <i class="fa-solid fa-ellipsis"></i>
+                        </a>
+                    </div>
+                    <!-- Contenu -->
+                    <div class="md:flex grid grid-cols-2 md:space-x-5 items-center justify-between">
+                        <p class="text-sm text-gray-400">
+                            <i class="text-sm fa-solid mr-2 fa-chart-line"></i> <span
+                                class="font-medium  text-blue-600">{{ $offre->taux_interet }}%</span>
+                        </p>
+                        <p class="text-sm text-gray-600">
+                            <i class="text-sm fa-solid mr-2 fa-money-bill"></i> <span
+                                class="font-medium text-green-600">{{ number_format($offre->montant, 0, '.', ' ') }}
+                                FCFA</span>
+                        </p>
+
+                    </div>
+
+
                 </div>
 
-                <!-- Actions -->
-                <div class="items-end justify-end flex xl:ml-4">
-                    <a href="{{ route('offre.show', $offre->id) }}"
-                        class="inline-block px-3 py-2 text-sm font-semibold text-white bg-blue-600 rounded-md hover:bg-blue-700">
-                        Voir les détails
-                    </a>
-                </div>
             </div>
         @empty
             <div class="col-span-1 text-center text-gray-600">
