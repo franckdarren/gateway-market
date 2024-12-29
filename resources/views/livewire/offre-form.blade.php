@@ -108,7 +108,7 @@
             <!-- RSI -->
             <div class="mb-4">
                 <label for="ir" class="block text-sm font-medium text-gray-700">RSI</label>
-                <input type="number" step="0.01" name="ir" id="ir" wire:model="ir"
+                <input type="number" name="ir" id="ir" wire:model="ir"
                     class="mt-1 block w-full px-4 py-2 bg-gray-100 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     required>
             </div>
@@ -116,7 +116,7 @@
             <!-- TRI -->
             <div class="mb-4">
                 <label for="tri" class="block text-sm font-medium text-gray-700">TRI</label>
-                <input type="number" step="0.01" name="tri" id="tri" wire:model="tri"
+                <input type="number" name="tri" id="tri" wire:model="tri"
                     class="mt-1 block w-full px-4 py-2 bg-gray-100 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     required>
             </div>
@@ -124,7 +124,7 @@
             <!-- KRL -->
             <div class="mb-4">
                 <label for="krl" class="block text-sm font-medium text-gray-700">KRL</label>
-                <input type="number" step="0.01" name="krl" id="krl" wire:model="krl"
+                <input type="number" name="krl" id="krl" wire:model="krl"
                     class="mt-1 block w-full px-4 py-2 bg-gray-100 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     required>
             </div>
