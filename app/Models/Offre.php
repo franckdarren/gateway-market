@@ -59,4 +59,29 @@ class Offre extends Model
 
         return $compteInvestisseur->favorites()->where('offre_id', $this->id)->exists();
     }
+
+    // Récupérer le RSI
+    public function rsi()
+    {
+        return $this->hasOne(Remboursement::class)->latest('id');
+    }
+
+    // Récupérer les remboursements déja éffectués
+    public function sommeRemboursementsEffectues()
+    {
+        return $this->remboursements()
+            ->where('statut', 'Remboursé')
+            ->sum('remboursement_total');
+    }
+
+    // Récupérer le pourcentage de remboursement
+    public function pourcentageRemboursement()
+    {
+        // Récupérer la somme des remboursements effectués et le RSI
+        $sommeRemboursementsEffectues = $this->sommeRemboursementsEffectues();
+        $rsi = $this->rsi ? $this->rsi->cumul_remboursement : 0;
+
+        // Calculer le pourcentage
+        return $rsi > 0 ? ($sommeRemboursementsEffectues / $rsi) * 100 : 0;
+    }
 }

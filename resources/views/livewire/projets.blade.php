@@ -67,7 +67,8 @@
                             <i class="fa-solid fa-ellipsis"></i>
                         </a>
                     </div>
-                    <div class="flex items-center"> <img src="{{ $offre->url_image ?? 'https://via.placeholder.com/150' }}"
+                    <div class="flex items-center"> <img
+                            src="{{ $offre->url_image ?? 'https://via.placeholder.com/150' }}"
                             alt="Image de {{ $offre->nom_projet }}" class="w-16 h-16 rounded-full object-cover mr-4">
 
 
@@ -94,12 +95,11 @@
                     <div class="md:flex grid grid-cols-2 md:space-x-5 items-center justify-between">
                         <p class="text-sm text-gray-400">
                             <i class="text-sm fa-solid mr-2 fa-chart-line"></i> <span
-                                class="font-medium  text-blue-600">{{ $offre->taux_interet }}%</span>
+                                class="font-medium  text-blue-600">{{ number_format($offre->pourcentageRemboursement, 1, ',', ' ') }} %</span>
                         </p>
                         <p class="text-sm text-gray-600">
                             <i class="text-sm fa-solid mr-2 fa-money-bill"></i> <span
-                                class="font-medium text-green-600">{{ number_format($offre->montant, 0, '.', ' ') }}
-                                FCFA</span>
+                                class="font-medium text-green-600">{{ number_format($offre->sommeRemboursementsEffectues, 0, ',', ' ') }} FCFA</span>
                         </p>
 
                     </div>

@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\Offre;
 use Livewire\Component;
 use Livewire\WithPagination;
+use App\Models\Remboursement;
 
 class Projets extends Component
 {
@@ -15,16 +16,24 @@ class Projets extends Component
         $compte = auth()->user()->compteInvestisseur;
         $mesOffres = Offre::where('compte_investisseur_id', $compte->id)
             ->where(function ($query) {
-                // Inclure les offres sans remboursements
                 $query->doesntHave('remboursements')
-                    // Inclure les offres avec au moins un remboursement non "Remboursé"
                     ->orWhereHas('remboursements', function ($subQuery) {
                         $subQuery->where('statut', '!=', 'Remboursé');
                     });
             })
-            ->with('compteStartup')
+            ->with(['compteStartup', 'rsi']) // Charger aussi la relation RSI
             ->orderBy('created_at', 'desc')
             ->paginate(12);
+
+        // Calculer la somme des paiements déjà effectués pour chaque offre
+        $mesOffres->each(function ($offre) {
+            $offre->sommeRemboursementsEffectues = $offre->sommeRemboursementsEffectues();
+            $offre->pourcentageRemboursement = $offre->pourcentageRemboursement();
+        });
+
+        // dd($mesOffres);
+
+
 
         return view('livewire.projets', [
             'mesOffres' => $mesOffres,
