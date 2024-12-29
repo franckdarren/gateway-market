@@ -33,7 +33,7 @@
                     <div
                         class="space-x-5 flex justify-between px-2 mx-2 my-0 py-2 rounded-lg hover:bg-[#CFDFEA] bg-white p-6 sm:gap-2 ">
 
-                        <div class="ml-2 flex flex-col gap-4 md:items-center sm:flex-row ">
+                        <div class="w-1/3 ml-2 flex flex-col gap-4 md:items-center sm:flex-row ">
                             <!-- img offre -->
                             <div class="w-[50px] space-x-2 flex items-center ">
                                 <img class="rounded-full rounded-end-4 bg-cover bg-center h-[50px] w-full"
@@ -47,12 +47,13 @@
                             </div>
                         </div>
 
-                        <div class="w-1/2 flex flex-col gap-16 sm:block">
+                        <div class="w-2/3 flex flex-col gap-16 sm:block">
 
                             <!-- ls-->
-                            <div class=" w-full flex sm:justify-content-center justify-end">
+                            <div class=" w-full gap-2 flex sm:justify-content-center justify-end">
                                 <!-- status -->
-                                <div class="md:max-w-2xl break-words flex justify-center items-center text-center">
+                                <div
+                                    class="w-1/2 md:max-w-2xl break-words flex justify-center items-center text-center">
                                     <span
                                         class="w-full
     @if ($offre->statut === 'En attente de validation') text-orange-500
@@ -64,13 +65,12 @@
                                 </div>
                                 <!-- les Boutons -->
                                 <div
-                                    class="flex flex-col sm:flex-row md:justify-around items-center gap-6 sm:gap-8 md:gap-6 p-4 ">
+                                    class=" flex flex-col sm:flex-row md:justify-around items-center gap-4 sm:gap-4 md:gap-4 p-2 ">
 
                                     <!-- Bouton Supprimer -->
                                     <div x-data="{ showDeleteModal: false }">
                                         <!-- Bouton pour ouvrir la modale de suppression -->
-                                        <button @click="showDeleteModal = true"
-                                            class="{{ in_array($offre->statut, ['investis', 'En attente de validation']) ? 'hidden' : '' }}">
+                                        <button @click="showDeleteModal = true" class="">
                                             <span>
                                                 <svg width="16" height="18" viewBox="0 0 16 18" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
@@ -124,8 +124,7 @@
                                         </div>
                                     </div>
                                     <!-- Bouton modifier -->
-                                    <a href="{{ route('offre.edit', $offre->id) }}"
-                                        class="{{ in_array($offre->statut, ['investis', 'En attente de validation']) ? 'hidden' : '' }}">
+                                    <a href="{{ route('offre.edit', $offre->id) }}" class="">
                                         <span>
                                             <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
@@ -136,7 +135,8 @@
                                         </span>
                                     </a>
                                     <!-- Bouton Voir -->
-                                    <a href="{{ route('offre.show', $offre->id) }}" class="f flex-auto">
+                                    <a href="{{ route('offre.show', $offre->id) }}"
+                                        class="f flex-auto lg:mb-2 lg:justify-content-center">
                                         <span>
                                             <svg width="15" height="3" viewBox="0 0 15 3" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
@@ -151,17 +151,17 @@
 
                                 </div>
                             </div>
-                            <!-- important -->
-                            <div class="w-full flex sm:justify-content-center justify-end ">
+                            <!-- important : montant et interet-->
+                            <div class="w-full flex sm:justify-content-center justify-end gap-2">
 
-                                <div class=" flex flex-row-reverse gap-2 text-center items-center">
+                                <div class="w-2/3 flex flex-row-reverse gap-2 text-center items-center">
 
                                     <p class="text-[14px] font-medium text-[#8D6CFF] sm:break-all">
                                         {{ number_format($offre->montant, 0, '.', ' ') }} FCFA
                                     </p>
                                     <i class="text-[#808080] fa-solid fa-money-bill-1-wave"></i>
                                 </div>
-                                <div class="flex flex-row-reverse gap-1 text-center items-center p-4">
+                                <div class="w-1/3 flex flex-row-reverse gap-1 text-center items-center p-4">
 
                                     <p class="text-[14px] font-medium text-green-600 ">
                                         {{ $offre->taux_interet }}%</p>
@@ -228,7 +228,6 @@
                             class="text-[14px] sm:text-[14px] md:text-[16px] lg:text-[14px] text-center break-normal font-bold text-[#03314B]">
                             180 000 000 FCFA</h1>
                     </div>
-
 
                     <!-- Section: % de remboursement -->
                     <div class="w-full flex justify-end xl:justify-around ">
