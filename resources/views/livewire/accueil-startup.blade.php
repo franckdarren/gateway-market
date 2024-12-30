@@ -35,17 +35,17 @@
                         <!-- Section Image et Informations -->
                         <div class="w-full flex flex-row items-center gap-4 w-full sm:w-1/3">
                             <!-- Image -->
-                            <div class="w-[50px] h-[50px]">
+                            <div class="w-[50px] h-[50px] ">
                                 <img class="rounded-full object-cover w-full h-full hover:scale-105 transition-transform duration-300"
                                     src="{{ $offre->url_image }}" alt="Image Offre">
                             </div>
                             <!-- Informations -->
-                            <div class="flex flex-col">
+                            <div class="flex flex-col justify-content-center w-1/2">
                                 <h3
-                                    class="text-[#0D062D] font-semibold text-[18px] hover:text-[#8D6CFF] transition-colors duration-300 truncate">
+                                    class="text-[#0D062D] break-normal font-semibold text-[18px] hover:text-[#8D6CFF] transition-colors duration-300 truncate">
                                     {{ $offre->nom_projet }}
                                 </h3>
-                                <p class="text-sm text-gray-500">{{ $offre->created_at }}</p>
+                                <p class="text-sm text-gray-500 break-normal">{{ $offre->created_at }}</p>
                             </div>
                         </div>
 
