@@ -115,6 +115,7 @@ class EditOffreForm extends Component
             'ir' => $this->ir,
             'tri' => $this->tri,
             'krl' => $this->krl,
+            'statut' => 'En attente de validation',
         ]);
 
         session()->flash('success', 'Offre modifiée avec succès.');
