@@ -4,13 +4,14 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\DB;
 use Laravel\Jetstream\HasProfilePhoto;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -35,11 +36,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'password',
         'type_abonnement',
 
-        'subscription_started_at',
         'trial_ends_at',
-        'subscription_next_charge_at',
-        'is_subscription_active',
-        'subscription_cancel_at',
+        'next_payment_date',
     ];
 
     /**
@@ -91,8 +89,98 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(CompteAdmin::class);
     }
 
-    public function subscriptionLogs()
+    // Gestion des abonnements
+
+    /**
+     * Met à niveau l'utilisateur vers un abonnement Premium ou Normal.
+     */
+    public function upgradeSubscription(string $type): void
     {
-        return $this->hasMany(SubscriptionLog::class);
+        DB::transaction(function () use ($type) {
+            $now = now();
+
+            // Vérifie si l'utilisateur revient à un type d'abonnement après l'avoir quitté
+            if ($this->type_abonnement === $type) {
+                throw new \Exception("Vous êtes déjà sur cet abonnement.");
+            }
+
+            // Si c'est la première fois et aucune période d'essai n'a été utilisée
+            if (!$this->hasHadTrial()) {
+                $this->trial_ends_at = $now->addMonths(3);
+                $this->next_payment_date = $this->trial_ends_at->addDay();
+            } else {
+                // Si déjà une période d’essai, facturer immédiatement
+                $this->processImmediatePayment($type);
+            }
+
+            // Met à jour le type d'abonnement
+            $this->type_abonnement = $type;
+
+            // Sauvegarde
+            $this->save();
+        });
     }
+
+    /**
+     * Rétrograde l'utilisateur vers un abonnement Normal.
+     */
+    public function downgradeToNormal(): void
+    {
+        $this->upgradeSubscription('Simple');
+    }
+
+    /**
+     * Rétrograde l'utilisateur vers un abonnement Normal.
+     */
+    public function upgradeToPremium(): void
+    {
+        $this->upgradeSubscription('Premium');
+    }
+
+    /**
+     * Facture l'utilisateur immédiatement pour le type d'abonnement.
+     */
+    private function processImmediatePayment(string $type): void
+    {
+        $now = now();
+
+        // Calcul des frais
+        $tarif = $this->getSubscriptionTarif($type);
+
+        // Simule le prélèvement (intégrer votre logique de paiement ici)
+        $this->paymentAbonnement($tarif);
+
+        // Met à jour la date du prochain paiement
+        $this->next_payment_date = $now->addMonth()->startOfDay();
+
+        $this->save();
+    }
+
+    /**
+     * Simule le prélèvement du montant.
+     */
+    private function paymentAbonnement(int $amount): void
+    {
+        // Logique réelle de paiement via une passerelle (Stripe, PayPal, etc.)
+        // Exemple : $this->charge($amount);
+        $this->compteStartup->solde -= $amount;
+    }
+
+    /**
+     * Retourne les frais en fonction du type d'abonnement.
+     */
+    private function getSubscriptionTarif(string $type): int
+    {
+        $tarif = config('subscription.tarif');
+        return $tarif[$type] ?? 0;
+    }
+
+    /**
+     * Vérifie si l'utilisateur a déjà bénéficié d'une période d'essai.
+     */
+    public function hasHadTrial(): bool
+    {
+        return $this->trial_ends_at !== null;
+    }
+
 }
