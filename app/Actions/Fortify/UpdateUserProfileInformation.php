@@ -27,6 +27,11 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             $user->updateProfilePhoto($input['photo']);
         }
 
+        // Gestion du changement de type d'abonnement
+        if ($input['type_abonnement'] !== $user->type_abonnement) {
+            $this->handleSubscriptionChange($user, $input['type_abonnement']);
+        }
+
         if (
             $input['email'] !== $user->email &&
             $user instanceof MustVerifyEmail
@@ -56,5 +61,17 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
         ])->save();
 
         $user->sendEmailVerificationNotification();
+    }
+
+    /**
+     * Handle subscription type changes.
+     */
+    protected function handleSubscriptionChange(User $user, string $newSubscriptionType): void
+    {
+        if ($newSubscriptionType === 'Premium') {
+            $user->upgradeToPremium();
+        } elseif ($newSubscriptionType === 'Normal') {
+            $user->downgradeToNormal();
+        }
     }
 }

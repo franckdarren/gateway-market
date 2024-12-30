@@ -50,4 +50,7 @@ Pour lancer la commande qui traite les workers
 Pour lancer manuellement la commande qui traite les remboursements
 `php artisan remboursement:command`
 
+Pour lancer manuellement la commande qui traite le payement des abonnements
+`php artisan abonnement:command`
+
 

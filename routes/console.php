@@ -1,6 +1,7 @@
 <?php
 
 use App\Console\Commands\DepotCommand;
+use App\Console\Commands\ProcessAbonnementPayments;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
 use App\Console\Commands\RemboursementCommand;
@@ -12,3 +13,5 @@ Artisan::command('inspire', function () {
 })->purpose('Display an inspiring quote')->hourly();
 
 Schedule::command(RemboursementCommand::class, [])->daily();
+Schedule::command(ProcessAbonnementPayments::class, [])->daily();
+
