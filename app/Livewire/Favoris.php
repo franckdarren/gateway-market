@@ -6,8 +6,15 @@ use Livewire\Component;
 
 class Favoris extends Component
 {
+    protected $listeners = ['favoriteUpdated' => 'refreshFavoris'];
+
     public function render()
     {
-        return view('livewire.favoris');
+        $investor = auth()->user()->compteInvestisseur;
+        $favorites = $investor->favorites()->with(['compteStartup', 'rsi'])->get();
+
+        return view('livewire.favoris', [
+            'favorites' => $favorites,
+        ]);
     }
 }

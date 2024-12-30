@@ -84,4 +84,56 @@ class Offre extends Model
         // Calculer le pourcentage
         return $rsi > 0 ? ($sommeRemboursementsEffectues / $rsi) * 100 : 0;
     }
+
+    // Calculer le RSI
+    private function calculerRSI()
+    {
+        $montantInvestissement = $this->montant;
+        $tauxInteret = $this->taux_interet;
+        $nbreMoisRemboursement = $this->nbre_mois_remboursement;
+        $nbreMoisGrace = $this->nbre_mois_grace;
+
+        $capitalRestant = $montantInvestissement;
+        $capitalTotalRestant = $capitalRestant;
+        $cumulRemboursement = 0;
+
+        for ($i = 1; $i <= $nbreMoisRemboursement + $nbreMoisGrace; $i++) {
+            $remboursementCapital = 0;
+            $remboursementInteret = 0;
+            $interetDu = 0;
+
+            // Calculer l'intérêt pendant la période de grâce
+            if ($i <= $nbreMoisGrace) {
+                $interetDu = floor($capitalRestant * ($tauxInteret / 100));
+                $capitalRestant += $interetDu;
+            }
+
+            // Calculer les remboursements après la période de grâce
+            if ($i > $nbreMoisGrace) {
+                if ($i == $nbreMoisGrace + 1) {
+                    $capitalTotalRestant = $capitalRestant;
+                }
+
+                $remboursementCapital = floor($capitalTotalRestant / $nbreMoisRemboursement);
+                $remboursementInteret = floor($capitalRestant * ($tauxInteret / 100));
+                $capitalRestant -= $remboursementCapital;
+            }
+
+            // Calculer le remboursement total pour le mois
+            $remboursementTotal = $remboursementCapital + $remboursementInteret;
+            $cumulRemboursement += $remboursementTotal;
+        }
+
+        return $cumulRemboursement;
+    }
+
+    /**
+     * Attribut calculé pour le RSI.
+     *
+     * @return float
+     */
+    public function getRsiAttribute()
+    {
+        return $this->calculerRSI();
+    }
 }
