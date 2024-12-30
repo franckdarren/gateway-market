@@ -338,7 +338,7 @@ if (auth()->user()->hasRole('Investisseur')) {
     <!-- Script JavaScript -->
     <script>
         let idleTime = 0;
-        const maxIdleTime = 30 * 60 * 1000; // 30 minutes
+        const maxIdleTime = 120 * 60 * 1000; // 120 minutes
 
         function resetIdleTime() {
             idleTime = 0;

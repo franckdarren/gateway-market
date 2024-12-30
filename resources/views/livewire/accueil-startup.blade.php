@@ -33,7 +33,7 @@
                     <div
                         class="container flex flex-col sm:flex-row justify-between bg-white rounded-lg shadow-md hover:shadow-xl p-4 gap-6 transition-shadow duration-300 ease-in-out">
                         <!-- Section Image et Informations -->
-                        <div class="w-full flex flex-row items-center gap-4 w-full sm:w-1/3">
+                        <div class="w-full flex flex-row items-center gap-4 sm:w-1/3">
                             <!-- Image -->
                             <div class="w-[50px] h-[50px]">
                                 <img class="rounded-full object-cover w-full h-full hover:scale-105 transition-transform duration-300"
@@ -55,12 +55,18 @@
                             <!-- Statut -->
                             <span
                                 class="px-3 py-1 text-sm font-medium rounded-lg
-    @if ($offre->statut === 'En attente de validation') bg-orange-100 text-orange-500
-    @elseif ($offre->statut === 'rejeter') bg-red-100 text-red-500
-    @elseif ($offre->statut === 'Disponible') bg-green-100 text-green-500
-    @else bg-gray-100 text-gray-500 @endif">
+                                @php
+                                    $statusClasses = match ($offre->statut) {
+                                        'En attente de validation' => 'bg-orange-100 text-orange-500',
+                                        'Rejeter' => 'bg-red-100 text-red-500',
+                                        'Disponible' => 'bg-green-100 text-green-500',
+                                        default => 'bg-gray-100 text-gray-500',
+                                    };
+                                @endphp
+                                {{ $statusClasses }}">
                                 {{ $offre->statut }}
                             </span>
+
                             <!-- Montant -->
                             <div class="flex items-center space-x-2">
                                 <i class="ftext-[#808080] fa-solid fa-money-bill-1-wave"></i>
@@ -151,78 +157,82 @@
 
                 @empty
                 @endforelse
-            @else
-                <div class="flex flex-col items-center justify-center h-full py-10 bg-white rounded-lg">
-                    <h1 class="mb-4 text-2xl font-bold text-gray-800">Aucun compte Startup trouvé</h1>
-                    <p class="mb-6 text-center text-gray-600">
-                        Vous n'avez pas encore de compte Startup. Créez-en un pour commencer.
-                    </p>
-                    <a href="{{ route('compte_startup.create') }}"
-                        class="inline-block px-4 py-2 font-semibold text-white transition bg-blue-500 rounded-lg shadow-md hover:bg-blue-600">
-                        Créer un compte Startup
-                    </a>
-                </div>
+            </div>
+        </div>
 
+
+    @else
+        <div class="flex flex-col items-center justify-center h-full py-10 bg-white rounded-lg">
+            <h1 class="mb-4 text-2xl font-bold text-gray-800">Aucun compte Startup trouvé</h1>
+            <p class="mb-6 text-center text-gray-600">
+                Vous n'avez pas encore de compte Startup. Créez-en un pour commencer.
+            </p>
+            <a href="{{ route('compte_startup.create') }}"
+                class="inline-block px-4 py-2 font-semibold text-white transition bg-blue-500 rounded-lg shadow-md hover:bg-blue-600">
+                Créer un compte Startup
+            </a>
+        </div>
     @endif
-</div>
-<div class="w-full flex flex-col xl:max-w-[500px] basis-[30%] bg-[#F5F5F5] rounded-2xl container mx-auto md:py-8">
-    <div class="">
-        <div class="flex border-b-4 border-[#8BC48A] pb-5 items-center space-x-5 mx-5">
-            <i class="fa-solid fa-circle text-[#8BC48A] text-[8px]"></i>
-            <h2 class="text-[21px] font-medium text-[#0D062D]">
-                Investisseurs
-            </h2>
+
+    <div class="w-full flex flex-col xl:max-w-[500px] basis-[30%] bg-[#F5F5F5] rounded-2xl container mx-auto md:py-8">
+        <div class="">
+            <div class="flex border-b-4 border-[#8BC48A] pb-5 items-center space-x-5 mx-5">
+                <i class="fa-solid fa-circle text-[#8BC48A] text-[8px]"></i>
+                <h2 class="text-[21px] font-medium text-[#0D062D]">
+                    Investisseurs
+                </h2>
+            </div>
         </div>
-    </div>
-    <!-- Section: pour voir les investisseurs qui ont place de l'argent sur une des mes offres -->
+        <!-- Section: pour voir les investisseurs qui ont place de l'argent sur une des mes offres -->
 
-    <div class="w-full p-5 border-b-4 xl:border-none mx-0 xl:mx-0 border-[#8BC48A]">
-        <div class="flex flex-col bg-white rounded-lg">
+        <div class="w-full p-5 border-b-4 xl:border-none mx-0 xl:mx-0 border-[#8BC48A]">
+            <div class="flex flex-col bg-white rounded-lg">
 
-            <div class="w-full items-center flex justify-between ">
+                <div class="w-full items-center flex justify-between ">
 
-                <div class="w-full items-center p-2 flex flex-row gap-4">
-                    <div class=" w-[50px] space-x-5 flex text-base font-semibold ">
-                        <img class="rounded-full bg-cover bg-center h-[50px] w-full" src="/asset/tune.jpg"
-                            alt="">
+                    <div class="w-full items-center p-2 flex flex-row gap-4">
+                        <div class=" w-[50px] space-x-5 flex text-base font-semibold ">
+                            <img class="rounded-full bg-cover bg-center h-[50px] w-full" src="/asset/tune.jpg"
+                                alt="">
+
+                        </div>
+
+                        <h2 class="flex text-[#03314B] text-[18px] font-semibold text-[18px] rounded-md">
+
+                            Jack Meek
+                        </h2>
+                    </div>
+
+                    <div class="w-full grid grid-cols-1 bg-white rounded-lg gap-1 p-2 ">
+
+                        <!-- Section: Montant rembourser -->
+                        <div class="w-full flex justify-end max-w-md ">
+
+                            <h1
+                                class="text-[14px] sm:text-[14px] md:text-[16px] lg:text-[14px] text-center break-normal font-bold text-[#03314B]">
+                                180 000 000 FCFA</h1>
+                        </div>
+
+                        <!-- Section: % de remboursement -->
+                        <div class="w-full flex justify-end xl:justify-around ">
+
+                            <h1
+                                class="text-[18px] sm:text-[14px] md:text-[16px] lg:text-[16px] break-normal font-bold text-[#1D82CC] ">
+                                18%</h1>
+
+                        </div>
 
                     </div>
 
-                    <h2 class="flex text-[#03314B] text-[18px] font-semibold text-[18px] rounded-md">
-
-                        Jack Meek
-                    </h2>
                 </div>
-
-                <div class="w-full grid grid-cols-1 bg-white rounded-lg gap-1 p-2 ">
-
-                    <!-- Section: Montant rembourser -->
-                    <div class="w-full flex justify-end max-w-md ">
-
-                        <h1
-                            class="text-[14px] sm:text-[14px] md:text-[16px] lg:text-[14px] text-center break-normal font-bold text-[#03314B]">
-                            180 000 000 FCFA</h1>
-                    </div>
-
-                    <!-- Section: % de remboursement -->
-                    <div class="w-full flex justify-end xl:justify-around ">
-
-                        <h1
-                            class="text-[18px] sm:text-[14px] md:text-[16px] lg:text-[16px] break-normal font-bold text-[#1D82CC] ">
-                            18%</h1>
-
-                    </div>
+                <div class="p-2 flex flex-col font-bold text-[18px] text-[#03314B] items-center w-full">
+                    <h1>Projet X</h1>
 
                 </div>
 
             </div>
-            <div class="p-2 flex flex-col font-bold text-[18px] text-[#03314B] items-center w-full">
-                <h1>Projet X</h1>
-
-            </div>
-
         </div>
 
     </div>
-
 </div>
+
