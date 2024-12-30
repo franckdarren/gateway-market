@@ -31,147 +31,116 @@
 
                 @forelse ($mesOffres as $offre)
                     <div
-                        class="space-x-5 flex justify-between px-2 mx-2 my-0 py-2 rounded-lg hover:bg-[#CFDFEA] bg-white p-6 sm:gap-2 ">
-
-                        <div class="w-1/3 ml-2 flex flex-col gap-4 md:items-center sm:flex-row ">
-                            <!-- img offre -->
-                            <div class="w-[50px] space-x-2 flex items-center ">
-                                <img class="rounded-full rounded-end-4 bg-cover bg-center h-[50px] w-full"
-                                    src={{ $offre->url_image }} alt="">
+                        class="container flex flex-col sm:flex-row justify-between bg-white rounded-lg shadow-md hover:shadow-xl p-4 gap-6 transition-shadow duration-300 ease-in-out">
+                        <!-- Section Image et Informations -->
+                        <div class="w-full flex flex-row items-center gap-4 w-full sm:w-1/3">
+                            <!-- Image -->
+                            <div class="w-[50px] h-[50px]">
+                                <img class="rounded-full object-cover w-full h-full hover:scale-105 transition-transform duration-300"
+                                    src="{{ $offre->url_image }}" alt="Image Offre">
                             </div>
+                            <!-- Informations -->
                             <div class="flex flex-col">
-
-                                <!-- nom et date de crea-->
-                                <div class="w-1/1 font-bold break-words ">{{ $offre->nom_projet }}</div>
-                                <p class="tex sm:break-normal text-justify">{{ $offre->created_at }}</p>
+                                <h3
+                                    class="text-[#0D062D] font-semibold text-[18px] hover:text-[#8D6CFF] transition-colors duration-300 truncate">
+                                    {{ $offre->nom_projet }}
+                                </h3>
+                                <p class="text-sm text-gray-500">{{ $offre->created_at }}</p>
                             </div>
                         </div>
 
-                        <div class="w-2/3 flex flex-col gap-16 sm:block">
+                        <!-- Section Statut et Montant -->
+                        <div
+                            class="flex flex-row items-center p-2 justify-between gap-4 sm:flex-col sm:items-end sm:w-1/2">
+                            <!-- Statut -->
+                            <span
+                                class="px-3 py-1 text-sm font-medium rounded-lg 
+    @if ($offre->statut === 'En attente de validation') bg-orange-100 text-orange-500 
+    @elseif ($offre->statut === 'rejeter') bg-red-100 text-red-500 
+    @elseif ($offre->statut === 'Disponible') bg-green-100 text-green-500 
+    @else bg-gray-100 text-gray-500 @endif">
+                                {{ $offre->statut }}
+                            </span>
+                            <!-- Montant -->
+                            <div class="flex items-center space-x-2">
+                                <i class="ftext-[#808080] fa-solid fa-money-bill-1-wave"></i>
+                                <p class="text-[#8D6CFF] font-medium text-sm">
+                                    {{ number_format($offre->montant, 0, '.', ' ') }} FCFA
+                                </p>
+                            </div>
+                        </div>
 
-                            <!-- ls-->
-                            <div class=" w-full gap-2 flex sm:justify-content-center justify-end">
-                                <!-- status -->
-                                <div
-                                    class="w-1/2 md:max-w-2xl break-words flex justify-center items-center text-center">
-                                    <span
-                                        class="w-full
-    @if ($offre->statut === 'En attente de validation') text-orange-500
-    @elseif($offre->statut === 'rejeter') text-red-500
-    @elseif($offre->statut === 'Disponible') text-green-500
-    @else text-gray-500 @endif">
-                                        {{ $offre->statut }}
-                                    </span>
-                                </div>
-                                <!-- les Boutons -->
-                                <div
-                                    class=" flex flex-col sm:flex-row md:justify-around items-center gap-4 sm:gap-4 md:gap-4 p-2 ">
+                        <!-- Section Boutons et Taux d'intérêt -->
+                        <div class="flex flex-row items-center justify-between gap-4 sm:flex-col sm:items-end p-2">
+                            <!-- Boutons d'Action -->
+                            <div class="flex flex-row lg:gap-3 gap-6">
 
-                                    <!-- Bouton Supprimer -->
-                                    <div x-data="{ showDeleteModal: false }">
-                                        <!-- Bouton pour ouvrir la modale de suppression -->
-                                        <button @click="showDeleteModal = true" class="">
-                                            <span>
-                                                <svg width="16" height="18" viewBox="0 0 16 18" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M1.33203 4.05136H14.6654M5.4987 1.4043H10.4987M6.33203 12.8749V7.58077M9.66536 12.8749V7.58077M10.9154 16.4043H5.08203C4.16156 16.4043 3.41536 15.6142 3.41536 14.6396L3.03487 4.97044C3.01514 4.46915 3.39363 4.05136 3.86748 4.05136H12.1299C12.6038 4.05136 12.9823 4.46915 12.9625 4.97044L12.582 14.6396C12.582 15.6142 11.8358 16.4043 10.9154 16.4043Z"
-                                                        stroke="black" stroke-width="2" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                </svg>
+                                <!-- Bouton Supprimer -->
 
-                                            </span>
+                                <div x-data="{ showDeleteModal: false }">
+                                    <!-- Bouton pour ouvrir la modale de suppression -->
+                                    <button @click="showDeleteModal = true"
+                                        class="flex rounded-lg hover:bg-red-200 transition-colors duration-300">
+                                        <i class="fa-solid fa-trash "></i>
 
-                                        </button>
+                                    </button>
 
-                                        <!-- Modale -->
-                                        <div x-show="showDeleteModal" x-cloak
-                                            class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-                                            <div class="p-6 mx-3 bg-white rounded-lg shadow-lg lg:w-1/3">
-                                                <h2 class="mb-4 text-3xl font-bold text-center text-red-600">
-                                                    Confirmation de suppression</h2>
-                                                <p class="mb-4 text-gray-700">Êtes-vous sûr de vouloir supprimer
-                                                    cette offre ?
-                                                    Cette action est irréversible.</p>
+                                    <!-- Modale -->
+                                    <div x-show="showDeleteModal" x-cloak
+                                        class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+                                        <div class="p-6 mx-3 bg-white rounded-lg shadow-lg lg:w-1/3">
+                                            <h2 class="mb-4 text-3xl font-bold text-center text-red-600">
+                                                Confirmation de suppression</h2>
+                                            <p class="mb-4 text-gray-700">Êtes-vous sûr de vouloir supprimer
+                                                cette offre ?
+                                                Cette action est irréversible.</p>
 
-                                                <!-- Récapitulatif -->
-                                                <ul class="mb-4 text-gray-600">
-                                                    <li><strong>Offre :</strong> {{ $offre->nom_projet }}</li>
-                                                    <li><strong>Montant :</strong>
-                                                        {{ number_format($offre->montant, 0, '.', ' ') }} FCFA
-                                                    </li>
-                                                </ul>
+                                            <!-- Récapitulatif -->
+                                            <ul class="mb-4 text-gray-600">
+                                                <li><strong>Offre :</strong> {{ $offre->nom_projet }}</li>
+                                                <li><strong>Montant :</strong>
+                                                    {{ number_format($offre->montant, 0, '.', ' ') }} FCFA
+                                                </li>
+                                            </ul>
 
-                                                <!-- Boutons -->
-                                                <div class="flex justify-end space-x-4">
-                                                    <!-- Bouton pour fermer la modale -->
-                                                    <button @click="showDeleteModal = false"
-                                                        class="px-4 py-2 text-gray-800 bg-gray-300 rounded hover:bg-gray-400">
-                                                        Annuler
+                                            <!-- Boutons -->
+                                            <div class="flex justify-end space-x-4">
+                                                <!-- Bouton pour fermer la modale -->
+                                                <button @click="showDeleteModal = false"
+                                                    class="px-4 py-2 text-gray-800 bg-gray-300 rounded hover:bg-gray-400">
+                                                    Annuler
+                                                </button>
+                                                <!-- Bouton pour confirmer la suppression -->
+                                                <form action="{{ route('offre.destroy', $offre->id) }}" method="POST"
+                                                    class="inline">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit"
+                                                        class="px-4 py-2 text-white bg-red-600 rounded hover:bg-red-700">
+                                                        Confirmer
                                                     </button>
-                                                    <!-- Bouton pour confirmer la suppression -->
-                                                    <form action="{{ route('offre.destroy', $offre->id) }}"
-                                                        method="POST" class="inline">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit"
-                                                            class="px-4 py-2 text-white bg-red-600 rounded hover:bg-red-700">
-                                                            Confirmer
-                                                        </button>
-                                                    </form>
-                                                </div>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- Bouton modifier -->
-                                    <a href="{{ route('offre.edit', $offre->id) }}" class="">
-                                        <span>
-                                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M8.49995 13.1973H13.5M0.5 13.1973L4.13832 12.4642C4.33147 12.4253 4.50882 12.3302 4.6481 12.1908L12.7928 4.04164C13.1833 3.65093 13.1831 3.0176 12.7922 2.62722L11.0669 0.903821C10.6762 0.513599 10.0432 0.513864 9.65288 0.904415L1.5073 9.05446C1.36829 9.19355 1.27337 9.37053 1.23442 9.56328L0.5 13.1973Z"
-                                                    stroke="black" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                        </span>
-                                    </a>
-                                    <!-- Bouton Voir -->
-                                    <a href="{{ route('offre.show', $offre->id) }}"
-                                        class="f flex-auto lg:mb-2 lg:justify-content-center">
-                                        <span>
-                                            <svg width="15" height="3" viewBox="0 0 15 3" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M2.44318 2.99485C2.03409 2.99485 1.68371 2.85091 1.39205 2.56303C1.10417 2.27515 0.962121 1.92667 0.965909 1.51758C0.962121 1.11606 1.10417 0.77326 1.39205 0.489169C1.68371 0.20129 2.03409 0.0573509 2.44318 0.0573509C2.82955 0.0573509 3.17045 0.20129 3.46591 0.489169C3.76515 0.77326 3.91667 1.11606 3.92045 1.51758C3.91667 1.79031 3.8447 2.03841 3.70455 2.2619C3.56818 2.48538 3.38826 2.66341 3.16477 2.79599C2.94508 2.92856 2.70455 2.99485 2.44318 2.99485ZM7.78131 2.99485C7.37222 2.99485 7.02184 2.85091 6.73017 2.56303C6.44229 2.27515 6.30025 1.92667 6.30403 1.51758C6.30025 1.11606 6.44229 0.77326 6.73017 0.489169C7.02184 0.20129 7.37222 0.0573509 7.78131 0.0573509C8.16767 0.0573509 8.50858 0.20129 8.80403 0.489169C9.10328 0.77326 9.25479 1.11606 9.25858 1.51758C9.25479 1.79031 9.18282 2.03841 9.04267 2.2619C8.90631 2.48538 8.72638 2.66341 8.5029 2.79599C8.2832 2.92856 8.04267 2.99485 7.78131 2.99485ZM13.1194 2.99485C12.7103 2.99485 12.36 2.85091 12.0683 2.56303C11.7804 2.27515 11.6384 1.92667 11.6422 1.51758C11.6384 1.11606 11.7804 0.77326 12.0683 0.489169C12.36 0.20129 12.7103 0.0573509 13.1194 0.0573509C13.5058 0.0573509 13.8467 0.20129 14.1422 0.489169C14.4414 0.77326 14.5929 1.11606 14.5967 1.51758C14.5929 1.79031 14.5209 2.03841 14.3808 2.2619C14.2444 2.48538 14.0645 2.66341 13.841 2.79599C13.6213 2.92856 13.3808 2.99485 13.1194 2.99485Z"
-                                                    fill="#0D062D" />
-                                            </svg>
-
-                                        </span>
-
-                                    </a>
-
                                 </div>
+                                <!-- Bouton Modifier -->
+                                <a href="{{ route('offre.edit', $offre->id) }}"
+                                    class="flex rounded-lg hover:bg-yellow-200 transition-colors duration-300">
+                                    <i class="fa-solid fa-pen "></i>
+                                </a>
+                                <!-- Bouton Voir -->
+                                <a href="{{ route('offre.show', $offre->id) }}"
+                                    class="flex md:justify-center text-[18px] md:text-center text-black hover:text-[#8D6CFF] transition-colors duration-300">
+                                    <i class="fa-solid fa-ellipsis"></i>
+                                </a>
                             </div>
-                            <!-- important : montant et interet-->
-                            <div class="w-full flex sm:justify-content-center justify-end gap-2">
-
-                                <div class="w-2/3 flex flex-row-reverse gap-2 text-center items-center">
-
-                                    <p class="text-[14px] font-medium text-[#8D6CFF] sm:break-all">
-                                        {{ number_format($offre->montant, 0, '.', ' ') }} FCFA
-                                    </p>
-                                    <i class="text-[#808080] fa-solid fa-money-bill-1-wave"></i>
-                                </div>
-                                <div class="w-1/3 flex flex-row-reverse gap-1 text-center items-center p-4">
-
-                                    <p class="text-[14px] font-medium text-green-600 ">
-                                        {{ $offre->taux_interet }}%</p>
-                                    <i class="text-[#808080] fa-solid fa-chart-line"></i>
-                                </div>
-                                <!-- Section: Taux d'intérêt respo-->
-
+                            <!-- Taux d'intérêt -->
+                            <div class="flex items-center sm:justify-start sm:w-full gap-2">
+                                <i class="fa-solid fa-chart-line text-[#808080]"></i>
+                                <p class="text-green-600 font-medium text-sm">{{ $offre->taux_interet }}%</p>
                             </div>
                         </div>
-
                     </div>
 
                 @empty
@@ -194,7 +163,7 @@
     <div class="">
         <div class="flex border-b-4 border-[#8BC48A] pb-5 items-center space-x-5 mx-5">
             <i class="fa-solid fa-circle text-[#8BC48A] text-[8px]"></i>
-            <h2 class="text-[16px] font-medium text-[#0D062D]">
+            <h2 class="text-[21px] font-medium text-[#0D062D]">
                 Investisseurs
             </h2>
         </div>
