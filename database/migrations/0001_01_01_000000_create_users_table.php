@@ -23,11 +23,8 @@ return new class extends Migration
             $table->string('profile_photo_path', 2048)->nullable();
             $table->timestamps();
 
-            $table->timestamp('subscription_started_at')->nullable(); // Date de début du Premium
-            $table->timestamp('trial_ends_at')->nullable(); // Fin de la période d'essai gratuite
-            $table->timestamp('subscription_next_charge_at')->nullable(); // Prochaine date de prélèvement
-            $table->boolean('is_subscription_active')->default(false); // Statut actif ou non de l'abonnement Premium
-            $table->timestamp('subscription_cancel_at')->nullable(); // Date programmée pour la résiliation
+            $table->timestamp('trial_ends_at')->nullable()->after('type_abonnement'); // Fin de la période d'essai gratuite
+            $table->timestamp('next_payment_date')->nullable()->after('trial_ends_at');
 
         });
 

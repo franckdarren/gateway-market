@@ -94,7 +94,7 @@
         </div>
 
         <!-- Type Abonnement -->
-        <!-- Type Abonnement - Display only for 'Startup' role -->
+        <!-- Display only for 'Startup' role -->
         @if (Auth::user()->hasRole('Startup'))
             <div class="col-span-6 sm:col-span-4">
                 <x-label for="type_abonnement" value="{{ __('Type abonnement') }}" />
