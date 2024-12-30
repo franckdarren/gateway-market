@@ -54,10 +54,10 @@
                             class="flex flex-row items-center p-2 justify-between gap-4 sm:flex-col sm:items-end sm:w-1/2">
                             <!-- Statut -->
                             <span
-                                class="px-3 py-1 text-sm font-medium rounded-lg 
-    @if ($offre->statut === 'En attente de validation') bg-orange-100 text-orange-500 
-    @elseif ($offre->statut === 'rejeter') bg-red-100 text-red-500 
-    @elseif ($offre->statut === 'Disponible') bg-green-100 text-green-500 
+                                class="px-3 py-1 text-sm font-medium rounded-lg
+    @if ($offre->statut === 'En attente de validation') bg-orange-100 text-orange-500
+    @elseif ($offre->statut === 'rejeter') bg-red-100 text-red-500
+    @elseif ($offre->statut === 'Disponible') bg-green-100 text-green-500
     @else bg-gray-100 text-gray-500 @endif">
                                 {{ $offre->statut }}
                             </span>
@@ -78,62 +78,68 @@
                                 <!-- Bouton Supprimer -->
 
                                 <div x-data="{ showDeleteModal: false }">
-                                    <!-- Bouton pour ouvrir la modale de suppression -->
-                                    <button @click="showDeleteModal = true"
-                                        class="flex rounded-lg hover:bg-red-200 transition-colors duration-300">
-                                        <i class="fa-solid fa-trash "></i>
+                                    @if ($offre->statut !== 'En cours')
+                                        <!-- Bouton pour ouvrir la modale de suppression -->
+                                        <button @click="showDeleteModal = true"
+                                            class="flex rounded-lg hover:bg-red-200 transition-colors duration-300">
+                                            <i class="fa-solid fa-trash "></i>
 
-                                    </button>
+                                        </button>
 
-                                    <!-- Modale -->
-                                    <div x-show="showDeleteModal" x-cloak
-                                        class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-                                        <div class="p-6 mx-3 bg-white rounded-lg shadow-lg lg:w-1/3">
-                                            <h2 class="mb-4 text-3xl font-bold text-center text-red-600">
-                                                Confirmation de suppression</h2>
-                                            <p class="mb-4 text-gray-700">Êtes-vous sûr de vouloir supprimer
-                                                cette offre ?
-                                                Cette action est irréversible.</p>
+                                        <!-- Modale -->
+                                        <div x-show="showDeleteModal" x-cloak
+                                            class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+                                            <div class="p-6 mx-3 bg-white rounded-lg shadow-lg lg:w-1/3">
+                                                <h2 class="mb-4 text-3xl font-bold text-center text-red-600">
+                                                    Confirmation de suppression</h2>
+                                                <p class="mb-4 text-gray-700">Êtes-vous sûr de vouloir supprimer
+                                                    cette offre ?
+                                                    Cette action est irréversible.</p>
 
-                                            <!-- Récapitulatif -->
-                                            <ul class="mb-4 text-gray-600">
-                                                <li><strong>Offre :</strong> {{ $offre->nom_projet }}</li>
-                                                <li><strong>Montant :</strong>
-                                                    {{ number_format($offre->montant, 0, '.', ' ') }} FCFA
-                                                </li>
-                                            </ul>
+                                                <!-- Récapitulatif -->
+                                                <ul class="mb-4 text-gray-600">
+                                                    <li><strong>Offre :</strong> {{ $offre->nom_projet }}</li>
+                                                    <li><strong>Montant :</strong>
+                                                        {{ number_format($offre->montant, 0, '.', ' ') }} FCFA
+                                                    </li>
+                                                </ul>
 
-                                            <!-- Boutons -->
-                                            <div class="flex justify-end space-x-4">
-                                                <!-- Bouton pour fermer la modale -->
-                                                <button @click="showDeleteModal = false"
-                                                    class="px-4 py-2 text-gray-800 bg-gray-300 rounded hover:bg-gray-400">
-                                                    Annuler
-                                                </button>
-                                                <!-- Bouton pour confirmer la suppression -->
-                                                <form action="{{ route('offre.destroy', $offre->id) }}" method="POST"
-                                                    class="inline">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit"
-                                                        class="px-4 py-2 text-white bg-red-600 rounded hover:bg-red-700">
-                                                        Confirmer
+                                                <!-- Boutons -->
+                                                <div class="flex justify-end space-x-4">
+                                                    <!-- Bouton pour fermer la modale -->
+                                                    <button @click="showDeleteModal = false"
+                                                        class="px-4 py-2 text-gray-800 bg-gray-300 rounded hover:bg-gray-400">
+                                                        Annuler
                                                     </button>
-                                                </form>
+                                                    <!-- Bouton pour confirmer la suppression -->
+                                                    <form action="{{ route('offre.destroy', $offre->id) }}"
+                                                        method="POST" class="inline">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit"
+                                                            class="px-4 py-2 text-white bg-red-600 rounded hover:bg-red-700">
+                                                            Confirmer
+                                                        </button>
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    @endif
+
                                 </div>
                                 <!-- Bouton Modifier -->
-                                <a href="{{ route('offre.edit', $offre->id) }}"
-                                    class="flex rounded-lg hover:bg-yellow-200 transition-colors duration-300">
-                                    <i class="fa-solid fa-pen "></i>
-                                </a>
+                                @if ($offre->statut !== 'En cours')
+                                    <a href="{{ route('offre.edit', $offre->id) }}"
+                                        class="flex rounded-lg hover:bg-yellow-200 transition-colors duration-300">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </a>
+                                @endif
                                 <!-- Bouton Voir -->
                                 <a href="{{ route('offre.show', $offre->id) }}"
                                     class="flex md:justify-center text-[18px] md:text-center text-black hover:text-[#8D6CFF] transition-colors duration-300">
                                     <i class="fa-solid fa-ellipsis"></i>
                                 </a>
+
                             </div>
                             <!-- Taux d'intérêt -->
                             <div class="flex items-center sm:justify-start sm:w-full gap-2">
