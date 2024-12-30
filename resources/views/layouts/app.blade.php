@@ -113,13 +113,10 @@
                         @endrole
 
                         @role('Investisseur')
-
-                        <!-- Lien Remboursement -->
-                        <x-nav-link href="{{ route('remboursement') }}" :active="request()->routeIs('remboursement')"
-                            :icone="'<i class=\'text-2xl fa-solid fa-coins\'></i>'">
-                            {{ __('Remboursement') }}
-                        </x-nav-link>
-
+                            <!-- Lien Remboursement -->
+                            <x-nav-link href="{{ route('remboursement') }}" :active="request()->routeIs('remboursement')" :icone="'<i class=\'text-2xl fa-solid fa-coins\'></i>'">
+                                {{ __('Remboursement') }}
+                            </x-nav-link>
                         @endrole
 
                         @role('Investisseur')
@@ -156,9 +153,9 @@
                             </x-nav-link>
                         @endrole
                         <x-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')" :icone='"<svg class=\"w-6 h-6\" xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\">
-                                                                            <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z\"></path>
+                                                                                                    <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z\"></path>
 
-                                                                                                                        </svg>"'>
+                                                                                                                                                </svg>"'>
                             {{ __('Profil') }}
                         </x-nav-link>
 
@@ -338,6 +335,26 @@ if (auth()->user()->hasRole('Investisseur')) {
     @livewireScripts
     @filamentScripts
     @vite('resources/js/app.js')
+    <!-- Script JavaScript -->
+    <script>
+        let idleTime = 0;
+        const maxIdleTime = 30 * 60 * 1000; // 30 minutes
+
+        function resetIdleTime() {
+            idleTime = 0;
+        }
+
+        document.onmousemove = resetIdleTime;
+        document.onkeypress = resetIdleTime;
+
+        setInterval(() => {
+            idleTime += 1000;
+            if (idleTime >= maxIdleTime) {
+                alert('Votre session a expiré. Vous allez être redirigé.');
+                window.location.href = '/login';
+            }
+        }, 1000);
+    </script>
 </body>
 
 </html>
