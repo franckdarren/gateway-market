@@ -79,10 +79,15 @@ class Offre extends Model
     {
         // Récupérer la somme des remboursements effectués et le RSI
         $sommeRemboursementsEffectues = $this->sommeRemboursementsEffectues();
-        $rsi = $this->rsi ? $this->rsi->cumul_remboursement : 0;
 
-        // Calculer le pourcentage
-        return $rsi > 0 ? ($sommeRemboursementsEffectues / $rsi) * 100 : 0;
+        // Appeler la méthode rsi() et utiliser first() pour obtenir l'objet
+        $rsi = $this->rsi()->first(); // Utilisez first() pour obtenir l'instance de Remboursement
+
+        // Si le remboursement existe, récupérer le cumul_remboursement, sinon 0
+        $rsiValue = $rsi ? $rsi->cumul_remboursement : 0;
+
+        // Calculer le pourcentage de remboursement
+        return $rsiValue > 0 ? ($sommeRemboursementsEffectues / $rsiValue) * 100 : 0;
     }
 
     // Calculer le RSI
@@ -127,13 +132,13 @@ class Offre extends Model
         return $cumulRemboursement;
     }
 
-    /**
-     * Attribut calculé pour le RSI.
-     *
-     * @return float
-     */
+
     public function getRsiAttribute()
     {
-        return $this->calculerRSI();
+        // Accéder au premier remboursement via la relation 'rsi'
+        $rsi = $this->rsi()->first(); // Utilisation de first() pour obtenir l'objet
+
+        // Si un remboursement existe, retourner cumul_remboursement, sinon 0
+        return $rsi ? $rsi->cumul_remboursement : 0;
     }
 }

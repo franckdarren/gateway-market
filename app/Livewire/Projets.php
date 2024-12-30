@@ -31,10 +31,6 @@ class Projets extends Component
             $offre->pourcentageRemboursement = $offre->pourcentageRemboursement();
         });
 
-        // dd($mesOffres);
-
-
-
         return view('livewire.projets', [
             'mesOffres' => $mesOffres,
         ]);
