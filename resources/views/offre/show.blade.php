@@ -44,7 +44,7 @@
 
                     </div>
                     <div class="space-y-4 ">
-                        <div class="flex flex-col items-center justify-center"><img class="w-full max-w-[400px] "
+                        <div class="flex flex-col items-center justify-center"><img class="w-full bg-cover bg-center h-[300px] "
                                 src="/asset/Rectangle 21.png" alt="">
                         </div>
                         <div class="flex gap-1">
@@ -55,7 +55,7 @@
                             <p class="text-sm text-black">{{ $offre->description_projet }}</p>
                         </div>
                         <div
-                            class="flex gap-5 w-full max-w-[300px] items-center justify-center p-4 text-black bg-[#cfdfea] rounded-md">
+                            class="flex gap-2 w-full max-w-[300px] items-center justify-center p-4 text-black bg-[#cfdfea] rounded-md">
                             <h3 class="text-sm font-semibold">Statut :</h3>
                             <p class="text-sm">{{ $offre->statut }}</p>
                         </div>
