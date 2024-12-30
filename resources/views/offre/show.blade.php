@@ -13,7 +13,8 @@
                 <button class="text-white hover:text-gray-200 focus:outline-none" @click="open = false">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
             </div>
@@ -25,7 +26,8 @@
                 <button class="text-white hover:text-gray-200 focus:outline-none" @click="open = false">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
             </div>
@@ -35,65 +37,64 @@
             <div class="p-6 bg-white rounded-lg shadow-lg sm:p-8">
                 <div class="text-black">
                     <div class="flex items-center mb-4">
-                        <img class="rounded-full flex bg-cover bg-center h-[50px] w-auto" src="/asset/tune.jpg"
+                        <img class="rounded-full flex bg-cover bg-center h-[50px] w-auto" src={{ $compteStartup->url_logo }}
                             alt="logo start up">
-                        <h2 class="ml-5 text-xl font-bold">Start up :</h2>
-                        <p class="text-xl ml-2"> Nom de la start up </p>
+                        <h2 class="ml-5 text-xl font-bold">Startup :</h2>
+                        <p class="text-xl ml-2"> {{ $compteStartup->nom }} </p>
 
                     </div>
                     <div class="space-y-4 ">
                         <div class="flex flex-col items-center h-[300px] w-auto justify-center"><img
-                                class="w-full h-full bg-cover bg-center " src="/asset/Rectangle 21.png" alt="">
+                                class="w-full h-full bg-cover bg-center " src={{ $offre->url_image }} alt="">
                         </div>
                         <div class="flex gap-1">
-                            <h3 class="text-[#0D062D] text-semibold text-xl">Projet</h3>
+                            <h3 class="text-[#0D062D] text-semibold text-xl">Projet :</h3>
                             <p class="text-[#0D062D] text-semibold text-xl">{{ $offre->nom_projet }}</p>
                         </div>
                         <div class="md:p-y4">
-                            <p class="text-sm text-black">{{ $offre->description_projet }}</p>
+                            <p class="text-sm text-[#0D062D]">{{ $offre->description_projet }}</p>
                         </div>
-                        <h3
-                            class="py-2 font-semibold text-[#0a061d] text-lg">
+                        <h3 class="py-2 font-semibold text-[#0a061d] text-lg">
                             Statut : {{ $offre->statut }}
                         </h3>
 
 
                         <div class="flex flex-col gap-1 md:grid md:grid-cols-2 justify-between">
 
-                            <div class="flex gap-1 text-black">
-                                <h3 class="text-sm md:text-lg font-semibold">Investissement :</h3>
+                            <div class="flex gap-1">
+                                <h3 class="text-sm md:text-lg text-semibold">Investissement :</h3>
                                 <p class="text-sm md:text-lg text-[#5030E5] font-bold">
                                     {{ number_format($offre->montant, 0, ',', ' ') }} FCFA
                                 </p>
                             </div>
-                            <div class="flex gap-1 text-black">
-                                <h3 class="text-sm md:text-lg font-semibold">Gain :</h3>
+                            <div class="flex gap-1 text-[#0D062D]">
+                                <h3 class="text-sm md:text-lg text-semibold">Gain :</h3>
                                 <p class="text-sm md:text-lg text-[#088606] font-bold">
-                                    {{ number_format($offre->montant, 0, ',', ' ') }} FCFA
+                                    {{ number_format($rsi, 0, ',', ' ') }} FCFA
                                 </p>
                             </div>
                             <div class="flex gap-1">
-                                <p class=" text-sm md:text-lg font-semibold text-black">
-                                    Mois de remboursement : </p>
+                                <h3 class=" text-sm md:text-lg text-semibold">
+                                    Mois de remboursement : </h3>
                                 <p class="text-sm md:text-lg text-[#088606] font-bold">
                                     {{ $offre->nbre_mois_remboursement }} mois
                                 </p>
                             </div>
                             <div class=" flex gap-1">
-                                <p class="text-sm md:text-lg font-semibold text-black">
-                                    Taux d'intérêt : </p>
+                                <h3 class="text-sm md:text-lg text-semibold">
+                                    Taux d'intérêt : </h3>
                                 <p class=" text-sm md:text-lg text-[#088606] font-bold">
                                     {{ $offre->taux_interet }}%
                                 </p>
                             </div>
 
-                            <!-- <div class=" flex gap-1">
-                                <p class="text-sm font-semibold  ">
+                            <div class=" flex gap-1">
+                                <p class="text-sm md:text-lg text-semibold  ">
                                     Mois de grâce :</p>
-                                <p class="text-sm text-blue-500 font-bold">
+                                <p class="text-sm md:text-lg text-[#088606] font-bold">
                                     {{ $offre->nbre_mois_grace }} mois
                                 </p>
-                            </div> -->
+                            </div>
 
 
                         </div>
@@ -102,7 +103,7 @@
                 </div>
 
                 <div class="mt-6">
-                    <h3 class="mb-4 text-lg font-bold text-gray-800">Détails financiers :</h3>
+                    <h3 class="mb-4 text-lg text-bold text-[#0D062D]">Détails financiers :</h3>
                     <div class="space-y-6">
 
                         <div class="hidden lg:flex">
@@ -131,7 +132,7 @@
                                     <tr class="bg-white">
 
                                         <td class="px-2 py-2 text-sm border border-gray-300 sm:px-4">
-                                            {{ number_format($offre->van, 2, ',', ' ') }} FCFA
+                                            {{ number_format($offre->van, 0, ',', ' ') }} FCFA
                                         </td>
                                         <td class="px-2 py-2 text-sm border border-gray-300 sm:px-4">
                                             {{ $offre->ir }}
@@ -191,7 +192,7 @@
                 </div>
 
                 <div class="mt-6">
-                    <h3 class="mb-4 text-lg font-semibold text-gray-800">Documents :</h3>
+                    <h3 class="mb-4 text-lg text-semibold text-[#0D062D]">Documents :</h3>
                     <div class="flex flex-col flex-wrap gap-4 sm:flex-row">
                         @if ($offre->url_business_plan)
                             <a href="{{ Storage::url($offre->url_business_plan) }}" target="_blank"
@@ -200,7 +201,8 @@
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path
                                         d="M13.668 3.16683H15.7513C16.3038 3.16683 16.8337 3.38632 17.2244 3.77702C17.6151 4.16772 17.8346 4.69763 17.8346 5.25016V19.8335C17.8346 20.386 17.6151 20.9159 17.2244 21.3066C16.8337 21.6973 16.3038 21.9168 15.7513 21.9168H3.2513C2.69877 21.9168 2.16886 21.6973 1.77816 21.3066C1.38746 20.9159 1.16797 20.386 1.16797 19.8335V5.25016C1.16797 4.69763 1.38746 4.16772 1.77816 3.77702C2.16886 3.38632 2.69877 3.16683 3.2513 3.16683H5.33464M6.3763 1.0835H12.6263C13.2016 1.0835 13.668 1.54987 13.668 2.12516V4.2085C13.668 4.78379 13.2016 5.25016 12.6263 5.25016H6.3763C5.80101 5.25016 5.33464 4.78379 5.33464 4.2085V2.12516C5.33464 1.54987 5.80101 1.0835 6.3763 1.0835Z"
-                                        stroke="#F5F5F5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                        stroke="#F5F5F5" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
                                 </svg>
 
 
@@ -216,12 +218,14 @@
                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path d="M6.03906 12.3178L8.53334 9.07598L11.3785 11.3109L13.8194 8.16064"
-                                        stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                    <circle cx="16.6643" cy="3.50027" r="1.60183" stroke="white" stroke-width="1.5"
-                                        stroke-linecap="round" stroke-linejoin="round" />
+                                        stroke="white" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <circle cx="16.6643" cy="3.50027" r="1.60183" stroke="white"
+                                        stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                     <path
                                         d="M12.4385 2.6001H6.38201C3.87247 2.6001 2.31641 4.37737 2.31641 6.8869V13.6222C2.31641 16.1318 3.84196 17.9014 6.38201 17.9014H13.5521C16.0616 17.9014 17.6177 16.1318 17.6177 13.6222V7.75647"
-                                        stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                        stroke="white" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round" />
                                 </svg>
 
                                 Voir l'étude de risque
@@ -234,103 +238,103 @@
                 <div class="mt-6">
                     @role('Investisseur')
 
-                    @php
-                        $compteInvestisseurId = auth()->user()->compteInvestisseur->id ?? null;
-                    @endphp
+                        @php
+                            $compteInvestisseurId = auth()->user()->compteInvestisseur->id ?? null;
+                        @endphp
 
-                    @if ($offre->compte_investisseur_id !== $compteInvestisseurId)
-                        <div x-data="{ showModal: false }">
-                            <!-- Bouton d'ouverture de la modale -->
-                            <a href="javascript:void(0)" @click="showModal = true"
-                                class="px-5 py-2.5 bg-[#5B3FFC] hover:bg-[#5B3FFC]/90 text-white rounded-md text-center">
-                                Investir
-                            </a>
+                        @if ($offre->compte_investisseur_id !== $compteInvestisseurId)
+                            <div x-data="{ showModal: false }">
+                                <!-- Bouton d'ouverture de la modale -->
+                                <a href="javascript:void(0)" @click="showModal = true"
+                                    class="px-5 py-2.5 bg-[#5B3FFC] hover:bg-[#5B3FFC]/90 text-white rounded-md text-center">
+                                    Investir
+                                </a>
 
-                            <!-- Modale -->
-                            <div x-show="showModal" x-cloak
-                                class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-                                <div class="p-6 mx-3 bg-white rounded-lg shadow-lg lg:w-1/3 ">
-                                    <h2 class="mb-4 text-3xl text-center font-2bold">Confirmation</h2>
-                                    <p class="mb-4">Êtes-vous sûr de vouloir investir sur ce projet ?</p>
+                                <!-- Modale -->
+                                <div x-show="showModal" x-cloak
+                                    class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+                                    <div class="p-6 mx-3 bg-white rounded-lg shadow-lg lg:w-1/3 ">
+                                        <h2 class="mb-4 text-3xl text-center font-2bold">Confirmation</h2>
+                                        <p class="mb-4">Êtes-vous sûr de vouloir investir sur ce projet ?</p>
 
-                                    <!-- Récapitulatif -->
-                                    <ul class="mb-4">
-                                        <li><strong>Offre :</strong> {{ $offre->nom_projet }}</li>
-                                        <li><strong>Montant à investir :</strong>
-                                            {{ number_format($offre->montant, 0, '.', ' ') }} FCFA</li>
-                                        <li><strong>Frais de transaction :</strong>
-                                            {{ number_format(($offre->montant * 2) / 100, 0, '.', ' ') }} FCFA</li>
-                                        <li><strong>Montant total :</strong>
-                                            {{ number_format(($offre->montant * 2) / 100 + $offre->montant, 0, '.', ' ') }}
-                                            FCFA</li>
-                                    </ul>
+                                        <!-- Récapitulatif -->
+                                        <ul class="mb-4">
+                                            <li><strong>Offre :</strong> {{ $offre->nom_projet }}</li>
+                                            <li><strong>Montant à investir :</strong>
+                                                {{ number_format($offre->montant, 0, '.', ' ') }} FCFA</li>
+                                            <li><strong>Frais de transaction :</strong>
+                                                {{ number_format(($offre->montant * 2) / 100, 0, '.', ' ') }} FCFA</li>
+                                            <li><strong>Montant total :</strong>
+                                                {{ number_format(($offre->montant * 2) / 100 + $offre->montant, 0, '.', ' ') }}
+                                                FCFA</li>
+                                        </ul>
 
-                                    <!-- Boutons -->
-                                    <div class="flex justify-end space-x-4">
-                                        <!-- Bouton pour fermer -->
-                                        <button @click="showModal = false"
-                                            class="px-4 py-2 text-gray-800 bg-gray-300 rounded hover:bg-gray-400">
-                                            Annuler
-                                        </button>
-                                        <!-- Bouton de confirmation -->
-                                        <a href="{{ route('offre.investir', $offre->id) }}"
-                                            class="px-4 py-2 text-white bg-blue-600 rounded hover:bg-blue-700">
-                                            Confirmer
-                                        </a>
+                                        <!-- Boutons -->
+                                        <div class="flex justify-end space-x-4">
+                                            <!-- Bouton pour fermer -->
+                                            <button @click="showModal = false"
+                                                class="px-4 py-2 text-gray-800 bg-gray-300 rounded hover:bg-gray-400">
+                                                Annuler
+                                            </button>
+                                            <!-- Bouton de confirmation -->
+                                            <a href="{{ route('offre.investir', $offre->id) }}"
+                                                class="px-4 py-2 text-white bg-blue-600 rounded hover:bg-blue-700">
+                                                Confirmer
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    @endif
+                        @endif
                     @endrole
                     @role('Startup')
-                    <div class="flex gap-10 mt-6">
-                        <div x-data="{ showDeleteModal: false }">
-                            <!-- Bouton pour ouvrir la modale de suppression -->
-                            <button @click="showDeleteModal = true"
-                                class="px-4 py-2 text-white bg-red-500 rounded-md hover:bg-red-600">
-                                Supprimer
-                            </button>
+                        <div class="flex gap-10 mt-6">
+                            <div x-data="{ showDeleteModal: false }">
+                                <!-- Bouton pour ouvrir la modale de suppression -->
+                                <button @click="showDeleteModal = true"
+                                    class="px-4 py-2 text-white bg-red-500 rounded-md hover:bg-red-600">
+                                    Supprimer
+                                </button>
 
-                            <!-- Modale -->
-                            <div x-show="showDeleteModal" x-cloak
-                                class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-                                <div class="p-6 mx-3 bg-white rounded-lg shadow-lg lg:w-1/3">
-                                    <h2 class="mb-4 text-3xl font-bold text-center text-red-600">Confirmation de
-                                        suppression</h2>
-                                    <p class="mb-4 text-black">Êtes-vous sûr de vouloir supprimer cette offre ?
-                                        Cette action est irréversible.</p>
+                                <!-- Modale -->
+                                <div x-show="showDeleteModal" x-cloak
+                                    class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+                                    <div class="p-6 mx-3 bg-white rounded-lg shadow-lg lg:w-1/3">
+                                        <h2 class="mb-4 text-3xl font-bold text-center text-red-600">Confirmation de
+                                            suppression</h2>
+                                        <p class="mb-4 text-black">Êtes-vous sûr de vouloir supprimer cette offre ?
+                                            Cette action est irréversible.</p>
 
-                                    <!-- Récapitulatif -->
-                                    <ul class="mb-4 text-gray-600">
-                                        <li><strong>Offre :</strong> {{ $offre->nom_projet }}</li>
-                                        <li><strong>Montant :</strong>
-                                            {{ number_format($offre->montant, 0, '.', ' ') }} FCFA</li>
-                                    </ul>
+                                        <!-- Récapitulatif -->
+                                        <ul class="mb-4 text-gray-600">
+                                            <li><strong>Offre :</strong> {{ $offre->nom_projet }}</li>
+                                            <li><strong>Montant :</strong>
+                                                {{ number_format($offre->montant, 0, '.', ' ') }} FCFA</li>
+                                        </ul>
 
-                                    <!-- Boutons -->
-                                    <div class="flex justify-end space-x-4">
-                                        <!-- Bouton pour fermer la modale -->
-                                        <button @click="showDeleteModal = false"
-                                            class="px-4 py-2 text-gray-800 bg-gray-300 rounded hover:bg-gray-400">
-                                            Annuler
-                                        </button>
-                                        <!-- Bouton pour confirmer la suppression -->
-                                        <form action="{{ route('offre.destroy', $offre->id) }}" method="POST"
-                                            class="inline">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit"
-                                                class="px-4 py-2 text-white bg-red-600 rounded hover:bg-red-700">
-                                                Confirmer
+                                        <!-- Boutons -->
+                                        <div class="flex justify-end space-x-4">
+                                            <!-- Bouton pour fermer la modale -->
+                                            <button @click="showDeleteModal = false"
+                                                class="px-4 py-2 text-gray-800 bg-gray-300 rounded hover:bg-gray-400">
+                                                Annuler
                                             </button>
-                                        </form>
+                                            <!-- Bouton pour confirmer la suppression -->
+                                            <form action="{{ route('offre.destroy', $offre->id) }}" method="POST"
+                                                class="inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit"
+                                                    class="px-4 py-2 text-white bg-red-600 rounded hover:bg-red-700">
+                                                    Confirmer
+                                                </button>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                    </div>
+                        </div>
                     @endrole
                 </div>
 
@@ -342,11 +346,11 @@
 
     <div class="sm:px-6 lg:px-8">
         @livewire('prevision', [
-    'montantEmprunte' => $offre->montant,
-    'duree' => $offre->nbre_mois_remboursement,
-    'tauxInteret' => $offre->taux_interet,
-    'delaiGrace' => $offre->nbre_mois_grace,
-])
+            'montantEmprunte' => $offre->montant,
+            'duree' => $offre->nbre_mois_remboursement,
+            'tauxInteret' => $offre->taux_interet,
+            'delaiGrace' => $offre->nbre_mois_grace,
+        ])
 
     </div>
     </div>

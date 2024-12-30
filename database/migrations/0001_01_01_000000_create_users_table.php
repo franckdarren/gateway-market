@@ -23,8 +23,8 @@ return new class extends Migration
             $table->string('profile_photo_path', 2048)->nullable();
             $table->timestamps();
 
-            $table->timestamp('trial_ends_at')->nullable()->after('type_abonnement'); // Fin de la période d'essai gratuite
-            $table->timestamp('next_payment_date')->nullable()->after('trial_ends_at');
+            $table->timestamp('trial_ends_at')->nullable(); // Fin de la période d'essai gratuite
+            $table->timestamp('next_payment_date')->nullable();
 
         });
 
