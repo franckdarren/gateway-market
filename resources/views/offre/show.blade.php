@@ -35,62 +35,71 @@
             <div class="p-6 bg-white rounded-lg shadow-lg sm:p-8">
                 <div class="text-black">
                     <div class="flex items-center mb-4">
-                        <img class="rounded-full flex bg-cover bg-center h-[50px] w-auto" src="/asset/tune.jpg"
+                        <img class="rounded-full flex bg-cover bg-center h-[50px] w-auto" src={{ $compteStartup->url_logo }}
                             alt="logo start up">
-                        <h2 class="ml-5 text-xl font-bold">Start up :</h2>
-                        <p class="text-xl ml-2"> Nom de la start up </p>
+                        <h2 class="ml-5 text-xl font-bold">Startup :</h2>
+                        <p class="text-xl ml-2"> {{ $compteStartup->nom }} </p>
 
                     </div>
                     <div class="space-y-4 ">
                         <div class="flex flex-col items-center h-[300px] w-auto justify-center"><img
-                                class="w-full h-full bg-cover bg-center " src="/asset/Rectangle 21.png" alt="">
+
+                                class="w-full h-full bg-cover bg-center " src={{ $offre->url_image }} alt="">
+
                         </div>
                         <div class="flex gap-1">
-                            <h3 class="text-[#0D062D] text-semibold text-xl">Projet</h3>
+                            <h3 class="text-[#0D062D] text-semibold text-xl">Projet :</h3>
                             <p class="text-[#0D062D] text-semibold text-xl">{{ $offre->nom_projet }}</p>
                         </div>
                         <div class="md:p-y4">
-                            <p class="text-sm text-black">{{ $offre->description_projet }}</p>
+
+                            <p class="text-sm text-[#0D062D]">{{ $offre->description_projet }}</p>
                         </div>
-                        <h3
-                            class="py-2 font-semibold text-[#0a061d] text-lg">
+                        <h3 class="py-2 font-semibold text-[#0a061d] text-lg">
                             Statut : {{ $offre->statut }}
                         </h3>
 
 
                         <div class="flex flex-col gap-1 md:grid md:grid-cols-2 justify-between">
 
-                            <div class="flex gap-1 text-black">
-                                <h3 class="text-sm md:text-lg font-semibold">Investissement :</h3>
+                            <div class="flex gap-1">
+                                <h3 class="text-sm md:text-lg text-semibold">Investissement :</h3>
+
                                 <p class="text-sm md:text-lg text-[#5030E5] font-bold">
                                     {{ number_format($offre->montant, 0, ',', ' ') }} FCFA
                                 </p>
                             </div>
-                            <div class="flex gap-1 text-black">
-                                <h3 class="text-sm md:text-lg font-semibold">Gain :</h3>
+
+                            <div class="flex gap-1 text-[#0D062D]">
+                                <h3 class="text-sm md:text-lg text-semibold">Gain :</h3>
                                 <p class="text-sm md:text-lg text-[#088606] font-bold">
-                                    {{ number_format($offre->montant, 0, ',', ' ') }} FCFA
+                                    {{ number_format($rsi, 0, ',', ' ') }} FCFA
                                 </p>
                             </div>
                             <div class="flex gap-1">
-                                <p class=" text-sm md:text-lg font-semibold text-black">
-                                    Mois de remboursement : </p>
+                                <h3 class=" text-sm md:text-lg text-semibold">
+                                    Mois de remboursement : </h3>
+
                                 <p class="text-sm md:text-lg text-[#088606] font-bold">
                                     {{ $offre->nbre_mois_remboursement }} mois
                                 </p>
                             </div>
                             <div class=" flex gap-1">
-                                <p class="text-sm md:text-lg font-semibold text-black">
-                                    Taux d'intérêt : </p>
+
+                                <h3 class="text-sm md:text-lg text-semibold">
+                                    Taux d'intérêt : </h3>
+
                                 <p class=" text-sm md:text-lg text-[#088606] font-bold">
                                     {{ $offre->taux_interet }}%
                                 </p>
                             </div>
 
-                            <!-- <div class=" flex gap-1">
-                                <p class="text-sm font-semibold  ">
+
+                            <div class=" flex gap-1">
+                                <p class="text-sm md:text-lg text-semibold  ">
+
                                     Mois de grâce :</p>
-                                <p class="text-sm text-blue-500 font-bold">
+                                <p class="text-sm md:text-lg text-[#088606] font-bold">
                                     {{ $offre->nbre_mois_grace }} mois
                                 </p>
                             </div> -->
@@ -102,7 +111,7 @@
                 </div>
 
                 <div class="mt-6">
-                    <h3 class="mb-4 text-lg font-bold text-gray-800">Détails financiers :</h3>
+                    <h3 class="mb-4 text-lg text-bold text-[#0D062D]">Détails financiers :</h3>
                     <div class="space-y-6">
 
                         <div class="hidden lg:flex">
@@ -131,7 +140,7 @@
                                     <tr class="bg-white">
 
                                         <td class="px-2 py-2 text-sm border border-gray-300 sm:px-4">
-                                            {{ number_format($offre->van, 2, ',', ' ') }} FCFA
+                                            {{ number_format($offre->van, 0, ',', ' ') }} FCFA
                                         </td>
                                         <td class="px-2 py-2 text-sm border border-gray-300 sm:px-4">
                                             {{ $offre->ir }}
@@ -191,7 +200,7 @@
                 </div>
 
                 <div class="mt-6">
-                    <h3 class="mb-4 text-lg font-semibold text-gray-800">Documents :</h3>
+                    <h3 class="mb-4 text-lg text-semibold text-[#0D062D]">Documents :</h3>
                     <div class="flex flex-col flex-wrap gap-4 sm:flex-row">
                         @if ($offre->url_business_plan)
                             <a href="{{ Storage::url($offre->url_business_plan) }}" target="_blank"

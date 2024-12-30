@@ -55,15 +55,17 @@
                             <!-- Statut -->
                             <span
                                 class="px-3 py-1 text-sm font-medium rounded-lg
-    @php
-$statusClasses = match ($offre->statut) {
-    'En attente de validation' => 'bg-orange-100 text-orange-500',
-    'Rejeter' => 'bg-red-100 text-red-500',
-    'Disponible' => 'bg-green-100 text-green-500',
-    default => 'bg-gray-100 text-gray-500',
-    }; @endphp
-    {{ $statusClasses }}">
-                                {{ $offre->statut }}
+
+                                @php
+                                    $statusClasses = match ($offre->statut) {
+                                        'En attente de validation' => 'bg-orange-100 text-orange-500',
+                                        'Rejeter' => 'bg-red-100 text-red-500',
+                                        'Disponible' => 'bg-green-100 text-green-500',
+                                        default => 'bg-gray-100 text-gray-500',
+                                    };
+                                @endphp
+                                {{ $statusClasses }}">
+          {{ $offre->statut }}
                             </span>
 
                             <!-- Montant -->
@@ -157,6 +159,7 @@ $statusClasses = match ($offre->statut) {
                 @empty
                 @endforelse
             </div>
+
             <!-- section investisseur -->
 
             <div class="w-full flex flex-col xl:max-w-[500px] basis-[30%] bg-[#F5F5F5] rounded-2xl container mx-auto ">
@@ -200,10 +203,11 @@ $statusClasses = match ($offre->statut) {
 
                     <!-- Répète ce bloc pour d'autres cartes -->
 
+
                 </div>
+              
 
             </div>
-
 
         </div>
     @else
@@ -220,4 +224,6 @@ $statusClasses = match ($offre->statut) {
 
     @endif
 
+
 </div>
+

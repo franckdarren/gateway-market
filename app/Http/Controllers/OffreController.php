@@ -98,10 +98,17 @@ class OffreController extends Controller
     {
         // Récupérer l'offre par son ID
         $offre = Offre::findOrFail($id);
-
+        $compteStartup = $offre->compteStartup;
+        $rsi = $offre->calculerRSI();
 
         // Afficher les détails de l'offre
-        return view('offre.show', compact('offre'));
+        return view('offre.show', [
+            'offre' => $offre,
+            'compteStartup' => $compteStartup,
+            'rsi' => $rsi,
+
+
+        ]);
     }
 
     // Afficher le formulaire d'édition pour une offre spécifique
