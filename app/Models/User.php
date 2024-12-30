@@ -33,7 +33,13 @@ class User extends Authenticatable implements MustVerifyEmail
         'email',
         'role',
         'password',
-        'type_abonnement'
+        'type_abonnement',
+
+        'subscription_started_at',
+        'trial_ends_at',
+        'subscription_next_charge_at',
+        'is_subscription_active',
+        'subscription_cancel_at',
     ];
 
     /**
@@ -83,5 +89,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function compteAdmin()
     {
         return $this->hasOne(CompteAdmin::class);
+    }
+
+    public function subscriptionLogs()
+    {
+        return $this->hasMany(SubscriptionLog::class);
     }
 }
