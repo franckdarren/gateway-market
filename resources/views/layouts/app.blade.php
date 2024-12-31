@@ -227,7 +227,7 @@
                             <div class="">
                                 @if (auth()->user()->hasRole('Investisseur'))
                                 <div class="flex justify-center items-center text-lg font-semibold text-gray-800">
-    <div class="flex items-center space-x-2 bg-white shadow-md p-4 rounded-lg w-full max-w-sm">
+    <div class="flex items-center space-x-2 bg-white  p-4 rounded-lg w-full max-w-sm">
         <!-- Icône de solde -->
         <i class="fas fa-wallet text-2xl text-[#5030E5]"></i>
 
@@ -245,7 +245,7 @@
 
                                 @elseif (auth()->user()->hasRole('Startup'))
                                 <div class="flex justify-center items-center text-lg font-semibold text-gray-800">
-    <div class="flex items-center space-x-2 bg-white shadow-md p-4 rounded-lg w-full max-w-sm">
+    <div class="flex items-center space-x-2 bg-white p-4 rounded-lg w-full max-w-sm">
         <!-- Icône de solde -->
         <i class="fas fa-wallet text-2xl text-[#5030E5]"></i>
 
@@ -265,7 +265,7 @@
                                 @elseif (auth()->user()->hasRole('Administrateur'))
                                   
                                     <div class="flex justify-center items-center text-lg font-semibold text-gray-800">
-    <div class="flex items-center space-x-2 bg-white shadow-md p-4 rounded-lg w-full max-w-sm">
+    <div class="flex items-center space-x-2 bg-white p-4 rounded-lg w-full max-w-sm">
         <!-- Icône de solde -->
         <i class="fas fa-wallet text-2xl text-[#5030E5]"></i>
 

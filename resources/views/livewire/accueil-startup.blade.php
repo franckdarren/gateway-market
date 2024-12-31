@@ -1,8 +1,8 @@
-<div class="">
+<div class="container gap-5 flex flex-col-reverse xl:flex-row mx-auto">
 
     @if ($hasCompteStartup)
 
-        <div class="container flex flex-col-reverse xl:flex-row mx-auto gap-10">
+        <div class="space-y-5 w-full px-2">
 
             <div class="w-full flex flex-col space-y-5 px-2 bg-[#F5F5F5] rounded-t-2xl">
                 <!-- partie A -->
@@ -171,18 +171,21 @@ $statusClasses = match ($offre->statut) {
 
     @endif
 
-    <div class="w-full flex flex-col xl:max-w-[500px] basis-[30%] bg-[#F5F5F5] rounded-2xl container mx-auto md:py-8">
-        <div class="">
-            <div class="flex border-b-4 border-[#8BC48A] pb-5 items-center space-x-5 mx-5">
+    <div class="w-full rounded-2xl bg-[#F5F5F5] xl:max-w-[400px]">
+        <div class="flex flex-col mb-10  container mx-auto">
+            <header>
+                 <div class="flex border-b-4 border-[#8BC48A] py-5 items-center space-x-5 mx-5">
                 <i class="fa-solid fa-circle text-[#8BC48A] text-[8px]"></i>
                 <h2 class="text-[21px] font-medium text-[#0D062D]">
                     Investisseurs
                 </h2>
             </div>
+            </header>
+           
         </div>
         <!-- Section: pour voir les investisseurs qui ont place de l'argent sur une des mes offres -->
 
-        <div class="w-full p-5 border-b-4 xl:border-none mx-0 xl:mx-0 border-[#8BC48A]">
+        <div class="w-full overflow-x-auto flex gap-5 xl:px-2 xl:py-5 lg:flox-col py-5 sm:p-5 mb-10 xl:mb-0 xl:mx-0">
             @forelse ($mesOffresEnCours as $offresEnCours)
                 <div class="flex flex-col bg-white rounded-lg">
 
@@ -228,7 +231,7 @@ $statusClasses = match ($offre->statut) {
 
                 </div>
             @empty
-            <p class="mb-6 text-center text-gray-600">
+            <p class="mb-6 w-full text-center text-gray-600">
                 Vous n'avez pas encore d'investisseur.
             </p>
             @endforelse
