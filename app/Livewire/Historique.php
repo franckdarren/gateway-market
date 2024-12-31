@@ -101,7 +101,7 @@ class Historique extends Component implements HasForms, HasTable
                     ->sortable()
                     ->summarize(
                         Sum::make()
-                            ->label('Total')
+                            ->label('Cumul des transactions')
                             ->formatStateUsing(function ($state) {
                                 return number_format($state, 0, '', ' ') . ' FCFA';
                             })
