@@ -112,7 +112,7 @@
                                     <tr class="py-2 ">
 
                                         <th
-                                            class="px-2 rounded-l-md py-2 text-sm font-semibold text-white border border-white sm:px-4">
+                                            class="px-2 rounded-tl-md py-2 text-sm font-semibold text-white border border-white sm:px-4">
                                             VAN</th>
                                         <th
                                             class="px-2 py-2 text-sm font-semibold text-white border border-white sm:px-4">
@@ -121,10 +121,10 @@
                                             class="px-2 py-2 text-sm font-semibold text-white border border-white sm:px-4">
                                             TRI</th>
                                         <th
-                                            class="px-2 py-2 text-sm rounded-r-md font-semibold text-white border border-white sm:px-4">
+                                            class="px-2 py-2 text-sm font-semibold text-white border border-white sm:px-4">
                                             KRL</th>
                                         <th
-                                            class="px-2 py-2 text-sm rounded-r-md font-semibold text-white border border-white sm:px-4">
+                                            class="px-2 py-2 text-sm rounded-tr-md font-semibold text-white border border-white sm:px-4">
                                             Mois de grâce</th>
                                     </tr>
                                 </thead>
