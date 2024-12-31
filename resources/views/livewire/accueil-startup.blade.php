@@ -35,26 +35,27 @@
                         <!-- Section Image et Informations -->
                         <div class="w-full flex flex-row items-center gap-4 sm:w-1/3">
                             <!-- Image -->
-                            <div class="w-[50px] h-[50px]">
+                            <div class="w-[50px] h-[50px] ">
                                 <img class="rounded-full object-cover w-full h-full hover:scale-105 transition-transform duration-300"
                                     src="{{ $offre->url_image }}" alt="Image Offre">
                             </div>
                             <!-- Informations -->
-                            <div class="flex flex-col">
+                            <div class="flex flex-col justify-content-center w-1/2">
                                 <h3
-                                    class="text-[#0D062D] font-semibold text-[18px] hover:text-[#8D6CFF] transition-colors duration-300 truncate">
+                                    class="text-[#0D062D] break-normal font-semibold text-[18px] hover:text-[#8D6CFF] transition-colors duration-300 truncate">
                                     {{ $offre->nom_projet }}
                                 </h3>
-                                <p class="text-sm text-gray-500">{{ $offre->created_at }}</p>
+                                <p class="text-sm text-gray-500 break-normal">{{ $offre->created_at }}</p>
                             </div>
                         </div>
 
                         <!-- Section Statut et Montant -->
                         <div
-                            class="flex flex-row items-center p-2 justify-between gap-4 sm:flex-col sm:items-end sm:w-1/2">
+                            class="flex flex-row items-center py-2 justify-between gap-4 sm:flex-col sm:items-end sm:w-1/2">
                             <!-- Statut -->
                             <span
                                 class="px-3 py-1 text-sm font-medium rounded-lg
+
                                 @php
                                     $statusClasses = match ($offre->statut) {
                                         'En attente de validation' => 'bg-orange-100 text-orange-500',
@@ -64,7 +65,7 @@
                                     };
                                 @endphp
                                 {{ $statusClasses }}">
-                                {{ $offre->statut }}
+          {{ $offre->statut }}
                             </span>
 
                             <!-- Montant -->
@@ -158,9 +159,57 @@
                 @empty
                 @endforelse
             </div>
+
+            <!-- section investisseur -->
+
+            <div class="w-full flex flex-col xl:max-w-[500px] basis-[30%] bg-[#F5F5F5] rounded-2xl container mx-auto ">
+                <div class="">
+                    <div class="flex border-b-4 border-[#8BC48A] mt-4 items-center space-x-5 mx-5">
+                        <i class="fa-solid fa-circle text-[#8BC48A] text-[8px]"></i>
+                        <h2 class="text-[21px] font-medium text-[#0D062D]">
+                            Investisseurs
+                        </h2>
+                    </div>
+                </div>
+                <!-- Section: pour voir les investisseurs qui ont place de l'argent sur une des mes offres -->
+
+                <div
+                    class="w-full overflow-x-auto flex gap-5 xl:px-2 xl:py-5 border-b-4 lg:border-none border-[#8BC48A] flex-row lg:flex-col">
+                    <div class="flex-none flex flex-col bg-white lg:w-full rounded-lg shadow-md">
+                        <div class="flex flex-col items-center py-4">
+                            <div class="flex w-full px-4 justify-between items-start">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-[50px] h-[50px]">
+                                        <!-- ici c'est l'image de profil de l'investisseur -->
+                                        <img class="rounded-full bg-cover bg-center h-full w-full"
+                                            src="{{ $offre->url_image }}" alt="">
+                                    </div>
+                                    <h2
+                                        class="text-[#0D062D] font-semibold text-[18px] hover:text-[#8D6CFF] transition-colors duration-300 truncate">
+                                        Jack Meek
+                                    </h2>
+                                </div>
+                                <div class="flex flex-col items-end space-y-2">
+                                    <h1 class="text-[14px] md:text-[16px] font-bold text-[#03314B]">180 000 000 FCFA
+                                    </h1>
+                                    <h1 class="text-[16px] font-bold text-[#1D82CC]">18%</h1>
+                                </div>
+                            </div>
+                            <div class="font-bold text-[18px] text-[#03314B] text-center mt-4">
+                                <h1>Projet X</h1>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Répète ce bloc pour d'autres cartes -->
+
+
+                </div>
+              
+
+            </div>
+
         </div>
-
-
     @else
         <div class="flex flex-col items-center justify-center h-full py-10 bg-white rounded-lg">
             <h1 class="mb-4 text-2xl font-bold text-gray-800">Aucun compte Startup trouvé</h1>
@@ -172,67 +221,9 @@
                 Créer un compte Startup
             </a>
         </div>
+
     @endif
 
-    <div class="w-full flex flex-col xl:max-w-[500px] basis-[30%] bg-[#F5F5F5] rounded-2xl container mx-auto md:py-8">
-        <div class="">
-            <div class="flex border-b-4 border-[#8BC48A] pb-5 items-center space-x-5 mx-5">
-                <i class="fa-solid fa-circle text-[#8BC48A] text-[8px]"></i>
-                <h2 class="text-[21px] font-medium text-[#0D062D]">
-                    Investisseurs
-                </h2>
-            </div>
-        </div>
-        <!-- Section: pour voir les investisseurs qui ont place de l'argent sur une des mes offres -->
 
-        <div class="w-full p-5 border-b-4 xl:border-none mx-0 xl:mx-0 border-[#8BC48A]">
-            <div class="flex flex-col bg-white rounded-lg">
-
-                <div class="w-full items-center flex justify-between ">
-
-                    <div class="w-full items-center p-2 flex flex-row gap-4">
-                        <div class=" w-[50px] space-x-5 flex text-base font-semibold ">
-                            <img class="rounded-full bg-cover bg-center h-[50px] w-full" src="/asset/tune.jpg"
-                                alt="">
-
-                        </div>
-
-                        <h2 class="flex text-[#03314B] text-[18px] font-semibold text-[18px] rounded-md">
-
-                            Jack Meek
-                        </h2>
-                    </div>
-
-                    <div class="w-full grid grid-cols-1 bg-white rounded-lg gap-1 p-2 ">
-
-                        <!-- Section: Montant rembourser -->
-                        <div class="w-full flex justify-end max-w-md ">
-
-                            <h1
-                                class="text-[14px] sm:text-[14px] md:text-[16px] lg:text-[14px] text-center break-normal font-bold text-[#03314B]">
-                                180 000 000 FCFA</h1>
-                        </div>
-
-                        <!-- Section: % de remboursement -->
-                        <div class="w-full flex justify-end xl:justify-around ">
-
-                            <h1
-                                class="text-[18px] sm:text-[14px] md:text-[16px] lg:text-[16px] break-normal font-bold text-[#1D82CC] ">
-                                18%</h1>
-
-                        </div>
-
-                    </div>
-
-                </div>
-                <div class="p-2 flex flex-col font-bold text-[18px] text-[#03314B] items-center w-full">
-                    <h1>Projet X</h1>
-
-                </div>
-
-            </div>
-        </div>
-
-    </div>
 </div>
 

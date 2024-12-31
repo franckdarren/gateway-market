@@ -19,6 +19,7 @@
                     <tbody class="divide-y divide-gray-200">
                         @foreach ($remboursements as $remboursement)
                             <tr>
+
                                 <td class="px-2 py-4 text-[14px] text-gray-900">{{ $remboursement['mois'] }}
                                 </td>
                                 <td class="px-2 py-4 text-[14px] text-gray-900">
@@ -32,6 +33,7 @@
                                 <td class="px-2 py-4 text-[14px] text-gray-900">
                                     {{ number_format($remboursement['remboursement_total'], 0, '', ' ') }} FCFA</td>
                                 <td class="px-2 py-4 text-[14px] font-extrabold text-green-700">
+
                                     {{ number_format($remboursement['cumul_remboursement'], 0, '', ' ') }} FCFA</td>
                             </tr>
                         @endforeach
