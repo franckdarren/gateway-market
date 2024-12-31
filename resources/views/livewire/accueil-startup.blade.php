@@ -40,7 +40,7 @@
                                                     src="{{ $offre->url_image }}" alt="Image Offre">
                                             </div>
                                             <!-- Informations -->
-                                            <div class="flex flex-col justify-content-center w-1/2">
+                                            <div class="flex flex-col justify-content-center">
                                                 <h3
                                                     class="text-[#0D062D] break-normal font-semibold text-[18px] hover:text-[#8D6CFF] transition-colors duration-300 ">
                                                     {{ $offre->nom_projet }}
@@ -175,7 +175,7 @@
 
     @endif
 
-    <div class="w-full rounded-2xl bg-[#F5F5F5] xl:max-w-[400px]">
+    <div class="w-full rounded-2xl bg-[#F5F5F5] xl:max xl:max-w-[400px]">
         <div class="flex flex-col mb-5  container mx-auto">
             <header>
                 <div class="flex border-b-4 border-[#8BC48A] py-5 items-center space-x-5 mx-5">
