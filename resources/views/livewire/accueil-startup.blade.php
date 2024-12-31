@@ -172,7 +172,7 @@ $statusClasses = match ($offre->statut) {
     @endif
 
     <div class="w-full rounded-2xl bg-[#F5F5F5] xl:max-w-[400px]">
-        <div class="flex flex-col mb-10  container mx-auto">
+        <div class="flex flex-col mb-5  container mx-auto">
             <header>
                  <div class="flex border-b-4 border-[#8BC48A] py-5 items-center space-x-5 mx-5">
                 <i class="fa-solid fa-circle text-[#8BC48A] text-[8px]"></i>
