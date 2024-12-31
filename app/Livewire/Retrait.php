@@ -54,13 +54,6 @@ class Retrait extends Component
             return;
         }
 
-        // Vérification du solde
-        if ($this->montant > $compte->solde) {
-            $this->reset();
-            session()->flash('error', 'Montant insuffisant dans le solde du compte.');
-            return;
-        }
-
         // Validation du numéro de compte en fonction du mode de retrait
         $rules = [
             'montant' => 'required|numeric',
@@ -94,6 +87,12 @@ class Retrait extends Component
                 'numero_transaction' => $this->numero_transaction,
             ]);
         } else {
+            // Vérification du solde
+            if ($this->montant > $compte->solde) {
+                $this->reset();
+                session()->flash('error', 'Montant insuffisant dans le solde du compte.');
+                return;
+            }
             $transaction = $compte->transactions()->create([
                 'montant' => $this->montant,
                 'type' => $this->type,
