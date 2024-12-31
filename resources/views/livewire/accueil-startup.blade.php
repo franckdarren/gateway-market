@@ -33,7 +33,7 @@
                                     <div
                                         class="container flex flex-col sm:flex-row justify-between bg-white rounded-lg shadow-md hover:shadow-xl p-4 gap-6 transition-shadow duration-300 ease-in-out">
                                         <!-- Section Image et Informations -->
-                                        <div class="w-full flex flex-row items-center gap-4 sm:w-1/3">
+                                        <div class="w-full flex flex-row items-center gap-4 max-w-[500px]">
                                             <!-- Image -->
                                             <div class="w-[50px] h-[50px] ">
                                                 <img class="rounded-full object-cover w-full h-full hover:scale-105 transition-transform duration-300"
@@ -42,7 +42,7 @@
                                             <!-- Informations -->
                                             <div class="flex flex-col justify-content-center w-1/2">
                                                 <h3
-                                                    class="text-[#0D062D] break-normal font-semibold text-[18px] hover:text-[#8D6CFF] transition-colors duration-300 truncate">
+                                                    class="text-[#0D062D] break-normal font-semibold text-[18px] hover:text-[#8D6CFF] transition-colors duration-300 ">
                                                     {{ $offre->nom_projet }}
                                                 </h3>
                                                 <p class="text-sm text-gray-500 break-normal">{{ $offre->created_at }}</p>
@@ -51,9 +51,9 @@
 
                                         <!-- Section Statut et Montant -->
                                         <div
-                                            class="flex flex-row items-center py-2 justify-between gap-4 sm:flex-col sm:items-end sm:w-1/2">
+                                            class="flex flex-row items-center py-2 md:max-w-[200px] justify-between gap-4 sm:flex-col sm:items-end w-full">
                                             <!-- Statut -->
-                                            <span class="px-3 py-1 text-sm font-medium rounded-lg
+                                            <span class="px-3 py-1 w-full  text-sm text-center font-medium rounded-lg
                                                                         @php
                                                                             $statusClasses = match ($offre->statut) {
                                                                                 'En attente de validation' => 'bg-orange-100 text-orange-500',
