@@ -85,7 +85,7 @@
 
             @if (auth()->user()->hasRole('Investisseur'))
                 <div class="w-full xl:max-w-[400px]">
-                    <div class=" flex flex-col  bg-[#F5F5F5] rounded-t-2xl container mx-auto">
+                    <div class=" flex flex-col mb-10   bg-[#F5F5F5] rounded-2xl container mx-auto">
                         <header class="">
                             <div class="flex border-b-4 border-[#8BC48A] py-5 items-center space-x-5 mx-5">
                                 <i class="fa-solid fa-circle text-[#8BC48A] text-[8px]"></i>
@@ -95,10 +95,10 @@
                             </div>
                         </header>
 
-                        <div class="py-5 sm:p-5 border-b-4 xl:border-none mx-5 mb-10 xl:mb-0 xl:mx-0 border-[#8BC48A]">
+                        <div class="py-5 sm:p-5 mx-5 mb-5 xl:mb-0 xl:mx-0 ">
 
                             <div
-                                class="flex xl:overflow-y-auto overflow-x-auto max-w-screen-md xl:max-h-screen  space-x-3 xl:space-x-0 space-y-3 xl:flex-col items-center justify-center xl:justify-between p-2 bg-white rounded-lg">
+                                class="flex xl:overflow-y-auto overflow-x-auto max-w-screen-md xl:max-h-screen h-full  space-x-3 xl:space-x-0 space-y-3 xl:flex-col xl:justify-between p-2 bg-white rounded-lg">
 
 
                                 {{-- Liste des Offres premiums --}}
@@ -132,7 +132,7 @@
                                             </a>
                                         </div>
 
-                                        <div class="p-2 flex flex-col w-full">
+                                        <div class="p-2 flex justify-between flex-col w-full">
 
                                             <div class="relative overflow-hidden rounded-md h-[100px] w-full">
                                                 <img class="transition-transform duration-300 ease-in-out transform hover:scale-125 object-cover h-full w-full"

@@ -9,7 +9,7 @@
                 <div class="col-start-2 relative h-12">
 
                     <a href="{{ route('offre.create') }}"
-                        class="inline-flex items-center justify-center text-white font-semibold text-sm rounded-lg focus:outline-none focus:ring-2 hover:bg-[#f5f5f5] focus:ring-indigo-500 focus:ring-opacity-50 hover:scale-105 hover:shadow-lg transition-all duration-300 ease-in-out transform float-right my-1">
+                        class="inline-flex items-center justify-center font-semibold text-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-opacity-50 hover:scale-110 transition-all duration-300 ease-in-out transform float-right my-1">
                         <span>
                             <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path opacity="0.2"
