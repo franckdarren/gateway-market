@@ -21,6 +21,6 @@
         <h5 class="mb-2 text-5xl font-bold tracking-tight text-gray-900 dark:text-white">
             {{ $attenteRetrait }}
         </h5>
-        <p class="font-normal text-gray-700 dark:text-gray-400">Attente(s) de retrait</p>
+        <p class="font-normal text-gray-700 dark:text-gray-400">Attente(s) de dépôt/retrait</p>
     </div>
 </div>

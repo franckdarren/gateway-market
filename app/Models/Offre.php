@@ -91,7 +91,9 @@ class Offre extends Model
     }
 
     // Calculer le RSI
+
     public function calculerRSI()
+
     {
         $montantInvestissement = $this->montant;
         $tauxInteret = $this->taux_interet;
