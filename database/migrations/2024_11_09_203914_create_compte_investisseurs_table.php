@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('profession');
             $table->integer('solde');
+            $table->string('url_logo')->nullable();
 
             $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade')->unique();
 
