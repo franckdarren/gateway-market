@@ -14,11 +14,11 @@
     <table class="overflow-hidden border border-gray-200 shadow-md">
         <thead class="bg-gray-50">
             <tr class="">
-                <th class="px-6 py-3 text-left text-sm font-medium text-black tracking-wider">Projet</th>
-                <th class="px-6 py-3 text-left text-sm font-medium text-black tracking-wider">Date</th>
-                <th class="px-6 py-3 text-left text-sm font-medium text-black tracking-wider">Remboursement</th>
-                <th class="px-6 py-3 text-left text-sm font-medium text-black tracking-wider">Cumul</th>
-                <th class="px-6 py-3 text-left text-sm font-medium text-black tracking-wider w-[250px]">Statut</th>
+                <th class="px-6 py-3 text-left text-sm font-medium tracking-wider">Projet</th>
+                <th class="px-6 py-3 text-left text-sm font-medium  tracking-wider">Date</th>
+                <th class="px-6 py-3 text-left text-sm font-medium  tracking-wider">Remboursement</th>
+                <th class="px-6 py-3 text-left text-sm font-medium tracking-wider">Cumul</th>
+                <th class="px-6 py-3 text-left text-sm font-medium tracking-wider w-[250px]">Statut</th>
             </tr>
         </thead>
         <tbody class="divide-y divide-gray-200 bg-white">
