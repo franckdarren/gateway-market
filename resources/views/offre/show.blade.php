@@ -102,7 +102,7 @@
                                 <p class="text-sm md:text-lg text-[#088606] font-bold">
                                     {{ $offre->nbre_mois_grace }} mois
                                 </p>
-                            </div> -->
+                            </div>
 
 
                         </div>

@@ -185,9 +185,9 @@ $statusClasses = match ($offre->statut) {
         </div>
         <!-- Section: pour voir les investisseurs qui ont place de l'argent sur une des mes offres -->
 
-        <div class="w-full overflow-x-auto flex gap-5 xl:px-2 xl:py-5 lg:flox-col py-5 sm:p-5 mb-10 xl:mb-0 xl:mx-0">
+        <div class="w-full overflow-x-auto flex gap-5 px-4 lg:flex-col my-5 xl:my-0">
             @forelse ($mesOffresEnCours as $offresEnCours)
-                <div class="flex flex-col bg-white rounded-lg">
+                <div class="min-w-[350px] w-full flex flex-col bg-white rounded-lg">
 
                     <div class="w-full items-center flex justify-between ">
 
