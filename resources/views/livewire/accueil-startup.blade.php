@@ -187,13 +187,13 @@ $statusClasses = match ($offre->statut) {
 
         <div class="w-full overflow-x-auto flex gap-5 px-4 lg:flex-col my-5 xl:my-0">
             @forelse ($mesOffresEnCours as $offresEnCours)
-                <div class="min-w-[350px] w-full flex flex-col bg-white rounded-lg">
+                <div class="min-w-[350px] w-full lg:min-w-full flex flex-col bg-white rounded-lg">
 
                     <div class="w-full items-center flex justify-between ">
 
-                        <div class="w-full items-center p-2 flex flex-row gap-4">
-                            <div class=" w-[50px] space-x-5 flex text-base font-semibold ">
-                                <img class="rounded-full bg-cover bg-center h-[50px] w-full" src="{{ $offresEnCours->compteInvestisseur->url_logo }}"
+                        <div class="w-full items-center pl-2 py-2 flex flex-row gap-4">
+                            <div class=" w-[50px] h-[50px] flex text-base font-semibold ">
+                                <img class="rounded-full h-full w-full object-cover bg-cover bg-center" src="{{ $offresEnCours->compteInvestisseur->url_logo }}"
                                     alt="">
                             </div>
 
@@ -213,7 +213,7 @@ $statusClasses = match ($offre->statut) {
                             </div>
 
                             <!-- Section: % de remboursement -->
-                            <div class="w-full flex justify-end xl:justify-around ">
+                            <div class="w-full flex justify-end ">
 
                                 <h1
                                     class="text-[18px] sm:text-[14px] md:text-[16px] lg:text-[16px] break-normal font-bold text-[#1D82CC] ">
