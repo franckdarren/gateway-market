@@ -32,6 +32,7 @@ class CompteInvestisseurFactory extends Factory
             'profession' => $this->faker->jobTitle,
             'solde' => 0,
             'user_id' => User::role('Investisseur')->whereDoesntHave('compteInvestisseur')->inRandomOrder()->first()->id ?? null, // Assurer qu'un investisseur n'a qu'un seul compte
+            'url_logo' => 'https://picsum.photos/150/150',
         ];
     }
 }
