@@ -146,7 +146,7 @@
 
                                             </div>
                                             <!-- Taux d'intérêt -->
-                                            <div class="flex items-center sm:justify-start sm:w-full gap-2">
+                                            <div class="flex items-end sm:justify-end sm:w-full gap-2">
                                                 <i class="fa-solid fa-chart-line text-[#808080]"></i>
                                                 <p class="text-green-600 font-medium text-sm">{{ $offre->taux_interet }}%</p>
                                             </div>
