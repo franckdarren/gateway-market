@@ -53,7 +53,7 @@
                                         <div
                                             class="flex flex-row items-center py-2 md:max-w-[200px] justify-between gap-4 sm:flex-col sm:items-end w-full">
                                             <!-- Statut -->
-                                            <span class="px-3 py-1 w-full  text-sm text-center font-medium rounded-lg
+                                            <span class="px-3 py-1  text-sm text-center font-medium rounded-lg
                                                                         @php
                                                                             $statusClasses = match ($offre->statut) {
                                                                                 'En attente de validation' => 'bg-orange-100 text-orange-500',
@@ -201,7 +201,7 @@
                                     src="{{ $offresEnCours->compteInvestisseur->url_logo }}" alt="">
                             </div>
 
-                            <h2 class="flex text-[#03314B] text-[18px] font-semibold rounded-md">
+                            <h2 class="flex text-[#03314B] text-[16px] font-semibold rounded-md">
                                 {{ $offresEnCours->compteInvestisseur->nom_complet }}
                             </h2>
                         </div>
@@ -230,7 +230,7 @@
                         </div>
 
                     </div>
-                    <div class="p-2 flex flex-col font-bold text-[18px] text-[#03314B] items-center w-full">
+                    <div class="p-2 flex flex-col text-[16px] text-[#03314B] items-center w-full">
                         <h1>{{ $offresEnCours->nom_projet }}</h1>
 
                     </div>
