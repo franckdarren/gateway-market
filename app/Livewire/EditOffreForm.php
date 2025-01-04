@@ -64,9 +64,12 @@ class EditOffreForm extends Component
 
     public function submit()
     {
-        $this->validate();
+        // Vérifier si l'itulisateur est actif
+        if (!auth()->user()->is_active) {
+            session()->flash('error', 'Veuillez renouveller votre abonnement.');
+        }
 
-        // dd($this->url_business_plan, $this->url_etude_risque);
+        $this->validate();
 
         // Vérifier si l'utilisateur a un compte startup
         $compteStartup = CompteStartup::where('user_id', auth()->id())->first();

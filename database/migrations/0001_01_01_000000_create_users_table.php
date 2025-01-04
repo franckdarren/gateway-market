@@ -25,8 +25,7 @@ return new class extends Migration
 
             $table->timestamp('trial_ends_at')->nullable(); // Fin de la période d'essai gratuite
             $table->timestamp('next_payment_date')->nullable();
-
-
+            $table->boolean('is_active')->default(true);
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

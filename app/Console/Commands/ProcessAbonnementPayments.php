@@ -5,8 +5,11 @@ namespace App\Console\Commands;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\CompteStartup;
+use App\Mail\AbonnementPayment;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
+use App\Mail\ErrorAbonnementPayment;
+use Illuminate\Support\Facades\Mail;
 
 class ProcessAbonnementPayments extends Command
 {
@@ -65,6 +68,13 @@ class ProcessAbonnementPayments extends Command
         // Vérifier si le solde est suffisant pour le paiement
         if ($user->CompteStartup->solde < $tarif) {
             $this->error('Insufficient balance for user: ' . $user->email);
+
+            // Désactiver l'utilisateur
+            $user->is_active = false;
+            $user->save();
+
+            // Envoyer l'email à la startup
+            Mail::to($user->CompteStartup->email)->send(new ErrorAbonnementPayment($user, $tarif));
             return;
         }
 
@@ -72,7 +82,22 @@ class ProcessAbonnementPayments extends Command
         if ($this->paymentAbonnement($user, $tarif)) {
             // Si le paiement est effectué, mettre à jour la date du prochain paiement
             $user->next_payment_date = Carbon::now()->addMonth()->startOfDay(); // Mise à jour du prochain paiement à la même date du mois suivant
+            $user->is_active = true;
             $user->save();
+
+            // Trace écrite de la transaction chez la Startup
+            $startup = $user->compteStartup;
+            $startup->transactions()->create([
+                'montant' => $tarif,
+                'type' => "Abonnement",
+                'compte_type' => "Compte Startup",
+                'compte_id' => $startup->id,
+                'description' => "Renouvellement de l'abonnement de {$startup->nom}",
+                'statut' => "Traitée",
+            ]);
+
+            // Envoyer l'email à la startup
+            Mail::to($user->CompteStartup->email)->send(new AbonnementPayment($user, $tarif));
 
             $this->info('Payment successfully processed for user: ' . $user->email);
         } else {

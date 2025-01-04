@@ -3,7 +3,6 @@
         <div class="container flex flex-col-reverse xl:flex-row mx-auto">
             <div class="space-y-5 w-full px-2">
                 @forelse ($mesOffresSimples as $offre)
-
                     <div
                         class="flex space-y-3 flex-col lg:flex-row justify-between py-2 px-4 bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 ease-in-out">
                         <div class="flex justify-between lg:justify-center items-start lg:items-center space-x-3">
@@ -178,14 +177,6 @@
             @endif
 
         </div>
-
-<!-- bouton wallet -->
-
-<a href="https://wa.me/11234567890" target="_blank"
-   class="fixed bottom-[30px] right-[20px] md:bottom-[50px] md:right-[60px] hover:scale-110 transition-all duration-300 ease-in-out transform bg-[#9d83fd]/80 text-[#673DF9] p-3 rounded-full shadow-2xl hover:bg-[#9d83fd] hover:border-[#673DF9] hover:border-4">
-   <span class="iconify text-4xl" 
- data-icon="solar:wallet-money-bold-duotone" data-inline="false"></span>
-</a>
 
         <!-- Pagination -->
         <div class="my-6">

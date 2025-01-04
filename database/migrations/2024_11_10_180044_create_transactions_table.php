@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->integer('montant');
-            $table->enum('type', ['Dépot', 'Retrait', 'Investissement', 'Remboursement débit', 'Remboursement crédit', 'Remboursement ERREUR', 'Commission']);
+            $table->enum('type', ['Dépot', 'Retrait', 'Investissement', 'Remboursement débit', 'Remboursement crédit', 'Remboursement ERREUR', 'Commission', 'Abonnement']);
             $table->string('description')->nullable();
             $table->morphs('compte');;
             $table->string('mode_retrait')->nullable();

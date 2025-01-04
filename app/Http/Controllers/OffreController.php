@@ -30,6 +30,12 @@ class OffreController extends Controller
     // Afficher le formulaire pour créer une nouvelle offre
     public function create()
     {
+        // Vérifie si l'utilisateur est actif
+        if (!auth()->user()->is_active) {
+            // Redirige ou retourne un message si l'utilisateur n'est pas actif
+            return redirect()->route('dashboard')->with('error', 'Votre abonnement doit être actif pour créer une offre.');
+        }
+
         // Récupérer les startups créées par l'utilisateur connecté
         $startups = CompteStartup::where('user_id', Auth::id())->get();
 
@@ -114,6 +120,12 @@ class OffreController extends Controller
     // Afficher le formulaire d'édition pour une offre spécifique
     public function edit(string $id)
     {
+        // Vérifie si l'utilisateur est actif
+        if (!auth()->user()->is_active) {
+            // Redirige ou retourne un message si l'utilisateur n'est pas actif
+            return redirect()->route('dashboard')->with('error', 'Votre abonnement doit être actif pour créer une offre.');
+        }
+
         // Récupérer l'offre par son ID
         $offre = Offre::findOrFail($id);
 
