@@ -43,6 +43,11 @@ class OffreForm extends Component
 
     public function submit()
     {
+        // Vérifier si l'itulisateur est actif
+        if (!auth()->user()->is_active) {
+            session()->flash('error', 'Veuillez renouveller votre abonnement.');
+        }
+
         $this->validate();
 
         // Vérifier si l'utilisateur a un compte startup
