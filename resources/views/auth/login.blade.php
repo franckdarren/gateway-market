@@ -27,28 +27,34 @@
                     autocomplete="current-password" />
             </div>
 
-            <div class="block mt-4">
+            <div class="flex items-center justify-between mt-4 gap-4">
                 <label for="remember_me" class="flex items-center">
                     <x-checkbox id="remember_me" name="remember" />
                     <span class="ms-2 text-sm text-gray-600">{{ __('Se souvenir de moi') }}</span>
                 </label>
-            </div>
-
-            <div class="flex items-center justify-end mt-4 gap-2">
                 @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    <a class="underline text-bold text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                         href="{{ route('password.request') }}">
                         {{ __('Mot de passe oublié?') }}
                     </a>
                 @endif
+            </div>
+
+            <div class="flex items-center justify-center mt-4 gap-4">
+                
 
                 {{-- <x-button class="ms-4 bg-blue-800 hover:bg-blue-900">
                     {{ __('Log in') }}
                 </x-button> --}}
-                <button type="submit" class="px-6 py-2 bg-blue-600 text-white font-semibold text-sm rounded-lg shadow-md
+                <button type="submit" class="w-full px-6 py-2 bg-blue-600 text-white font-semibold text-sm rounded-lg shadow-md
            hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all">
                     Se connecter
                 </button>
+
+            </div>
+            <div class="flex items-center justify-end mt-6 gap-2">
+                <h3>Vous n'avez pas de compte ? </h3>
+                <a class="underline" href="{{ route('register') }}">Créer un compte</a>
 
             </div>
         </form>
