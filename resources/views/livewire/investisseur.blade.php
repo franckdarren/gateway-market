@@ -178,40 +178,6 @@
 
         </div>
 
-        <!-- bouton wallet -->
-        <div x-data="{ showModal: false }" class="relative">
-            <!-- Bouton pour ouvrir la modale -->
-            <a href="javascript:void(0)" @click="showModal = true"
-                class="fixed bottom-[30px] right-[20px] md:bottom-[50px] md:right-[60px] hover:scale-110 transition-all duration-300 ease-in-out transform bg-[#9d83fd]/80 text-[#673DF9] p-3 rounded-full shadow-2xl hover:bg-[#9d83fd] hover:border-[#673DF9] hover:border-4">
-                <span class="iconify text-4xl" data-icon="solar:wallet-money-bold-duotone" data-inline="false"></span>
-            </a>
-
-            <!-- Modale -->
-            <div x-show="showModal" x-transition x-cloak
-                class="fixed inset-x-0 lg:left-64 bottom-0 z-50 bg-white shadow-lg border ">
-                <!-- En-tête de la modale -->
-                <div class="flex items-center justify-between px-6 py-4 border-b">
-                    <h2 class="text-lg font-semibold">Mon portefeuille</h2>
-                    <button @click="showModal = false" class="text-gray-500 hover:text-gray-800">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
-                </div>
-
-                <!-- Contenu de la modale -->
-                <div class="px-6 py-4">
-                    <p class="text-gray-700">Ceci est le contenu de votre modale située en bas de la page.</p>
-                </div>
-
-
-            </div>
-        </div>
-
-
-
         <!-- Pagination -->
         <div class="my-6">
             {{ $mesOffresSimples->links() }}
