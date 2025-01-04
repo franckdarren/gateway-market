@@ -5,7 +5,6 @@ use App\Console\Commands\ProcessAbonnementPayments;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
 use App\Console\Commands\RemboursementCommand;
-use App\Console\Commands\RetraitCommand;
 use Illuminate\Support\Facades\Schedule;
 
 Artisan::command('inspire', function () {
