@@ -83,7 +83,7 @@
             </div>
 
             @if (auth()->user()->hasRole('Investisseur'))
-                <div class="w-full xl:max-w-[400px]">
+                <div class="w-full mt-5 md:mt-0 xl:max-w-[400px]">
                     <div class=" flex flex-col mb-10   bg-[#F5F5F5] rounded-2xl container mx-auto">
                         <header class="">
                             <div class="flex border-b-4 border-[#8BC48A] py-5 items-center space-x-5 mx-5">
