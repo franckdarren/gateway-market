@@ -49,7 +49,8 @@
                     </div>
 
                     <nav class="mt-10">
-                        <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')" :icone="'<span class=\'iconify text-4xl\'
+                        <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')"
+                            :icone="'<span class=\'iconify text-4xl\'
                             data-icon=\'duo-icons:dashboard\' data-inline=\'false\'></span>
                             '">
                             @if (auth()->user()->hasRole('Administrateur'))
@@ -64,109 +65,117 @@
                         </x-nav-link>
 
                         @role('Administrateur')
-                            <!-- Lien Investisseurs -->
-                            <x-nav-link href="{{ route('validations-offres') }}" :active="request()->routeIs('validations-offres')" :icone="'<span class=\'iconify text-4xl\'
+                        <!-- Lien Investisseurs -->
+                        <x-nav-link href="{{ route('validations-offres') }}"
+                            :active="request()->routeIs('validations-offres')" :icone="'<span class=\'iconify text-4xl\'
                                 data-icon=\'uim:briefcase\' data-inline=\'false\'></span>'">
-                                {{ __('Offres') }}
-                            </x-nav-link>
+                            {{ __('Offres') }}
+                        </x-nav-link>
                         @endrole
 
                         @role(['Administrateur', 'Superviseur'])
-                            <!-- Lien Investisseurs -->
-                            <x-nav-link href="{{ route('investisseur') }}" :active="request()->routeIs('investisseur')" :icone="'<span class=\'iconify text-4xl\'
+                        <!-- Lien Investisseurs -->
+                        <x-nav-link href="{{ route('investisseur') }}" :active="request()->routeIs('investisseur')"
+                            :icone="'<span class=\'iconify text-4xl\'
                                 data-icon=\'stash:user-dollar-duotone\' data-inline=\'false\'></span>'">
-                                {{ __('Investisseurs') }}
-                            </x-nav-link>
+                            {{ __('Investisseurs') }}
+                        </x-nav-link>
                         @endrole
 
                         @role(['Administrateur', 'Superviseur'])
-                            <!-- Lien Startups -->
-                            <x-nav-link href="{{ route('startup') }}" :active="request()->routeIs('startup')" :icone="'<span class=\'iconify text-4xl\'
+                        <!-- Lien Startups -->
+                        <x-nav-link href="{{ route('startup') }}" :active="request()->routeIs('startup')" :icone="'<span class=\'iconify text-4xl\'
                                 data-icon=\'solar:rocket-bold-duotone\' data-inline=\'false\'></span>'">
-                                {{ __('Startups') }}
-                            </x-nav-link>
+                            {{ __('Startups') }}
+                        </x-nav-link>
                         @endrole
 
                         @role(['Administrateur', 'Superviseur'])
-                            <!-- Lien Retraits -->
-                            <x-nav-link href="{{ route('demandes') }}" :active="request()->routeIs('demandes')" :icone="'<span class=\'iconify text-4xl\'
+                        <!-- Lien Retraits -->
+                        <x-nav-link href="{{ route('demandes') }}" :active="request()->routeIs('demandes')"
+                            :icone="'<span class=\'iconify text-4xl\'
                                 data-icon=\'pepicons-print:money-note-circle-filled\' data-inline=\'false\'></span>'">
-                                {{ __('Dépots/Retraits') }}
-                            </x-nav-link>
+                            {{ __('Dépots/Retraits') }}
+                        </x-nav-link>
                         @endrole
 
                         @role('Administrateur')
-                            <!-- Lien Transactions -->
-                            <x-nav-link href="{{ route('transaction') }}" :active="request()->routeIs('transaction')" :icone="'<span class=\'iconify text-4xl\'
+                        <!-- Lien Transactions -->
+                        <x-nav-link href="{{ route('transaction') }}" :active="request()->routeIs('transaction')"
+                            :icone="'<span class=\'iconify text-4xl\'
                                 data-icon=\'proicons:arrow-swap\' data-inline=\'false\'></span>'">
-                                {{ __('Transactions') }}
-                            </x-nav-link>
+                            {{ __('Transactions') }}
+                        </x-nav-link>
                         @endrole
 
 
                         @role('Investisseur')
-                            <!-- Lien Mes projets -->
-                            <x-nav-link href="{{ route('projets') }}" :active="request()->routeIs('projets')" :icone="'<span class=\'iconify text-4xl\'
+                        <!-- Lien Mes projets -->
+                        <x-nav-link href="{{ route('projets') }}" :active="request()->routeIs('projets')" :icone="'<span class=\'iconify text-4xl\'
                                 data-icon=\'uim:chart\' data-inline=\'false\'></span>'">
-                                {{ __('Mes placements') }}
-                            </x-nav-link>
+                            {{ __('Mes placements') }}
+                        </x-nav-link>
                         @endrole
 
                         @role('Investisseur')
-                            <!-- Lien Favoris -->
-                            <x-nav-link href="{{ route('favoris') }}" :active="request()->routeIs('favoris')" :icone="'<span class=\'iconify text-4xl\'
+                        <!-- Lien Favoris -->
+                        <x-nav-link href="{{ route('favoris') }}" :active="request()->routeIs('favoris')" :icone="'<span class=\'iconify text-4xl\'
                                 data-icon=\'iconamoon:star-duotone\' data-inline=\'false\'></span>'">
-                                {{ __('Favoris') }}
-                            </x-nav-link>
+                            {{ __('Favoris') }}
+                        </x-nav-link>
                         @endrole
 
                         @role('Investisseur')
-                            <!-- Lien Remboursement -->
-                            <x-nav-link href="{{ route('remboursement') }}" :active="request()->routeIs('remboursement')" :icone="'<span class=\'iconify text-4xl\'
+                        <!-- Lien Remboursement -->
+                        <x-nav-link href="{{ route('remboursement') }}" :active="request()->routeIs('remboursement')"
+                            :icone="'<span class=\'iconify text-4xl\'
                                 data-icon=\'pepicons-print:coins\' data-inline=\'false\'></span>'">
-                                {{ __('Remboursement') }}
-                            </x-nav-link>
+                            {{ __('Remboursement') }}
+                        </x-nav-link>
                         @endrole
 
                         @role('Investisseur')
-                            <!-- Lien Historique -->
-                            <x-nav-link href="{{ route('historique') }}" :active="request()->routeIs('historique')" :icone="'<span class=\'iconify text-4xl\'
+                        <!-- Lien Historique -->
+                        <x-nav-link href="{{ route('historique') }}" :active="request()->routeIs('historique')"
+                            :icone="'<span class=\'iconify text-4xl\'
                                 data-icon=\'proicons:arrow-swap\' data-inline=\'false\'></span>'">
-                                {{ __('Transactions') }}
-                            </x-nav-link>
+                            {{ __('Transactions') }}
+                        </x-nav-link>
                         @endrole
 
                         @role('Investisseur')
-                            <!-- Lien Retrait -->
-                            <x-nav-link href="{{ route('retrait') }}" :active="request()->routeIs('retrait')" :icone="'<span class=\'iconify text-4xl\'
+                        <!-- Lien Retrait -->
+                        <x-nav-link href="{{ route('retrait') }}" :active="request()->routeIs('retrait')" :icone="'<span class=\'iconify text-4xl\'
                                 data-icon=\'pepicons-print:money-note-circle-filled\' data-inline=\'false\'></span>'">
-                                {{ __('Dépot/Retrait') }}
-                            </x-nav-link>
+                            {{ __('Dépot/Retrait') }}
+                        </x-nav-link>
                         @endrole
 
                         @role('Startup')
-                            <x-nav-link href="{{ route('dette') }}" :active="request()->routeIs('dette')" :icone="'<span class=\'iconify text-4xl\'
+                        <x-nav-link href="{{ route('dette') }}" :active="request()->routeIs('dette')" :icone="'<span class=\'iconify text-4xl\'
                                 data-icon=\'ic:twotone-receipt-long\' data-inline=\'false\'></span>'">
-                                {{ __('Dette') }}
-                            </x-nav-link>
+                            {{ __('Dette') }}
+                        </x-nav-link>
                         @endrole
 
                         @role('Startup')
-                            <x-nav-link href="{{ route('historique') }}" :active="request()->routeIs('historique')" :icone="'<span class=\'iconify text-4xl\'
+                        <x-nav-link href="{{ route('historique') }}" :active="request()->routeIs('historique')"
+                            :icone="'<span class=\'iconify text-4xl\'
                                 data-icon=\'proicons:arrow-swap\' data-inline=\'false\'></span>'">
-                                {{ __('Historique') }}
-                            </x-nav-link>
+                            {{ __('Historique') }}
+                        </x-nav-link>
                         @endrole
                         @role('Startup')
-                            <x-nav-link href="{{ route('retrait') }}" :active="request()->routeIs('retrait')" :icone="'<span class=\'iconify text-4xl\'
+                        <x-nav-link href="{{ route('retrait') }}" :active="request()->routeIs('retrait')" :icone="'<span class=\'iconify text-4xl\'
                                 data-icon=\'pepicons-print:money-note-circle-filled\' data-inline=\'false\'></span>'">
-                                {{ __('Dépot/Retrait') }}
-                            </x-nav-link>
+                            {{ __('Dépot/Retrait') }}
+                        </x-nav-link>
                         @endrole
-                            <x-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')" :icone="'<span class=\'iconify text-4xl\'
+                        <x-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')"
+                            :icone="'<span class=\'iconify text-4xl\'
                                 data-icon=\'solar:user-bold-duotone\' data-inline=\'false\'></span>'">
-                                {{ __('Profil') }}
-                            </x-nav-link>
+                            {{ __('Profil') }}
+                        </x-nav-link>
                     </nav>
                 </div>
                 <div class="flex flex-col flex-1 overflow-hidden">
@@ -174,8 +183,7 @@
                         <!-- border-b-4 border-[#0A52AB] -->
                         <div class="flex items-center mr-5 md:mr-0">
                             <button @click="sidebarOpen = true" class="text-gray-500 focus:outline-none lg:hidden">
-                                <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
+                                <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M4 6H20M4 12H20M4 18H11" stroke="currentColor" stroke-width="2"
                                         stroke-linecap="round" stroke-linejoin="round"></path>
                                 </svg>
@@ -211,17 +219,16 @@
                             <div class="">
                                 @if (auth()->user()->hasRole('Investisseur'))
                                     <div class="flex justify-center items-center text-lg font-semibold text-gray-800">
-                                        <div
-                                            class="flex items-center space-x-2 bg-white  p-4 rounded-lg w-full max-w-sm">
+                                        <div class="flex items-center space-x-2 bg-white py-4 md:p-4 rounded-lg w-full max-w-sm">
                                             <!-- Icône de solde -->
                                             <i class="fas fa-wallet text-2xl text-[#5030E5]"></i>
 
                                             <!-- Titre solde -->
-                                            <span class="text-base text-gray-500">Solde disponible :</span>
+                                            <span class="text-base hidden md:flex text-gray-500">Solde disponible :</span>
 
 
                                             <span
-                                                class="text-xl text-green-600">{{ number_format($soldeInvestisseur, 0, '.', ' ') }}
+                                                class="text-lg md:text-xl text-green-600">{{ number_format($soldeInvestisseur, 0, '.', ' ') }}
                                                 FCFA</span>
 
 
@@ -229,17 +236,16 @@
                                     </div>
                                 @elseif (auth()->user()->hasRole('Startup'))
                                     <div class="flex justify-center items-center text-lg font-semibold text-gray-800">
-                                        <div
-                                            class="flex items-center space-x-2 bg-white p-4 rounded-lg w-full max-w-sm">
+                                        <div class="flex items-center space-x-2 bg-white py-4 md:p-4  rounded-lg w-full max-w-sm">
                                             <!-- Icône de solde -->
                                             <i class="fas fa-wallet text-2xl text-[#5030E5]"></i>
 
                                             <!-- Titre solde -->
-                                            <span class="text-base text-gray-500">Solde disponible :</span>
+                                            <span class="text-base hidden md:flex text-gray-500">Solde disponible :</span>
 
 
                                             <span
-                                                class="text-green-600 lg:text-xl">{{ number_format($soldeStartup, 0, '.', ' ') }}
+                                                class="text-green-600 text-lg md:text-xl">{{ number_format($soldeStartup, 0, '.', ' ') }}
                                                 FCFA
                                             </span>
 
@@ -248,8 +254,7 @@
                                     </div>
                                 @elseif (auth()->user()->hasRole('Administrateur'))
                                     <div class="flex justify-center items-center text-lg font-semibold text-gray-800">
-                                        <div
-                                            class="flex items-center space-x-2 bg-white p-4 rounded-lg w-full max-w-sm">
+                                        <div class="flex items-center space-x-2 bg-white p-4 rounded-lg w-full max-w-sm">
                                             <!-- Icône de solde -->
                                             <i class="fas fa-wallet text-2xl text-[#5030E5]"></i>
 
@@ -329,8 +334,8 @@
                                 <div x-show="showModal" x-transition x-cloak
                                     class="fixed inset-x-0 lg:left-64 bottom-0 z-50 bg-white shadow-lg border ">
                                     <!-- En-tête de la modale -->
-                                    <div class="flex items-center justify-between px-6 py-4 border-b">
-                                        <h2 class="text-lg font-semibold">Mon portefeuille</h2>
+                                    <div class="flex items-center justify-between xl:px-10 md:px-8 px-2 py-3 border-b">
+                                        <h2 class="text-lg xl:text-[21px] font-semibold">Mon portefeuille</h2>
                                         <button @click="showModal = false" class="text-gray-500 hover:text-gray-800">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
                                                 viewBox="0 0 24 24" stroke="currentColor">
@@ -341,9 +346,24 @@
                                     </div>
 
                                     <!-- Contenu de la modale -->
-                                    <div class="px-6 py-4">
-                                        <p class="text-gray-700">Ceci est le contenu de votre modale située en bas de la
-                                            page.</p>
+                                    <div class="px-2 md:px-8 xl:px-10 flex w-full items-center justify-between  py-4">
+                                        <div>
+                                            <p class="text-gray-600 text-[12px] md:text-[14px] xl:text-xl">Total remboursé</p>
+                                            <p class="text-[14px] text-blue-900 md:text-[16px] xl:text-2xl">2 000 000 Fcfa</p>
+                                        </div>
+                                        <span class="iconify  text-gray-800  text-md md:text-2xl xl:text-4xl" data-icon="ic:round-minus"
+                                            data-inline="false"></span>
+                                        <div>
+                                            <p class="text-gray-600 text-[12px] md:text-[14px] xl:text-xl">Total investis</p>
+                                            <p class="text-[14px] md:text-[16px] xl:text-2xl">10 000 000 Fcfa</p>
+                                        </div>
+                                        <span class="iconify text-gray-800 text-md md:text-2xl xl:text-4xl" data-icon="material-symbols:equal-rounded"
+                                            data-inline="false"></span>
+                                        <div>
+                                            <p class="text-gray-600 text-[12px] md:text-[14px] xl:text-xl">Total bénéfice gain/perte</p>
+                                            <p class="{{ 800000 >= 0 ? 'text-green-500' : 'text-red-500 ' }} text-[14px] font-bold md:text-[16px] xl:text-2xl">8 000 000 Fcfa</p>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
