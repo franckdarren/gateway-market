@@ -74,24 +74,24 @@
                 <!-- Contenu de la modale -->
                 <div class="px-2 md:px-8 xl:px-10 flex w-full items-center justify-between  py-4">
                     <div>
-                        <p class="text-gray-600 text-[12px] md:text-[14px] xl:text-xl">Total remboursé</p>
+                        <p class="text-gray-600 text-[12px] md:text-[14px] xl:text-xl">Total dette</p>
                         <p class="text-[14px] text-blue-900 md:text-[16px] xl:text-2xl">
-                            X FCFA</p>
+                            {{ number_format($totalDette, 0, '.', ' ') }} FCFA</p>
                     </div>
                     <span class="iconify  text-gray-800  text-md md:text-2xl xl:text-4xl" data-icon="ic:round-minus"
                         data-inline="false"></span>
                     <div>
-                        <p class="text-gray-600 text-[12px] md:text-[14px] xl:text-xl">Total investis</p>
+                        <p class="text-gray-600 text-[12px] md:text-[14px] xl:text-xl">Total remboursé</p>
                         <p class="text-[14px] md:text-[16px] xl:text-2xl">
-                            X FCFA</p>
+                            {{ number_format($totalRembourse, 0, '.', ' ') }} FCFA</p>
                     </div>
                     <span class="iconify text-gray-800 text-md md:text-2xl xl:text-4xl"
                         data-icon="material-symbols:equal-rounded" data-inline="false"></span>
                     <div>
-                        <p class="text-gray-600 text-[12px] md:text-[14px] xl:text-xl">Total bénéfice gain/perte</p>
+                        <p class="text-gray-600 text-[12px] md:text-[14px] xl:text-xl">Somme restante à rembourser</p>
                         <p
-                            class="{{ $benefice_perte >= 0 ? 'text-green-500' : 'text-red-500 ' }} text-[14px] font-bold md:text-[16px] xl:text-2xl">
-                            X FCFA</p>
+                            class="{{ $detteRestante <= 0 ? 'text-green-500' : 'text-red-500 ' }} text-[14px] font-bold md:text-[16px] xl:text-2xl">
+                            {{ number_format($detteRestante, 0, '.', ' ') }} FCFA</p>
                     </div>
 
                 </div>

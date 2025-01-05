@@ -45,4 +45,24 @@ class CompteStartup extends Model
     {
         return $this->hasMany(Offre::class);
     }
+
+    // Cumul des remboursements
+    public function totalRembourse()
+    {
+        return $this->offres()->with('remboursements')
+            ->get()
+            ->flatMap(function ($offre) {
+                return $offre->remboursements->where('statut', 'Remboursé');
+            })
+            ->sum('remboursement_total');
+    }
+
+    // Cumul des investissements
+    public function totalDette()
+    {
+        return $this->offres()
+            ->get()
+            ->whereNotNull('compte_investisseur_id')
+            ->sum('montant');
+    }
 }
