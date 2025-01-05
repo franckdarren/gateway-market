@@ -12,7 +12,7 @@ class Retrait extends Component
 {
     public $montant;
     public $type;
-    public $description = "Retrait d'argent";
+    public $description = "";
     public $mode_retrait;
     public $mode_depot;
 
@@ -73,16 +73,12 @@ class Retrait extends Component
         // Applique la validation
         $this->validate($rules);
 
-        // Débiter le montant du compte
-        $compte->solde -= $this->montant;
-        $compte->save();
-
         // Créer la transaction
         if ($this->type == 'depot') {
             $transaction = $compte->transactions()->create([
                 'montant' => $this->montant,
                 'type' => 'Dépot',
-                'description' => $this->description,
+                'description' => 'Dépot d\'argent',
                 'compte_type' => $compteType,
                 'mode_retrait' => $this->mode_depot,
                 'nom_compte' => $this->nom_compte,
@@ -90,7 +86,6 @@ class Retrait extends Component
                 'compte_id' => $compte_id,
                 'numero_transaction' => $this->numero_transaction,
                 'solde' => $compte->solde,
-
             ]);
         } else {
             // Vérification du solde
@@ -102,7 +97,7 @@ class Retrait extends Component
             $transaction = $compte->transactions()->create([
                 'montant' => $this->montant,
                 'type' => 'Retrait',
-                'description' => $this->description,
+                'description' => 'Retrait d\'argent',
                 'compte_type' => $compteType,
                 'mode_retrait' => $this->mode_retrait,
                 'nom_compte' => $this->nom_compte,
@@ -111,6 +106,11 @@ class Retrait extends Component
                 'numero_transaction' => $this->numero_transaction,
                 'solde' => $compte->solde,
             ]);
+
+            // Débiter le montant du compte
+            $compte->solde -= $this->montant;
+            $compte->save();
+
         }
 
         // Réinitialiser les champs après soumission

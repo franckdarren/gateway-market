@@ -245,6 +245,11 @@ class Demandes extends Component implements HasForms, HasTable
                             $compte = CompteStartup::find($record->compte_id);
                         }
 
+                        // Marquer la transaction comme traitée
+                        $record->update([
+                            'statut' => 'Traitée',
+                        ]);
+
                         // Effectuer les opérations financières
                         $compte->solde += $record->montant;
                         $compte->save();
@@ -256,17 +261,12 @@ class Demandes extends Component implements HasForms, HasTable
                             Mail::to($compte->email)->send(new NotificationRetrait($record));
                         }
 
-                        // Marquer la transaction comme traitée
-                        $record->update([
-                            'statut' => 'Traitée',
-                        ]);
-
                         // Notification de succès
-                        Notification::make()
-                            ->title('Transaction traitée')
-                            ->body("La transaction #{$record->id} a été traitée avec succès.")
-                            ->success()
-                            ->send();
+                        // Notification::make()
+                        //     ->title('Transaction traitée')
+                        //     ->body("La transaction #{$record->id} a été traitée avec succès.")
+                        //     ->success()
+                        //     ->send();
                     })
             ])
             ->bulkActions([]);
