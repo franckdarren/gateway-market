@@ -52,4 +52,23 @@ class CompteInvestisseur extends Model
     {
         return $this->belongsToMany(Offre::class, 'favorites', 'compte_investisseur_id', 'offre_id');
     }
+
+    // Cumul des remboursements
+    public function totalRemboursements()
+    {
+        return $this->offres()->with('remboursements')
+            ->get()
+            ->flatMap(function ($offre) {
+                return $offre->remboursements->where('statut', 'Remboursé');
+            })
+            ->sum('remboursement_total');
+    }
+
+    // Cumul des investissements
+    public function totalInvestissement()
+    {
+        return $this->offres()
+            ->get()
+            ->sum('montant');
+    }
 }
