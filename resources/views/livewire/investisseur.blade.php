@@ -131,7 +131,7 @@
                                             </a>
                                         </div>
 
-                                        <div class="p-2 flex justify-between flex-col w-full">
+                                        <div class="p-2 h-full flex justify-between flex-col w-full">
 
                                             <div class="relative overflow-hidden rounded-md h-[100px] w-full">
                                                 <img class="transition-transform duration-300 ease-in-out transform hover:scale-125 object-cover h-full w-full"
