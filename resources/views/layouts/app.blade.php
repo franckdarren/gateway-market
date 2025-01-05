@@ -219,16 +219,16 @@
                             <div class="">
                                 @if (auth()->user()->hasRole('Investisseur'))
                                     <div class="flex justify-center items-center text-lg font-semibold text-gray-800">
-                                        <div class="flex items-center space-x-2 bg-white  p-4 rounded-lg w-full max-w-sm">
+                                        <div class="flex items-center space-x-2 bg-white py-4 md:p-4 rounded-lg w-full max-w-sm">
                                             <!-- Icône de solde -->
                                             <i class="fas fa-wallet text-2xl text-[#5030E5]"></i>
 
                                             <!-- Titre solde -->
-                                            <span class="text-base text-gray-500">Solde disponible :</span>
+                                            <span class="text-base hidden md:flex text-gray-500">Solde disponible :</span>
 
 
                                             <span
-                                                class="text-xl text-green-600">{{ number_format($soldeInvestisseur, 0, '.', ' ') }}
+                                                class="text-lg md:text-xl text-green-600">{{ number_format($soldeInvestisseur, 0, '.', ' ') }}
                                                 FCFA</span>
 
 
@@ -236,16 +236,16 @@
                                     </div>
                                 @elseif (auth()->user()->hasRole('Startup'))
                                     <div class="flex justify-center items-center text-lg font-semibold text-gray-800">
-                                        <div class="flex items-center space-x-2 bg-white p-4 rounded-lg w-full max-w-sm">
+                                        <div class="flex items-center space-x-2 bg-white py-4 md:p-4  rounded-lg w-full max-w-sm">
                                             <!-- Icône de solde -->
                                             <i class="fas fa-wallet text-2xl text-[#5030E5]"></i>
 
                                             <!-- Titre solde -->
-                                            <span class="text-base text-gray-500">Solde disponible :</span>
+                                            <span class="text-base hidden md:flex text-gray-500">Solde disponible :</span>
 
 
                                             <span
-                                                class="text-green-600 lg:text-xl">{{ number_format($soldeStartup, 0, '.', ' ') }}
+                                                class="text-green-600 text-lg md:text-xl">{{ number_format($soldeStartup, 0, '.', ' ') }}
                                                 FCFA
                                             </span>
 
