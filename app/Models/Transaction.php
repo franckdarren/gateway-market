@@ -22,7 +22,8 @@ class Transaction extends Model
         'offre_id',
 
         'frais',
-        'numero_transaction'
+        'numero_transaction',
+        'solde',
     ];
 
     public function compte()
@@ -34,5 +35,4 @@ class Transaction extends Model
     {
         return $this->belongsTo(Offre::class);
     }
-
 }

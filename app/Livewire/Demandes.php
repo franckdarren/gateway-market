@@ -44,8 +44,8 @@ class Demandes extends Component implements HasForms, HasTable
             ->query(function () {
                 return Transaction::query()
                     ->where(function ($query) {
-                        $query->where('type', 'retrait')
-                            ->orWhere('type', 'depot');
+                        $query->where('type', 'Retrait')
+                            ->orWhere('type', 'Dépot');
                     })
                     ->where('statut', 'En attente de traitement')
                     ->orderByDesc('created_at'); // Trier par date décroissante
@@ -249,9 +249,12 @@ class Demandes extends Component implements HasForms, HasTable
                         $compte->solde += $record->montant;
                         $compte->save();
 
-
                         // Envoyer l'email au compte
-                        Mail::to($compte->email)->send(new NotificationDepot($record));
+                        if ($record->type == 'Dépot') {
+                            Mail::to($compte->email)->send(new NotificationDepot($record));
+                        } else {
+                            Mail::to($compte->email)->send(new NotificationRetrait($record));
+                        }
 
                         // Marquer la transaction comme traitée
                         $record->update([

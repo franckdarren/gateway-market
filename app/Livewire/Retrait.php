@@ -73,11 +73,15 @@ class Retrait extends Component
         // Applique la validation
         $this->validate($rules);
 
+        // Débiter le montant du compte
+        $compte->solde -= $this->montant;
+        $compte->save();
+
         // Créer la transaction
         if ($this->type == 'depot') {
             $transaction = $compte->transactions()->create([
                 'montant' => $this->montant,
-                'type' => $this->type,
+                'type' => 'Dépot',
                 'description' => $this->description,
                 'compte_type' => $compteType,
                 'mode_retrait' => $this->mode_depot,
@@ -85,6 +89,8 @@ class Retrait extends Component
                 'numero_compte' => $this->numero_compte,
                 'compte_id' => $compte_id,
                 'numero_transaction' => $this->numero_transaction,
+                'solde' => $compte->solde,
+
             ]);
         } else {
             // Vérification du solde
@@ -95,7 +101,7 @@ class Retrait extends Component
             }
             $transaction = $compte->transactions()->create([
                 'montant' => $this->montant,
-                'type' => $this->type,
+                'type' => 'Retrait',
                 'description' => $this->description,
                 'compte_type' => $compteType,
                 'mode_retrait' => $this->mode_retrait,
@@ -103,11 +109,8 @@ class Retrait extends Component
                 'numero_compte' => $this->numero_compte,
                 'compte_id' => $compte_id,
                 'numero_transaction' => $this->numero_transaction,
+                'solde' => $compte->solde,
             ]);
-
-            // Débiter le montant du compte
-            $compte->solde -= $this->montant;
-            $compte->save();
         }
 
         // Réinitialiser les champs après soumission
@@ -115,7 +118,6 @@ class Retrait extends Component
 
         session()->flash('success', 'Transaction créée avec succès.');
     }
-
 
     public function render()
     {

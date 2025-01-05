@@ -126,7 +126,7 @@ class Historique extends Component implements HasForms, HasTable
                     ->searchable()
                     ->sortable(),
 
-                TextColumn::make('compte.solde')
+                TextColumn::make('solde')
                     ->label('Solde')
                     ->searchable()
                     ->sortable()

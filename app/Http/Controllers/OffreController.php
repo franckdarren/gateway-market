@@ -272,6 +272,8 @@ class OffreController extends Controller
                     'type' => 'Investissement',
                     'description' => 'Investissement dans l\'offre ' . $offre->nom_projet,
                     'offre_id' => $offre->id,
+                    'solde' => $investisseur->solde,
+
                 ]);
 
                 // Trace écrite transaction Dépôt chez la Startup
@@ -280,6 +282,7 @@ class OffreController extends Controller
                     'type' => "Dépôt",
                     'description' => "Financement du projet {$offre->nom_projet} par " . $investisseur->nom . " " . $investisseur->prenom,
                     'statut' => "Traitée",
+                    'solde' => $startup->solde,
                 ]);
 
                 // Trace écrite transaction Commission chez l'Admin
@@ -288,6 +291,8 @@ class OffreController extends Controller
                     'type' => "Commission",
                     'description' => "Commission pour le financement du projet {$offre->nom_projet} par " . $investisseur->nom . " " . $investisseur->prenom,
                     'statut' => "Traitée",
+                    'solde' => $admin->solde,
+
                 ]);
 
                 // Remplissage de la table remboursement et envoi des emails

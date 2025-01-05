@@ -99,13 +99,18 @@ class ListInvestisseur extends Component implements HasForms, HasTable
                                 ->label('Montant'),
                         ])
                         ->action(function (array $data, $record) {
+                            // Mise à jour du solde du compte
+                            $record->increment('solde', $data['montant']);
+
                             // Création de la transaction en utilisant la relation morphique
                             $record->transactions()->create([
                                 'montant' => $data['montant'],
                                 'type' => 'Dépot',
                                 'description' => "Dépôt d'argent au compte " . $record->nom . ' ' . $record->prenom,
                                 // 'compte_type' => "Compte Investisseur",
-                                'statut' => 'En attente de traitement',
+                                'statut' => 'Traitée',
+                                'solde' => $record->solde,
+
                             ]);
 
                             // Notification::make()

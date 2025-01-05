@@ -119,14 +119,16 @@ class ListStartup extends Component implements HasForms, HasTable
                                 ->label('Montant'),
                         ])
                         ->action(function (array $data, $record) {
+                            // Mise à jour du solde du compte
+                            $record->increment('solde', $data['montant']);
+
                             // Création manuelle de la transaction en utilisant la relation morphique
                             $record->transactions()->create([
                                 'montant' => $data['montant'],
                                 'type' => 'Dépot',
                                 'description' => "Dépôt d'argent au compte " . $record->nom,
-                                // 'compte_type' => "Compte Startup",
-                                // 'compte_id' => $record->id,
-                                'statut' => 'En attente de traitement',
+                                'statut' => 'Traitée',
+                                'solde' => $record->solde,
                             ]);
                         }),
 
